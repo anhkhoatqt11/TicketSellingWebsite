@@ -1,9 +1,13 @@
-import React from 'react'
+'use client';
 
+import React from 'react'
+import ButtonTest from './component/ButtonTest';
 const page = () => {
-  return (
-    <div>page</div>
-  )
+    return (
+        <div>
+            <ButtonTest/>
+        </div >
+    )
 }
 
 export default page

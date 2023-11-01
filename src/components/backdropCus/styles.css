@@ -1,0 +1,18 @@
+/** @format */
+
+.backdrop-in {
+  background: rgb(255 255 255 / 0.8); /* or your custom background */
+  backdrop-filter: blur(5px);
+  transition: opacity 0.3s ease; /* Add transition to opacity */
+  opacity: 0; /* Initial opacity */
+  animation: fadeIn 0.3s forwards; /* Add animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
