@@ -9,18 +9,31 @@ generator client {
 }
 
 model User {
-  id              Int      @id @default(autoincrement())
-  name            String
-  email           String   @unique
-  phoneNumber     String?
-  password        String
-  diaChi          String?
-  role            String?  @default("user")
-  avatar          String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
-  isEmailVerified Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  SuKiens         SuKien[]
-  HoaDon          HoaDon[]
+  id                Int      @id @default(autoincrement())
+  name              String
+  email             String   @unique
+  phoneNumber       String?
+  password          String
+  diaChi            String?
+  role              String?  @default("user")
+  avatar            String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
+  isEmailVerified   Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  // organizer
+  loaiHinhKinhDoanh Int
+  // loai hinh kinh doanh ca nhan
+  hoTenOrganizer    String
+  cccdNumber        String
+  maSoThueCaNhan    String
+  anhDaiDienToChuc  String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
+  // loai hinh kinh doanh doanh nghiep
+  tenDoanhNghiep    String
+  maSoDKKD          String
+  noiCap            String
+  ngayCap           DateTime
+  //---------------------------------
+  SuKiens           SuKien[]
+  HoaDon            HoaDon[]
 }
 
 model SuKien {
