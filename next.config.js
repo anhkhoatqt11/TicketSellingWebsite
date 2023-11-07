@@ -85,6 +85,11 @@ const nextConfig = {
                 hostname: 'blog.topcv.vn',
                 port: ''
             },
+            {
+                protocol: 'https',
+                hostname: 'images.tkbcdn.com',
+                port: ''
+            }
         ],
     },
 }
