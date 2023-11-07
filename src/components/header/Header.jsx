@@ -75,7 +75,7 @@ const NavigationMenuDemo = ({ session }) => {
 
       <div className="hidden lg:flex py-2 items-center justify-center  ">
         {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null}
-        <Logo />
+        {/* <Logo /> */}
         <NavigationMenu.Root className="NavigationMenuRoot">
           <NavigationMenu.List className="NavigationMenuList">
             <NavigationMenu.Item>
