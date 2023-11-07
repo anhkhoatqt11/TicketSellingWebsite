@@ -1,4 +1,5 @@
 import React from 'react'
+import Login from './Login'
 
 const page = async () => {
     return (
@@ -12,6 +13,7 @@ const page = async () => {
                         <p className="text-sm text-muted-foreground">
                             Đăng nhập vào trang bán vé sự kiện
                         </p>
+                        <Login />
                     </div>
                 </div>
             </div>

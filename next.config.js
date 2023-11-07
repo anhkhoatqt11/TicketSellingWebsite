@@ -74,7 +74,17 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'upload.wikimedia.org',
                 port: ''
-            }
+            },
+            {
+                protocol: 'https',
+                hostname: 'www.shutterstock.com',
+                port: ''
+            },
+            {
+                protocol: 'https',
+                hostname: 'blog.topcv.vn',
+                port: ''
+            },
         ],
     },
 }
