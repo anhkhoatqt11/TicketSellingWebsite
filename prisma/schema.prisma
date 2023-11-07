@@ -20,6 +20,7 @@ model User {
   avatar            String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
   isEmailVerified   Boolean  @default(false)
   createdAt         DateTime @default(now())
+<<<<<<< HEAD
   loaiHinhKinhDoanh Int
   anhDaiDienToChuc  String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
   hoTenOrganizer    String
@@ -28,6 +29,21 @@ model User {
   maSoDKKD          String
   noiCap            String
   ngayCap           String
+=======
+  // organizer
+  loaiHinhKinhDoanh Int?
+  // loai hinh kinh doanh ca nhan
+  hoTenOrganizer    String?
+  cccdNumber        String?
+  maSoThueCaNhan    String?
+  anhDaiDienToChuc  String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
+  // loai hinh kinh doanh doanh nghiep
+  tenDoanhNghiep    String?
+  maSoDKKD          String?
+  noiCap            String?
+  ngayCap           DateTime?
+  //---------------------------------
+>>>>>>> 65cc81be84dad456e5752bb38108c051a7640a3b
   SuKiens           SuKien[]
   HoaDon            HoaDon[]
 }

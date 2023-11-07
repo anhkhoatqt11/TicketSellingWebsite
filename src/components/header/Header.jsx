@@ -230,10 +230,9 @@ const NavigationMenuDemo = ({ session }) => {
             <NavigationMenu.Viewport className="NavigationMenuViewport" />
           </div>
         </NavigationMenu.Root>
-        <Button className="w-48 h-6 text-sm">Dành cho đối tác</Button>
         {user ? (
           <div className="flex flex-row gap-5 items-center justify-center">
-            <Link href={'/favorite'}>
+            {/* <Link href={'/favorite'}>
               <Button variant="outline" size="icon" className="relative">
                 {1 > 0 && (
                   <Badge
@@ -247,7 +246,7 @@ const NavigationMenuDemo = ({ session }) => {
                   <AiOutlineHeart className="text-slate-600 stroke-zinc-950 w-4 h-4 " />
                 }
               </Button>
-            </Link>
+            </Link> */}
             <div className="w-full h-full">
               <Dropdown
                 shouldBlockScroll={true}
