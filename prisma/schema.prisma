@@ -20,17 +20,17 @@ model User {
   isEmailVerified   Boolean  @default(false)
   createdAt         DateTime @default(now())
   // organizer
-  loaiHinhKinhDoanh Int
+  loaiHinhKinhDoanh Int?
   // loai hinh kinh doanh ca nhan
-  hoTenOrganizer    String
-  cccdNumber        String
-  maSoThueCaNhan    String
+  hoTenOrganizer    String?
+  cccdNumber        String?
+  maSoThueCaNhan    String?
   anhDaiDienToChuc  String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
   // loai hinh kinh doanh doanh nghiep
-  tenDoanhNghiep    String
-  maSoDKKD          String
-  noiCap            String
-  ngayCap           DateTime
+  tenDoanhNghiep    String?
+  maSoDKKD          String?
+  noiCap            String?
+  ngayCap           DateTime?
   //---------------------------------
   SuKiens           SuKien[]
   HoaDon            HoaDon[]

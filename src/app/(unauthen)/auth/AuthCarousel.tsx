@@ -19,7 +19,7 @@ function AuthCarousel() {
             src="https://blog.topcv.vn/wp-content/uploads/2021/07/sk2uEvents_Page_Header_2903ed9c-40c1-4f6c-9a69-70bb8415295b.jpg"
             alt="Auth background"
             fill
-            objectFit="cover"
+            style={{objectFit:"cover"}}
             priority
             quality={100}
           />
@@ -42,7 +42,7 @@ function AuthCarousel() {
             src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2021/01/Vector-Illustration-1.jpg"
             alt="Auth background"
             fill
-            objectFit="cover"
+            style={{objectFit:"cover"}}
             priority
             quality={100}
           />

@@ -20,6 +20,7 @@ import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';
 import { Button } from '@/components/ui/button';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 
 
@@ -139,6 +140,12 @@ const Login = ({ className }: { className?: string }) => {
                                 </div>
                             </div>
                             <Button type="submit">Đăng nhập</Button>
+                            <p className="mt-10 px-8 text-center text-sm text-muted-foreground">
+                                Chưa có tài khoản?{' '}
+                                <Link className="font-bold underline text-black" href="/auth/register">
+                                    Đăng ký
+                                </Link>
+                            </p>
                         </div>
                     </form>
                 </Form>
