@@ -1,11 +1,11 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -14,24 +14,20 @@ model User {
   email             String   @unique
   phoneNumber       String?
   password          String
+  cccdNumber        String
   diaChi            String?
   role              String?  @default("user")
   avatar            String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
   isEmailVerified   Boolean  @default(false)
   createdAt         DateTime @default(now())
-  // organizer
   loaiHinhKinhDoanh Int
-  // loai hinh kinh doanh ca nhan
-  hoTenOrganizer    String
-  cccdNumber        String
-  maSoThueCaNhan    String
   anhDaiDienToChuc  String?  @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?ssl=1")
-  // loai hinh kinh doanh doanh nghiep
+  hoTenOrganizer    String
+  maSoThueCaNhan    String
   tenDoanhNghiep    String
   maSoDKKD          String
   noiCap            String
-  ngayCap           DateTime
-  //---------------------------------
+  ngayCap           String
   SuKiens           SuKien[]
   HoaDon            HoaDon[]
 }
@@ -45,8 +41,8 @@ model SuKien {
   ngayBatDau    DateTime
   ngayKetThuc   DateTime
   userId        Int
-  user          User     @relation(fields: [userId], references: [id])
   ChuDeId       Int
+  user          User     @relation(fields: [userId], references: [id])
   ChuDe         ChuDe    @relation(fields: [ChuDeId], references: [id])
   ves           Ve[]
 
@@ -84,12 +80,12 @@ model HoaDon {
   id                  Int        @id @default(autoincrement())
   ngayDatHang         DateTime
   userId              Int
-  user                User       @relation(fields: [userId], references: [id])
   phuongThucThanhToan String
   createdAt           DateTime   @default(now())
+  veId                Int?
+  user                User       @relation(fields: [userId], references: [id])
   HoaDonVe            HoaDonVe[]
   Ve                  Ve?        @relation(fields: [veId], references: [id])
-  veId                Int?
 
   @@index([userId])
   @@index([veId])
@@ -98,12 +94,12 @@ model HoaDon {
 model HoaDonVe {
   id       Int    @id @default(autoincrement())
   hoaDonId Int
-  hoaDon   HoaDon @relation(fields: [hoaDonId], references: [id])
   veId     Int
-  ve       Ve     @relation(fields: [veId], references: [id])
   soLuong  Int
   tongGia  Float
+  hoaDon   HoaDon @relation(fields: [hoaDonId], references: [id])
+  ve       Ve     @relation(fields: [veId], references: [id])
 
-  @@index([hoaDonId, veId], name: "HoaDonVe_HoaDonVeId")
+  @@index([hoaDonId, veId], map: "HoaDonVe_HoaDonVeId")
   @@index([veId])
 }

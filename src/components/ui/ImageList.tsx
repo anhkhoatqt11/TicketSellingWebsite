@@ -1,8 +1,8 @@
 /** @format */
 
-import { Zoom } from '@components/ui/zoom-image';
-import { ScrollArea } from '@components/ui/scroll-area';
-import { ImageCus } from '@components/ui/ImageCus';
+import { Zoom } from "@components/ui/zoom-image";
+import { ScrollArea } from "@components/ui/scroll-area";
+import { ImageCus } from "@components/ui/ImageCus";
 export const ImageList = ({ files, width, height, className }) => {
   return (
     <ScrollArea className={className}>

@@ -1,32 +1,32 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /** @format */
 
-import * as React from 'react';
-import Cropper, { type ReactCropperElement } from 'react-cropper';
+import * as React from "react";
+import Cropper, { type ReactCropperElement } from "react-cropper";
 import {
   useDropzone,
   type Accept,
   type FileRejection,
   type FileWithPath,
-} from 'react-dropzone';
+} from "react-dropzone";
 import type {
   FieldPath,
   FieldValues,
   Path,
   PathValue,
   UseFormSetValue,
-} from 'react-hook-form';
-import { toast } from 'react-hot-toast';
+} from "react-hook-form";
+import { toast } from "react-hot-toast";
 
-import 'cropperjs/dist/cropper.css';
+import "cropperjs/dist/cropper.css";
 
-import { cn, formatBytes, getImageKey } from '@/lib/utils';
-import { Button } from '@components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@components/ui/dialog';
-import { Icons } from '@/assets/Icons';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { ImageCus } from '@/components/ui/ImageCus';
-import { postRequest } from '@/lib/fetch';
+import { cn, formatBytes, getImageKey } from "@/lib/utils";
+import { Button } from "@components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@components/ui/dialog";
+import { Icons } from "@/assets/Icons";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { ImageCus } from "@/components/ui/ImageCus";
+import { postRequest } from "@/lib/fetch";
 
 // FIXME Your proposed upload exceeds the maximum allowed size, this should trigger toast.error too
 type FileWithPreview = FileWithPath & {
@@ -53,7 +53,7 @@ export function FileDialog<TFieldValues extends FieldValues>({
   name,
   setValue,
   accept = {
-    'image/*': [],
+    "image/*": [],
   },
   maxSize = 1024 * 1024 * 2,
   maxFiles = 1,
@@ -80,7 +80,7 @@ export function FileDialog<TFieldValues extends FieldValues>({
         });
         if (rejectedFiles.length > 0) {
           rejectedFiles.forEach(({ errors }) => {
-            if (errors[0]?.code === 'file-too-large') {
+            if (errors[0]?.code === "file-too-large") {
               toast.error(
                 `File is too large. Max size is ${formatBytes(maxSize)}`
               );
@@ -132,14 +132,14 @@ export function FileDialog<TFieldValues extends FieldValues>({
 
         {(files && files?.length < maxFiles) || !files ? (
           <div>
-            {' '}
+            {" "}
             <div
               {...getRootProps()}
               className={cn(
-                'group relative mt-8 grid h-48 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-5 py-2.5 text-center transition hover:bg-muted/25',
-                'ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                isDragActive && 'border-muted-foreground/50',
-                disabled && 'pointer-events-none opacity-60',
+                "group relative mt-8 grid h-48 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-5 py-2.5 text-center transition hover:bg-muted/25",
+                "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                isDragActive && "border-muted-foreground/50",
+                disabled && "pointer-events-none opacity-60",
                 className
               )}
               {...props}
@@ -152,7 +152,7 @@ export function FileDialog<TFieldValues extends FieldValues>({
               ) : isDragActive ? (
                 <div className="grid place-items-center gap-2 text-muted-foreground sm:px-5">
                   <Icons.upload
-                    className={cn('h-8 w-8', isDragActive && 'animate-bounce')}
+                    className={cn("h-8 w-8", isDragActive && "animate-bounce")}
                   />
                   <p className="text-base font-medium">Drop the file here</p>
                 </div>
@@ -163,14 +163,14 @@ export function FileDialog<TFieldValues extends FieldValues>({
                     Kéo và thả ảnh vào đây hoặc click để tải ảnh lên
                   </p>
                   <p className="text-sm text-slate-500">
-                    Vui lòng chọn file có kích thước nhỏ hơn{' '}
+                    Vui lòng chọn file có kích thước nhỏ hơn{" "}
                     {formatBytes(maxSize)}
                   </p>
                 </div>
               )}
             </div>
             <p className="text-center text-sm font-medium text-muted-foreground">
-              Bạn có thể tải lên {maxFiles} {maxFiles === 1 ? 'file' : 'files'}
+              Bạn có thể tải lên {maxFiles} {maxFiles === 1 ? "file" : "files"}
             </p>
           </div>
         ) : null}
@@ -235,7 +235,7 @@ function FileCard({
 
     croppedCanvas.toBlob((blob) => {
       if (!blob) {
-        console.error('Blob creation failed');
+        console.error("Blob creation failed");
         return;
       }
       const croppedImage = new File([blob], file.name, {
@@ -257,13 +257,13 @@ function FileCard({
 
   React.useEffect(() => {
     function handleKeydown(e: KeyboardEvent) {
-      if (e.key === 'Enter') {
+      if (e.key === "Enter") {
         onCrop();
         setIsOpen(false);
       }
     }
-    document.addEventListener('keydown', handleKeydown);
-    return () => document.removeEventListener('keydown', handleKeydown);
+    document.addEventListener("keydown", handleKeydown);
+    return () => document.removeEventListener("keydown", handleKeydown);
   }, [onCrop]);
   return (
     <div className="relative flex items-center justify-between gap-2.5">
@@ -275,7 +275,7 @@ function FileCard({
         />
         <div className="flex flex-col">
           <p className="line-clamp-1 text-sm font-medium text-muted-foreground">
-            {file.name.length > 30 ? file.name.slice(0, 30) + '...' : file.name}
+            {file.name.length > 30 ? file.name.slice(0, 30) + "..." : file.name}
           </p>
           <p className="text-xs text-slate-500">
             {(file.size / 1024 / 1024).toFixed(2)}MB
