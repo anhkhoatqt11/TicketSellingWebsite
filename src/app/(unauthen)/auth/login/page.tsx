@@ -1,7 +1,9 @@
 import React from 'react'
 import Login from './Login'
+import { alreadyLoggedIn } from '@/lib/auth';
 
 const page = async () => {
+    await alreadyLoggedIn();
     return (
         <div className="p-12 relative h-screen w-full ">
             <div className="lg:p-8 sm:p-12 ">
