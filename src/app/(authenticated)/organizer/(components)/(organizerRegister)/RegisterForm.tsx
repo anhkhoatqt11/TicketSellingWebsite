@@ -19,7 +19,7 @@ import { checkEmail, checkPhoneNumber } from "@/lib/utils";
 
 // const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
-export const RegisterForm = ({ organizerType }) => {
+export const RegisterForm = ({ organizerType, setTrigger }) => {
   //   const { startUpload } = useUploadThing('imageUploader');
 
   const [organizerName, setOrganizerName] = React.useState("");
@@ -33,7 +33,6 @@ export const RegisterForm = ({ organizerType }) => {
   const [ngayCap, setNgayCap] = useState("");
 
   const [avatarImageFile, setAvatarImageFile] = React.useState([]);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const { fetchOrganizerById, uploadOrganizerInfo } = useOrganizer();
   useEffect(() => {
@@ -44,6 +43,14 @@ export const RegisterForm = ({ organizerType }) => {
       console.log(result[0]);
       setEmail(result[0]?.email);
       setAddressValue(result[0]?.diaChi);
+      if (result[0]?.role !== "user") {
+        setOrganizerName(result[0]?.hoTenOrganizer);
+        setCompanyName(result[0]?.tenDoanhNghiep);
+        setMaSoDKKD(result[0]?.maSoDKKD);
+        setMaSoThueCaNhan(result[0]?.maSoThueCaNhan);
+        setNoiCap(result[0]?.noiCap);
+        setNgayCap(result[0]?.ngayCap);
+      }
     };
     fetchOrganizer();
   }, []);
@@ -62,11 +69,11 @@ export const RegisterForm = ({ organizerType }) => {
       toast.error("Vui lòng nhập tất cả thông tin");
       return;
     }
-    if (checkEmail(email)) {
+    if (!checkEmail(email)) {
       toast.error("Email không đúng định dạng, vui lòng nhập lại");
       return;
     }
-    if (checkPhoneNumber(phoneNumber)) {
+    if (!checkPhoneNumber(phoneNumber)) {
       toast.error("Số điện thoại không hợp lệ, vui lòng nhập lại");
       return;
     }
@@ -92,12 +99,16 @@ export const RegisterForm = ({ organizerType }) => {
       diaChi: addressValue,
       phoneNumber: phoneNumber,
       email: email,
+      role: "organizer",
       // anhChanDung: anhChanDungImageFiles ? JSON.stringify([...anhChanDungImageFiles]) : null,
       id: 1,
     };
 
-    setIsSubmitting(true);
-    await uploadOrganizerInfo(thongTin).then((data) => console.log(data));
+    await uploadOrganizerInfo(thongTin).then(() => {
+      setTimeout(() => {
+        setTrigger(false);
+      }, 1000);
+    });
   };
   return (
     <div className="grid-cols-1 grid gap-4 mb-6 mt-5">
@@ -122,7 +133,7 @@ export const RegisterForm = ({ organizerType }) => {
               files={avatarImageFile}
               setFiles={setAvatarImageFile}
               disabled={false}
-              className={" bg-emerald-400 z-50"}
+              className={" bg-emerald-400"}
             />
           </div>
         </div>
@@ -309,7 +320,6 @@ export const RegisterForm = ({ organizerType }) => {
 
       <div className="w-full flex items-center justify-center pt-6">
         <Button
-          disabled={isSubmitting}
           onClick={() => {
             onSubmit();
           }}
@@ -318,19 +328,6 @@ export const RegisterForm = ({ organizerType }) => {
           Xác nhận
         </Button>
       </div>
-      {isSubmitting && (
-        <DialogCustom
-          className="w-[90%] lg:w-[50%] h-fit items-center justify-center"
-          isModalOpen={isSubmitting}
-          notShowClose={true}
-        >
-          <div className="flex flex-col gap-3 items-center justify-center">
-            <div className="text-center font-semibold text-xs sm:text-sm">
-              Thông tin ban tổ chức đã được lưu vào hồ sơ.
-            </div>
-          </div>
-        </DialogCustom>
-      )}
     </div>
   );
 };

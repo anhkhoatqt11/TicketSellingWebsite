@@ -39,7 +39,7 @@ export default async function OrganizerLayout({
       <Header session={session} />
       {/* <Header session={session}/> */}
       <div className="flex justify-between h-full ">
-        {/* <OrganizerRegister session={session}/> */}
+        <OrganizerRegister session={session} />
         <Sidebar navItems={navItems} title="Navigation" />
         <div className="flex-1 w-full h-full min-h-screen bg-slate-50">
           {children}
