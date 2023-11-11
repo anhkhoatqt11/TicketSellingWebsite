@@ -14,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import Link from 'next/link';
 import { parseJSON } from 'date-fns';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 
@@ -31,7 +32,7 @@ export function formatCurrency(value: number) {
 export function EventDetail({ id }) {
   const { fetchEventById } = useEvent();
   const [isLoading, setIsLoading] = React.useState(false);
-
+  const [isError, setIsError] = React.useState(false);
 
   const { data: EventDetail } = useQuery({
     queryKey: ['EventDetail', id],
@@ -39,6 +40,9 @@ export function EventDetail({ id }) {
       const res = await fetchEventById(id);
       setIsLoading(true);
       return res?.[0];
+    },
+    onError: (err) => {
+      setIsError(true);
     }
   })
 
@@ -46,6 +50,16 @@ export function EventDetail({ id }) {
     console.log(EventDetail);
   })
 
+  if (isError) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-slate-50">
+        <p>Sự kiện bạn tìm kiếm không tồn tại</p>
+        <Link href='/'>
+          <Button className='ml-4'>Quay lại</Button>
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <div className='w-full h-full bg-slate-50'>
