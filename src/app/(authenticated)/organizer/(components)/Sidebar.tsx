@@ -80,7 +80,10 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                     {navItems.map((item) => {
                       const isCurrentPage = title === item.title;
                       return (
-                        <Link key={item.title} href={`/agency/${item.value}`}>
+                        <Link
+                          key={item.title}
+                          href={`/organizer/${item.value}`}
+                        >
                           <motion.span
                             className={classnames(
                               "text-[14px] flex items-center font-medium gap-2 w-full pl-4 h-8 rounded-md text-slate-11 relative transition ease-in-out duration-200",

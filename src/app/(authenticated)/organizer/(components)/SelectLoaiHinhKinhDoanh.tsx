@@ -3,7 +3,10 @@
 import { Select, SelectItem } from "@nextui-org/react";
 import React, { useEffect } from "react";
 
-export const SelectLoaiHinhKinhDoanh = ({ setLoaiHinhKinhDoanhValue }) => {
+export const SelectLoaiHinhKinhDoanh = ({
+  setLoaiHinhKinhDoanhValue,
+  loaiHinhKinhDoanhValue,
+}) => {
   const [selectedLoaiHinhKinhDoanh, setSelectedLoaiHinhKinhDoanh] =
     React.useState(new Set([]));
   const [loaiHinhKinhDoanhTouched, setLoaiHinhKinhDoanhTouched] =
@@ -35,7 +38,7 @@ export const SelectLoaiHinhKinhDoanh = ({ setLoaiHinhKinhDoanhValue }) => {
           radius={"sm"}
           label="Loại hình kinh doanh"
           placeholder="Chọn loại hình kinh doanh"
-          selectedKeys={selectedLoaiHinhKinhDoanh}
+          selectedKeys={loaiHinhKinhDoanhValue ? [loaiHinhKinhDoanhValue] : []}
           isInvalid={
             isLoaiHinhKinhDoanhValid || !loaiHinhKinhDoanhTouched ? false : true
           }

@@ -37,9 +37,9 @@ function Header({ session }) {
   const router = useRouter();
   return (
     <Navbar shouldHideOnScroll>
-      <NavbarBrand>
+      {/* <NavbarBrand>
         <Logo />
-      </NavbarBrand>
+      </NavbarBrand> */}
       <NavbarContent as="div" justify="end">
         <Button isIconOnly aria-label="Like" radius="full">
           <BellIcon />

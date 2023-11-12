@@ -42,6 +42,7 @@ model SuKien {
   ngayKetThuc   DateTime
   userId        Int
   ChuDeId       Int
+  trangThai     String   @default("Đã duyệt")
   user          User     @relation(fields: [userId], references: [id])
   ChuDe         ChuDe    @relation(fields: [ChuDeId], references: [id])
   ves           Ve[]

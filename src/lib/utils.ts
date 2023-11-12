@@ -113,3 +113,7 @@ export const getImageKey = (url) => {
   const filename = url.split('/').pop();
   return filename;
 };
+
+export const convertDateTimeToDate = (type) => {
+  return new Date(type).toLocaleDateString("en-GB");
+}

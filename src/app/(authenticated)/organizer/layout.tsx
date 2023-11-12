@@ -10,8 +10,13 @@ import { Footer } from "@/components/footer";
 
 const navItems = [
   {
-    title: "Danh sách BĐS đã tạo",
+    title: "Hồ sơ ban tổ chức",
     value: "profile",
+    icon: <DashboardIcon className="w-5 h-5" />,
+  },
+  {
+    title: "Quản lý sự kiện",
+    value: "event",
     icon: <DashboardIcon className="w-5 h-5" />,
   },
   //   {

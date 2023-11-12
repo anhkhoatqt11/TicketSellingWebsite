@@ -1,26 +1,27 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useEffect, useState } from "react";
 import { SelectAddress } from "./SelectAddress";
 import { generateReactHelpers } from "@uploadthing/react/hooks";
-// import { OurFileRouter } from '@/app/api/uploadthing/core';
+import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { FileDialog } from "@/components/ui/FileDialog";
 import { ImageList } from "@/components/ui/ImageList";
 import { Button } from "@/components/ui/button";
-// import { useDoiTac } from '@/hooks/useDoiTac';
 import DialogCustom from "@/components/ui/dialogCustom";
-// import { PartnerName } from './PartnerName';
-// import { PhoneNumber } from './PhoneNumber';
 import toast from "react-hot-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@nextui-org/react";
 import { useOrganizer } from "@/hooks/useOrganizer";
 import { checkEmail, checkPhoneNumber } from "@/lib/utils";
+import { url } from "inspector";
+import { Zoom } from "@/components/ui/zoom-image";
+import { ImageCus } from "@/components/ui/ImageCus";
 
-// const { useUploadThing } = generateReactHelpers<OurFileRouter>();
+const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
-export const RegisterForm = ({ organizerType, setTrigger }) => {
-  //   const { startUpload } = useUploadThing('imageUploader');
+export const RegisterForm = ({ organizerType, setIsLoading }) => {
+  const { startUpload } = useUploadThing("imageUploader");
 
   const [organizerName, setOrganizerName] = React.useState("");
   const [companyName, setCompanyName] = React.useState("");
@@ -33,6 +34,7 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
   const [ngayCap, setNgayCap] = useState("");
 
   const [avatarImageFile, setAvatarImageFile] = React.useState([]);
+  const [defaultAvatar, setDefaultAvatar] = useState("");
 
   const { fetchOrganizerById, uploadOrganizerInfo } = useOrganizer();
   useEffect(() => {
@@ -50,12 +52,11 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
         setMaSoThueCaNhan(result[0]?.maSoThueCaNhan);
         setNoiCap(result[0]?.noiCap);
         setNgayCap(result[0]?.ngayCap);
+        setDefaultAvatar(result[0]?.anhDaiDienToChuc);
       }
     };
-    fetchOrganizer();
+    fetchOrganizer().then(setIsLoading(false));
   }, []);
-
-  //   const { uploadDoiTacInfo } = useDoiTac();
 
   const onSubmit = async () => {
     if (
@@ -77,16 +78,18 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
       toast.error("Số điện thoại không hợp lệ, vui lòng nhập lại");
       return;
     }
-    // const [nationalIDFrontImage, nationalIDBackImage, giayPhepKinhDoanhImages] = await Promise.all([
-    //   startUpload([...nationalIDFrontImageFile]).then((res) => {
-    //     const formattedImages = res?.map((image) => ({
-    //       id: image.key,
-    //       name: image.key.split('_')[1] ?? image.key,
-    //       url: image.url,
-    //     }));
-    //     return formattedImages ?? null;
-    //   }),
-    // ]);
+
+    setIsLoading(true);
+    const [avatarImage] = await Promise.all([
+      startUpload([...avatarImageFile]).then((res) => {
+        const formattedImages = res?.map((image) => ({
+          id: image.key,
+          name: image.key.split("_")[1] ?? image.key,
+          url: image.url,
+        }));
+        return formattedImages ?? null;
+      }),
+    ]);
 
     const thongTin = {
       hoTenOrganizer: organizerType === "canhan" ? organizerName : "",
@@ -100,31 +103,35 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
       phoneNumber: phoneNumber,
       email: email,
       role: "organizer",
-      // anhChanDung: anhChanDungImageFiles ? JSON.stringify([...anhChanDungImageFiles]) : null,
+      anhDaiDienToChuc: avatarImage ? avatarImage[0]?.url : null,
       id: 1,
     };
 
     await uploadOrganizerInfo(thongTin).then(() => {
-      setTimeout(() => {
-        setTrigger(false);
-      }, 1000);
+      setIsLoading(false);
+      setTimeout(() => {}, 1000);
     });
   };
   return (
     <div className="grid-cols-1 grid gap-4 mb-6 mt-5">
       <h1 className="font-semibold">Thông tin cơ bản</h1>
-      <div className="flex flex-row flex-wrap rounded bg-white p-4">
-        <div className="basis-1/3 p-2 pr-3">
+      <div className="flex flex-col md:flex-row rounded bg-white p-4">
+        <div className="md:basis-1/3 p-2 pr-3">
           {/* avatar */}
           <div className="flex flex-col gap-y-3 max-w-xs lg:max-w-lg">
             <div className="font-bold text-sm"></div>
-            <div className=" w-full h-40">
-              <ImageList
-                className={"w-full h-40 border-2 rounded"}
-                files={avatarImageFile}
-                height={40}
-                width={40}
-              />
+            <div className=" w-full h-41 border-2 rounded">
+              <Zoom key={1} className={"w-full "}>
+                <img
+                  src={
+                    avatarImageFile[0]?.preview ||
+                    avatarImageFile[0]?.url ||
+                    defaultAvatar
+                  }
+                  alt={avatarImageFile[0]?.name}
+                  className={`h-40 w-full rounded-md object-cover object-center`}
+                />
+              </Zoom>
             </div>
             <FileDialog
               name="images"
@@ -137,7 +144,7 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
             />
           </div>
         </div>
-        <div className="basis-2/3 p-2 space-y-4 pt-3">
+        <div className="md:basis-2/3 p-2 space-y-4 pt-3">
           {/* ten doi tac */}
           {organizerType === "canhan" ? (
             <>
@@ -267,9 +274,9 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
 
       <h1 className="font-semibold">Thông tin liên hệ</h1>
       <div className="flex flex-col flex-wrap rounded bg-white p-6 gap-2">
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* so dien thoai */}
-          <div className="flex flex-col gap-3 max-w-xs lg:max-w-2xl ">
+          <div className="flex flex-col gap-3 w-full">
             <Label className="font-bold text-sm">
               Số điện thoại <span className="text-red-500">*</span>
             </Label>
@@ -278,7 +285,7 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
               errorMessage={`${
                 phoneNumber !== "" ? "" : "Vui lòng nhập số điện thoại"
               }`}
-              className="max-w-xs lg:max-w-2xl "
+              className="w-full"
               radius="sm"
               value={phoneNumber}
               placeholder="Nhập số điện thoại"
@@ -287,7 +294,7 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
               }}
             />
           </div>
-          <div className="flex flex-col gap-3 max-w-xs lg:max-w-2xl ">
+          <div className="flex flex-col gap-3 w-full">
             <Label className="font-bold text-sm">
               Email liên hệ: <span className="text-red-500">*</span>
             </Label>
@@ -296,7 +303,7 @@ export const RegisterForm = ({ organizerType, setTrigger }) => {
               errorMessage={`${
                 email !== "" ? "" : "Vui lòng nhập email liên hệ"
               }`}
-              className="max-w-xs lg:max-w-2xl "
+              className="w-full"
               radius="sm"
               value={email}
               type={"email"}
