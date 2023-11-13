@@ -5,6 +5,7 @@ export async function GET(request: Request) {
   const searchParams = new URLSearchParams(url.search);
   const page = parseInt(searchParams?.get('page')); // Retrieves the value of the 'skip' parameter
   const limit = parseInt(searchParams?.get('limit')); // Retrieves the value of the 'limit' parameter
+  const userId = parseInt(searchParams?.get('userId'))
   const searchWord = searchParams.get('name');
 
   const event = await prisma.suKien.findMany({
@@ -14,6 +15,9 @@ export async function GET(request: Request) {
     skip: (page - 1) * limit,
     take: limit,
     where: {
+      userId:{
+        equals: userId,
+      },
       name: {
         contains: searchWord || ""
       }, 

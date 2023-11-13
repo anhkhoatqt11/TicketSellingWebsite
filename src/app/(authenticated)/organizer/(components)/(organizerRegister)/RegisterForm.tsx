@@ -21,6 +21,7 @@ import { ImageCus } from "@/components/ui/ImageCus";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export const RegisterForm = ({ organizerType, setIsLoading }) => {
+  const userId = 1;
   const { startUpload } = useUploadThing("imageUploader");
 
   const [organizerName, setOrganizerName] = React.useState("");
@@ -104,7 +105,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
       email: email,
       role: "organizer",
       anhDaiDienToChuc: avatarImage ? avatarImage[0]?.url : null,
-      id: 1,
+      id: userId,
     };
 
     await uploadOrganizerInfo(thongTin).then(() => {

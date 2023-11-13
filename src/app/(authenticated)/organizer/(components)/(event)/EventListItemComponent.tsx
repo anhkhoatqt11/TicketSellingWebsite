@@ -88,9 +88,10 @@ export function EventListItemComponent({ item }) {
               {" - "}
               {convertDateTimeToDate(item?.ngayKetThuc)}
             </h1>
-            <p className="mt-2 text-medium text-ellipsis overflow-hidden h-[60px]">
-              {item?.moTa}
-            </p>
+            <p
+              className="mt-2 text-medium text-ellipsis overflow-hidden h-[60px]"
+              dangerouslySetInnerHTML={{ __html: `${item?.moTa}` }}
+            ></p>
           </div>
         </div>
         <Separator />

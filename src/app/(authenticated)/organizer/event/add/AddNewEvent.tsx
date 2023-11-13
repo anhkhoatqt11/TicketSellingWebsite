@@ -1,15 +1,24 @@
 "use client";
 
+import { useEventOrganizer } from "@/hooks/useEventOrganizer";
 import { checkPhoneNumber } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
-import React, { useState } from "react";
+import { CircularProgress } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import GeneralInformation from "../../(components)/(event)/(add)/GeneralInformation";
 import TicketInformation, {
   TicketProps,
 } from "../../(components)/(event)/(add)/TicketInformation";
+import { generateReactHelpers } from "@uploadthing/react/hooks";
+import { OurFileRouter } from "@/app/api/uploadthing/core";
+import { useTicketOrganizer } from "@/hooks/useTicketOrganizer";
+const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export function AddNewEvent({ session }) {
+  const userId = 1;
+
+  const { startUpload } = useUploadThing("imageUploader");
   const [eventName, setEventName] = React.useState("");
   const [addressValue, setAddressValue] = React.useState("");
   const [startDate, setStartDate] = useState(new Date());
@@ -20,6 +29,10 @@ export function AddNewEvent({ session }) {
   const [ticketEvent, setTicketEvent] = useState<TicketProps[]>([]);
   const [ticketDropEvent, setTicketDropEvent] = useState<TicketProps[]>([]);
   const [canSubmit, setCanSubmit] = useState(true);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const { createNewEvent, fetchJustCreatedEvent } = useEventOrganizer();
+  const { createNewTicket } = useTicketOrganizer();
 
   const onSubmit = () => {
     if (eventPosterFile.length <= 0) {
@@ -57,12 +70,70 @@ export function AddNewEvent({ session }) {
         );
         return;
       } else if (index === ticketEvent.length - 1) {
-        console.log("ok");
+        processCreationEvent();
+        return;
       }
+    });
+    if (ticketEvent.length === 0) {
+      processCreationEvent();
+    }
+  };
+
+  const processCreationEvent = async () => {
+    setIsLoading(true);
+    const [posterImage] = await Promise.all([
+      startUpload([...eventPosterFile]).then((res) => {
+        const formattedImages = res?.map((image) => ({
+          id: image.key,
+          name: image.key.split("_")[1] ?? image.key,
+          url: image.url,
+        }));
+        return formattedImages ?? null;
+      }),
+    ]);
+    const data = {
+      name: eventName,
+      moTa: contentValue,
+      diaChi: addressValue,
+      hinhAnhSuKien: posterImage ? posterImage[0]?.url : null,
+      ngayBatDau: startDate,
+      ngayKetThuc: endDate,
+      userId: userId,
+      ChuDeId: parseInt(typeEventSelected),
+      trangThai: "Đã duyệt",
+    };
+    await createNewEvent(data).then(() => {
+      processingTicket().then(() => {
+        setIsLoading(false);
+        toast.success("Sự kiện được tạo thành công");
+        setTimeout(() => {
+          //redirect
+        }, 1000);
+      });
+    });
+  };
+
+  const processingTicket = async () => {
+    await fetchJustCreatedEvent(userId).then((res) => {
+      ticketEvent.map(async (item, index) => {
+        const data = {
+          name: item.name,
+          moTa: item.moTa,
+          gia: item.gia,
+          mau: item.mau,
+          soLuong: item.soLuong,
+          soLuongToiThieu: item.soLuongToiThieu,
+          soLuongToiDa: item.soLuongToiDa,
+          ngayBan: item.ngayBan,
+          ngayKetThuc: item.ngayKetThuc,
+          SuKienId: res?.id,
+        };
+        await createNewTicket(data);
+      });
     });
   };
   return (
-    <>
+    <div className="relative min-h-[1032px]">
       <GeneralInformation
         props={{
           eventName,
@@ -98,6 +169,11 @@ export function AddNewEvent({ session }) {
       >
         Tạo sự kiện
       </Button>
-    </>
+      {isLoading ? (
+        <div className="w-full h-full flex justify-center bg-gray-200 z-10 absolute top-0">
+          <CircularProgress color="success" aria-label="Loading..." />
+        </div>
+      ) : null}
+    </div>
   );
 }

@@ -13,6 +13,7 @@ import EventListItemComponent from "./EventListItemComponent";
 import { useEventOrganizer } from "@/hooks/useEventOrganizer";
 
 function EventListComponent({ props }) {
+  const userId = 1;
   const [currentPage, setCurrentPage] = useState(1);
   const { fetchEventOfOrganizer } = useEventOrganizer();
   const [isLoaded, setIsLoaded] = React.useState(true);
@@ -21,7 +22,7 @@ function EventListComponent({ props }) {
       ["event", currentPage],
       ["name", props],
     ],
-    queryFn: () => fetchEventOfOrganizer(props, currentPage),
+    queryFn: () => fetchEventOfOrganizer(props, currentPage, userId),
     staleTime: 60 * 1000 * 1,
     keepPreviousData: true,
     onSuccess: () => {
