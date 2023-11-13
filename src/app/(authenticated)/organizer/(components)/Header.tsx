@@ -36,7 +36,7 @@ function Header({ session }) {
   const [user] = useState(session?.user);
   const router = useRouter();
   return (
-    <Navbar shouldHideOnScroll>
+    <Navbar shouldHideOnScroll className="shadow">
       {/* <NavbarBrand>
         <Logo />
       </NavbarBrand> */}

@@ -48,7 +48,7 @@ function TicketInformation({ props }) {
               subtitle="4 unread messages"
               title="Chung Miller"
             >
-              <div className="space-y-3">
+              <div className="space-y-6">
                 <Input
                   className="w-full"
                   radius="sm"
@@ -59,7 +59,7 @@ function TicketInformation({ props }) {
                   // }}
                 />
                 <Textarea label="Mô tả vé" placeholder="Nhập mô tả loại vé" />
-                <div className="flex h-20 items-center space-x-4 text-small">
+                <div className="lg:flex lg:h-20 space-y-3 lg:space-y-0 items-center lg:space-x-4 text-small">
                   <div className="space-y-3">
                     <div className="flex flex-row gap-2">
                       <h1 className="leading-10 text-sm w-[150px]">
@@ -100,7 +100,7 @@ function TicketInformation({ props }) {
                   </div>
                 </div>
                 <Divider className="my-4" />
-                <div className="flex h-20 items-center space-x-4 text-small">
+                <div className="lg:flex lg:h-20 space-y-3 lg:space-y-0 items-center lg:space-x-4 text-small">
                   <div className="flex flex-col gap-2">
                     <h1 className="leading-10 text-sm w-full text-center">
                       {`Giá vé (VNĐ)`}
