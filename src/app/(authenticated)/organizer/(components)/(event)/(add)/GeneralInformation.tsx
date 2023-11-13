@@ -19,33 +19,33 @@ import { Zoom } from "@/components/ui/zoom-image";
 import { CustomRadio } from "@/components/ui/CustomRadio";
 import EditorCustom from "@/components/editorCus/EditorCustom";
 import { DatePicker } from "@/components/ui/date-picker";
+import { useTopic } from "@/hooks/useTopic";
 
 function GeneralInformation({ props }) {
-  const [organizerName, setOrganizerName] = React.useState("");
-  const [companyName, setCompanyName] = React.useState("");
-  const [addressValue, setAddressValue] = React.useState("");
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [maSoThueCaNhan, setMaSoThueCaNhan] = useState("");
-  const [maSoDKKD, setMaSoDKKD] = useState("");
-  const [noiCap, setNoiCap] = useState("");
-  const [ngayCap, setNgayCap] = useState("");
-
-  const [avatarImageFile, setAvatarImageFile] = React.useState([]);
-  const [typeEventSelected, setTypeEventSelected] = React.useState("");
-  const [contentValue, setContentValue] = useState("");
-
+  const [topicList, setTopicList] = useState([]);
+  const { fetchTopic } = useTopic();
+  useEffect(() => {
+    const getTopic = async () => {
+      await fetchTopic().then((res) => {
+        setTopicList(res);
+      });
+    };
+    getTopic();
+  }, []);
   return (
     <div className="grid-cols-1 grid gap-4 mb-6 mt-5">
-      <h1 className="font-semibold">Thông tin sự kiện</h1>
+      <h1 className="font-semibold text-xl">Thông tin sự kiện</h1>
       <div className="rounded bg-white p-4">
         {/* avatar */}
         <div className="flex flex-col gap-y-3 w-full">
           <div className=" w-full h-41 border-2 rounded">
             <Zoom key={1} className={"w-full h-[360px]"}>
               <img
-                src={avatarImageFile[0]?.preview || avatarImageFile[0]?.url}
-                alt={avatarImageFile[0]?.name}
+                src={
+                  props.eventPosterFile[0]?.preview ||
+                  props.eventPosterFile[0]?.url
+                }
+                alt={props.eventPosterFile[0]?.name}
                 className={`h-[360px] w-full rounded-md object-cover object-center`}
               />
             </Zoom>
@@ -54,8 +54,8 @@ function GeneralInformation({ props }) {
             name="images"
             maxFiles={1}
             maxSize={1024 * 1024 * 4}
-            files={avatarImageFile}
-            setFiles={setAvatarImageFile}
+            files={props.eventPosterFile}
+            setFiles={props.setEventPosterFile}
             disabled={false}
             className={" bg-emerald-400"}
           />
@@ -67,23 +67,23 @@ function GeneralInformation({ props }) {
                 Tên sự kiện: <span className="text-red-500">*</span>
               </Label>
               <Input
-                isInvalid={email !== "" ? false : true}
+                isInvalid={props.eventName !== "" ? false : true}
                 errorMessage={`${
-                  email !== "" ? "" : "Vui lòng nhập tên sự kiện"
+                  props.eventName !== "" ? "" : "Vui lòng nhập tên sự kiện"
                 }`}
                 className="w-full"
                 radius="sm"
-                value={email}
+                value={props.eventName}
                 placeholder="Nhập tên sự kiện"
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  props.setEventName(e.target.value);
                 }}
               />
             </div>
           </div>
           <SelectAddress
-            addressValue={addressValue}
-            setAddressValue={setAddressValue}
+            addressValue={props.addressValue}
+            setAddressValue={props.setAddressValue}
           />
           <div className="flex flex-col gap-3 w-full">
             <Label className="font-bold text-sm">Chủ đề:</Label>
@@ -91,60 +91,39 @@ function GeneralInformation({ props }) {
               <RadioGroup
                 label="Chọn loại sự kiện"
                 orientation="horizontal"
-                value={typeEventSelected}
-                onValueChange={setTypeEventSelected}
+                value={props.typeEventSelected}
+                onValueChange={props.setTypeEventSelected}
               >
-                <CustomRadio value="buenos-aires">Buenos Aires</CustomRadio>
-                <CustomRadio value="sydney">Sydney</CustomRadio>
-                <CustomRadio value="san-francisco">San Francisco</CustomRadio>
-                <CustomRadio value="london">London</CustomRadio>
-                <CustomRadio value="tokyo">Tokyo</CustomRadio>
+                {topicList.map((item) => (
+                  <CustomRadio key={item?.id} value={item?.id}>
+                    {item?.name}
+                  </CustomRadio>
+                ))}
               </RadioGroup>
             </div>
           </div>
           <div className="flex flex-col gap-3 w-full">
             <Label className="font-bold text-sm">Mô tả:</Label>
             <EditorCustom
-              contentValue={contentValue}
+              contentValue={props.contentValue}
               // data={data?.policy}
-              setContentValue={setContentValue}
+              setContentValue={props.setContentValue}
               disabled={false}
             />
-            {/* <Textarea /> */}
           </div>
           <div className="flex flex-col gap-3 w-full">
             <Label className="font-bold text-sm">Ngày sự kiện:</Label>
-            {/* <Input
-                isInvalid={email !== "" ? false : true}
-                errorMessage={`${
-                  email !== "" ? "" : "Vui lòng nhập tên sự kiện"
-                }`}
-                className="w-full"
-                radius="sm"
-                value={DatePicker}
-                placeholder="Nhập tên sự kiện"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              /> */}
             <div className="flex flex-col lg:flex-row gap-4">
               <div className="flex flex-row gap-2">
                 <h1 className="leading-10 text-sm w-[60px]">Bắt đầu: </h1>
                 <DatePicker
-                  date={undefined}
-                  setDate={function (date: Date): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  date={props.startDate}
+                  setDate={props.setStartDate}
                 />
               </div>
               <div className="flex flex-row gap-2">
                 <h1 className="leading-10 text-sm w-[60px]">Kết thúc: </h1>
-                <DatePicker
-                  date={undefined}
-                  setDate={function (date: Date): void {
-                    throw new Error("Function not implemented.");
-                  }}
-                />
+                <DatePicker date={props.endDate} setDate={props.setEndDate} />
               </div>
             </div>
           </div>

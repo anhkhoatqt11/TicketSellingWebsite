@@ -14,11 +14,10 @@ function EditorCustom({
   setContentValue: any;
   disabled: boolean;
 }) {
-  console.log(process.env.TINYMCE_KEY);
   return (
     <Editor
       disabled={disabled}
-      apiKey={process.env.TINYMCE_KEY}
+      apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
       initialValue={data?.content}
       value={contentValue}
       onEditorChange={(newValue) => {

@@ -14,7 +14,6 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
   const [selectedWard, setSelectedWard] = React.useState(new Set([]));
 
   const [diaChiTouched, setDiaChiTouched] = React.useState(false);
-  console.log(setDiaChiTouched);
   const [provinceTouched, setProvinceTouched] = React.useState(false);
   const [districtTouched, setDistrictTouched] = React.useState(false);
   const [wardTouched, setWardTouched] = React.useState(false);
@@ -76,7 +75,6 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
 
     getWard();
   }, [selectedDistrict]);
-  console.log(wards);
   const isProvinceValid = selectedProvince.size > 0;
   const isDistrictValid = selectedDistrict.size > 0;
   const isWardValid = selectedWard.size > 0;
@@ -97,7 +95,6 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
     const valuesArrayWard = Array.from(selectedWard);
     const wardCode = valuesArrayWard[0];
     const wardValue = wards.find((ward) => ward.code == wardCode)?.name;
-    console.log(provinceValue, districtValue, wardValue, locationValue);
     setAddressValue(
       `${locationValue}, ${wardValue}, ${districtValue}, ${provinceValue}`
     );
