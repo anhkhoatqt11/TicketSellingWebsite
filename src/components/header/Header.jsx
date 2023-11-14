@@ -21,7 +21,7 @@ import { Badge } from "../ui/badge";
 import Logo from "../logo";
 import { BsTicketPerforated } from "react-icons/bs";
 import BackDropCus from "../backdropCus/backdropCus";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const avatarNav = [
   {
@@ -44,6 +44,7 @@ const NavigationMenuDemo = ({ session }) => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [show, setShow] = useState("translate-y-0");
   const router = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
     return () => {
@@ -75,7 +76,7 @@ const NavigationMenuDemo = ({ session }) => {
       <div className="hidden lg:flex py-2 items-center h-full ">
         {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null}
         {<Logo />}
-        {
+        {pathname !== "/search" ? (
           <div className="form-control">
             <input
               type="text"
@@ -83,7 +84,7 @@ const NavigationMenuDemo = ({ session }) => {
               className="input input-bordered md:w-[500px] ml-5 h-10"
             />
           </div>
-        }
+        ) : null}
         {user ? (
           <div className="flex flex-row gap-5 items-center justify-center ml-auto">
             <div className="box-border w-full h-full flex gap-10">

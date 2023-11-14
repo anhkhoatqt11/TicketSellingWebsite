@@ -1,11 +1,8 @@
 "use client";
 
 import React from "react";
-import ButtonTest from "./component/ButtonTest";
-import { Button } from "@/components/ui/button";
-import DialogCustom from "@/components/ui/dialogCustom";
-import NavigationBar from "./component/NavigationBar";
-import ContentSection from "./component/ContentSection";
+import NavigationBar from "./components/NavigationBar";
+import ContentSection from "./components/ContentSection";
 
 const page = () => {
   return (
