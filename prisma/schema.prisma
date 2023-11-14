@@ -33,18 +33,20 @@ model User {
 }
 
 model SuKien {
-  id            Int      @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   name          String
   moTa          String?
   diaChi        String?
-  hinhAnhSuKien String?  @db.LongText
+  hinhAnhSuKien String?     @db.LongText
   ngayBatDau    DateTime
   ngayKetThuc   DateTime
   userId        Int
   ChuDeId       Int
+  trangThai     String   @default("Đã duyệt")
   user          User     @relation(fields: [userId], references: [id])
   ChuDe         ChuDe    @relation(fields: [ChuDeId], references: [id])
   ves           Ve[]
+  MaGiamGia     MaGiamGia[]
 
   @@index([userId])
   @@index([ChuDeId])
@@ -58,7 +60,7 @@ model ChuDe {
 }
 
 model Ve {
-  id              Int        @id @default(autoincrement())
+  id              Int         @id @default(autoincrement())
   name            String
   moTa            String?
   gia             Float
@@ -69,9 +71,10 @@ model Ve {
   ngayBan         DateTime
   ngayKetThuc     DateTime
   SuKienId        Int
-  suKien          SuKien     @relation(fields: [SuKienId], references: [id])
+  suKien          SuKien      @relation(fields: [SuKienId], references: [id])
   HoaDon          HoaDon[]
   HoaDonVe        HoaDonVe[]
+  MaGiamGia       MaGiamGia[]
 
   @@index([SuKienId])
 }
@@ -102,4 +105,21 @@ model HoaDonVe {
 
   @@index([hoaDonId, veId], map: "HoaDonVe_HoaDonVeId")
   @@index([veId])
+}
+
+model MaGiamGia {
+  id           Int      @id @default(autoincrement())
+  maGiamGia    String   @unique
+  soTienGiam   Float?
+  phanTramGiam Int?
+  ngayBatDau   DateTime
+  ngayKetThuc  DateTime
+  SuKienId     Int?
+  VeId         Int?
+
+  suKien SuKien? @relation(fields: [SuKienId], references: [id])
+  ve     Ve?     @relation(fields: [VeId], references: [id])
+
+  @@index([SuKienId])
+  @@index([VeId])
 }
