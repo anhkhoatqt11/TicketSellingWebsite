@@ -9,7 +9,7 @@ import { CiEdit } from "react-icons/ci";
 import { DatePicker } from "@/components/ui/date-picker";
 import { IoTicketOutline } from "react-icons/io5";
 import { toast } from "react-hot-toast";
-import { checkPhoneNumber } from "@/lib/utils";
+import { checkPhoneNumber, prismaDateToNextDate } from "@/lib/utils";
 import {
   Modal,
   ModalContent,
@@ -42,16 +42,16 @@ function TicketInformation({ props }) {
   const [description, setDescription] = useState("");
   const [startSale, setStartSale] = useState(new Date());
   const [endSale, setEndSale] = useState(new Date());
-  const [ticketPrice, setTicketPrice] = useState("0");
+  const [ticketPrice, setTicketPrice] = useState("15000");
   const [totalCount, setTotalCount] = useState("10");
   const [minimun, setMinimun] = useState("1");
   const [maximum, setMaximum] = useState("10");
+  const [justCreated, setJustCreated] = useState(true);
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
 
   const [isEditing, setIsEditing] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [deletedId, setDeletedId] = useState();
-  const [isJustCreated, setIsJustCreated] = useState(false);
 
   const addNewEvent = () => {
     if (isEditing) {
@@ -61,10 +61,10 @@ function TicketInformation({ props }) {
     props.setTicketEvent([
       ...props.ticketEvent,
       {
-        id: startId + 1,
+        id: startId + 1 + props.startIndex,
         name: newEventName,
         moTa: "",
-        gia: 0,
+        gia: 15000,
         mau: "#ff0000",
         soLuong: 10,
         soLuongToiThieu: 1,
@@ -72,7 +72,7 @@ function TicketInformation({ props }) {
         ngayBan: new Date(),
         ngayKetThuc: new Date(),
         justCreated: true,
-        SuKienId: -1,
+        SuKienId: props.eventId,
       },
     ]);
     setStartId((prev) => prev + 1);
@@ -137,10 +137,21 @@ function TicketInformation({ props }) {
   };
 
   const deleteTicketContent = () => {
-    props.setTicketEvent(
-      props.ticketEvent.filter((item) => item.id === deletedId)
-    );
-    if (!isJustCreated) {
+    var item = props.ticketEvent.filter((item) => item.id === deletedId);
+    // if (
+    //   !item[0].justCreated &&
+    //   item[0].ngayBan.getTime() <= new Date().getTime()
+    // ) {
+    //   toast.error("Vé đã bắt đầu được bán, không thể xóa");
+    //   setIsEditing(false);
+    //   return;
+    // }
+    try {
+      props.setTicketEvent(
+        props.ticketEvent?.filter((item) => item.id !== deletedId)
+      );
+    } catch (except) {}
+    if (!item[0]?.justCreated) {
       props.setTicketDropEvent([
         ...props.ticketDropEvent,
         {
@@ -163,6 +174,7 @@ function TicketInformation({ props }) {
           setTotalCount(item.soLuong.toString());
           setMinimun(item.soLuongToiThieu.toString());
           setMaximum(item.soLuongToiDa.toString());
+          setJustCreated(item.justCreated);
         }
       });
     }
@@ -185,13 +197,22 @@ function TicketInformation({ props }) {
                   color="success"
                   variant="light"
                   onPress={() => {
+                    setIsEditing(false);
+                    props.setCanSubmit(true);
                     onClose();
                     deleteTicketContent();
                   }}
                 >
                   Xóa vé
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button
+                  color="primary"
+                  onPress={() => {
+                    setIsEditing(false);
+                    props.setCanSubmit(true);
+                    onClose();
+                  }}
+                >
                   Hủy
                 </Button>
               </ModalFooter>
@@ -199,11 +220,19 @@ function TicketInformation({ props }) {
           )}
         </ModalContent>
       </Modal>
-      <div className="grid-cols-1 grid gap-4 mb-6 mt-5">
+      <div className="grid-cols-1 grid gap-4 mt-5">
         <h1 className="font-semibold text-xl">Hệ thống vé</h1>
-        <span className="text-red-500 text-sm">
-          *Lưu ý: Trong quá trình chỉnh sửa vé, không thể thao tác với các vé
-          khác và thêm vé mới !
+        <span className="text-red-500 text-sm leading-6">
+          *Lưu ý: <br />
+          1. Trong quá trình chỉnh sửa vé, không thể thao tác với các vé khác và
+          thêm vé mới !
+          <br />
+          2. Các vé đã được tạo và bắt đầu đăng bán không thể thực hiện xóa, chỉ
+          có thể sửa !
+          <br />
+          3. Thao tác xóa vé có thể sẽ xuất hiện thông báo lỗi do thời gian cập
+          nhật, các bạn vui lòng bỏ qua. Nếu có sự cố vui lòng liên hệ đơn vị kỹ
+          thuật !
         </span>
         <div className="rounded bg-white p-4">
           <div className="gap-6 mt-3">
@@ -230,7 +259,7 @@ function TicketInformation({ props }) {
               selectedKeys={selectedKeys}
               onSelectionChange={setSelectedKeys}
             >
-              {props.ticketEvent.map((item) => (
+              {props.ticketEvent?.map((item) => (
                 <AccordionItem
                   className="shadow-md rounded-md px-12 mb-4"
                   key={item.id}
@@ -387,7 +416,6 @@ function TicketInformation({ props }) {
                         onPress={() => {
                           onOpen();
                           setDeletedId(item.id);
-                          setIsJustCreated(item.justCreated);
                         }}
                       >
                         Xóa vé

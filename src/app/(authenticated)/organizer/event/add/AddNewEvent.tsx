@@ -13,12 +13,22 @@ import TicketInformation, {
 import { generateReactHelpers } from "@uploadthing/react/hooks";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { useTicketOrganizer } from "@/hooks/useTicketOrganizer";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export function AddNewEvent({ session }) {
   const userId = 1;
-
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { startUpload } = useUploadThing("imageUploader");
+  const [startIndex, setStartIndex] = useState(1);
+  const [eventId, setEventId] = useState(-1);
   const [eventName, setEventName] = React.useState("");
   const [addressValue, setAddressValue] = React.useState("");
   const [startDate, setStartDate] = useState(new Date());
@@ -48,7 +58,7 @@ export function AddNewEvent({ session }) {
       return;
     }
     if (!canSubmit) {
-      toast.error("Vui lòng hoàn thành thông tin vé sự kiện");
+      toast.error("Đang ở chế độ chỉnh sửa thông tin vé, vui lòng hoàn tất");
       return;
     }
     ticketEvent.map((item, index) => {
@@ -65,6 +75,19 @@ export function AddNewEvent({ session }) {
         !checkPhoneNumber(item.soLuongToiThieu.toString()) ||
         item.ngayBan.getTime() >= item.ngayKetThuc.getTime()
       ) {
+        console.log(
+          !item.name,
+          !item.moTa,
+          !item.gia,
+          !item.soLuong,
+          !item.soLuongToiDa,
+          !item.soLuongToiThieu,
+          !checkPhoneNumber(item.gia.toString()),
+          !checkPhoneNumber(item.soLuong.toString()),
+          !checkPhoneNumber(item.soLuongToiDa.toString()),
+          !checkPhoneNumber(item.soLuongToiThieu.toString()),
+          item.ngayBan.getTime() >= item.ngayKetThuc.getTime()
+        );
         toast.error(
           `Vé thứ ${index + 1} đang bị lỗi dữ liệu, vui lòng kiểm tra lại !`
         );
@@ -133,47 +156,84 @@ export function AddNewEvent({ session }) {
     });
   };
   return (
-    <div className="relative min-h-[1032px]">
-      <GeneralInformation
-        props={{
-          eventName,
-          setEventName,
-          addressValue,
-          setAddressValue,
-          startDate,
-          setStartDate,
-          endDate,
-          setEndDate,
-          eventPosterFile,
-          setEventPosterFile,
-          typeEventSelected,
-          setTypeEventSelected,
-          contentValue,
-          setContentValue,
-        }}
-      />
-      <TicketInformation
-        props={{
-          ticketEvent,
-          setTicketEvent,
-          ticketDropEvent,
-          setTicketDropEvent,
-          canSubmit,
-          setCanSubmit,
-        }}
-      />
-      <Button
-        className="bg-emerald-500 text-white w-full border-1"
-        radius="sm"
-        onClick={onSubmit}
-      >
-        Tạo sự kiện
-      </Button>
-      {isLoading ? (
-        <div className="w-full h-full flex justify-center bg-gray-200 z-10 absolute top-0">
-          <CircularProgress color="success" aria-label="Loading..." />
-        </div>
-      ) : null}
-    </div>
+    <>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Xác nhận
+              </ModalHeader>
+              <ModalBody>
+                <p>
+                  Sự kiện đã tạo sẽ không thể xóa. Bạn có chắc chắn muốn tạo sự
+                  kiện này
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="success"
+                  variant="light"
+                  onPress={() => {
+                    onClose();
+                    onSubmit();
+                  }}
+                >
+                  Tạo sự kiện
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Hủy
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+      <div className="relative min-h-[1032px]">
+        <GeneralInformation
+          props={{
+            eventName,
+            setEventName,
+            addressValue,
+            setAddressValue,
+            startDate,
+            setStartDate,
+            endDate,
+            setEndDate,
+            eventPosterFile,
+            setEventPosterFile,
+            typeEventSelected,
+            setTypeEventSelected,
+            contentValue,
+            setContentValue,
+            setIsLoading,
+          }}
+        />
+        <TicketInformation
+          props={{
+            ticketEvent,
+            setTicketEvent,
+            ticketDropEvent,
+            setTicketDropEvent,
+            canSubmit,
+            setCanSubmit,
+            eventId,
+            startIndex,
+          }}
+        />
+        <Button
+          className="bg-emerald-500 text-white w-full border-1"
+          radius="sm"
+          onClick={onOpen}
+        >
+          Tạo sự kiện
+        </Button>
+        {isLoading ? (
+          <div className="w-full h-full flex justify-center bg-gray-200 z-10 absolute top-0">
+            <CircularProgress color="success" aria-label="Loading..." />
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 }

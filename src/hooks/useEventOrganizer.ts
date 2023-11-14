@@ -19,10 +19,25 @@ export const useEventOrganizer = () => {
     return res;
   }
 
+  const fetchEventById = async (eventId) => {
+    const res = await getRequest({endPoint: `/api/organizer/event/user-event/detail?eventId=${eventId}`})
+    return res;
+  }
+
+  const editEvent = async (data) => {
+    const res = await postRequest({
+      endPoint: '/api/organizer/event/user-event/edit',
+      isFormData: false,
+      formData: data,
+    });
+  };
+
   return {
     // fetchAllDoiTac,
     fetchEventOfOrganizer,
     createNewEvent,
-    fetchJustCreatedEvent
+    fetchJustCreatedEvent,
+    fetchEventById,
+    editEvent
   };
 };

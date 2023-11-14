@@ -1,4 +1,4 @@
-import { getRequest, postRequest } from '@/lib/fetch';
+import { deleteRequest, getRequest, postRequest } from '@/lib/fetch';
 import toast from 'react-hot-toast';
 
 export const useTicketOrganizer = () => {
@@ -14,7 +14,25 @@ export const useTicketOrganizer = () => {
     });
   };
 
+  const editTicket = async (data) => {
+    const res = await postRequest({
+      endPoint: '/api/organizer/event/user-event/edit/edit-ticket',
+      isFormData: false,
+      formData: data,
+    });
+  };
+
+  const deleteTicket = async (id) => {
+    const res = await deleteRequest({
+      endPoint: `/api/organizer/event/user-event/edit/delete-ticket?id=${id}`,
+    });
+    console.log(res);
+    return res;
+  };
+
   return {
     createNewTicket,
+    editTicket,
+    deleteTicket
   };
 };

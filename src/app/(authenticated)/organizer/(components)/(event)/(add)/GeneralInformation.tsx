@@ -26,8 +26,10 @@ function GeneralInformation({ props }) {
   const { fetchTopic } = useTopic();
   useEffect(() => {
     const getTopic = async () => {
+      props.setIsLoading(true);
       await fetchTopic().then((res) => {
         setTopicList(res);
+        props.setIsLoading(false);
       });
     };
     getTopic();
@@ -43,7 +45,8 @@ function GeneralInformation({ props }) {
               <img
                 src={
                   props.eventPosterFile[0]?.preview ||
-                  props.eventPosterFile[0]?.url
+                  props.eventPosterFile[0]?.url ||
+                  props.defaultPoster
                 }
                 alt={props.eventPosterFile[0]?.name}
                 className={`h-[360px] w-full rounded-md object-cover object-center`}

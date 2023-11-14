@@ -16,6 +16,7 @@ function EditorCustom({
 }) {
   return (
     <Editor
+      id={process.env.NEXT_PUBLIC_TINYMCE_ID}
       disabled={disabled}
       apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
       initialValue={data?.content}

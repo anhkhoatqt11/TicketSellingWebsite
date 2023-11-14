@@ -118,3 +118,11 @@ export const getImageKey = (url) => {
 export const convertDateTimeToDate = (type) => {
   return new Date(type).toLocaleDateString("en-GB");
 }
+
+export const prismaDateToNextDate = (type) => {
+  const time = convertDateTimeToDate(type).split("/");
+  const year =  parseInt(time[2]);
+  const month = parseInt(time[1]) - 1;
+  const day =  parseInt(time[0]);
+  return new Date(year,month,day);
+}

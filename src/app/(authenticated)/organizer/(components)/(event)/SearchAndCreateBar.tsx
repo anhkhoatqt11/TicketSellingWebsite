@@ -9,9 +9,11 @@ import { useRouter } from "next/navigation";
 
 export function SearchAndCreateBar({ setSearchWord }) {
   const [searchKey, setSearchKey] = useState("");
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") searchSubmit();
-  });
+  try {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") searchSubmit();
+    });
+  } catch (except) {}
   const searchSubmit = () => {
     setSearchWord(searchKey);
   };

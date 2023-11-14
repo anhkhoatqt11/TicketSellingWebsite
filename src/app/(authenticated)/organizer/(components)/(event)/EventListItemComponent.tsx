@@ -17,6 +17,7 @@ import { FcSportsMode } from "react-icons/fc";
 import { BiSolidDiscount } from "react-icons/bi";
 import { FaChartBar } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 export function EventListItemComponent({ item }) {
   const currentDate = new Date(
@@ -104,10 +105,12 @@ export function EventListItemComponent({ item }) {
             <BiSolidDiscount className="w-full" />
             Mã giảm giá
           </div>
-          <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
-            <AiFillEdit className="w-full" />
-            Chỉnh sửa
-          </div>
+          <Link href={`/organizer/event/details/${item?.id}`}>
+            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
+              <AiFillEdit className="w-full" />
+              Chỉnh sửa
+            </div>
+          </Link>
           <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-br-lg">
             <FaChartBar className="w-full" />
             Tổng kết
@@ -123,6 +126,7 @@ const getDateTimeKetThuc = (type) => {
   const year = new Date().getFullYear() - parseInt(time[2]);
   const month = new Date().getMonth() + 1 - parseInt(time[1]);
   const day = new Date().getDate() - parseInt(time[0]);
+  console.log(year, month, day);
   return (
     year < 0 ||
     (year === 0 && month < 0) ||

@@ -67,7 +67,6 @@ export function FileDialog<TFieldValues extends FieldValues>({
 }: FileDialogProps<TFieldValues>) {
   const onDrop = React.useCallback(
     (acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
-      console.log(acceptedFiles.length, files?.length);
       if (acceptedFiles.length + (files?.length ?? 0) > maxFiles) {
         toast.error(`You can only upload up to ${maxFiles} files`);
         return;
@@ -99,7 +98,6 @@ export function FileDialog<TFieldValues extends FieldValues>({
   React.useEffect(() => {
     setValue?.(name, files as PathValue<TFieldValues, Path<TFieldValues>>);
   }, [files]);
-  console.log(files);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept,
