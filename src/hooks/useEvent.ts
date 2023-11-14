@@ -7,6 +7,7 @@ export const useEvent = () => {
         return res;
     }
 
+
     return {
         fetchEventById,
     }
