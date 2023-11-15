@@ -254,6 +254,7 @@ function TicketInformation({ props }) {
                 Tạo vé mới
               </Button>
             </div>
+
             <Accordion
               showDivider={false}
               selectedKeys={selectedKeys}

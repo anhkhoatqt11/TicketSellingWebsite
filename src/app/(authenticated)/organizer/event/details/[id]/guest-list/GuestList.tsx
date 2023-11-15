@@ -3,7 +3,7 @@
 import { useEventOrganizer } from "@/hooks/useEventOrganizer";
 import { checkPhoneNumber, prismaDateToNextDate } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
-import { CircularProgress, Divider } from "@nextui-org/react";
+import { CircularProgress, Divider, Input } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import GeneralInformation from "../../../../(components)/(event)/(add)/GeneralInformation";
@@ -25,6 +25,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import * as XLSX from "xlsx";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 export function GuestList({ session, id }) {
   const userId = 1;
@@ -35,6 +36,20 @@ export function GuestList({ session, id }) {
   const [guestList, setGuestList] = useState<GuestItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { fetchEventAngGuestListById } = useEventOrganizer();
+  const [searchKey, setSearchKey] = useState("");
+  const [copyList, setCopyList] = useState<GuestItem[]>([]);
+  try {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") searchSubmit();
+    });
+  } catch (except) {}
+  const searchSubmit = () => {
+    setGuestList(
+      copyList.filter((item) =>
+        item.guest.toLowerCase().includes(searchKey.toLowerCase())
+      )
+    );
+  };
 
   const onCreateExcelList = () => {
     var wb = XLSX.utils.book_new();
@@ -76,6 +91,7 @@ export function GuestList({ session, id }) {
           });
           if (index === res.ves?.length - 1) {
             setGuestList(copyGuestList);
+            setCopyList(copyGuestList);
             setIsLoading(false);
           }
         });
@@ -134,6 +150,21 @@ export function GuestList({ session, id }) {
             Để đảm bảo thông tin khách hàng, trường email và số điện thoại sẽ bị
             ẩn
           </h1>
+        </div>
+        <div className="w-full py-6 flex justify-end flex-row">
+          <Input
+            className="h-[52px] w-full md:w-[360px]"
+            variant="bordered"
+            radius="sm"
+            label="Nhập tên khán giả..."
+            onChange={(e) => setSearchKey(e.target.value)}
+          />
+          <Button
+            className="h-[52px] w-[0px] rounded-md m-0 p-0 -ml-[50px] min-w-unit-12 bg-transparent"
+            onClick={searchSubmit}
+          >
+            <MagnifyingGlassIcon className="h-6 w-6 text-emerald-400" />
+          </Button>
         </div>
         <div className="w-full px-12 grid grid-cols-6 text-sm lg:text-base font-semibold mt-6 ">
           <div>*</div>
