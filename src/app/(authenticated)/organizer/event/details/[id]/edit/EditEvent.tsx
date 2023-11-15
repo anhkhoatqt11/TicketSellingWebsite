@@ -6,10 +6,10 @@ import { Button } from "@nextui-org/button";
 import { CircularProgress } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import GeneralInformation from "../../../(components)/(event)/(add)/GeneralInformation";
+import GeneralInformation from "../../../../(components)/(event)/(add)/GeneralInformation";
 import TicketInformation, {
   TicketProps,
-} from "../../../(components)/(event)/(add)/TicketInformation";
+} from "../../../../(components)/(event)/(add)/TicketInformation";
 import { generateReactHelpers } from "@uploadthing/react/hooks";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { useTicketOrganizer } from "@/hooks/useTicketOrganizer";
@@ -235,7 +235,13 @@ export function EditEvent({ session, id }) {
       </Button>
       {isLoading ? (
         <div className="w-full h-full flex justify-center bg-gray-200 z-10 absolute top-0">
-          <CircularProgress color="success" aria-label="Loading..." />
+          <CircularProgress
+            color="success"
+            aria-label="Loading..."
+            classNames={{
+              svg: "w-28 h-28 drop-shadow-md",
+            }}
+          />
         </div>
       ) : null}
     </div>

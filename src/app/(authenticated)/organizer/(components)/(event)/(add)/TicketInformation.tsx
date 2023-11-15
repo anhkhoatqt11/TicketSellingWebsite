@@ -138,14 +138,14 @@ function TicketInformation({ props }) {
 
   const deleteTicketContent = () => {
     var item = props.ticketEvent.filter((item) => item.id === deletedId);
-    // if (
-    //   !item[0].justCreated &&
-    //   item[0].ngayBan.getTime() <= new Date().getTime()
-    // ) {
-    //   toast.error("Vé đã bắt đầu được bán, không thể xóa");
-    //   setIsEditing(false);
-    //   return;
-    // }
+    if (
+      !item[0].justCreated &&
+      item[0].ngayBan.getTime() <= new Date().getTime()
+    ) {
+      toast.error("Vé đã bắt đầu được bán, không thể xóa");
+      setIsEditing(false);
+      return;
+    }
     try {
       props.setTicketEvent(
         props.ticketEvent?.filter((item) => item.id !== deletedId)

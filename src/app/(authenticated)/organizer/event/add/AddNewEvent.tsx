@@ -75,19 +75,6 @@ export function AddNewEvent({ session }) {
         !checkPhoneNumber(item.soLuongToiThieu.toString()) ||
         item.ngayBan.getTime() >= item.ngayKetThuc.getTime()
       ) {
-        console.log(
-          !item.name,
-          !item.moTa,
-          !item.gia,
-          !item.soLuong,
-          !item.soLuongToiDa,
-          !item.soLuongToiThieu,
-          !checkPhoneNumber(item.gia.toString()),
-          !checkPhoneNumber(item.soLuong.toString()),
-          !checkPhoneNumber(item.soLuongToiDa.toString()),
-          !checkPhoneNumber(item.soLuongToiThieu.toString()),
-          item.ngayBan.getTime() >= item.ngayKetThuc.getTime()
-        );
         toast.error(
           `Vé thứ ${index + 1} đang bị lỗi dữ liệu, vui lòng kiểm tra lại !`
         );
@@ -230,7 +217,13 @@ export function AddNewEvent({ session }) {
         </Button>
         {isLoading ? (
           <div className="w-full h-full flex justify-center bg-gray-200 z-10 absolute top-0">
-            <CircularProgress color="success" aria-label="Loading..." />
+            <CircularProgress
+              color="success"
+              aria-label="Loading..."
+              classNames={{
+                svg: "w-28 h-28 drop-shadow-md",
+              }}
+            />
           </div>
         ) : null}
       </div>

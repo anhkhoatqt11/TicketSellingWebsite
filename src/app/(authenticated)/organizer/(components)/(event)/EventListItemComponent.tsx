@@ -97,15 +97,17 @@ export function EventListItemComponent({ item }) {
         </div>
         <Separator />
         <div className="grid grid-cols-4 gap-2 rounded-md text-green-500 font-medium w-full place-content-center">
-          <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-bl-lg">
-            <IoPeople className="w-full" />
-            Danh sách khách
-          </div>
+          <Link href={`/organizer/event/details/${item?.id}/guest-list`}>
+            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-bl-lg">
+              <IoPeople className="w-full" />
+              Danh sách khách
+            </div>
+          </Link>
           <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
             <BiSolidDiscount className="w-full" />
             Mã giảm giá
           </div>
-          <Link href={`/organizer/event/details/${item?.id}`}>
+          <Link href={`/organizer/event/details/${item?.id}/edit`}>
             <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
               <AiFillEdit className="w-full" />
               Chỉnh sửa
