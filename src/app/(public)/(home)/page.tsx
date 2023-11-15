@@ -1,18 +1,16 @@
-'use client';
+"use client";
 
-import React from 'react'
-import ButtonTest from './component/ButtonTest';
-import { Button } from '@/components/ui/button';
-import DialogCustom from '@/components/ui/dialogCustom';
+import React from "react";
+import NavigationBar from "./components/NavigationBar";
+import ContentSection from "./components/ContentSection";
 
 const page = () => {
+  return (
+    <div className="flex flex-row">
+      <NavigationBar></NavigationBar>
+      <ContentSection></ContentSection>
+    </div>
+  );
+};
 
-    const [openPreview, setOpenPreview] = React.useState(false);
-
-    return (
-        <div>
-        </div>
-    )
-}
-
-export default page
+export default page;
