@@ -29,6 +29,11 @@ export const useEventOrganizer = () => {
     return res;
   }
 
+  const fetchEventAndCouponListById = async (eventId) => {
+    const res = await getRequest({endPoint: `/api/organizer/event/user-event/coupon?eventId=${eventId}`})
+    return res;
+  }
+
   const editEvent = async (data) => {
     const res = await postRequest({
       endPoint: '/api/organizer/event/user-event/edit',
@@ -44,6 +49,7 @@ export const useEventOrganizer = () => {
     fetchJustCreatedEvent,
     fetchEventById,
     fetchEventAngGuestListById,
+    fetchEventAndCouponListById,
     editEvent
   };
 };

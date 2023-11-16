@@ -209,7 +209,7 @@ export function AddNewEvent({ session }) {
           }}
         />
         <Button
-          className="bg-emerald-500 text-white w-full border-1"
+          className="w-full bg-emerald-400 text-white font-semibold py-6 text-base"
           radius="sm"
           onClick={onOpen}
         >

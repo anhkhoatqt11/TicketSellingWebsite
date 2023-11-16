@@ -1,3 +1,5 @@
+"use client";
+
 import { currencyFormat } from "@/lib/utils";
 import { IoTicketOutline } from "react-icons/io5";
 
