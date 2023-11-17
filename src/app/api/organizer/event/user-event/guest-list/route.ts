@@ -9,11 +9,14 @@ export async function GET(request: Request) {
     include: {
       ves: {
         include: {
-            HoaDon: {
-                include: {
-                    HoaDonVe: true,
+            HoaDonVe: {
+              include: {
+                hoaDon: {
+                  include: {
                     user: true
-                },
+                  }
+                }
+              }
             }
         }
       },

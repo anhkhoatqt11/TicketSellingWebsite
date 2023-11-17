@@ -1,6 +1,7 @@
 "use client";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Label } from "@/components/ui/label";
+import { useVoucher } from "@/hooks/useVoucher";
 import {
   checkPhoneNumber,
   convertDateInUI,
@@ -20,7 +21,6 @@ import {
 import { Select, SelectItem } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { string } from "zod";
 
 export const CouponModal = ({ props }) => {
   const [code, setCode] = useState(props.code);
@@ -29,7 +29,8 @@ export const CouponModal = ({ props }) => {
   const [start, setStart] = useState(convertDateInUI(props.start));
   const [end, setEnd] = useState(convertDateInUI(props.end));
   const [ticketId, setTicketId] = useState(props.ticketId);
-  const editVoucher = (close) => {
+  const { editVoucher, creatNewVoucher } = useVoucher();
+  const editVoucherAction = async (close) => {
     if (!code || (!price && !percent) || !start || !end || !ticketId) {
       toast.error("Vui lòng điền đầy đủ thông tin");
       return;
@@ -54,42 +55,88 @@ export const CouponModal = ({ props }) => {
     const ticketName = props.ticketList.filter(
       (item) => item.id === parseInt(ticketId)
     )[0]?.name;
-    props.setCouponList(
-      props.couponList.map((item) =>
-        item.id === props.id
-          ? {
-              id: item.id,
-              code: code,
-              price: price ? price : null,
-              percent: percent ? percent : null,
-              start: convertDateUIToDate(start),
-              end: convertDateUIToDate(end),
-              ticketName: ticketName,
-              ticketId: ticketId,
-              state:
-                convertDateUIToDate(end).getTime() >= new Date().getTime()
-                  ? "Đang sử dụng"
-                  : "Hết hạn",
-            }
-          : item
-      )
-    );
+    if (props.action === "edit") {
+      props.setCouponList(
+        props.couponList.map((item) =>
+          item.id === props.id
+            ? {
+                id: item.id,
+                code: code,
+                price: price ? price : null,
+                percent: percent ? percent : null,
+                start: convertDateUIToDate(start),
+                end: convertDateUIToDate(end),
+                ticketName: ticketName,
+                ticketId: ticketId,
+                state:
+                  convertDateUIToDate(end).getTime() >= new Date().getTime()
+                    ? "Đang sử dụng"
+                    : "Hết hạn",
+              }
+            : item
+        )
+      );
+      const data = {
+        id: props.id,
+        maGiamGia: code,
+        soTienGiam: price ? parseInt(price) : null,
+        phanTramGiam: percent ? parseInt(percent) : null,
+        ngayBatDau: convertDateUIToDate(start),
+        ngayKetThuc: convertDateUIToDate(end),
+        VeId: parseInt(ticketId),
+      };
+      await editVoucher(data).then(() =>
+        toast.success("Chỉnh sửa mã giảm giá thành công")
+      );
+    } else {
+      const data = {
+        maGiamGia: code,
+        soTienGiam: price ? parseInt(price) : null,
+        phanTramGiam: percent ? parseInt(percent) : null,
+        ngayBatDau: convertDateUIToDate(start),
+        ngayKetThuc: convertDateUIToDate(end),
+        VeId: parseInt(ticketId),
+        SuKienId: parseInt(props.eventId),
+      };
+      await creatNewVoucher(data).then((res) => {
+        props.setCouponList([
+          ...props.couponList,
+          {
+            id: res?.id,
+            code: code,
+            price: price ? price : null,
+            percent: percent ? percent : null,
+            start: convertDateUIToDate(start),
+            end: convertDateUIToDate(end),
+            ticketName: ticketName,
+            ticketId: ticketId,
+            state:
+              convertDateUIToDate(end).getTime() >= new Date().getTime()
+                ? "Đang sử dụng"
+                : "Hết hạn",
+            trangThai: true,
+          },
+        ]);
+        toast.success("Thêm mã giảm giá mới thành công");
+      });
+    }
     close();
   };
   const [selectedLoaiVe, setSelectedLoaiVe] = useState(new Set([]));
   useEffect(() => {
     if (props.isOpen) {
-      setCode(props.code);
-      setPrice(props.price ? props.price : "");
-      setPercent(props.percent ? props.percent : "");
-      setStart(convertDateInUI(props.start));
-      setEnd(convertDateInUI(props.end));
-      setTicketId(props.ticketId);
-      if (props.ticketId) {
+      setCode(props.action === "edit" ? props.code : "");
+      setPrice(props.action === "edit" && props.price ? props.price : "");
+      setPercent(props.action === "edit" && props.percent ? props.percent : "");
+      setStart(props.action === "edit" ? convertDateInUI(props.start) : "");
+      setEnd(props.action === "edit" ? convertDateInUI(props.end) : "");
+      setTicketId(props.action === "edit" ? props.ticketId : "");
+      if (props.ticketId && props.action === "edit") {
         setSelectedLoaiVe(props.ticketId.toString());
       }
     }
   }, [
+    props.action,
     props.code,
     props.end,
     props.isOpen,
@@ -124,10 +171,6 @@ export const CouponModal = ({ props }) => {
                     Mã giảm giá: <span className="text-red-500">*</span>
                   </Label>
                   <Input
-                    isInvalid={code !== "" ? false : true}
-                    errorMessage={`${
-                      code !== "" ? "" : "Vui lòng nhập mã giảm giá"
-                    }`}
                     className="w-full"
                     radius="sm"
                     value={code}
@@ -231,7 +274,7 @@ export const CouponModal = ({ props }) => {
                 color="success"
                 variant="light"
                 onPress={() => {
-                  editVoucher(onClose);
+                  editVoucherAction(onClose);
                 }}
               >
                 Xác nhận

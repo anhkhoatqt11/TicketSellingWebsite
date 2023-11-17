@@ -12,12 +12,9 @@ export const useEventOrganizer = () => {
       isFormData: false,
       formData: data,
     });
+    return res;
   };
 
-  const fetchJustCreatedEvent = async (userId) => {
-    const res = await getRequest({endPoint: `/api/organizer/event/add/get-newest?userId=${userId}`})
-    return res;
-  }
 
   const fetchEventById = async (eventId) => {
     const res = await getRequest({endPoint: `/api/organizer/event/user-event/detail?eventId=${eventId}`})
@@ -42,14 +39,19 @@ export const useEventOrganizer = () => {
     });
   };
 
+  const fetchSummary = async (eventId) => {
+    const res = await getRequest({endPoint: `/api/organizer/event/user-event/summary?eventId=${eventId}`})
+    return res;
+  }
+
   return {
     // fetchAllDoiTac,
     fetchEventOfOrganizer,
     createNewEvent,
-    fetchJustCreatedEvent,
     fetchEventById,
     fetchEventAngGuestListById,
     fetchEventAndCouponListById,
-    editEvent
+    editEvent,
+    fetchSummary
   };
 };

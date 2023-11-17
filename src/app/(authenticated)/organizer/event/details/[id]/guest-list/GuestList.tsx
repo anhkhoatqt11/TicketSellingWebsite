@@ -72,21 +72,19 @@ export function GuestList({ session, id }) {
           const color = item?.mau;
           const mave = item?.id;
           const loaive = item?.name;
-          item?.HoaDon?.map((item2) => {
-            const name = item2?.user?.name;
-            item2?.HoaDonVe?.map((item3) => {
-              const soluong = item3?.soLuong;
-              const tonggia = item3?.tongGia;
-              const id = `${color}-${mave}-${name}-${tonggia}`;
-              copyGuestList.push({
-                id: id,
-                color: color,
-                guest: name,
-                ticketId: mave,
-                ticketName: loaive,
-                amount: soluong,
-                price: tonggia,
-              });
+          item?.HoaDonVe?.map((item2) => {
+            const name = item2?.hoaDon?.user?.name;
+            const soLuong = item2?.soLuong;
+            const tongGia = item2?.tongGia;
+            const id = `${color}-${mave}-${name}-${tongGia}`;
+            copyGuestList.push({
+              id: id,
+              color: color,
+              guest: name,
+              ticketId: mave,
+              ticketName: loaive,
+              amount: soLuong,
+              price: tongGia,
             });
           });
           if (index === res.ves?.length - 1) {

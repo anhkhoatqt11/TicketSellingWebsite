@@ -8,8 +8,9 @@ import {
 import { Button } from "@nextui-org/button";
 import { CiEdit } from "react-icons/ci";
 import { CouponModal } from "./CouponModal";
-import { HiBan } from "react-icons/hi";
+import { HiBan, HiOutlineTicket } from "react-icons/hi";
 import { useDisclosure } from "@nextui-org/modal";
+import { useVoucher } from "@/hooks/useVoucher";
 export type CouponItem = {
   id: string;
   code: string;
@@ -25,27 +26,14 @@ export type CouponItem = {
 
 export const CouponItemComponent = ({ props }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const unable = () => {
-    props.setCouponList(
-      props.couponList.map((item) =>
-        item.id === props.id
-          ? {
-              id: item.id,
-              code: props.code,
-              price: props.price ? props.price : null,
-              percent: props.percent ? props.percent : null,
-              start: convertDateUIToDate(props.start),
-              end: convertDateUIToDate(props.end),
-              ticketName: props.ticketName,
-              ticketId: props.ticketId,
-              state: "Vô hiệu",
-            }
-          : item
-      )
-    );
-  };
+  const { editVoucher } = useVoucher();
+  const unableOrAble = async (value) => {
+    const data = {
+      id: props.id,
+      trangThai: value,
+    };
+    await editVoucher(data);
 
-  const able = () => {
     props.setCouponList(
       props.couponList.map((item) =>
         item.id === props.id
@@ -54,14 +42,17 @@ export const CouponItemComponent = ({ props }) => {
               code: props.code,
               price: props.price ? props.price : null,
               percent: props.percent ? props.percent : null,
-              start: convertDateUIToDate(props.start),
-              end: convertDateUIToDate(props.end),
+              start: props.start,
+              end: props.end,
               ticketName: props.ticketName,
               ticketId: props.ticketId,
-              state:
-                convertDateUIToDate(props.end).getTime() >= new Date().getTime()
-                  ? "Đang sử dụng"
-                  : "Hết hạn",
+              state: !value
+                ? "Vô hiệu"
+                : prismaDateToNextDate(props.end).getTime() >=
+                  new Date().getTime()
+                ? "Đang sử dụng"
+                : "Hết hạn",
+              trangThai: value,
             }
           : item
       )
@@ -86,6 +77,7 @@ export const CouponItemComponent = ({ props }) => {
           id: props.id,
           couponList: props.couponList,
           setCouponList: props.setCouponList,
+          action: "edit",
         }}
       />
       <div className="grid grid-cols-7 shadow-md rounded-md px-12 py-4 mb-4 ">
@@ -116,11 +108,14 @@ export const CouponItemComponent = ({ props }) => {
           </div>
           {props.trangThai === true ? (
             <div className="p-3 border-1 border-red-400 rounded-md h-12 w-12 transition ease-in-out hover:bg-white hover:scale-105 hover:shadow hover:text-red-400">
-              <HiBan className="w-6 h-6" onClick={unable} />
+              <HiBan className="w-6 h-6" onClick={() => unableOrAble(false)} />
             </div>
           ) : (
             <div className="p-3 border-1 border-blue-400 rounded-md h-12 w-12 transition ease-in-out hover:bg-white hover:scale-105 hover:shadow hover:text-blue-400">
-              <HiBan className="w-6 h-6" onClick={able} />
+              <HiOutlineTicket
+                className="w-6 h-6"
+                onClick={() => unableOrAble(true)}
+              />
             </div>
           )}
         </div>

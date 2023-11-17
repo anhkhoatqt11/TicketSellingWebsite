@@ -21,6 +21,8 @@ import {
   CouponItemComponent,
 } from "@/app/(authenticated)/organizer/(components)/(event)/(detail)/CouponItem";
 import { DatePicker } from "@/components/ui/date-picker";
+import { useDisclosure } from "@nextui-org/modal";
+import { CouponModal } from "@/app/(authenticated)/organizer/(components)/(event)/(detail)/CouponModal";
 
 export function CouponList({ session, id }) {
   const userId = 1;
@@ -30,11 +32,11 @@ export function CouponList({ session, id }) {
   const [couponList, setCouponList] = useState<CouponItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { fetchEventAndCouponListById } = useEventOrganizer();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  let [startDate, setStartDate] = useState(new Date());
+  let [endDate, setEndDate] = useState(new Date());
   const [copyList, setCopyList] = useState<CouponItem[]>([]);
   const [ticketList, setTicketList] = useState();
-
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const searchSubmit = () => {
     if (startDate.getTime() > endDate.getTime()) {
       toast.error(
@@ -70,9 +72,13 @@ export function CouponList({ session, id }) {
           const endDay = prismaDateToNextDate(item?.ngayKetThuc);
           if (startDate.getTime() > startDay.getTime()) {
             setStartDate(startDay);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            startDate = startDay;
           }
           if (endDate.getTime() < endDay.getTime()) {
             setEndDate(endDay);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            endDate = endDay;
           }
           const nowDate = new Date().getTime();
           copyCouponList.push({
@@ -100,6 +106,18 @@ export function CouponList({ session, id }) {
 
   return (
     <>
+      <CouponModal
+        props={{
+          isOpen,
+          onOpen,
+          onOpenChange,
+          ticketList: ticketList,
+          couponList: couponList,
+          setCouponList: setCouponList,
+          action: "add",
+          eventId: id,
+        }}
+      />
       <div className="relative min-h-[1032px]">
         <div className="mt-6">
           <h1 className="font-semibold text-2xl">{eventName}</h1>
@@ -163,7 +181,10 @@ export function CouponList({ session, id }) {
               }}
             ></CouponItemComponent>
           ))}
-          <Button className="w-full bg-emerald-400 mt-4 text-white font-semibold py-6 text-base">
+          <Button
+            className="w-full bg-emerald-400 mt-4 text-white font-semibold py-6 text-base"
+            onClick={onOpen}
+          >
             Tạo mã giảm giá mới
           </Button>
         </div>

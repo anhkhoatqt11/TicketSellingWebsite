@@ -103,20 +103,24 @@ export function EventListItemComponent({ item }) {
               Danh sách khách
             </div>
           </Link>
-          <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
-            <BiSolidDiscount className="w-full" />
-            Mã giảm giá
-          </div>
+          <Link href={`/organizer/event/details/${item?.id}/coupon`}>
+            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
+              <BiSolidDiscount className="w-full" />
+              Mã giảm giá
+            </div>
+          </Link>
           <Link href={`/organizer/event/details/${item?.id}/edit`}>
             <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
               <AiFillEdit className="w-full" />
               Chỉnh sửa
             </div>
           </Link>
-          <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-br-lg">
-            <FaChartBar className="w-full" />
-            Tổng kết
-          </div>
+          <Link href={`/organizer/event/details/${item?.id}/summary`}>
+            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-br-lg">
+              <FaChartBar className="w-full" />
+              Tổng kết
+            </div>
+          </Link>
         </div>
       </div>
     </Card>
