@@ -39,7 +39,13 @@ export const EditProfileForm = () => {
       </div>
       {isLoading ? (
         <div className="w-full h-full flex justify-center bg-gray-200 z-10 absolute top-0">
-          <CircularProgress color="success" aria-label="Loading..." />
+          <CircularProgress
+            color="success"
+            aria-label="Loading..."
+            classNames={{
+              svg: "w-28 h-28 drop-shadow-md",
+            }}
+          />
         </div>
       ) : null}
     </div>

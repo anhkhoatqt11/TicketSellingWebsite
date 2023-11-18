@@ -42,9 +42,9 @@ model SuKien {
   ngayKetThuc   DateTime
   userId        Int
   ChuDeId       Int
-  trangThai     String   @default("Đã duyệt")
-  user          User     @relation(fields: [userId], references: [id])
-  ChuDe         ChuDe    @relation(fields: [ChuDeId], references: [id])
+  trangThai     String      @default("Đã duyệt")
+  user          User        @relation(fields: [userId], references: [id])
+  ChuDe         ChuDe       @relation(fields: [ChuDeId], references: [id])
   ves           Ve[]
   MaGiamGia     MaGiamGia[]
 
@@ -72,7 +72,6 @@ model Ve {
   ngayKetThuc     DateTime
   SuKienId        Int
   suKien          SuKien      @relation(fields: [SuKienId], references: [id])
-  HoaDon          HoaDon[]
   HoaDonVe        HoaDonVe[]
   MaGiamGia       MaGiamGia[]
 
@@ -85,13 +84,10 @@ model HoaDon {
   userId              Int
   phuongThucThanhToan String
   createdAt           DateTime   @default(now())
-  veId                Int?
   user                User       @relation(fields: [userId], references: [id])
   HoaDonVe            HoaDonVe[]
-  Ve                  Ve?        @relation(fields: [veId], references: [id])
 
   @@index([userId])
-  @@index([veId])
 }
 
 model HoaDonVe {
@@ -116,9 +112,9 @@ model MaGiamGia {
   ngayKetThuc  DateTime
   SuKienId     Int?
   VeId         Int?
-
-  suKien SuKien? @relation(fields: [SuKienId], references: [id])
-  ve     Ve?     @relation(fields: [VeId], references: [id])
+  trangThai    Boolean  @default(true)
+  suKien       SuKien?  @relation(fields: [SuKienId], references: [id])
+  ve           Ve?      @relation(fields: [VeId], references: [id])
 
   @@index([SuKienId])
   @@index([VeId])

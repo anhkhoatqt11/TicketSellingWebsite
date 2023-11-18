@@ -7,7 +7,19 @@ export async function GET(request: Request) {
 
   const event = await prisma.suKien.findFirst({
     include: {
-      ves: true,
+      ves: {
+        include: {
+            HoaDonVe: {
+              include: {
+                hoaDon: {
+                  include: {
+                    user: true
+                  }
+                }
+              }
+            }
+        }
+      },
       ChuDe: true
     },
     where: {
