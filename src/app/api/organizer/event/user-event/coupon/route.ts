@@ -3,18 +3,23 @@ import prisma from '@/lib/prisma';
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const searchParams = new URLSearchParams(url.search);
-  const userId = parseInt(searchParams?.get('userId'))
+  const eventId = parseInt(searchParams?.get('eventId'))
 
   const event = await prisma.suKien.findFirst({
-    where: {
-      userId:{
-        equals: userId,
+    include: {
+      MaGiamGia: {
+        include: {
+            ve: true
+        }
       },
+      ChuDe: true,
+      ves: true
     },
-    orderBy: {
-        id: 'desc'
+    where: {
+      id:{
+        equals: eventId,
+      },
     }
   });
-
   return new Response(JSON.stringify(event), { status: 200 });
 }

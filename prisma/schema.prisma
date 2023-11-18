@@ -42,9 +42,9 @@ model SuKien {
   ngayKetThuc   DateTime
   userId        Int
   ChuDeId       Int
-  trangThai     String   @default("Đã duyệt")
-  user          User     @relation(fields: [userId], references: [id])
-  ChuDe         ChuDe    @relation(fields: [ChuDeId], references: [id])
+  trangThai     String      @default("Đã duyệt")
+  user          User        @relation(fields: [userId], references: [id])
+  ChuDe         ChuDe       @relation(fields: [ChuDeId], references: [id])
   ves           Ve[]
   MaGiamGia     MaGiamGia[]
 
@@ -113,9 +113,8 @@ model MaGiamGia {
   SuKienId     Int?
   VeId         Int?
   trangThai    Boolean  @default(true)
-
-  suKien SuKien? @relation(fields: [SuKienId], references: [id])
-  ve     Ve?     @relation(fields: [VeId], references: [id])
+  suKien       SuKien?  @relation(fields: [SuKienId], references: [id])
+  ve           Ve?      @relation(fields: [VeId], references: [id])
 
   @@index([SuKienId])
   @@index([VeId])

@@ -70,10 +70,6 @@ function GeneralInformation({ props }) {
                 Tên sự kiện: <span className="text-red-500">*</span>
               </Label>
               <Input
-                isInvalid={props.eventName !== "" ? false : true}
-                errorMessage={`${
-                  props.eventName !== "" ? "" : "Vui lòng nhập tên sự kiện"
-                }`}
                 className="w-full"
                 radius="sm"
                 value={props.eventName}

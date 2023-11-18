@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma';
 export async function POST(req: Request) {
   const body = await req.json();
 
-  const ticket = await prisma.ve.update({
+  const voucher = await prisma.maGiamGia.update({
     where: {
         id: body?.id,
     },
@@ -11,7 +11,7 @@ export async function POST(req: Request) {
         ...body
     },
   });
-  if (ticket) {
-    return new Response(JSON.stringify(ticket), { status: 200 });
+  if (voucher) {
+    return new Response(JSON.stringify(voucher), { status: 200 });
   }
 }

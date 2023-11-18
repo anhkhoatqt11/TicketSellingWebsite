@@ -21,6 +21,7 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export function AddNewEvent({ session }) {
@@ -41,8 +42,9 @@ export function AddNewEvent({ session }) {
   const [canSubmit, setCanSubmit] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
-  const { createNewEvent, fetchJustCreatedEvent } = useEventOrganizer();
+  const { createNewEvent } = useEventOrganizer();
   const { createNewTicket } = useTicketOrganizer();
+  const route = useRouter();
 
   const onSubmit = () => {
     if (eventPosterFile.length <= 0) {
@@ -75,19 +77,6 @@ export function AddNewEvent({ session }) {
         !checkPhoneNumber(item.soLuongToiThieu.toString()) ||
         item.ngayBan.getTime() >= item.ngayKetThuc.getTime()
       ) {
-        console.log(
-          !item.name,
-          !item.moTa,
-          !item.gia,
-          !item.soLuong,
-          !item.soLuongToiDa,
-          !item.soLuongToiThieu,
-          !checkPhoneNumber(item.gia.toString()),
-          !checkPhoneNumber(item.soLuong.toString()),
-          !checkPhoneNumber(item.soLuongToiDa.toString()),
-          !checkPhoneNumber(item.soLuongToiThieu.toString()),
-          item.ngayBan.getTime() >= item.ngayKetThuc.getTime()
-        );
         toast.error(
           `Vé thứ ${index + 1} đang bị lỗi dữ liệu, vui lòng kiểm tra lại !`
         );
@@ -125,34 +114,32 @@ export function AddNewEvent({ session }) {
       ChuDeId: parseInt(typeEventSelected),
       trangThai: "Đã duyệt",
     };
-    await createNewEvent(data).then(() => {
-      processingTicket().then(() => {
+    await createNewEvent(data).then((res) => {
+      processingTicket(res?.id).then(() => {
         setIsLoading(false);
         toast.success("Sự kiện được tạo thành công");
         setTimeout(() => {
-          //redirect
+          route.push("/organizer/event");
         }, 1000);
       });
     });
   };
 
-  const processingTicket = async () => {
-    await fetchJustCreatedEvent(userId).then((res) => {
-      ticketEvent.map(async (item, index) => {
-        const data = {
-          name: item.name,
-          moTa: item.moTa,
-          gia: item.gia,
-          mau: item.mau,
-          soLuong: item.soLuong,
-          soLuongToiThieu: item.soLuongToiThieu,
-          soLuongToiDa: item.soLuongToiDa,
-          ngayBan: item.ngayBan,
-          ngayKetThuc: item.ngayKetThuc,
-          SuKienId: res?.id,
-        };
-        await createNewTicket(data);
-      });
+  const processingTicket = async (id) => {
+    ticketEvent.map(async (item) => {
+      const data = {
+        name: item.name,
+        moTa: item.moTa,
+        gia: item.gia,
+        mau: item.mau,
+        soLuong: item.soLuong,
+        soLuongToiThieu: item.soLuongToiThieu,
+        soLuongToiDa: item.soLuongToiDa,
+        ngayBan: item.ngayBan,
+        ngayKetThuc: item.ngayKetThuc,
+        SuKienId: id,
+      };
+      await createNewTicket(data);
     });
   };
   return (
@@ -222,7 +209,7 @@ export function AddNewEvent({ session }) {
           }}
         />
         <Button
-          className="bg-emerald-500 text-white w-full border-1"
+          className="w-full bg-emerald-400 text-white font-semibold py-6 text-base"
           radius="sm"
           onClick={onOpen}
         >
@@ -230,7 +217,13 @@ export function AddNewEvent({ session }) {
         </Button>
         {isLoading ? (
           <div className="w-full h-full flex justify-center bg-gray-200 z-10 absolute top-0">
-            <CircularProgress color="success" aria-label="Loading..." />
+            <CircularProgress
+              color="success"
+              aria-label="Loading..."
+              classNames={{
+                svg: "w-28 h-28 drop-shadow-md",
+              }}
+            />
           </div>
         ) : null}
       </div>
