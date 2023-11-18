@@ -5,7 +5,7 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  //   await mustBeLoggedIn();
+    await mustBeLoggedIn();
 
   return (
     <div className="">

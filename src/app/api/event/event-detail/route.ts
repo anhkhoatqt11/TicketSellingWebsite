@@ -18,7 +18,14 @@ export async function GET(request:Request) {
             //     }
             // },
             ves: true,
-            user: true,
+            user: {
+                select: {
+                    id: true,
+                    name:true,
+                    phoneNumber:true,
+                    avatar: true,
+                }
+            }
         }
     })
     if (!event)

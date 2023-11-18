@@ -29,10 +29,25 @@ export function formatCurrency(value: number) {
   return CURRENCY_FORMAT.format(value);
 }
 
+function formatDate(inputDateString: string): string {
+  const parsedDate = new Date(inputDateString);
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const dateFormatter = new Intl.DateTimeFormat('en-GB', options);
+
+  return dateFormatter.format(parsedDate);
+}
+
+
+function getHoursFromDateString(inputDateString: string): number {
+  const parsedDate = new Date(inputDateString);
+  return parsedDate.getUTCHours();
+}
+
 export function EventDetail({ id }) {
   const { fetchEventById } = useEvent();
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
+  const [currentDateTime, setCurrentDateTime] = React.useState("");
 
   const { data: EventDetail } = useQuery({
     queryKey: ['EventDetail', id],
@@ -47,8 +62,12 @@ export function EventDetail({ id }) {
   })
 
   useEffect(() => {
-    console.log(EventDetail);
-  })
+    fetch("http://worldtimeapi.org/api/timezone/Asia/Bangkok")
+      .then(response => response.json())
+      .then(data => {
+        setCurrentDateTime(data.utc_datetime);
+      });
+  }, []);
 
   if (isError) {
     return (
@@ -82,7 +101,12 @@ export function EventDetail({ id }) {
                 <h1 className='text-xl font-bold'>{EventDetail?.name}</h1>
                 <div className='pt-3 flex flex-row'>
                   <ClockIcon size={18} className='mt-1' />
-                  <p className='ml-2'>{EventDetail?.ngayBatDau}-{EventDetail?.ngayKetThuc}</p>
+                  {formatDate(EventDetail?.ngayBatDau) != formatDate(EventDetail?.ngayKetThuc) ? (
+                    <p className='ml-2'>{formatDate(EventDetail?.ngayBatDau)} - {formatDate(EventDetail?.ngayKetThuc)}</p>
+                  ) : null}
+                  {formatDate(EventDetail?.ngayBatDau) == formatDate(EventDetail?.ngayKetThuc) ? (
+                    <p className='ml-2'>{formatDate(EventDetail?.ngayBatDau)}</p>
+                  ) : null}
                 </div>
                 <div className='pt-3 flex flex-row'>
                   <IoLocationOutline size={18} className='mt-1' />
@@ -115,10 +139,29 @@ export function EventDetail({ id }) {
                     {EventDetail?.ves.map((item) => (
                       <AccordionItem value={item.id} key={`item-${item.id}`}>
                         <AccordionTrigger className='cursor-pointer flex justify-between'>
-                          <p className='flex flex-row'>{item.name}
-                            <ChevronDownIcon className="h-4 w-4 ml-1 shrink-0 text-muted-foreground transition-transform duration-200" />
-                          </p>
+                          <div className='flex flex-col'>
+                            <p className='flex flex-row'>{item.name}
+                              <ChevronDownIcon className="h-4 w-4 ml-1 shrink-0 text-muted-foreground transition-transform duration-200" />
+                            </p>
+                            {Date.parse(item.ngayBan) > Date.parse(currentDateTime) && item.soLuong != 0 ? (
+                              <div className='border border-gray-500 p-2 mt-3'>
+                                <p>VÉ SẮP MỞ BÁN</p>
+                              </div>
+                            ) : null}
+                            {Date.parse(item.ngayKetThuc) < Date.parse(currentDateTime) && item.soLuong != 0 ? (
+                              <div className='border border-gray-500 p-2 mt-3'>
+                                <p>VÉ HẾT THỜI HẠN</p>
+                              </div>
+                            ) : null}
+                            {item.soLuong == 0 ? (
+                              <div className='border border-gray-500 p-2 mt-3'>
+                                <p>HẾT VÉ</p>
+                              </div>
+                            ) : null}
+                          </div>
+
                           <p className='font-bold'>{formatCurrency(item.gia)}</p>
+
                         </AccordionTrigger>
                         <AccordionContent>
                           <p>{item.moTa}</p>
@@ -141,7 +184,7 @@ export function EventDetail({ id }) {
                   </div>
                   <div className='ml-4'>
                     <p className='text-lg font-bold'>{EventDetail?.user?.name}</p>
-                    <div className='pt-3 flex flex-row'>
+                    <div className='mt-1 flex flex-row'>
                       <PhoneIcon size={18} />
                       <p className='ml-2'>{EventDetail?.user?.phoneNumber}</p>
                     </div>
@@ -156,7 +199,12 @@ export function EventDetail({ id }) {
                   <div className="font-semibold">{EventDetail?.name}</div>
                   <div className='pt-3 flex flex-row'>
                     <ClockIcon size={18} className='mt-1' />
-                    <p className='ml-2'>{EventDetail?.ngayBatDau}-{EventDetail?.ngayKetThuc}</p>
+                    {formatDate(EventDetail?.ngayBatDau) != formatDate(EventDetail?.ngayKetThuc) ? (
+                      <p className='ml-2'>{formatDate(EventDetail?.ngayBatDau)} - {formatDate(EventDetail?.ngayKetThuc)}</p>
+                    ) : null}
+                    {formatDate(EventDetail?.ngayBatDau) == formatDate(EventDetail?.ngayKetThuc) ? (
+                      <p className='ml-2'>{formatDate(EventDetail?.ngayBatDau)}</p>
+                    ) : null}
                   </div>
                   <div className='pt-3 flex flex-row'>
                     <IoLocationOutline size={18} className='mt-1' />
