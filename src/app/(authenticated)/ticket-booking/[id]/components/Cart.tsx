@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import { Button } from '@/components/ui/button';
+import { useBooking } from '@/hooks/useBooking';
+import { useRouter } from 'next/navigation';
+
 
 const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
     currency: 'VND',
@@ -13,7 +16,7 @@ export function formatCurrency(value: number) {
 }
 
 
-const Cart = ({ setWebsiteBooking }) => {
+const Cart = ({ websiteBooking, setWebsiteBooking }) => {
 
     const [isDisabled, setIsDisabled] = React.useState(true);
 
@@ -23,6 +26,8 @@ const Cart = ({ setWebsiteBooking }) => {
         return buyList.reduce((total, item) => total + item.totalPrice, 0);
     };
 
+    const router = useRouter();
+
     useEffect(() => {
         if (buyList.length === 0) {
             setIsDisabled(true);
@@ -30,6 +35,21 @@ const Cart = ({ setWebsiteBooking }) => {
             setIsDisabled(false);
         }
     }, [buyList]);
+
+
+    const {uploadPaymentInfo} = useBooking();
+
+    const onPayment = async () => {
+        const paymentreq = {
+            amount: calculateTotalPrice(),
+            bankCode: "",
+            language: "vn",
+        }
+
+        const success = await uploadPaymentInfo(paymentreq);
+        router.push(success.data);
+    }
+
 
 
     return (
@@ -75,17 +95,22 @@ const Cart = ({ setWebsiteBooking }) => {
                     </div>
                 </div>
             </div>
-            {isDisabled === true ? (
-                <div>
-                    <Button className='w-full mt-10 px-0' disabled>TIẾP TỤC</Button>
-                </div>
-            ) : (
-                <div>
-                    <Button className='w-full mt-10 px-0' onClick={() => {
-                        setWebsiteBooking("payment");
-                    }}>TIẾP TỤC</Button>
-                </div>
-            )}
+            <div>
+                <Button
+                    className='w-full mt-10 px-0'
+                    disabled={isDisabled && websiteBooking === "choose-ticket"}
+                    onClick={() => {
+                        if (!isDisabled && websiteBooking === "choose-ticket") {
+                            setWebsiteBooking("payment");
+                        }
+                        if (websiteBooking === "payment"){
+                            onPayment();
+                        }
+                    }}
+                >
+                    {websiteBooking === "payment" ? "HOÀN TẤT ĐẶT VÉ" : "TIẾP TỤC"}
+                </Button>
+            </div>
 
         </div>
     );

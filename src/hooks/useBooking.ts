@@ -1,29 +1,27 @@
-'use client';
-
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { postRequest } from "@/lib/fetch"
 
 
-import {
-    increaseTicketFromBookingList,
-    decreaseTicketFromBookingList,
-} from '@/redux/booking-list/booking-list';
 
 export const useBooking = () => {
-    const dispatch = useDispatch();
-    const booking = useSelector((state:any) => state.booking) || null;
-
-    const onIncreaseTicketFromBookingList = useCallback(({data}) => {
-        dispatch(increaseTicketFromBookingList({data}));
-    },[]);
-
-    const onDecreaseTicketFromBookingList = useCallback(({data}) => {
-        dispatch(decreaseTicketFromBookingList({data}));
-    },[]);
     
+    
+    const uploadPaymentInfo = async (data) => {
+        try{
+            const res = await postRequest({
+                endPoint: '/api/payment/vnpay',
+                isFormData: false,
+                formData: data,
+            })
+            console.log(res);
+            return res;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    } 
+
     return {
-        onIncreaseTicketFromBookingList,
-        onDecreaseTicketFromBookingList,
-        booking,
+        uploadPaymentInfo
     }
+
 }

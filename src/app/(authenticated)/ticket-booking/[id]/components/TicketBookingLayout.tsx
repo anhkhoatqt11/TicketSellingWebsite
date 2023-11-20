@@ -7,7 +7,8 @@ import TicketChoose from './(ticket-choosing)/TicketChoose'
 import Loader from '@/components/Loader'
 import { useQuery } from '@tanstack/react-query'
 import { useEvent } from '@/hooks/useEvent'
-import Cart from './(ticket-choosing)/Cart';
+import Cart from './Cart';
+import PaymentChoose from './(payment)/PaymentChoose';
 
 
 
@@ -35,29 +36,19 @@ const TicketBookingLayout = ({ id }) => {
     }
 
     return (
+
         <div>
-            {websiteBooking === "choose-ticket" && (
-                <div>
-                    <EventInfo EventDetail={EventDetail} />
-                    <div>
-                        <BookingBreadcrumbs page={"choose-ticket"} />
-                        <div className='flex flex-row justify-between md:px-[180px]'>
-                            <TicketChoose EventDetail={EventDetail} />
-                            <Cart setWebsiteBooking={setWebsiteBooking} />
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {websiteBooking === "payment" && (
-                <div>
-                    <EventInfo EventDetail={EventDetail} />
-                    <div>
-                        <BookingBreadcrumbs page={"payment"} />
-                    </div>
-                </div>
-            )}
-
+            <EventInfo EventDetail={EventDetail} />
+            <BookingBreadcrumbs page={websiteBooking} />
+            <div className='flex flex-row justify-between md:px-[180px]'>
+                {websiteBooking === "choose-ticket" && (
+                    <TicketChoose EventDetail={EventDetail} />
+                )}
+                {websiteBooking === "payment" && (
+                    <PaymentChoose />
+                )}
+                <Cart websiteBooking={websiteBooking} setWebsiteBooking={setWebsiteBooking} />
+            </div>
         </div>
     )
 }
