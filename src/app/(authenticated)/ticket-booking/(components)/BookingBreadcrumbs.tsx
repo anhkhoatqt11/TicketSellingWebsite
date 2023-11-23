@@ -1,4 +1,4 @@
-import { ArrowRight, CheckIcon } from "lucide-react";
+import { ArrowRight, CheckIcon, X } from "lucide-react";
 import React from "react";
 import { AiOutlineInsertRowBelow } from "react-icons/ai";
 import { FaCreditCard } from "react-icons/fa";
@@ -29,6 +29,11 @@ const pageSteps = {
         { background: "white", color: "emerald-400", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
         { background: "white", color: "emerald-400", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
         { background: "emerald-400 text-white", color: "emerald-400", icon: <CheckIcon size={25} />, text: "HOÀN TẤT" },
+    ],
+    "failed": [
+        { background: "white", color: "emerald-400", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
+        { background: "white", color: "emerald-400", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
+        { background: "red-400 text-white", color: "red-400", icon: <X size={25} />, text: "THẤT BẠI" },
     ],
 };
 

@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { stringify } from 'querystring';
 
 
 export async function POST(req: Request) {
@@ -18,7 +17,6 @@ export async function POST(req: Request) {
         let secretKey = process.env.NEXT_PUBLIC_VNP_HASHSECERT;
         let vnpUrl = process.env.NEXT_PUBLIC_VNP_URL;
         let returnUrl = process.env.NEXT_PUBLIC_VNP_RETURNURL;
-        let orderId = moment(date).format('DDHHmmss');
         let amount = body.amount;
         let bankCode = body.bankCode;
 
@@ -33,8 +31,8 @@ export async function POST(req: Request) {
         vnp_Params['vnp_TmnCode'] = tmnCode;
         vnp_Params['vnp_Locale'] = locale;
         vnp_Params['vnp_CurrCode'] = currCode;
-        vnp_Params['vnp_TxnRef'] = orderId;
-        vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + orderId;
+        vnp_Params['vnp_TxnRef'] = body.orderId;
+        vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + body.orderId;
         vnp_Params['vnp_OrderType'] = 'other';
         vnp_Params['vnp_Amount'] = amount * 100;
         vnp_Params['vnp_ReturnUrl'] = returnUrl;

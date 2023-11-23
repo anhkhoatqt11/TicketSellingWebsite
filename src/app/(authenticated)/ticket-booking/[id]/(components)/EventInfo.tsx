@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import Loader from "@/components/Loader";
 import Image from "next/image";
 
-export function EventInfo({ EventDetail }) {
+export function EventInfo({ EventDetail }) {    
     return (
         <div className="w-full h-[110px] bg-emerald-400">
             <div className="flex flex-col p-4 text-white">

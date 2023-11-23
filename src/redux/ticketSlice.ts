@@ -11,6 +11,8 @@ interface Ticket {
   id: number;
   name: string;
   price: number;
+  maxQuantity: number; // Maximum quantity allowed for this ticket
+  quantityLeft: number; // Quantity left from the server
   // ... other ticket properties
 }
 
@@ -19,7 +21,9 @@ interface BuyListItem {
   name: string;
   price: number;
   quantity: number;
-  totalPrice: number; // Added property for total price of each item
+  totalPrice: number;
+  maxQuantity: number;
+  quantityLeft: number;
 }
 
 const initialState: TicketState = {
@@ -35,20 +39,37 @@ const ticketSlice = createSlice({
       state.tickets = action.payload;
     },
     addToBuyList: (state, action: PayloadAction<BuyListItem>) => {
-      const { ticketId, name, price, quantity } = action.payload;
+      const { ticketId, name, price, quantity, maxQuantity, quantityLeft } = action.payload;
       const existingItem = state.buyList.find((item) => item.ticketId === ticketId);
 
       if (existingItem) {
-        // If the item is already in the buy list, update the quantity, price, and total price
+        // If the item is already in the buy list, update the quantity, total price, and quantity left
         existingItem.quantity += quantity;
         existingItem.totalPrice = existingItem.price * existingItem.quantity;
+        existingItem.quantityLeft -= quantity;
       } else {
-        // If the item is not in the buy list, add it with the specified quantity and total price
-        state.buyList.push({ ticketId, name, price, quantity, totalPrice: price * quantity });
+        // If the item is not in the buy list, add it with the specified quantity, total price, max quantity, and quantity left
+        state.buyList.push({
+          ticketId,
+          name,
+          price,
+          quantity,
+          totalPrice: price * quantity,
+          maxQuantity,
+          quantityLeft,
+        });
       }
     },
     removeFromBuyList: (state, action: PayloadAction<number>) => {
       const ticketId = action.payload;
+      const removedItem = state.buyList.find((item) => item.ticketId === ticketId);
+
+      if (removedItem) {
+        // If the item is in the buy list, update the quantity left
+        const quantityToRemove = removedItem.quantity;
+        removedItem.quantityLeft += quantityToRemove;
+      }
+
       state.buyList = state.buyList.filter((item) => item.ticketId !== ticketId);
     },
     clearBuyList: (state) => {

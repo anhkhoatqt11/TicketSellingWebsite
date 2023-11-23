@@ -29,14 +29,13 @@ export function formatCurrency(value: number) {
   return CURRENCY_FORMAT.format(value);
 }
 
-function formatDate(inputDateString: string): string {
-  const parsedDate = new Date(inputDateString);
-  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  const dateFormatter = new Intl.DateTimeFormat('en-GB', options);
-
-  return dateFormatter.format(parsedDate);
+function convertUtcToGmtPlus7(utcString) {
+  const utcDate = new Date(utcString);
+  const gmtPlus7Offset = 7 * 60;
+  const localDate = new Date(utcDate.getTime() + gmtPlus7Offset * 60 * 1000);
+  const formattedDate = localDate.toISOString().replace('T', ' ').replace(/\.\d+Z$/, '');
+  return formattedDate;
 }
-
 
 function getHoursFromDateString(inputDateString: string): number {
   const parsedDate = new Date(inputDateString);
@@ -101,11 +100,11 @@ export function EventDetail({ id }) {
                 <h1 className='text-xl font-bold'>{EventDetail?.name}</h1>
                 <div className='pt-3 flex flex-row'>
                   <ClockIcon size={18} className='mt-1' />
-                  {formatDate(EventDetail?.ngayBatDau) != formatDate(EventDetail?.ngayKetThuc) ? (
-                    <p className='ml-2'>{formatDate(EventDetail?.ngayBatDau)} - {formatDate(EventDetail?.ngayKetThuc)}</p>
+                  {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) != convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                    <p className='ml-2'>{convertUtcToGmtPlus7(EventDetail?.ngayBatDau)} - {convertUtcToGmtPlus7(EventDetail?.ngayKetThuc)}</p>
                   ) : null}
-                  {formatDate(EventDetail?.ngayBatDau) == formatDate(EventDetail?.ngayKetThuc) ? (
-                    <p className='ml-2'>{formatDate(EventDetail?.ngayBatDau)}</p>
+                  {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) == convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                    <p className='ml-2'>{convertUtcToGmtPlus7(EventDetail?.ngayBatDau)}</p>
                   ) : null}
                 </div>
                 <div className='pt-3 flex flex-row'>
@@ -114,7 +113,9 @@ export function EventDetail({ id }) {
                 </div>
               </div>
               <div className='md:w-1/2 flex justify-center md:justify-end mt-10'> {/* Center button on mobile and push it to the right on larger screens */}
-                <Button className='w-full md:w-[340px]'>Đặt vé ngay</Button>
+                <Link href={`/ticket-booking/${EventDetail.id}`}>
+                  <Button className='w-full md:w-[340px] bg-emerald-500'>Đặt vé ngay</Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -155,7 +156,7 @@ export function EventDetail({ id }) {
                             ) : null}
                             {item.soLuong == 0 ? (
                               <div className='border border-gray-500 p-2 mt-3'>
-                                <p>HẾT VÉ</p>
+                                <p>VÉ SỰ KIỆN ĐÃ HẾT</p>
                               </div>
                             ) : null}
                           </div>
@@ -199,19 +200,21 @@ export function EventDetail({ id }) {
                   <div className="font-semibold">{EventDetail?.name}</div>
                   <div className='pt-3 flex flex-row'>
                     <ClockIcon size={18} className='mt-1' />
-                    {formatDate(EventDetail?.ngayBatDau) != formatDate(EventDetail?.ngayKetThuc) ? (
-                      <p className='ml-2'>{formatDate(EventDetail?.ngayBatDau)} - {formatDate(EventDetail?.ngayKetThuc)}</p>
+                    {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) != convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                      <p className='ml-2'>{convertUtcToGmtPlus7(EventDetail?.ngayBatDau)} - {convertUtcToGmtPlus7(EventDetail?.ngayKetThuc)}</p>
                     ) : null}
-                    {formatDate(EventDetail?.ngayBatDau) == formatDate(EventDetail?.ngayKetThuc) ? (
-                      <p className='ml-2'>{formatDate(EventDetail?.ngayBatDau)}</p>
+                    {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) == convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                      <p className='ml-2'>{convertUtcToGmtPlus7(EventDetail?.ngayBatDau)}</p>
                     ) : null}
                   </div>
                   <div className='pt-3 flex flex-row'>
                     <IoLocationOutline size={18} className='mt-1' />
                     <p className='ml-2'>{EventDetail?.diaChi}</p>
                   </div>
-                  <div className='md:w-1/2 flex justify-center md:justify-end mt-10'> {/* Center button on mobile and push it to the right on larger screens */}
-                    <Button className='w-full'>Đặt vé ngay</Button>
+                  <div className='flex justify-center md:justify-end mt-10'> {/* Center button on mobile and push it to the right on larger screens */}
+                    <Link href={`/ticket-booking/${EventDetail.id}`}>
+                      <Button className='w-full bg-emerald-500'>Đặt vé ngay</Button>
+                    </Link>
                   </div>
                 </div>
               </div>

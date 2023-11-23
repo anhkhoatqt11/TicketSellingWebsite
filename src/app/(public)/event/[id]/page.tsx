@@ -1,4 +1,4 @@
-import {EventDetail} from "./components/EventDetail";
+import {EventDetail} from "./(components)/EventDetail";
 
 
 export default function page({ params }) {

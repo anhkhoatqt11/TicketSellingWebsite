@@ -79,14 +79,15 @@ model Ve {
 }
 
 model HoaDon {
-  id                  Int      @id @default(autoincrement())
+  id                  Int        @id @default(autoincrement())
   ngayDatHang         DateTime
   userId              Int
   phuongThucThanhToan String
-  tinhTrang           String   @default("Chưa thanh toán")
-  createdAt DateTime   @default(now())
-  user      User       @relation(fields: [userId], references: [id])
-  HoaDonVe  HoaDonVe[]
+  createdAt           DateTime   @default(now())
+  tinhTrang           String     @default("Chưa thanh toán")
+  tongTien            Float      @default(0)
+  user                User       @relation(fields: [userId], references: [id])
+  HoaDonVe            HoaDonVe[]
 
   @@index([userId])
 }

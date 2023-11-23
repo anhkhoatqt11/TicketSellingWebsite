@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { EventInfo } from './EventInfo'
-import { BookingBreadcrumbs } from './BookingBreadcrumbs'
+import { BookingBreadcrumbs } from '../../(components)/BookingBreadcrumbs';
 import TicketChoose from './(ticket-choosing)/TicketChoose'
 import Loader from '@/components/Loader'
 import { useQuery } from '@tanstack/react-query'
@@ -10,14 +10,12 @@ import { useEvent } from '@/hooks/useEvent'
 import Cart from './Cart';
 import PaymentChoose from './(payment)/PaymentChoose';
 
-
-
-const TicketBookingLayout = ({ id }) => {
-
+const TicketBookingLayout = ({ id, session }) => {
 
     const { fetchEventById } = useEvent();
-
     const [websiteBooking, setWebsiteBooking] = React.useState("choose-ticket");
+    const [paymentMethod, setPaymentMethod] = React.useState("");
+
 
     const { data: EventDetail } = useQuery({
         queryKey: ['EventDetail', id],
@@ -36,8 +34,7 @@ const TicketBookingLayout = ({ id }) => {
     }
 
     return (
-
-        <div>
+        <div className='bg-slate-50'>
             <EventInfo EventDetail={EventDetail} />
             <BookingBreadcrumbs page={websiteBooking} />
             <div className='flex flex-row justify-between md:px-[180px]'>
@@ -45,9 +42,9 @@ const TicketBookingLayout = ({ id }) => {
                     <TicketChoose EventDetail={EventDetail} />
                 )}
                 {websiteBooking === "payment" && (
-                    <PaymentChoose />
+                    <PaymentChoose paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} />
                 )}
-                <Cart websiteBooking={websiteBooking} setWebsiteBooking={setWebsiteBooking} />
+                <Cart websiteBooking={websiteBooking} setWebsiteBooking={setWebsiteBooking} paymentMethod={paymentMethod} session={session} />
             </div>
         </div>
     )

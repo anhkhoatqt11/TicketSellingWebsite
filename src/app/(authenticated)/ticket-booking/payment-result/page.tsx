@@ -1,10 +1,11 @@
 import React from 'react'
-import TestComponent from './components/TestComponent'
+import BookingResultLayout from './components/BookingResultLayout'
+
 
 export default function page({ params }) {
   return (
-    <div className='w-full h-full'>
-        <TestComponent params={params} />
+    <div className='w-full h-screen bg-slate-50'>
+        <BookingResultLayout/>
     </div>
   )
 }
