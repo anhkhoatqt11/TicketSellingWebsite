@@ -63,6 +63,13 @@ const NavigationMenuDemo = ({ session }) => {
     }
     setLastScrollY(window.scrollY);
   };
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchKeyPress = (e) => {
+    if (e.key === "Enter") {
+      router.push(`/search?searchWord=${encodeURIComponent(searchQuery)}`);
+    }
+  };
   return (
     <div
       className={`w-full h-[50px] md:h-[76px] 
@@ -82,6 +89,9 @@ const NavigationMenuDemo = ({ session }) => {
               type="text"
               placeholder="Search"
               className="input input-bordered md:w-[500px] ml-5 h-10"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearchKeyPress}
             />
           </div>
         ) : null}
