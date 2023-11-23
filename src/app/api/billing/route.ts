@@ -5,27 +5,19 @@ export async function GET(request:Request) {
     const searchParams = new URLSearchParams(url.search);
     const id = parseInt(searchParams.get('id'));
     
-    const event = await prisma.suKien.findMany({
+    const order = await prisma.hoaDon.findMany({
         where: {
             id: {
                 equals: id
             }
         },
         include: {
-            ves: true,
-            user: {
-                select: {
-                    id: true,
-                    name:true,
-                    phoneNumber:true,
-                    avatar: true,
-                }
-            }
+            HoaDonVe:true
         }
     })
-    if (!event)
+    if (!order)
     return  new Response(JSON.stringify({ message: 'Không tìm thấy dữ liệu' }), {
         status: 404,
       });
-    return new Response(JSON.stringify(event), { status: 200 });
+    return new Response(JSON.stringify(order), { status: 200 });
 }

@@ -1,3 +1,4 @@
+import { ReduxProvider } from "@/redux/Provider";
 import { Header } from "@/components/header";
 import "./globals.css";
 import type { Metadata } from 'next'
@@ -22,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <QueryProvider>
+        <QueryProvider>
           <AuthProvider>
+            <ReduxProvider>
               <Toaster />
               {children}
+            </ReduxProvider>
           </AuthProvider>
         </QueryProvider>
       </body>
