@@ -16,10 +16,11 @@ type props = {
 };
 export function LineChart({ chartData }: props) {
   return (
-    <div className="chart-container" style={{ width: "1000px" }}>
+    <div className="chart-container">
       <Line
         data={chartData}
         options={{
+          responsive: true,
           plugins: {
             title: {
               display: true,

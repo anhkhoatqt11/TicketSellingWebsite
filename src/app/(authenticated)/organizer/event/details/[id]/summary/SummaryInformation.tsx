@@ -188,9 +188,9 @@ export function SummaryInformation({ session, id }) {
         <h1 className="w-full text-center my-2 text-xl font-medium">
           Tổng kết sự kiện
         </h1>
-        <div className="flex flex-row w-full">
+        <div className="flex flex-row w-full gap-3">
           <div
-            className="basis-1/2 flex flex-col m-3 h-[120px] rounded-[5px] transition ease-in-out hover:scale-105"
+            className="basis-1/2 flex flex-col  h-[120px] rounded-[5px] transition ease-in-out hover:scale-105"
             style={{
               backgroundImage:
                 "linear-gradient(to right, rgb(254, 148, 102), rgb(255, 182, 150))",
@@ -216,7 +216,7 @@ export function SummaryInformation({ session, id }) {
             </h6>
           </div>
           <div
-            className="basis-1/2 flex flex-col m-3 h-[120px] rounded-[5px] transition ease-in-out hover:scale-105"
+            className="basis-1/2 flex flex-col  h-[120px] rounded-[5px] transition ease-in-out hover:scale-105"
             style={{
               backgroundImage:
                 "linear-gradient(to right, rgb(6, 197, 133), rgb(19, 241, 164))",
@@ -242,10 +242,12 @@ export function SummaryInformation({ session, id }) {
             </h6>
           </div>
         </div>
-        <div className="w-full flex justify-center my-6">
+        <div className="w-full flex justify-center my-6 p-6 rounded-md shadow-md bg-white border-1 border-gray-400">
           <DoughnutChart chartData={chartDataDoughnut} />
         </div>
-        <LineChart chartData={chartDataLine} />
+        <div className="rounded-md shadow-md bg-white border-1 border-gray-400 p-6">
+          <LineChart chartData={chartDataLine} />
+        </div>
         {isLoading ? (
           <div className="w-full h-full flex justify-center bg-gray-200 z-10 absolute top-0">
             <CircularProgress

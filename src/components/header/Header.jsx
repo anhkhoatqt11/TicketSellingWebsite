@@ -17,7 +17,6 @@ import {
 } from "@nextui-org/react";
 import AuthSvg from "@/assets/AuthSvg";
 import { MobileNav } from "./MobileNavBar";
-import { Badge } from "../ui/badge";
 import Logo from "../logo";
 import { BsTicketPerforated } from "react-icons/bs";
 import BackDropCus from "../backdropCus/backdropCus";
