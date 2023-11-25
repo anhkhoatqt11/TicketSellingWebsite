@@ -259,7 +259,7 @@ const Cart = ({ websiteBooking,
                     {websiteBooking === "payment" ? "HOÀN TẤT ĐẶT VÉ" : "TIẾP TỤC"}
                 </Button>
                 {websiteBooking !== 'choose-ticket' && (
-                    <Button className="w-full mt-8 px-0" onClick={() => setWebsiteBooking('choose-ticket')}>
+                    <Button className="w-full mt-8 px-0" onClick={() => {setWebsiteBooking('choose-ticket');setIsCouponUsing(false)}}>
                         QUAY LẠI
                     </Button>
                 )}
