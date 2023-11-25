@@ -33,6 +33,10 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
   const [maSoDKKD, setMaSoDKKD] = useState("");
   const [noiCap, setNoiCap] = useState("");
   const [ngayCap, setNgayCap] = useState("");
+  const [chuTaiKhoan, setChuTaiKhoan] = useState("");
+  const [soTaiKhoan, setSoTaiKhoan] = useState("");
+  const [tenNganHang, setTenNganHang] = useState("");
+  const [chiNhanh, setChiNhanh] = useState("");
 
   const [avatarImageFile, setAvatarImageFile] = React.useState([]);
   const [defaultAvatar, setDefaultAvatar] = useState("");
@@ -54,6 +58,10 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
         setNoiCap(result[0]?.noiCap);
         setNgayCap(result[0]?.ngayCap);
         setDefaultAvatar(result[0]?.anhDaiDienToChuc);
+        setChuTaiKhoan(result[0]?.tenChuTaiKhoan);
+        setSoTaiKhoan(result[0]?.soTaiKhoan);
+        setTenNganHang(result[0]?.tenNganHang);
+        setChiNhanh(result[0]?.chiNhanh);
       }
     };
     fetchOrganizer().then(setIsLoading(false));
@@ -64,6 +72,10 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
       !addressValue ||
       !phoneNumber ||
       !email ||
+      !chuTaiKhoan ||
+      !soTaiKhoan ||
+      !tenNganHang ||
+      !chiNhanh ||
       (organizerType === "canhan" && (!organizerName || !maSoThueCaNhan)) ||
       (organizerType === "doanhnghiep" &&
         (!companyName || !maSoDKKD || !ngayCap || !noiCap))
@@ -77,6 +89,10 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
     }
     if (!checkPhoneNumber(phoneNumber)) {
       toast.error("Số điện thoại không hợp lệ, vui lòng nhập lại");
+      return;
+    }
+    if (!checkPhoneNumber(soTaiKhoan)) {
+      toast.error("Số tài khoản không hợp lệ, vui lòng nhập lại");
       return;
     }
 
@@ -103,6 +119,10 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
       diaChi: addressValue,
       phoneNumber: phoneNumber,
       email: email,
+      tenChuTaiKhoan: chuTaiKhoan,
+      soTaiKhoan: soTaiKhoan,
+      tenNganHang: tenNganHang,
+      chiNhanh: chiNhanh,
       role: "organizer",
       anhDaiDienToChuc: avatarImage ? avatarImage[0]?.url : defaultAvatar,
       id: userId,
@@ -119,9 +139,9 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
       <div className="flex flex-col md:flex-row rounded bg-white p-4">
         <div className="md:basis-1/3 p-2 pr-3">
           {/* avatar */}
-          <div className="flex flex-col gap-y-3 max-w-xs lg:max-w-lg">
+          <div className="flex flex-col items-center gap-y-3 max-w-xs lg:max-w-lg justify-center">
             <div className="font-bold text-sm"></div>
-            <div className=" w-full h-41 border-2 rounded">
+            <div className=" w-49 h-49 border-2 rounded-full">
               <Zoom key={1} className={"w-full "}>
                 <img
                   src={
@@ -130,7 +150,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                     defaultAvatar
                   }
                   alt={avatarImageFile[0]?.name}
-                  className={`h-40 w-full rounded-md object-cover object-center`}
+                  className={`h-48 w-48 rounded-full object-cover object-center`}
                 />
               </Zoom>
             </div>
@@ -141,7 +161,6 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               files={avatarImageFile}
               setFiles={setAvatarImageFile}
               disabled={false}
-              className={" bg-emerald-400"}
             />
           </div>
         </div>
@@ -160,6 +179,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl h-[60px]"
                   radius="sm"
+                  variant="faded"
                   value={organizerName}
                   placeholder="Nhập tên cá nhân ban tổ chức"
                   onChange={(e) => {
@@ -180,6 +200,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl "
                   radius="sm"
+                  variant="faded"
                   value={maSoThueCaNhan}
                   placeholder="Nhập mã số thuế cá nhân"
                   onChange={(e) => {
@@ -201,6 +222,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl h-[52px]"
                   radius="sm"
+                  variant="faded"
                   value={companyName}
                   placeholder="Nhập tên doanh nghiệp ban tổ chức"
                   onChange={(e) => {
@@ -222,6 +244,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl h-[52px]"
                   radius="sm"
+                  variant="faded"
                   value={maSoDKKD}
                   placeholder="Nhập mã số đăng ký kinh doanh"
                   onChange={(e) => {
@@ -242,6 +265,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl h-[52px]"
                   radius="sm"
+                  variant="faded"
                   value={noiCap}
                   placeholder="Nhập nơi cấp mã số đăng ký kinh doanh"
                   onChange={(e) => {
@@ -260,6 +284,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   type="date"
                   radius="sm"
+                  variant="faded"
                   className="max-w-xs lg:max-w-2xl h-[52px]"
                   value={ngayCap}
                   placeholder="Chọn ngày cấp mã số đăng ký kinh doanh"
@@ -288,6 +313,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               }`}
               className="w-full"
               radius="sm"
+              variant="faded"
               value={phoneNumber}
               placeholder="Nhập số điện thoại"
               onChange={(e) => {
@@ -306,6 +332,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               }`}
               className="w-full"
               radius="sm"
+              variant="faded"
               value={email}
               type={"email"}
               placeholder="Nhập email liên hệ"
@@ -323,7 +350,85 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
 
       <h1 className="font-semibold">Thông tin ngân hàng</h1>
       <div className="flex flex-col flex-wrap rounded bg-white p-6 gap-2">
-        <h1>Not completed</h1>
+        <div className="grid grid-cols-1 gap-6">
+          {/* so dien thoai */}
+          <div className="flex flex-col gap-3 w-full">
+            <Label className="font-bold text-sm">
+              Chủ tài khoản <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              isInvalid={chuTaiKhoan !== "" ? false : true}
+              errorMessage={`${
+                chuTaiKhoan !== "" ? "" : "Vui lòng nhập tên chủ tài khoản"
+              }`}
+              className="w-full"
+              radius="sm"
+              variant="faded"
+              value={chuTaiKhoan}
+              placeholder="Nhập tên chủ tài khoản"
+              onChange={(e) => {
+                setChuTaiKhoan(e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-3 w-full">
+            <Label className="font-bold text-sm">
+              Số tài khoản: <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              isInvalid={soTaiKhoan !== "" ? false : true}
+              errorMessage={`${
+                soTaiKhoan !== "" ? "" : "Vui lòng nhập số tài khoản"
+              }`}
+              className="w-full"
+              radius="sm"
+              variant="faded"
+              value={soTaiKhoan}
+              placeholder="Nhập số tài khoản"
+              onChange={(e) => {
+                setSoTaiKhoan(e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-3 w-full">
+            <Label className="font-bold text-sm">
+              Tên ngân hàng: <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              isInvalid={tenNganHang !== "" ? false : true}
+              errorMessage={`${
+                tenNganHang !== "" ? "" : "Vui lòng nhập tên ngân hàng"
+              }`}
+              className="w-full"
+              radius="sm"
+              variant="faded"
+              value={tenNganHang}
+              placeholder="Nhập tên ngân hàng"
+              onChange={(e) => {
+                setTenNganHang(e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-3 w-full">
+            <Label className="font-bold text-sm">
+              Chi nhánh: <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              isInvalid={chiNhanh !== "" ? false : true}
+              errorMessage={`${
+                chiNhanh !== "" ? "" : "Vui lòng nhập tên chi nhánh"
+              }`}
+              className="w-full"
+              radius="sm"
+              variant="faded"
+              value={chiNhanh}
+              placeholder="Nhập tên chi nhánh"
+              onChange={(e) => {
+                setChiNhanh(e.target.value);
+              }}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="w-full flex items-center justify-center pt-6">
@@ -331,7 +436,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
           onClick={() => {
             onSubmit();
           }}
-          className="w-[100%] h-12 text-black bg-emerald-400 hover:bg-emerald-500 transition duration-300 ease-in-out active:scale-90"
+          className="w-[100%] h-12 text-white bg-emerald-400 hover:bg-emerald-500 transition duration-300 ease-in-out active:scale-90"
         >
           Xác nhận
         </Button>

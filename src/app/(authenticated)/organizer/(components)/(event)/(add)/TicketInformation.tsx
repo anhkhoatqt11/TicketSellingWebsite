@@ -240,6 +240,7 @@ function TicketInformation({ props }) {
               <Input
                 className="w-full"
                 radius="sm"
+                variant="bordered"
                 value={newEventName}
                 placeholder="Nhập tên loại vé"
                 onChange={(e) => {
@@ -288,6 +289,7 @@ function TicketInformation({ props }) {
                     <Input
                       className="w-full"
                       radius="sm"
+                      variant="bordered"
                       value={isEditing ? eventName : item.name}
                       placeholder="Nhập tên loại vé"
                       onChange={(e) => {
@@ -297,6 +299,7 @@ function TicketInformation({ props }) {
                     <Textarea
                       label="Mô tả vé"
                       placeholder="Nhập mô tả loại vé"
+                      variant="bordered"
                       value={isEditing ? description : item.moTa}
                       onChange={(e) => {
                         setDescription(e.target.value);
@@ -407,13 +410,17 @@ function TicketInformation({ props }) {
                     <div className="h-4"></div>
                     <div className="space-y-2">
                       <Button
-                        className="bg-emerald-400 text-black font-medium w-full"
+                        className="bg-emerald-400 text-white font-medium w-full"
+                        radius="sm"
+                        size="md"
                         onClick={saveTicketContent}
                       >
                         Xong
                       </Button>
                       <Button
-                        className="bg-red-400 text-black font-medium w-full"
+                        className="bg-red-400 text-white font-medium w-full"
+                        radius="sm"
+                        size="md"
                         onPress={() => {
                           onOpen();
                           setDeletedId(item.id);

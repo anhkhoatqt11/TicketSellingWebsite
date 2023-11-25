@@ -37,6 +37,7 @@ export const SelectLoaiHinhKinhDoanh = ({
           key={"loaihinhkinhdoanh"}
           radius={"sm"}
           label="Loại hình kinh doanh"
+          variant="bordered"
           placeholder="Chọn loại hình kinh doanh"
           selectedKeys={loaiHinhKinhDoanhValue ? [loaiHinhKinhDoanhValue] : []}
           isInvalid={

@@ -60,7 +60,6 @@ function GeneralInformation({ props }) {
             files={props.eventPosterFile}
             setFiles={props.setEventPosterFile}
             disabled={false}
-            className={" bg-emerald-400"}
           />
           {/* thong tin khac */}
           <div className="gap-6 mt-6">
@@ -72,6 +71,7 @@ function GeneralInformation({ props }) {
               <Input
                 className="w-full"
                 radius="sm"
+                variant="faded"
                 value={props.eventName}
                 placeholder="Nhập tên sự kiện"
                 onChange={(e) => {
