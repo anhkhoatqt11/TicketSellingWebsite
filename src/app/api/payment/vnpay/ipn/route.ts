@@ -46,6 +46,8 @@ export async function GET(req: Request) {
                 return new Response(JSON.stringify({ code: '01', data: 'Thanh toán thất bại', orderId: id.toString() }), { status: 200 });
             }
 
+        } else if (hoaDon[0].tinhTrang == "Đã thanh toán") {
+            return new Response(JSON.stringify({ code: '00', data: 'Thanh toán thành công', orderId: id.toString() }), { status: 200 });
         } else {
             return new Response(JSON.stringify({ code: '01', data: 'Thanh toán thất bại', orderId: id.toString() }), { status: 200 });
         }

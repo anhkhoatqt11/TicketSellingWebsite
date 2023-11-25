@@ -58,12 +58,7 @@ const TicketChoose = ({ EventDetail }) => {
         }
     };
 
-    const tickets = useSelector((state: RootState) => state.ticket.tickets);
     const buyList = useSelector((state: RootState) => state.ticket.buyList);
-
-    const calculateTotalPrice = () => {
-        return buyList.reduce((total, item) => total + item.totalPrice, 0);
-    };
 
     return (
         <Table className='w-2/4 mr-10' aria-label='Lựa chọn vé của bạn'>

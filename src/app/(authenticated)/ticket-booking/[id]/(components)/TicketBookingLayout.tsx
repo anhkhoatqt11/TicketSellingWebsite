@@ -44,7 +44,7 @@ const TicketBookingLayout = ({ id, session }) => {
                 {websiteBooking === "payment" && (
                     <PaymentChoose paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} />
                 )}
-                <Cart websiteBooking={websiteBooking} setWebsiteBooking={setWebsiteBooking} paymentMethod={paymentMethod} session={session} />
+                <Cart websiteBooking={websiteBooking} setWebsiteBooking={setWebsiteBooking} paymentMethod={paymentMethod} EventDetail={EventDetail} session={session} />
             </div>
         </div>
     )

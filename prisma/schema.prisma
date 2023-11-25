@@ -28,6 +28,10 @@ model User {
   maSoDKKD          String?
   noiCap            String?
   ngayCap           String?
+  chiNhanh          String?
+  soTaiKhoan        String?
+  tenChuTaiKhoan    String?
+  tenNganHang       String?
   SuKiens           SuKien[]
   HoaDon            HoaDon[]
 }
@@ -86,6 +90,7 @@ model HoaDon {
   createdAt           DateTime   @default(now())
   tinhTrang           String     @default("Chưa thanh toán")
   tongTien            Float      @default(0)
+  maGiamGiaId         Int?
   user                User       @relation(fields: [userId], references: [id])
   HoaDonVe            HoaDonVe[]
 
