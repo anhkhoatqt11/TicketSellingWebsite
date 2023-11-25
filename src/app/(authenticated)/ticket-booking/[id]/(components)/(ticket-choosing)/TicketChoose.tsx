@@ -61,7 +61,7 @@ const TicketChoose = ({ EventDetail }) => {
     const buyList = useSelector((state: RootState) => state.ticket.buyList);
 
     return (
-        <Table className='w-2/4 mr-10' aria-label='Lựa chọn vé của bạn'>
+        <Table className='w-full p-4 md:w-2/4 mr-0 md:mr-10' aria-label='Lựa chọn vé của bạn'>
             <TableHeader>
                 <TableColumn>LOẠI VÉ</TableColumn>
                 <TableColumn>GIÁ VÉ</TableColumn>

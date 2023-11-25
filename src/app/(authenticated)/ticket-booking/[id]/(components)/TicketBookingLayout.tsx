@@ -37,17 +37,26 @@ const TicketBookingLayout = ({ id, session }) => {
         <div className='bg-slate-50'>
             <EventInfo EventDetail={EventDetail} />
             <BookingBreadcrumbs page={websiteBooking} />
-            <div className='flex flex-row justify-between md:px-[180px]'>
-                {websiteBooking === "choose-ticket" && (
+            <div className='flex flex-col md:flex-row justify-between md:px-[180px]'>
+                {websiteBooking === 'choose-ticket' && (
                     <TicketChoose EventDetail={EventDetail} />
                 )}
-                {websiteBooking === "payment" && (
-                    <PaymentChoose paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} />
+                {websiteBooking === 'payment' && (
+                    <PaymentChoose
+                        paymentMethod={paymentMethod}
+                        setPaymentMethod={setPaymentMethod}
+                    />
                 )}
-                <Cart websiteBooking={websiteBooking} setWebsiteBooking={setWebsiteBooking} paymentMethod={paymentMethod} EventDetail={EventDetail} session={session} />
+                <Cart
+                    websiteBooking={websiteBooking}
+                    setWebsiteBooking={setWebsiteBooking}
+                    paymentMethod={paymentMethod}
+                    EventDetail={EventDetail}
+                    session={session}
+                />
             </div>
         </div>
-    )
+    );
 }
 
 export default TicketBookingLayout

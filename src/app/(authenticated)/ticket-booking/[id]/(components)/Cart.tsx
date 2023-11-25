@@ -135,7 +135,7 @@ const Cart = ({ websiteBooking,
 
 
     return (
-        <div className='w-2/4'>
+        <div className='w-full p-4 md:w-2/4'>
             <div className='h-auto min-h-[500px] bg-white border border-gray-200 shadow rounded-xl flex flex-col'>
                 <div className='bg-gray-100 mx-4 rounded-md h-[40px] mt-3 flex items-center justify-center'>
                     <p className='text-sm font-semibold text-foreground-500'>THÔNG TIN ĐƠN HÀNG</p>
