@@ -21,6 +21,7 @@ export function DoughnutChart({ chartData }: props) {
         style={{ marginTop: "20px" }}
         data={chartData}
         options={{
+          responsive: true,
           plugins: {
             title: {
               display: true,

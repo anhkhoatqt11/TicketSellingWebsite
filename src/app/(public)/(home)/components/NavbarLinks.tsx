@@ -1,35 +1,33 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  FcHome,
-  FcCloseUpMode,
-  FcMusic,
-  FcFilm,
-  FcNightLandscape,
-  FcConferenceCall,
-  FcKindle,
-  FcLandscape,
-  FcSportsMode,
-} from "react-icons/fc";
+import LiveMusic from "@/components/livemusic";
+import NightLifeIcon from "@/components/nightlife";
+import StageIcon from "@/components/stage";
+import ConferenceIcon from "@/components/conference";
+import CourseIcon from "@/components/course";
+import TourismIcon from "@/components/tourism";
+import SportIcon from "@/components/sport";
+import OutsideIcon from "@/components/outside";
+import CalendarIcon from "@/components/calendar";
 const NavbarLinks = ({ data }) => {
   const getIconById = (id) => {
     switch (id) {
       case 1:
-        return <FcLandscape size={20} className="mr-2 ms-3" />;
+        return <OutsideIcon className={"mr-2 ms-3 w-6 h-6"} />;
       case 2:
-        return <FcMusic size={20} className="mr-2 ms-3" />;
+        return <LiveMusic className={"mr-2 ms-3 w-6 h-6"} />;
       case 3:
-        return <FcFilm size={20} className="mr-2 ms-3" />;
+        return <StageIcon className={"mr-2 ms-3 w-6 h-6"} />;
       case 4:
-        return <FcNightLandscape size={20} className="mr-2 ms-3" />;
+        return <NightLifeIcon className={"mr-2 ms-3 w-6 h-6"} />;
       case 5:
-        return <FcConferenceCall size={20} className="mr-2 ms-3" />;
+        return <ConferenceIcon className={"mr-2 ms-3 w-6 h-6"} />;
       case 6:
-        return <FcKindle size={20} className="mr-2 ms-3" />;
+        return <CourseIcon className={"mr-2 ms-3 w-6 h-6"} />;
       case 7:
-        return <FcCloseUpMode size={20} className="mr-2 ms-3" />;
+        return <TourismIcon className={"mr-2 ms-3 w-6 h-6"} />;
       case 8:
-        return <FcSportsMode size={20} className="mr-2 ms-3" />;
+        return <SportIcon className={"mr-2 ms-3 w-6 h-6"} />;
       default:
         return null;
     }
@@ -43,7 +41,7 @@ const NavbarLinks = ({ data }) => {
             href="/"
             className="flex items-center p-2 text-gray-900 rounded-lg bg-white  box-shadow"
           >
-            <FcHome size={20} className="mr-2 ms-3" />
+            <CalendarIcon className={"mr-2 ms-3 w-6 h-6"} />
             <span className="text-sm font-bold">Trang chủ</span>
           </Link>
         </div>

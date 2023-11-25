@@ -104,7 +104,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
       phoneNumber: phoneNumber,
       email: email,
       role: "organizer",
-      anhDaiDienToChuc: avatarImage ? avatarImage[0]?.url : null,
+      anhDaiDienToChuc: avatarImage ? avatarImage[0]?.url : defaultAvatar,
       id: userId,
     };
 
