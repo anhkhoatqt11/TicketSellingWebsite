@@ -1,5 +1,4 @@
-import { getRequest, postRequest } from "@/lib/fetch";
-import toast from "react-hot-toast";
+import { getRequest } from "@/lib/fetch";
 
 export const useUser = () => {
     const fetchUserInfoById = async (id) => {

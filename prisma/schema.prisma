@@ -51,6 +51,7 @@ model SuKien {
   ChuDe         ChuDe       @relation(fields: [ChuDeId], references: [id])
   ves           Ve[]
   MaGiamGia     MaGiamGia[]
+  Banners       Banners[]
 
   @@index([userId])
   @@index([ChuDeId])
@@ -91,6 +92,7 @@ model HoaDon {
   tinhTrang           String     @default("Chưa thanh toán")
   tongTien            Float      @default(0)
   maGiamGiaId         Int?
+  checkIn             Boolean    @default(false)
   user                User       @relation(fields: [userId], references: [id])
   HoaDonVe            HoaDonVe[]
 
@@ -125,4 +127,12 @@ model MaGiamGia {
 
   @@index([SuKienId])
   @@index([VeId])
+}
+
+model Banners {
+  id       Int    @id @default(autoincrement())
+  SuKienId Int
+  suKien   SuKien @relation(fields: [SuKienId], references: [id])
+
+  @@index([SuKienId])
 }
