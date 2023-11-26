@@ -17,7 +17,38 @@ import { FcSportsMode } from "react-icons/fc";
 import { BiSolidDiscount } from "react-icons/bi";
 import { FaChartBar } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
+import LiveMusic from "@/components/livemusic";
+import NightLifeIcon from "@/components/nightlife";
+import StageIcon from "@/components/stage";
+import ConferenceIcon from "@/components/conference";
+import CourseIcon from "@/components/course";
+import TourismIcon from "@/components/tourism";
+import SportIcon from "@/components/sport";
+import OutsideIcon from "@/components/outside";
 import Link from "next/link";
+
+const getIconById = (id) => {
+  switch (id) {
+    case 1:
+      return <OutsideIcon className={"mt-1 w-4 h-4"} />;
+    case 2:
+      return <LiveMusic className={"mt-1 w-4 h-4"} />;
+    case 3:
+      return <StageIcon className={"mt-1 w-4 h-4"} />;
+    case 4:
+      return <NightLifeIcon className={"mt-1 w-4 h-4"} />;
+    case 5:
+      return <ConferenceIcon className={"mt-1 w-4 h-4"} />;
+    case 6:
+      return <CourseIcon className={"mt-1 w-4 h-4"} />;
+    case 7:
+      return <TourismIcon className={"mt-1 w-4 h-4"} />;
+    case 8:
+      return <SportIcon className={"mt-1 w-4 h-4"} />;
+    default:
+      return null;
+  }
+};
 
 export function EventListItemComponent({ item }) {
   const currentDate = new Date(
@@ -73,7 +104,7 @@ export function EventListItemComponent({ item }) {
           </div>
           <div className="lg:w-2/3 m-3">
             <h1 className="text-base text-emerald-400 mt-1 flex flex-row gap-2">
-              <FcSportsMode className="mt-1" />
+              {getIconById(item?.ChuDe?.id)}
               {item?.ChuDe?.name}
             </h1>
             <div className="flex flex-row">
@@ -96,7 +127,7 @@ export function EventListItemComponent({ item }) {
           </div>
         </div>
         <Separator />
-        <div className="grid grid-cols-4 gap-2 rounded-md text-green-500 font-medium w-full place-content-center">
+        <div className="grid grid-cols-4 gap-2 rounded-md text-emerald-400 font-medium w-full place-content-center">
           <Link href={`/organizer/event/details/${item?.id}/guest-list`}>
             <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-bl-lg">
               <IoPeople className="w-full" />
