@@ -5,6 +5,7 @@ export const useUser = () => {
         const res = await getRequest({
             endPoint: `/api/user?id=${id}`,
         });
+        console.log(res);
         return res;
     };
     return {

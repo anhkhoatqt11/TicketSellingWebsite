@@ -1,15 +1,16 @@
 import React from "react";
 import UserList from "./(components)/UserList";
+import UserItemCard from "./(components)/UserItemCard";
+import { UserListLayout } from "./(components)/UserListLayout";
 
 
 
 
-const page = () => {
+export default async function page() {
     return (
         <div className="p-4">
-            <UserList/>
+            <UserListLayout />
         </div>
     )
 }
 
-export default page

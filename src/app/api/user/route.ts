@@ -11,6 +11,28 @@ export async function GET(req: Request) {
     where: {
       id: parseInt(userId),
     },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      avatar: true,
+      phoneNumber: true,
+      diaChi: true,
+      role: true,
+      loaiHinhKinhDoanh: true,
+      hoTenOrganizer: true,
+      cccdNumber: true,
+      maSoThueCaNhan: true,
+      anhDaiDienToChuc: true,
+      tenDoanhNghiep: true,
+      maSoDKKD: true,
+      noiCap: true,
+      ngayCap: true,
+      chiNhanh: true,
+      soTaiKhoan: true,
+      tenChuTaiKhoan: true,
+      tenNganHang: true,
+    }
   });
   if (!user) {
     return { status: 400, body: { message: 'user not found' } };

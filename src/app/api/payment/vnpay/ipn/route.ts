@@ -49,6 +49,16 @@ export async function GET(req: Request) {
         } else if (hoaDon[0].tinhTrang == "Đã thanh toán") {
             return new Response(JSON.stringify({ code: '00', data: 'Thanh toán thành công', orderId: id.toString() }), { status: 200 });
         } else {
+            await prisma.hoaDon.delete({
+                where: {
+                    id: id,
+                }
+            });
+            await prisma.hoaDonVe.deleteMany({
+                where: {
+                    hoaDonId: id,
+                }
+            });
             return new Response(JSON.stringify({ code: '01', data: 'Thanh toán thất bại', orderId: id.toString() }), { status: 200 });
         }
     } catch (e) {

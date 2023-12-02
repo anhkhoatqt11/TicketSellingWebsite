@@ -5,7 +5,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "@/components/Loader";
 import { Card, Button, Progress, CardBody } from "@nextui-org/react";
-import { Ticket, User } from 'lucide-react';
+import { Calendar, Ticket, User } from 'lucide-react';
 import { BiMoney } from 'react-icons/bi';
 
 
@@ -35,7 +35,7 @@ export default function Dashboard() {
     });
 
     if (isLoading) return (
-        <div className="flex h-screen items-center justify-center">
+        <div className="w-full flex h-screen items-center justify-center">
             <Loader />
         </div>
     )
@@ -53,7 +53,7 @@ export default function Dashboard() {
                         </div>
                         <div>
                             <Button className={`bg-yellow-100 w-[50px] h-[50px]`}>
-                                <Ticket className={`w-6 h-6 text-yellow-500`} />
+                                <Calendar className={`w-6 h-6 text-yellow-500`} />
                             </Button>
                         </div>
                     </div>
@@ -174,6 +174,40 @@ export default function Dashboard() {
                             <p className="text-gray-200 font-bold">/tháng</p>
                         </div>
                         <p className={`text-purple-500 font-bold`}>6,8%</p>
+                    </div>
+                </CardBody>
+            </Card>
+            <Card
+                isFooterBlurred
+                radius="lg"
+                className="border-none w-full h-[190px] md:w-[270px]">
+                <CardBody className="p-5">
+                    <div className="flex flex-row justify-between items-center">
+                        <div>
+                            <p className="font-normal text-gray-400">Tổng vé đã tạo</p>
+                            <p className="text-3xl font-extrabold mt-2">{DashBoardInfo.totalTicket}</p>
+                        </div>
+                        <div>
+                            <Button className={`bg-orange-100 w-[50px] h-[50px]`}>
+                                <Ticket className={`w-6 h-6 text-orange-500`} />
+                            </Button>
+                        </div>
+                    </div>
+                    <Progress
+                        aria-label="Loading..."
+                        value={parseInt(formatCurrency(DashBoardInfo.totalTicket))}
+                        maxValue={10000}
+                        classNames={{
+                            base: "w-full mt-5",
+                            indicator: `bg-orange-500`,
+                        }}
+                    />
+                    <div className="flex flex-row justify-between items-center text-sm mt-4">
+                        <div className="flex flex-row">
+                            <p className="font-bold">120</p>
+                            <p className="text-gray-200 font-bold">/tháng</p>
+                        </div>
+                        <p className={`text-orange-500 font-bold`}>6,8%</p>
                     </div>
                 </CardBody>
             </Card>

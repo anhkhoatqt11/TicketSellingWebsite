@@ -63,13 +63,19 @@ const TicketChoose = ({ EventDetail }) => {
     return (
         <Table className='w-full p-4 md:w-2/4 mr-0 md:mr-10' aria-label='Lựa chọn vé của bạn'>
             <TableHeader>
+                <TableColumn>MÀU VÉ</TableColumn>
                 <TableColumn>LOẠI VÉ</TableColumn>
                 <TableColumn>GIÁ VÉ</TableColumn>
                 <TableColumn>SỐ LƯỢNG / TÌNH TRẠNG</TableColumn>
             </TableHeader>
             <TableBody>
                 {EventDetail?.ves?.map((ticket) => (
-                    <TableRow className='h-[80px]' key={ticket.id}>
+                    <TableRow className='h-[80px] border-b-2 border-gray-50' key={ticket.id}>
+                        <TableCell>
+                            <div className={`rounded-full h-[20px] w-[20px] items-center justify-center`} style={{backgroundColor: ticket.mau}}>
+                                
+                            </div>
+                        </TableCell>
                         <TableCell>{ticket.name}</TableCell>
                         <TableCell>{formatCurrency(ticket.gia)}</TableCell>
                         <TableCell>
@@ -86,11 +92,11 @@ const TicketChoose = ({ EventDetail }) => {
                                         Date.parse(ticket.ngayKetThuc) < Date.parse(currentDateTime)
                                     ) && (
                                             <>
-                                                <Button className='rounded-full bg-transparent text-black border border-solid border-red-500 h-[20px] hover:bg-red-500 hover:text-white' onClick={() => handleRemoveFromBuyList(ticket.id)}>-</Button>
+                                                <Button className='rounded-md bg-transparent text-black border border-solid border-red-500 h-[20px] hover:bg-red-500 hover:text-white' onClick={() => handleRemoveFromBuyList(ticket.id)}>-</Button>
                                                 <p className='text-center items-center mt-2 font-bold'>
                                                     {buyList.find((item) => item.ticketId === ticket.id)?.quantity || 0}
                                                 </p>
-                                                <Button className='rounded-full bg-transparent text-black border border-solid border-emerald-500 h-[20px] hover:bg-emerald-500 hover:text-white'
+                                                <Button className='rounded-md bg-transparent text-black border border-solid border-emerald-500 h-[20px] hover:bg-emerald-500 hover:text-white'
                                                     onClick={() => handleAddToBuyList(ticket.id, ticket.name, ticket.gia, ticket.soLuongToiDa, ticket.soLuong)}
                                                     disabled={
                                                         (buyList.find((item) => item.ticketId === ticket.id)?.quantity || 0) >=

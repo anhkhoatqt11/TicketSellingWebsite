@@ -22,11 +22,6 @@ const navItems = [
     icon: <DashboardIcon className="w-5 h-5" />,
   },
   {
-    title: "Quản lý phương thức thanh toán",
-    value: "payments",
-    icon: <DashboardIcon className="w-5 h-5" />,
-  },
-  {
     title: "Quản lý banner",
     value: "banners",
     icon: <DashboardIcon className="w-5 h-5" />,

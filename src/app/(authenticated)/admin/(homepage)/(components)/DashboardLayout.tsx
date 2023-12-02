@@ -10,7 +10,7 @@ const DashboardLayout = () => {
 
     return (
         <div className='w-full h-full mt-5 pl-7 pr-7'>
-            <div className='flex flex-row w-full'>
+            <div className='flex flex-col md:flex-row w-full'>
                 <Dashboard />
                 <Popular />
             </div>

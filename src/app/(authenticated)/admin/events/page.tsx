@@ -1,9 +1,9 @@
-import React from 'react'
+import { EventManagement } from "./(components)/EventManagement";
 
-const page = () => {
+export default async function page() {
   return (
-    <div>page</div>
-  )
+    <div className="m-4">
+      <EventManagement session={undefined} />
+    </div>
+  );
 }
-
-export default page
