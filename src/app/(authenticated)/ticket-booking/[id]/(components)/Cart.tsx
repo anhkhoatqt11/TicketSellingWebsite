@@ -108,6 +108,7 @@ const Cart = ({ websiteBooking,
             phuongThucThanhToan: "VNPAY",
             tinhTrang: "Chưa thanh toán",
             tongTien: calculateTotalPrice(),
+            suKienId: EventDetail.id,
             maGiamGiaId: couponId,
             HoaDonVe: buyList.map((item) => ({
                 veId: item.ticketId,

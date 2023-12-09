@@ -53,6 +53,7 @@ model SuKien {
   ves           Ve[]
   MaGiamGia     MaGiamGia[]
   Banners       Banners[]
+  HoaDon        HoaDon[]
 
   @@index([userId])
   @@index([ChuDeId])
@@ -94,10 +95,13 @@ model HoaDon {
   tongTien            Float      @default(0)
   maGiamGiaId         Int?
   checkIn             Boolean    @default(false)
+  suKienId            Int
   user                User       @relation(fields: [userId], references: [id])
+  suKien              SuKien     @relation(fields: [suKienId], references: [id])
   HoaDonVe            HoaDonVe[]
 
   @@index([userId])
+  @@index([suKienId])
 }
 
 model HoaDonVe {

@@ -1,15 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, Tooltip, Image, Input, Select, SelectItem } from "@nextui-org/react";
-import { EditIcon, DeleteIcon, EyeIcon } from "lucide-react";
+import { EditIcon, DeleteIcon, EyeIcon, Unlock, Lock } from "lucide-react";
 import { useAdmin } from '@/hooks/useAdmin';
 import { useQuery } from '@tanstack/react-query';
 import Loader from "@/components/Loader";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { useUser } from '@/hooks/useUser';
 import { Pagination } from "@nextui-org/react";
-import { VaiTroMap } from '@/lib/constant';
+import { VaiTroMap, LoaiHinhKinhDoanhMap } from '@/lib/constant';
 
 const statusColorMap = {
     dang_hoat_dong: "success",
@@ -27,15 +27,52 @@ function convertUtcToGmtPlus7(utcString) {
 }
 
 export default function UserList({ props }) {
+
     const [currentPage, setCurrentPage] = React.useState(1);
     const { fetchAllUser } = useAdmin();
     const [isLoaded, setIsLoaded] = React.useState(false);
-    const [isModalLoading, setIsModalLoading] = React.useState(true); // State to track if modal is loading or not
+    const [isModalLoading, setIsModalLoading] = React.useState(true); 
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const [selectedUser, setSelectedUser] = React.useState(null); // State to store selected user information
-    const { fetchUserInfoById } = useUser(); // Destructure the fetchUserInfoById function
+    const [selectedUser, setSelectedUser] = React.useState(null); 
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-    const { data } = useQuery({
+
+    const [selectedVaiTro, setSelectedVaiTro] = React.useState(new Set([]));
+    const [selectedLoaiHinhKinhDoanh, setSelectedLoaiHinhKinhDoanh] = React.useState(new Set([]));
+
+
+    const [hoTen, setHoTen] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [dienThoai, setDienThoai] = React.useState('');
+    const [diaChi, setDiaChi] = React.useState('');
+    const [vaiTro, setVaiTro] = React.useState('');
+    const [maSoDKKD, setMaSoDKKD] = React.useState('');
+    const [noiCap, setNoiCap] = React.useState('');
+    const [ngayCap, setNgayCap] = React.useState();
+    const [loaiHinhKinhDoanh, setLoaiHinhKinhDoanh] = React.useState('');
+    const [hoTenBTC, setHoTenBTC] = React.useState('');
+    const [maSoThueCaNhan, setMaSoThueCaNhan] = React.useState('');
+    const [hoTenDoanhNghiep, setHoTenDoanhNghiep] = React.useState('');
+
+    const { fetchUserInfoById, updateUserInfo } = useUser();
+
+    useEffect(() => {
+        if (selectedVaiTro.size > 0) {
+            const vaiTroValueArray = Array.from(selectedVaiTro);
+            setVaiTro(vaiTroValueArray?.[0].split(',').map(role => role.trim()));
+        }
+    }, [selectedVaiTro]);
+
+    useEffect(() => {
+        if (selectedLoaiHinhKinhDoanh.size > 0) {
+            const loaiHinhKinhDoanhArray = Array.from(selectedLoaiHinhKinhDoanh);
+            setLoaiHinhKinhDoanh(loaiHinhKinhDoanhArray?.[0]);
+        }
+    }, [selectedLoaiHinhKinhDoanh]);
+
+
+
+    const { data, refetch } = useQuery({
         queryKey: [
             ["user", currentPage],
             ["name", props],
@@ -60,17 +97,91 @@ export default function UserList({ props }) {
 
     const handleDetailsClick = async (userId) => {
         try {
-            setSelectedUser(null); 
-            setIsModalLoading(true); 
-            onOpen(); 
+            setSelectedUser(null);
+            setIsModalLoading(true);
+            onOpen();
             const response = await fetchUserInfoById(userId);
-            setSelectedUser(response); 
-            setIsModalLoading(false); 
-            console.log(selectedUser.role);
+            setSelectedUser(response);
+            setHoTen(response?.name);
+            setEmail(response?.email);
+            setDienThoai(response?.phoneNumber);
+            setDiaChi(response?.diaChi);
+            setVaiTro(response?.role.split(',').map(role => role.trim()));
+            setMaSoDKKD(response?.maSoDKKD);
+            setNoiCap(response?.noiCap);
+            setNgayCap(response?.ngayCap);
+            if (response?.loaiHinhKinhDoanh != null) {
+                setLoaiHinhKinhDoanh(response?.loaiHinhKinhDoanh.toString());
+            }
+            setHoTenBTC(response?.hoTenOrganizer);
+            setMaSoThueCaNhan(response?.maSoThueCaNhan);
+            setHoTenDoanhNghiep(response?.tenDoanhNghiep);
+            setIsModalLoading(false);
         } catch (error) {
             console.error('Error fetching user information:', error);
         }
     };
+
+
+    const onSubmit = async () => {
+
+        setIsSubmitting(true);
+
+        const userInfo = {
+            id: selectedUser?.id,
+            name: hoTen,
+            phoneNumber: dienThoai,
+            diaChi: diaChi,
+            role: vaiTro.toString(),
+            loaiHinhKinhDoanh: parseInt(loaiHinhKinhDoanh),
+            hoTenOrganizer: hoTenBTC,
+            maSoThueCaNhan: maSoThueCaNhan,
+            tenDoanhNghiep: hoTenDoanhNghiep,
+            maSoDKKD: maSoDKKD,
+            noiCap: noiCap,
+            ngayCap: ngayCap,
+        }
+
+        const success = await updateUserInfo(userInfo);
+        if (success) {
+            setIsSubmitting(true);
+        }
+    }
+
+    const lockUser = async (userId) => {
+
+        setIsSubmitting(true);
+
+        const userInfo = {
+            id: userId,
+            trangThai: 'khoa_tai_khoan'
+        }
+
+        const success = await updateUserInfo(userInfo);
+        if (success) {
+            setIsSubmitting(true);
+            refetch();
+        }
+    }
+
+
+    const unlockUser = async (userId) => {
+
+        setIsSubmitting(true);
+
+        const userInfo = {
+            id: userId,
+            trangThai: 'dang_hoat_dong'
+        }
+
+        const success = await updateUserInfo(userInfo);
+        if (success) {
+            setIsSubmitting(true);
+            refetch();
+        }
+    }
+
+
 
 
     const renderCell = React.useCallback((user, columnKey) => {
@@ -80,11 +191,12 @@ export default function UserList({ props }) {
             case "name":
                 return (
                     <TableCell>
-                        <div className='flex flex-row items-center gap-3'><Image
-                            src={user.avatar}
-                            width="32px"
-                            height="32px"
-                            className="rounded-full" />
+                        <div className='flex flex-row items-center gap-3'>
+                            <Image
+                                src={user.avatar}
+                                width="32px"
+                                height="32px"
+                                className="rounded-full hidden md:block" />
                             {cellValue}
                         </div>
                     </TableCell>
@@ -120,21 +232,25 @@ export default function UserList({ props }) {
                 return (
                     <TableCell align="center">
                         <div className="relative flex items-center gap-2">
-                            <Tooltip content="Details">
+                            <Tooltip content="Sửa thông tin">
                                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                                    <EyeIcon onClick={() => handleDetailsClick(user.id)} />
+                                    <EditIcon onClick={() => handleDetailsClick(user.id)} />
                                 </span>
                             </Tooltip>
-                            <Tooltip content="Edit user">
-                                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                                    <EditIcon />
-                                </span>
-                            </Tooltip>
-                            <Tooltip color="danger" content="Delete user">
-                                <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                                    <DeleteIcon />
-                                </span>
-                            </Tooltip>
+                            {user.trangThai === "khoa_tai_khoan" ? (
+                                <Tooltip color="primary" content="Mở khoá người dùng">
+                                    <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                                        <Unlock onClick={() => unlockUser(user.id)} />
+                                    </span>
+                                </Tooltip>
+                            ) : (
+                                <Tooltip color="danger" content="Khoá người dùng">
+                                    <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                                        <Lock onClick={() => lockUser(user.id)} />
+                                    </span>
+                                </Tooltip>
+                            )}
+
                         </div>
                     </TableCell>
                 );
@@ -156,6 +272,7 @@ export default function UserList({ props }) {
         { name: "Hành động", uid: "actions" },
     ];
 
+
     if (isLoaded === false) {
         return (
             <div className="w-full flex h-screen items-center justify-center">
@@ -163,6 +280,8 @@ export default function UserList({ props }) {
             </div>
         )
     }
+
+
 
     return (
         <div>
@@ -194,9 +313,9 @@ export default function UserList({ props }) {
                 />
             </div>
             {/* <Button onPress={onOpen}>Open Modal</Button> */}
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size={vaiTro.includes('organizer') ? '5xl' : 'md'}>
                 {isModalLoading ? (
-                    <ModalContent className="w-full flex h-screen items-center justify-center">
+                    <ModalContent className="w-full flex h-screen pt-4 pb-4 items-center justify-center">
                         <Loader />
                     </ModalContent>
                 ) : (
@@ -205,33 +324,91 @@ export default function UserList({ props }) {
                             <>
                                 <ModalHeader className="flex flex-col gap-1">Chi tiết người dùng</ModalHeader>
                                 <ModalBody>
-                                    {/* Display user information in the modal */}
                                     {selectedUser && (
-                                        <div>
-                                            <div className="flex items-center justify-center mb-4">
-                                                <Image src={selectedUser.avatar} width="120px" height="120px" className="rounded-full" />
+                                        <div className={vaiTro.includes('organizer') ? "grid grid-cols-2 gap-8" : ""}>
+                                            {/* Single Column for User, Two Columns for Organizer */}
+                                            <div>
+                                                <div className="flex items-center justify-center mb-4">
+                                                    <Image src={selectedUser?.avatar} width="120px" height="120px" className="rounded-full" />
+                                                </div>
+
+                                                <div className='grid grid-cols gap-4'>
+                                                    <Input variant='bordered' label='Họ và tên' labelPlacement='outside' placeholder='Nhập họ và tên' value={hoTen} onChange={(e) => setHoTen(e.target.value)}></Input>
+                                                    <Input variant='bordered' label='Email' labelPlacement='outside' placeholder='Nhập email' value={email} onChange={(e) => setEmail(e.target.value)} disabled></Input>
+                                                    <Input variant='bordered' label='Điện thoại' labelPlacement='outside' placeholder='Nhập số điện thoại' value={dienThoai} onChange={(e) => setDienThoai(e.target.value)}></Input>
+                                                    <Input variant='bordered' label='Địa chỉ' labelPlacement='outside' placeholder='Nhập địa chỉ' value={diaChi} onChange={(e) => setDiaChi(e.target.value)}></Input>
+                                                    <Select
+                                                        className='w-full mt-4'
+                                                        label='Vai trò'
+                                                        variant='bordered'
+                                                        labelPlacement='outside'
+                                                        selectedKeys={vaiTro}
+                                                        onSelectionChange={setSelectedVaiTro}
+                                                    >
+                                                        {VaiTroMap?.map((role) => (
+                                                            <SelectItem key={role.name} value={role.value}>{role.value.toString()}</SelectItem>
+                                                        ))}
+                                                    </Select>
+                                                </div>
                                             </div>
 
-                                            <div className='grid grid-cols gap-4'>
-                                                <Input variant='bordered' label='Họ và tên' labelPlacement='outside' placeholder='Nhập họ và tên' value={selectedUser?.name}></Input>
-                                                <Input variant='bordered' label='Email' labelPlacement='outside' placeholder='Nhập email' value={selectedUser?.email} disabled></Input>
-                                                <Input variant='bordered' label='Điện thoại' labelPlacement='outside' placeholder='Nhập số điện thoại' value={selectedUser?.phoneNumber}></Input>
-                                                <Input variant='bordered' label='Địa chỉ' labelPlacement='outside' placeholder='Nhập địa chỉ' value={selectedUser.diaChi}></Input>
-                                                <Select
-                                                    className='w-full mt-4'
-                                                    label='Vai trò'
-                                                    variant='bordered'
-                                                    labelPlacement='outside'
-                                                    selectedKeys={selectedUser.role.toString()}>
-                                                    {VaiTroMap?.map((role) => (
-                                                        <SelectItem key={role.name} value={role.value}>{role.value.toString()}</SelectItem>
-                                                    ))}
-                                                </Select>
-                                            </div>
+                                            {/* Organizer Info (if role is "organizer") */}
+                                            {vaiTro.includes('organizer') && (
+                                                <div>
+                                                    <Select
+                                                        className='w-full'
+                                                        label='Loại hình kinh doanh'
+                                                        variant='bordered'
+                                                        labelPlacement='outside'
+                                                        selectedKeys={loaiHinhKinhDoanh.toString()}
+                                                        onSelectionChange={setSelectedLoaiHinhKinhDoanh}
+                                                    >
+                                                        {LoaiHinhKinhDoanhMap?.map((loaiHinh) => (
+                                                            <SelectItem key={loaiHinh.name} value={loaiHinh.value}>{loaiHinh.value.toString()}</SelectItem>
+                                                        ))}
+                                                    </Select>
+                                                    {loaiHinhKinhDoanh === '1' && (
+                                                        <div className='grid grid-cols gap-4 mt-4'>
+                                                            <Input variant='bordered' label='Tên tổ chức' labelPlacement='outside' placeholder='Nhập tên tổ chức' value={hoTenBTC} onChange={(e) => setHoTenBTC(e.target.value)}></Input>
+                                                            <Input variant='bordered' label='Mã số thuế cá nhân' labelPlacement='outside' placeholder='Nhập mã số thuế cá nhân' value={maSoThueCaNhan} onChange={(e) => setMaSoThueCaNhan(e.target.value)}></Input>
+                                                        </div>
+                                                    )}
+                                                    {loaiHinhKinhDoanh === '2' && (
+                                                        <div className='grid grid-cols gap-4 mt-4'>
+                                                            <Input variant='bordered' label='Tên doanh nghiệp' labelPlacement='outside' placeholder='Nhập tên doanh nghiệp' value={hoTenDoanhNghiep} onChange={(e) => setHoTenDoanhNghiep(e.target.value)}></Input>
+                                                            <Input variant='bordered' label='Mã số đăng ký kinh doanh' labelPlacement='outside' placeholder='Nhập mã số đăng ký kinh doanh' value={maSoDKKD} onChange={(e) => setMaSoDKKD(e.target.value)}></Input>
+                                                            <Input variant='bordered' label='Nơi cấp' labelPlacement='outside' placeholder='Nhập nơi cấp' value={noiCap} onChange={(e) => setNoiCap(e.target.value)}></Input>
+                                                            <Input
+                                                                isInvalid={ngayCap !== "" ? false : true}
+                                                                errorMessage={`${ngayCap !== "" ? "" : "Vui lòng chọn ngày cấp"
+                                                                    }`}
+                                                                type="date"
+                                                                variant='bordered'
+                                                                label='Ngày cấp'
+                                                                labelPlacement='outside'
+                                                                placeholder='Chọn ngày cấp'
+                                                                radius="sm"
+                                                                className="max-w-xs lg:max-w-2xl h-[52px]"
+                                                                value={ngayCap}
+                                                                onChange={(e) => {
+                                                                    setNgayCap(e.target.value);
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    )}
+
+                                                </div>
+                                            )}
+                                            <Button
+                                                className='w-full col-span-full bg-green-500 text-white mt-4'
+                                                disabled={isSubmitting}
+                                                onClick={() => {
+                                                    onSubmit();
+                                                }}
+                                            >Xác nhận</Button>
                                         </div>
                                     )}
                                 </ModalBody>
-                                {/* ... other modal code */}
                             </>
                         )}
                     </ModalContent>

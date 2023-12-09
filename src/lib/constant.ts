@@ -12,3 +12,14 @@ export const VaiTroMap = [
     value: 'Nhà tổ chức'
   }
 ]
+
+export const LoaiHinhKinhDoanhMap = [
+  {
+    name: '1',
+    value: 'Cá nhân',
+  },
+  {
+    name: '2',
+    value: 'Doanh nghiệp/ Nhà tổ chức',
+  },
+]

@@ -18,8 +18,17 @@ export const useAdmin = () => {
         return res;
     } 
 
+    const fetchAllBanner = async () => {
+        const res = await getRequest({
+            endPoint: `/api/admin/banners`,
+        });
+        console.log(res);
+        return res;
+    }
+
     return {
         fetchTotalInfo,
         fetchAllUser,
+        fetchAllBanner,
     };
 };
