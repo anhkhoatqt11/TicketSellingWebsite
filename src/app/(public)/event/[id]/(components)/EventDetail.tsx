@@ -14,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import Link from 'next/link';
 import { parseJSON } from 'date-fns';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 
@@ -28,10 +29,24 @@ export function formatCurrency(value: number) {
   return CURRENCY_FORMAT.format(value);
 }
 
+function convertUtcToGmtPlus7(utcString) {
+  const utcDate = new Date(utcString);
+  const gmtPlus7Offset = 7 * 60;
+  const localDate = new Date(utcDate.getTime() + gmtPlus7Offset * 60 * 1000);
+  const formattedDate = localDate.toISOString().replace('T', ' ').replace(/\.\d+Z$/, '');
+  return formattedDate;
+}
+
+function getHoursFromDateString(inputDateString: string): number {
+  const parsedDate = new Date(inputDateString);
+  return parsedDate.getUTCHours();
+}
+
 export function EventDetail({ id }) {
   const { fetchEventById } = useEvent();
   const [isLoading, setIsLoading] = React.useState(false);
-
+  const [isError, setIsError] = React.useState(false);
+  const [currentDateTime, setCurrentDateTime] = React.useState("");
 
   const { data: EventDetail } = useQuery({
     queryKey: ['EventDetail', id],
@@ -39,13 +54,30 @@ export function EventDetail({ id }) {
       const res = await fetchEventById(id);
       setIsLoading(true);
       return res?.[0];
+    },
+    onError: (err) => {
+      setIsError(true);
     }
   })
 
   useEffect(() => {
-    console.log(EventDetail);
-  })
+    fetch("http://worldtimeapi.org/api/timezone/Asia/Bangkok")
+      .then(response => response.json())
+      .then(data => {
+        setCurrentDateTime(data.utc_datetime);
+      });
+  }, []);
 
+  if (isError) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-slate-50">
+        <p>Sự kiện bạn tìm kiếm không tồn tại</p>
+        <Link href='/'>
+          <Button className='ml-4'>Quay lại</Button>
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <div className='w-full h-full bg-slate-50'>
@@ -68,7 +100,12 @@ export function EventDetail({ id }) {
                 <h1 className='text-xl font-bold'>{EventDetail?.name}</h1>
                 <div className='pt-3 flex flex-row'>
                   <ClockIcon size={18} className='mt-1' />
-                  <p className='ml-2'>{EventDetail?.ngayBatDau}-{EventDetail?.ngayKetThuc}</p>
+                  {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) != convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                    <p className='ml-2'>{convertUtcToGmtPlus7(EventDetail?.ngayBatDau)} - {convertUtcToGmtPlus7(EventDetail?.ngayKetThuc)}</p>
+                  ) : null}
+                  {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) == convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                    <p className='ml-2'>{convertUtcToGmtPlus7(EventDetail?.ngayBatDau)}</p>
+                  ) : null}
                 </div>
                 <div className='pt-3 flex flex-row'>
                   <IoLocationOutline size={18} className='mt-1' />
@@ -76,7 +113,9 @@ export function EventDetail({ id }) {
                 </div>
               </div>
               <div className='md:w-1/2 flex justify-center md:justify-end mt-10'> {/* Center button on mobile and push it to the right on larger screens */}
-                <Button className='w-full md:w-[340px]'>Đặt vé ngay</Button>
+                <Link href={`/ticket-booking/${EventDetail.id}`}>
+                  <Button className='w-full md:w-[340px] bg-emerald-500'>Đặt vé ngay</Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -101,10 +140,29 @@ export function EventDetail({ id }) {
                     {EventDetail?.ves.map((item) => (
                       <AccordionItem value={item.id} key={`item-${item.id}`}>
                         <AccordionTrigger className='cursor-pointer flex justify-between'>
-                          <p className='flex flex-row'>{item.name}
-                            <ChevronDownIcon className="h-4 w-4 ml-1 shrink-0 text-muted-foreground transition-transform duration-200" />
-                          </p>
+                          <div className='flex flex-col'>
+                            <p className='flex flex-row'>{item.name}
+                              <ChevronDownIcon className="h-4 w-4 ml-1 shrink-0 text-muted-foreground transition-transform duration-200" />
+                            </p>
+                            {Date.parse(item.ngayBan) > Date.parse(currentDateTime) && item.soLuong != 0 ? (
+                              <div className='border border-gray-500 p-2 mt-3'>
+                                <p>VÉ SẮP MỞ BÁN</p>
+                              </div>
+                            ) : null}
+                            {Date.parse(item.ngayKetThuc) < Date.parse(currentDateTime) && item.soLuong != 0 ? (
+                              <div className='border border-gray-500 p-2 mt-3'>
+                                <p>VÉ HẾT THỜI HẠN</p>
+                              </div>
+                            ) : null}
+                            {item.soLuong == 0 ? (
+                              <div className='border border-gray-500 p-2 mt-3'>
+                                <p>VÉ SỰ KIỆN ĐÃ HẾT</p>
+                              </div>
+                            ) : null}
+                          </div>
+
                           <p className='font-bold'>{formatCurrency(item.gia)}</p>
+
                         </AccordionTrigger>
                         <AccordionContent>
                           <p>{item.moTa}</p>
@@ -127,7 +185,7 @@ export function EventDetail({ id }) {
                   </div>
                   <div className='ml-4'>
                     <p className='text-lg font-bold'>{EventDetail?.user?.name}</p>
-                    <div className='pt-3 flex flex-row'>
+                    <div className='mt-1 flex flex-row'>
                       <PhoneIcon size={18} />
                       <p className='ml-2'>{EventDetail?.user?.phoneNumber}</p>
                     </div>
@@ -142,14 +200,21 @@ export function EventDetail({ id }) {
                   <div className="font-semibold">{EventDetail?.name}</div>
                   <div className='pt-3 flex flex-row'>
                     <ClockIcon size={18} className='mt-1' />
-                    <p className='ml-2'>{EventDetail?.ngayBatDau}-{EventDetail?.ngayKetThuc}</p>
+                    {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) != convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                      <p className='ml-2'>{convertUtcToGmtPlus7(EventDetail?.ngayBatDau)} - {convertUtcToGmtPlus7(EventDetail?.ngayKetThuc)}</p>
+                    ) : null}
+                    {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) == convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                      <p className='ml-2'>{convertUtcToGmtPlus7(EventDetail?.ngayBatDau)}</p>
+                    ) : null}
                   </div>
                   <div className='pt-3 flex flex-row'>
                     <IoLocationOutline size={18} className='mt-1' />
                     <p className='ml-2'>{EventDetail?.diaChi}</p>
                   </div>
-                  <div className='md:w-1/2 flex justify-center md:justify-end mt-10'> {/* Center button on mobile and push it to the right on larger screens */}
-                    <Button className='w-full'>Đặt vé ngay</Button>
+                  <div className='flex justify-center md:justify-end mt-10'> {/* Center button on mobile and push it to the right on larger screens */}
+                    <Link href={`/ticket-booking/${EventDetail.id}`}>
+                      <Button className='w-full bg-emerald-500'>Đặt vé ngay</Button>
+                    </Link>
                   </div>
                 </div>
               </div>
