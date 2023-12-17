@@ -26,7 +26,7 @@ export const CustomRadio = (props) => {
 const PaymentChoose = ({ paymentMethod ,setPaymentMethod}) => {
 
   return (
-    <div className='w-2/4 mr-10'>
+    <div className='w-full p-4 md:w-2/4 mr-0 md:mr-10'>
       <div className='h-auto min-h-[500px] bg-white border border-gray-200 shadow rounded-xl flex flex-col'>
         <div className='bg-gray-100 mx-4 rounded-md h-[40px] mt-3 flex items-center justify-center'>
           <p className='text-sm font-semibold text-foreground-500'>LỰA CHỌN HÌNH THỨC THANH TOÁN</p>

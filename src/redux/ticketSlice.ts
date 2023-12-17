@@ -75,8 +75,26 @@ const ticketSlice = createSlice({
     clearBuyList: (state) => {
       state.buyList = [];
     },
+    updateBuyList: (state, action: PayloadAction<BuyListItem[]>) => {
+      const updatedItems = action.payload;
+
+      updatedItems.forEach((updatedItem) => {
+        const existingItemIndex = state.buyList.findIndex(
+          (item) => item.ticketId === updatedItem.ticketId
+        );
+
+        if (existingItemIndex !== -1) {
+          // If the item is in the buy list, update the quantity, total price, and quantity left
+          state.buyList[existingItemIndex] = {
+            ...state.buyList[existingItemIndex],
+            ...updatedItem,
+            totalPrice: updatedItem.price * updatedItem.quantity,
+          };
+        }
+      });
+    },
   },
 });
 
-export const { setTickets, addToBuyList, removeFromBuyList, clearBuyList } = ticketSlice.actions;
+export const { setTickets, addToBuyList, removeFromBuyList, clearBuyList, updateBuyList } = ticketSlice.actions;
 export default ticketSlice.reducer;

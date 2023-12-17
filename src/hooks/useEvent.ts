@@ -26,9 +26,14 @@ export const useEvent = () => {
     const res = await getRequest({ endPoint: endPointUrl });
     return res;
   };
+  const fetchEventBanner = async () => {
+    const res = await getRequest({ endPoint: `/api/event/event-banners` });
+    return res;
+  };
   return {
     fetchEventById,
     fetchAllEvents,
     fetchAllEventsBySearch,
+    fetchEventBanner,
   };
 };
