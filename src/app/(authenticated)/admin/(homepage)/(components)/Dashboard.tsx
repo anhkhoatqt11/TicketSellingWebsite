@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAdmin } from "@/hooks/useAdmin";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "@/components/Loader";
@@ -23,6 +23,7 @@ export default function Dashboard() {
 
     const { fetchTotalInfo } = useAdmin();
     const [isLoading, setIsLoading] = React.useState(true);
+    const [currentDateTime, setCurrentDateTime] = React.useState("");
 
 
     const { data: DashBoardInfo } = useQuery({
@@ -34,6 +35,23 @@ export default function Dashboard() {
         }
     });
 
+
+
+    useEffect(() => {
+        fetch("http://worldtimeapi.org/api/timezone/Asia/Bangkok")
+            .then(response => response.json())
+            .then(data => {
+                const utcDateTime = new Date(data.utc_datetime);
+                const localDateTime = new Date(utcDateTime.getTime() + (utcDateTime.getTimezoneOffset() * 60000));
+
+                // Format the local datetime
+                const formattedDateTime = localDateTime.toISOString().slice(0, 19).replace("T", " ");
+
+                setCurrentDateTime(formattedDateTime);
+            });
+    }, []);
+
+
     if (isLoading) return (
         <div className="w-full flex h-screen items-center justify-center">
             <Loader />
@@ -44,7 +62,7 @@ export default function Dashboard() {
             <Card
                 isFooterBlurred
                 radius="lg"
-                className="border-none w-full h-[190px] md:w-[270px]">
+                className="border-none w-full h-[180px] md:w-[400px]">
                 <CardBody className="p-5">
                     <div className="flex flex-row justify-between items-center">
                         <div>
@@ -68,17 +86,16 @@ export default function Dashboard() {
                     />
                     <div className="flex flex-row justify-between items-center text-sm mt-4">
                         <div className="flex flex-row">
-                            <p className="font-bold">120</p>
-                            <p className="text-gray-200 font-bold">/tháng</p>
+                            <p className="text-xs">Cập nhật lúc: {currentDateTime} </p>
                         </div>
-                        <p className={`text-yellow-500 font-bold`}>6,8%</p>
+                        {/* <p className={`text-yellow-500 font-bold`}>Đã cập nhật...</p> */}
                     </div>
                 </CardBody>
             </Card>
             <Card
                 isFooterBlurred
                 radius="lg"
-                className="border-none w-full h-[190px] md:w-[270px]">
+                className="border-none w-full h-[180px] md:w-[400px]">
                 <CardBody className="p-5">
                     <div className="flex flex-row justify-between items-center">
                         <div>
@@ -102,17 +119,16 @@ export default function Dashboard() {
                     />
                     <div className="flex flex-row justify-between items-center text-sm mt-4">
                         <div className="flex flex-row">
-                            <p className="font-bold">120</p>
-                            <p className="text-gray-200 font-bold">/tháng</p>
+                            <p className="text-xs">Cập nhật lúc: {currentDateTime} </p>
                         </div>
-                        <p className={`text-blue-500 font-bold`}>6,8%</p>
+                        {/* <p className={`text-blue-500 font-bold`}>Đã cập nhật...</p> */}
                     </div>
                 </CardBody>
             </Card>
             <Card
                 isFooterBlurred
                 radius="lg"
-                className="border-none w-full h-[190px] md:w-[270px]">
+                className="border-none w-full h-[180px] md:w-[400px]">
                 <CardBody className="p-5">
                     <div className="flex flex-row justify-between items-center">
                         <div>
@@ -136,22 +152,21 @@ export default function Dashboard() {
                     />
                     <div className="flex flex-row justify-between items-center text-sm mt-4">
                         <div className="flex flex-row">
-                            <p className="font-bold">120</p>
-                            <p className="text-gray-200 font-bold">/tháng</p>
+                            <p className="text-xs">Cập nhật lúc: {currentDateTime} </p>
                         </div>
-                        <p className={`text-green-500 font-bold`}>6,8%</p>
+                        {/* <p className={`text-green-500 font-bold`}>Đã cập nhật...</p> */}
                     </div>
                 </CardBody>
             </Card>
             <Card
                 isFooterBlurred
                 radius="lg"
-                className="border-none w-full h-[190px] md:w-[270px]">
+                className="border-none w-full h-[180px] md:w-[400px]">
                 <CardBody className="p-5">
                     <div className="flex flex-row justify-between items-center">
                         <div>
                             <p className="font-normal text-gray-400">Tổng doanh thu</p>
-                            <p className="text-3xl font-extrabold mt-2">{DashBoardInfo.totalRevenue}</p>
+                            <p className="text-3xl font-extrabold mt-2">{formatCurrency(DashBoardInfo.totalRevenue)}</p>
                         </div>
                         <div>
                             <Button className={`bg-purple-100 w-[50px] h-[50px]`}>
@@ -161,7 +176,7 @@ export default function Dashboard() {
                     </div>
                     <Progress
                         aria-label="Loading..."
-                        value={parseInt(formatCurrency(DashBoardInfo.totalRevenue))}
+                        value={DashBoardInfo.totalRevenue}
                         maxValue={10000}
                         classNames={{
                             base: "w-full mt-5",
@@ -170,17 +185,16 @@ export default function Dashboard() {
                     />
                     <div className="flex flex-row justify-between items-center text-sm mt-4">
                         <div className="flex flex-row">
-                            <p className="font-bold">120</p>
-                            <p className="text-gray-200 font-bold">/tháng</p>
+                            <p className="text-xs">Cập nhật lúc: {currentDateTime} </p>
                         </div>
-                        <p className={`text-purple-500 font-bold`}>6,8%</p>
+                        {/* <p className={`text-purple-500 font-bold`}>Đã cập nhật...</p> */}
                     </div>
                 </CardBody>
             </Card>
             <Card
                 isFooterBlurred
                 radius="lg"
-                className="border-none w-full h-[190px] md:w-[270px]">
+                className="border-none w-full h-[180px] md:w-[400px]">
                 <CardBody className="p-5">
                     <div className="flex flex-row justify-between items-center">
                         <div>
@@ -204,10 +218,9 @@ export default function Dashboard() {
                     />
                     <div className="flex flex-row justify-between items-center text-sm mt-4">
                         <div className="flex flex-row">
-                            <p className="font-bold">120</p>
-                            <p className="text-gray-200 font-bold">/tháng</p>
+                            <p className="text-xs">Cập nhật lúc: {currentDateTime} </p>
                         </div>
-                        <p className={`text-orange-500 font-bold`}>6,8%</p>
+                        {/* <p className={`text-orange-500 font-bold`}>Đã cập nhật...</p> */}
                     </div>
                 </CardBody>
             </Card>

@@ -23,3 +23,18 @@ export const LoaiHinhKinhDoanhMap = [
     value: 'Doanh nghiệp/ Nhà tổ chức',
   },
 ]
+
+export const TrangThaiSuKienMap = [
+  {
+    name: "Đã duyệt",
+    value: "Đã duyệt",
+  },
+  {
+    name: "Đã huỷ",
+    value: "Đã huỷ",
+  },
+  {
+    name: "Đã khoá",
+    value: "Đã khoá",
+  }
+]

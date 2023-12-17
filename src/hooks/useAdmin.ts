@@ -26,7 +26,7 @@ export const useAdmin = () => {
         return res;
     }
 
-    const addBanner = async (data,id) => {
+    const addBanner = async (data, id) => {
         const res = await postRequest({
             endPoint: `/api/admin/banners/add?id=${id}`,
             isFormData: false,
@@ -59,6 +59,16 @@ export const useAdmin = () => {
         return res;
     }
 
+    const updateEvent = async (data, id) => {
+        const res = await postRequest({
+            endPoint: `/api/admin/event/update?id=${id}`,
+            isFormData: false,
+            formData: data,
+        });
+        console.log(res);
+        return res;
+    }
+
     return {
         fetchTotalInfo,
         fetchAllUser,
@@ -66,6 +76,7 @@ export const useAdmin = () => {
         addBanner,
         updateBanner,
         deletedBanner,
-        fetchEventOfOrganizerForBanner
+        fetchEventOfOrganizerForBanner,
+        updateEvent,
     };
 };

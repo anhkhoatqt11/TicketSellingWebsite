@@ -2,9 +2,10 @@
 
 import React, { useEffect } from 'react'
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Table, TableRow, TableCell, TableColumn, TableHeader, TableBody, Checkbox } from "@nextui-org/react";
-import { Search } from 'lucide-react';
+import { PlusCircle, Search } from 'lucide-react';
 import { useQuery } from "@tanstack/react-query";
 import { useAdmin } from '@/hooks/useAdmin';
+import toast from 'react-hot-toast';
 
 const AddBannerModal = ({ refetch, banners }) => {
 
@@ -65,6 +66,7 @@ const AddBannerModal = ({ refetch, banners }) => {
 
     const res = await addBanner(data, suKienId);
     if (res) {
+      toast.success("Thêm Banner thành công");
       refetch();
     }
   }
@@ -77,7 +79,9 @@ const AddBannerModal = ({ refetch, banners }) => {
       case "addEvent":
         return (
           <TableCell>
-            <Button onClick={() => { handleAddBanner(event.id) }}>Add</Button>
+            <Button className='bg-green-500 rounded-full' onClick={() => { handleAddBanner(event.id) }}>
+              <PlusCircle className="w-6 h-6 text-white" />
+            </Button>
           </TableCell>
         );
       default:
@@ -126,14 +130,6 @@ const AddBannerModal = ({ refetch, banners }) => {
                   </TableBody>
                 </Table>
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>

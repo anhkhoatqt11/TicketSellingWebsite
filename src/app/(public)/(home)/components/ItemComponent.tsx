@@ -15,7 +15,7 @@ const ItemComponent = ({ item }) => {
       : description;
   return (
     <>
-      <Link href={`event/${item?.id}`}>
+      <Link href={`event/${item?.id}`} key={item.id}>
         <div className="max-w-sm h-full rounded-lg block overflow-hidden shadow-lg hover:opacity-80">
           <img className="w-full" src={item.hinhAnhSuKien} alt="Event" />
           <div className="px-6 py-4">

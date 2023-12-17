@@ -65,7 +65,6 @@ const BannerDnD = () => {
 
       const updatedBanners = arrayMove(banners, oldIndex, newIndex);
       setBanners(updatedBanners);
-
       await updateBannerPositions(updatedBanners);
     }
   }
@@ -79,7 +78,7 @@ const BannerDnD = () => {
     await Promise.all(updatePromises);
 
     refetch();
-    toast.success('Cập nhật banner thành công');
+    toast.success('Cập nhật Banners thành công');
   }
 };
 

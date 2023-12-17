@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import { useCategory } from '@/hooks/useCategory';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -23,22 +23,15 @@ export default function Popular() {
         datasets: [{
             data: categories.map(category => category.suKienCount),
             backgroundColor: [
-                '#f43f5e',
-                '#8b5cf6',
-                '#3b82f6',
-                '#06b6d4',
-                '#22c55e',
-                '#f97316',
-                '#737373',
-                '#64748b'
-                // Add more colors as needed
+                '#4ade80',
+                '#34d399',
+                '#2dd4bf',
+                '#fbbf24',
+                '#f87171',
+                '#c084fc',
+                '#fb7185',
+                '#831843'
             ],
-            // hoverBackgroundColor: [
-            //     '#FF6384',
-            //     '#36A2EB',
-            //     '#FFCE56',
-            //     // Add more colors as needed
-            // ]
         }]
     };
 
@@ -56,12 +49,12 @@ export default function Popular() {
             <Card
                 isFooterBlurred
                 radius="lg"
-                className="border-none w-full h-[350px] mt-10 md:mt-0 md:w-[270px] overflow-hidden">
+                className="border-none w-full h-[350px] mt-10 md:mt-0 md:w-[270px]">
                 <CardHeader>
                     <p className="font-bold text-xl">Chủ đề nổi bật</p>
                 </CardHeader>
-                <CardBody className="p-5 justify-center items-center">
-                    <Pie className='overflow-hidden' data={data} options={options}/>
+                <CardBody className="p-5 justify-center items-center overflow-hidden">
+                    <Doughnut data={data} options={options} />
                 </CardBody>
             </Card>
         </div>
