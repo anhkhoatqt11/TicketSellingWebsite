@@ -6,7 +6,7 @@ function Logo() {
   return (
     <Link className="mr-2" href={"/"}>
       <div className="items-center w-full flex flex-row gap-2">
-        <Image alt="TicketBox" src="/logo.png" width={40} height={40} />
+        <Image alt="TicketBox" src="/logo.svg" width={40} height={40} />
       </div>
     </Link>
   );
