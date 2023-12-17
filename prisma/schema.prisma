@@ -87,6 +87,7 @@ model Ve {
 
 model HoaDon {
   id                  Int        @id @default(autoincrement())
+  maDatCho            String     
   ngayDatHang         DateTime
   userId              Int
   phuongThucThanhToan String
@@ -138,6 +139,7 @@ model Banners {
   id       Int    @id @default(autoincrement())
   SuKienId Int
   suKien   SuKien @relation(fields: [SuKienId], references: [id])
+  position Int?
 
   @@index([SuKienId])
 }

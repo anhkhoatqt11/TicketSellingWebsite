@@ -34,7 +34,9 @@ const Cart = ({ websiteBooking,
     const [isCouponUsing, setIsCouponUsing] = React.useState(false);
     const [discountPrice, setDiscountPrice] = React.useState(0);
     const [orginalBuyList, setOrginalBuyList] = React.useState([]);
-    const [couponId, setCouponId] = React.useState(0);
+    const [couponId, setCouponId] = React.useState(null);
+    var crypto = require("crypto");
+
 
     const dispatch = useDispatch();
 
@@ -96,13 +98,14 @@ const Cart = ({ websiteBooking,
         console.log(orginalBuyList);
         dispatch(updateBuyList(orginalBuyList));
         if (isCouponUsing === false) {
-            setCouponId(0);
+            setCouponId(null);
         }
     }, [isCouponUsing]);
 
     const onPayment = async () => {
 
         const BillingInfo = {
+            maDatCho: crypto.randomBytes(3).toString('hex').toUpperCase(),
             ngayDatHang: currentDateTime,
             userId: session?.user?.id,
             phuongThucThanhToan: "VNPAY",

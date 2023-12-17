@@ -68,7 +68,7 @@ const TicketChoose = ({ EventDetail }) => {
                 <TableColumn>GIÁ VÉ</TableColumn>
                 <TableColumn>SỐ LƯỢNG / TÌNH TRẠNG</TableColumn>
             </TableHeader>
-            <TableBody>
+            <TableBody emptyContent={"Vé sự kiện hiện không có sẵn."}>
                 {EventDetail?.ves?.map((ticket) => (
                     <TableRow className='h-[80px] border-b-2 border-gray-50' key={ticket.id}>
                         <TableCell>

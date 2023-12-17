@@ -293,7 +293,7 @@ export default function UserList({ props }) {
                         </TableColumn>
                     )}
                 </TableHeader>
-                <TableBody items={data?.data || []}>
+                <TableBody items={data?.data || []} emptyContent={"Người dùng tìm kiếm không tồn tại."}>
                     {(item) => (
                         <TableRow key={item.id}>
                             {(columnKey) => renderCell(item, columnKey)}

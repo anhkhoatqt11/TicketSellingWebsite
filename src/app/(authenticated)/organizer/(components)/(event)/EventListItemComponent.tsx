@@ -15,7 +15,7 @@ import {
 import { IoLocationOutline, IoPeople } from "react-icons/io5";
 import { FcSportsMode } from "react-icons/fc";
 import { BiSolidDiscount } from "react-icons/bi";
-import { FaChartBar } from "react-icons/fa";
+import { FaChartBar, FaQrcode } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
 import LiveMusic from "@/components/livemusic";
 import NightLifeIcon from "@/components/nightlife";
@@ -127,7 +127,7 @@ export function EventListItemComponent({ item }) {
           </div>
         </div>
         <Separator />
-        <div className="grid grid-cols-4 gap-2 rounded-md text-emerald-400 font-medium w-full place-content-center">
+        <div className="grid grid-cols-5 gap-2 rounded-md text-emerald-400 font-medium w-full place-content-center">
           <Link href={`/organizer/event/details/${item?.id}/guest-list`}>
             <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-bl-lg">
               <IoPeople className="w-full" />
@@ -150,6 +150,12 @@ export function EventListItemComponent({ item }) {
             <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-br-lg">
               <FaChartBar className="w-full" />
               Tổng kết
+            </div>
+          </Link>
+          <Link href={`/organizer/event/details/${item?.id}/check-in`}>
+            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-br-lg">
+              <FaQrcode className="w-full" />
+              Checkin
             </div>
           </Link>
         </div>
