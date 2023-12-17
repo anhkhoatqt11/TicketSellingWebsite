@@ -66,7 +66,6 @@ export function EventListItemComponent({ item , onOpen, setSelectedItem, setTran
     0,
     0
   );
-  console.log(item);
   return (
     <>
       <Card className="mt-4 cursor-pointer" key={`batdongsan_${"item.id"}`}>
@@ -157,7 +156,6 @@ const getDateTimeKetThuc = (type) => {
   const year = new Date().getFullYear() - parseInt(time[2]);
   const month = new Date().getMonth() + 1 - parseInt(time[1]);
   const day = new Date().getDate() - parseInt(time[0]);
-  console.log(year, month, day);
   return (
     year < 0 ||
     (year === 0 && month < 0) ||

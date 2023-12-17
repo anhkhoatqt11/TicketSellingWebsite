@@ -64,8 +64,6 @@ function EventListComponent({ props }) {
       trangThai: trangThai.toString(),
     };
 
-    console.log(data);
-
     const res = await updateEvent(data, selectedItem?.id);
     if (res) {
       toast.success("Cập nhật trạng thái thành công");
