@@ -17,7 +17,7 @@ export function ListComponent() {
         Danh sách sự kiện đang diễn ra
       </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 mt-6 p-6">
+      <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-6 mt-6 p-6">
         {data?.data.map((item) => (
           <ItemComponent key={item.id} item={item} />
         ))}

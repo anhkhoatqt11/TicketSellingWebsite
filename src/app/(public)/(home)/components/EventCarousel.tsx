@@ -36,9 +36,9 @@ function EventCarousel() {
       >
         {sortedData.map((item) => (
           <Link href={`event/${item?.SuKienId}`}>
-            <div key={item.suKienId} className="w-full h-[200px] md:h-[300px] lg:h-[400px]">
+            <div key={item.suKienId} className="w-full aspect-[13/5]">
               <Image
-                className="rounded-lg"
+                className="rounded-lg w-full aspect-[13/5]"
                 src={item.suKien.hinhAnhSuKien}
                 alt="Event background"
                 fill

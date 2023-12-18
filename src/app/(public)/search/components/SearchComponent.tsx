@@ -152,7 +152,12 @@ const SearchComponent = ({ setSearchProps }: props) => {
                   )}
                 />
               </div>
-              <Button type="submit">Tìm kiếm</Button>
+              <Button
+                className="text-white bg-blue-700 hover:bg-blue-800"
+                type="submit"
+              >
+                Tìm kiếm
+              </Button>
             </div>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 max-w-[960px] md:w-[600px] lg:w-[1280px] gap-2 mx-auto p-3 md:p-0">

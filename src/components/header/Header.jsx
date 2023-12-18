@@ -101,14 +101,17 @@ const NavigationMenuDemo = ({ session }) => {
                 <div className="flex gap-16">
                   <div>
                     <Link href="#">
-                      <Button className="h-7 w-full rounded-full bg-green-500 hover:bg-green-600">
+                      <Button className="!box-content h-7 w-full rounded-full bg-blue-700 hover:bg-blue-800">
                         Tạo sự kiện
                       </Button>
                     </Link>
                   </div>
                   <div className="flex items-center">
-                    <Link href="#">
-                      <BsTicketPerforated size={25} />
+                    <Link href={"/user/my-ticket"}>
+                      <BsTicketPerforated
+                        size={25}
+                        className="hover:text-blue-700"
+                      />
                     </Link>
                   </div>
                 </div>
@@ -161,7 +164,7 @@ const NavigationMenuDemo = ({ session }) => {
         ) : (
           <div className="ml-auto mr-8">
             <Link href={"/auth/login"}>
-              <Button className=" h-8 w-full rounded-full bg-green-500">
+              <Button className="!box-content h-8 w-full rounded-full bg-green-500">
                 Login
               </Button>
             </Link>
