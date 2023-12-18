@@ -13,7 +13,6 @@ import {
   AiFillEdit,
 } from "react-icons/ai";
 import { IoLocationOutline, IoPeople } from "react-icons/io5";
-import { FcSportsMode } from "react-icons/fc";
 import { BiSolidDiscount } from "react-icons/bi";
 import { FaChartBar, FaQrcode } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
@@ -60,9 +59,8 @@ export function EventListItemComponent({ item }) {
     0,
     0
   );
-  console.log(item);
   return (
-    <Card className="mt-4 cursor-pointer" key={`batdongsan_${"item.id"}`}>
+    <Card className="mt-4 cursor-pointer" key={`event_${"item.id"}`}>
       <div>
         <div className="flex flex-col lg:flex-row">
           <div className="lg:w-1/3 h-[180px] m-3 relative">
@@ -103,7 +101,7 @@ export function EventListItemComponent({ item }) {
             ) : null}
           </div>
           <div className="lg:w-2/3 m-3">
-            <h1 className="text-base text-emerald-400 mt-1 flex flex-row gap-2">
+            <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
               {getIconById(item?.ChuDe?.id)}
               {item?.ChuDe?.name}
             </h1>
@@ -121,39 +119,39 @@ export function EventListItemComponent({ item }) {
               {convertDateTimeToDate(item?.ngayKetThuc)}
             </h1>
             <p
-              className="mt-2 text-medium text-ellipsis overflow-hidden h-[60px]"
+              className="mt-2 text-medium h-24 overflow-clip"
               dangerouslySetInnerHTML={{ __html: `${item?.moTa}` }}
             ></p>
           </div>
         </div>
         <Separator />
-        <div className="grid grid-cols-5 gap-2 rounded-md text-emerald-400 font-medium w-full place-content-center">
+        <div className="grid grid-cols-5 gap-2 rounded-md text-blue-700 h-full font-medium w-full place-content-center">
           <Link href={`/organizer/event/details/${item?.id}/guest-list`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-bl-lg">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4 rounded-bl-lg">
               <IoPeople className="w-full" />
               Danh sách khách
             </div>
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/coupon`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4">
               <BiSolidDiscount className="w-full" />
               Mã giảm giá
             </div>
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/edit`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4">
               <AiFillEdit className="w-full" />
               Chỉnh sửa
             </div>
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/summary`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-br-lg">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4">
               <FaChartBar className="w-full" />
               Tổng kết
             </div>
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/check-in`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-br-lg">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4 rounded-br-lg">
               <FaQrcode className="w-full" />
               Checkin
             </div>

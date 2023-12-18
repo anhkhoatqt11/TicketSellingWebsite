@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export function AddNewEvent({ session }) {
-  const userId = 1;
+  const userId = session?.user?.id;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { startUpload } = useUploadThing("imageUploader");
   const [startIndex, setStartIndex] = useState(1);
@@ -209,7 +209,7 @@ export function AddNewEvent({ session }) {
           }}
         />
         <Button
-          className="w-full bg-emerald-400 text-white font-semibold py-6 text-base"
+          className="w-full bg-blue-700 text-white font-semibold py-6 text-base"
           radius="sm"
           onClick={onOpen}
         >
@@ -221,7 +221,7 @@ export function AddNewEvent({ session }) {
               color="success"
               aria-label="Loading..."
               classNames={{
-                svg: "w-28 h-28 drop-shadow-md",
+                svg: "w-20 h-20 text-blue-700",
               }}
             />
           </div>

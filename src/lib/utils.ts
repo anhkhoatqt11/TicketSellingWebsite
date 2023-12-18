@@ -15,9 +15,13 @@ export function checkEmail(email) {
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regexEmail.test(email);
 }
-export function checkPhoneNumber(str) {
-  if (typeof str != "string") return false 
-  return !isNaN(parseFloat(str)) 
+export function checkPhoneNumber(str:string) {
+  for (let i = 0; i < str.length ; i++)
+  {
+    if (str[i]<'0'|| str[i]>'9')
+    return false;
+  }
+  return true;
 }
 
 export function currencyFormat(num) {

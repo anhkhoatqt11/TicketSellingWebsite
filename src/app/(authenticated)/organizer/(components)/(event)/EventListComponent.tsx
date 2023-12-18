@@ -12,8 +12,8 @@ import Loader from "@/components/Loader";
 import EventListItemComponent from "./EventListItemComponent";
 import { useEventOrganizer } from "@/hooks/useEventOrganizer";
 
-function EventListComponent({ props }) {
-  const userId = 1;
+function EventListComponent({ props, session }) {
+  const userId = session?.user?.id;
   const [currentPage, setCurrentPage] = useState(1);
   const { fetchEventOfOrganizer } = useEventOrganizer();
   const [isLoaded, setIsLoaded] = React.useState(true);
@@ -57,6 +57,7 @@ function EventListComponent({ props }) {
             <Pagination
               showControls
               total={data?.totalPages}
+              color="primary"
               initialPage={1}
               onChange={(page) => {
                 onPageChange(page);

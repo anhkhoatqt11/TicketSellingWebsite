@@ -24,9 +24,13 @@ const ItemComponent = ({ item }) => {
           />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{item.name}</div>
-            <p className="text-gray-700 text-base">
+            {/* <p className="text-gray-700 text-base">
               {truncateDescription(item.moTa, 100)}
-            </p>
+            </p> */}
+            <div
+              className="text-medium h-24 overflow-clip"
+              dangerouslySetInnerHTML={{ __html: `${item?.moTa}` }}
+            ></div>
           </div>
           <div className="px-6 pt-4 pb-2">
             <div>{formatDate(item.ngayBatDau)}</div>

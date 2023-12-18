@@ -194,7 +194,7 @@ export const CouponModal = ({ props }) => {
                       setPrice(e.target.value);
                     }}
                   />
-                  <div className="w-full text-center text-sm text-emerald-400">
+                  <div className="w-full text-center text-sm text-blue-700">
                     hoặc
                   </div>
                   <Input
@@ -252,9 +252,10 @@ export const CouponModal = ({ props }) => {
                   </Label>
                   <Select
                     label="Chọn loại vé"
+                    className="w-[94%]"
+                    radius="sm"
                     selectedKeys={selectedLoaiVe}
                     onSelectionChange={setSelectedLoaiVe}
-                    className="w-full"
                   >
                     {props.ticketList.map((ticket) => (
                       <SelectItem

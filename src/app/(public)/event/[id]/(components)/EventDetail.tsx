@@ -138,9 +138,10 @@ export function EventDetail({ id }) {
                 <div className="flex flex-row justify-between flex-wrap">
                   <div className="text-gray-600 font-semibold">Về sự kiện</div>
                 </div>
-                <div className="mt-4 text-gray-600 text-[14px]">
-                  {EventDetail?.moTa}
-                </div>
+                <div
+                  className="mt-4 text-gray-600 text-[14px]"
+                  dangerouslySetInnerHTML={{ __html: `${EventDetail?.moTa}` }}
+                ></div>
               </div>
 
               <div className="mt-8 mb-8 w-full rounded-md bg-white border-[1px] shadow p-8">

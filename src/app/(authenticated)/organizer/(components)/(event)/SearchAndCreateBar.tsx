@@ -32,11 +32,11 @@ export function SearchAndCreateBar({ setSearchWord }) {
           className="h-[52px] w-[0px] rounded-md m-0 p-0 -ml-[50px] min-w-unit-12 bg-transparent"
           onClick={searchSubmit}
         >
-          <MagnifyingGlassIcon className="h-6 w-6 text-emerald-400" />
+          <MagnifyingGlassIcon className="h-6 w-6 text-blue-700" />
         </Button>
       </div>
       <Button
-        className="h-[52px] w-full md:w-[200px] rounded-md m-0 p-0 font-medium bg-emerald-400 text-base text-white mr-6 md:mr-6"
+        className="h-[52px] w-full md:w-[200px] rounded-md m-0 p-0 font-medium bg-blue-700 text-base text-white mr-6 md:mr-6"
         onClick={() => {
           router.push("/organizer/event/add");
         }}

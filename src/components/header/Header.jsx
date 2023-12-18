@@ -73,17 +73,19 @@ const NavigationMenuDemo = ({ session }) => {
     <div
       className={`w-full h-[50px] md:h-[76px] 
     bg-white  items-center justify-between z-20
-    sticky top-0 transition-transform duration-300 px-14 shadow-sm
+    sticky top-0 transition-transform duration-300 px-6 shadow-sm
     ${show}
     `}
     >
+
       <MobileNav session={session} />
 
-      <div className="hidden lg:flex py-2 items-center h-full ">
+
+      <div className="flex py-2 items-center h-full drop-shadow">
         {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null}
         {<Logo />}
         {pathname !== "/search" ? (
-          <div className="form-control">
+          <div className="form-control hidden lg:block">
             <input
               type="text"
               placeholder="Tìm kiếm sự kiện"

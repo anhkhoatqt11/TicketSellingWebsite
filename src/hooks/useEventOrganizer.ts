@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 export const useEventOrganizer = () => {
   const fetchEventOfOrganizer = async (name,page,userId) => {
-    const res = await getRequest({endPoint: `/api/organizer/event/user-event?name=${name}&page=${page}&limit=2&userId=${userId}`})
+    const res = await getRequest({endPoint: `/api/organizer/event/user-event?name=${name}&page=${page}&limit=10&userId=${userId}`})
     return res;
   }
   const createNewEvent = async (data) => {
