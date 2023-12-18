@@ -1,5 +1,4 @@
 import OutsideIcon from "@/components/outside";
-import { Card } from "@/components/ui/card";
 import { convertDateTimeToDate } from "@/lib/utils";
 import React, { useState } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
@@ -12,7 +11,9 @@ import CourseIcon from "@/components/course";
 import TourismIcon from "@/components/tourism";
 import SportIcon from "@/components/sport";
 import { Separator } from "@/components/ui/separator";
-import QRCode from "react-qr-code";
+import { Button } from "@/components/ui/button";
+import { BiRightArrow, BiRightArrowAlt } from "react-icons/bi";
+import { Card, CardHeader, CardBody, Image, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
 
 interface TicketItemProps {
   ticketItem: {
@@ -43,6 +44,8 @@ interface TicketItemProps {
       };
     }[];
   };
+  onOpen: () => void;
+  setSelectedMaDatCho: (maDatCho) => void;
 }
 const getIconById = (id) => {
   switch (id) {
@@ -67,7 +70,17 @@ const getIconById = (id) => {
   }
 };
 
-const TicketItem = ({ ticketItem }: TicketItemProps) => {
+
+const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
+  currency: 'VND',
+  style: 'currency',
+});
+
+export function formatCurrency(value: number) {
+  return CURRENCY_FORMAT.format(value);
+}
+
+const TicketItem = ({ ticketItem, onOpen, setSelectedMaDatCho }: TicketItemProps) => {
   const {
     id,
     ngayDatHang,
@@ -87,168 +100,68 @@ const TicketItem = ({ ticketItem }: TicketItemProps) => {
     HoaDonVe,
   } = ticketItem;
   const [isExpanded, setExpanded] = useState(false);
-
-  const toggleAccordion = () => {
-    setExpanded(!isExpanded);
-  };
   return (
-    <Card className="mt-4 " key={`batdongsan_${"item.id"}`}>
-      <div>
-        <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/3 h-[150px] m-3 relative">
-            <img
-              className="rounded-md h-[150px] w-full object-cover"
-              src={hinhAnhSuKien}
-            />
-          </div>
-          <div className="lg:w-2/3 m-3">
-            <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
-              {getIconById(ChuDeId)}
-              {ChuDe.name}
-            </h1>
-            <div className="flex flex-row">
-              <h1 className="text-2xl font-extrabold mt-1">{name}</h1>
-            </div>
-            <h1 className="text-base text-slate-500 mt-1 flex flex-row gap-2">
-              <IoLocationOutline className="mt-1" />
-              {diaChi}
-            </h1>
-            <h1 className="text-base text-slate-500 mt-1 flex flex-row gap-2">
-              <AiOutlineClockCircle className="mt-1" />
-              {convertDateTimeToDate(ngayBatDau)}
-              {" - "}
-              {convertDateTimeToDate(ngayKetThuc)}
-            </h1>
-          </div>
-        </div>
-        <Separator />
-        <div>
+    <Card className="py-4 mt-4">
+      <CardBody className="pb-0 pt-2 px-4 flex-col-reverse md:flex-row items-start">
+        <div className="overflow-visible py-2 pb-0 pt-2 px-4">
           <div className="flex flex-col">
+            <small className="text-default-500">TÊN SỰ KIỆN</small>
+            <p className="text-md font-bold text-blue-500">{name}</p>
+          </div>
+          <Divider className="my-2" />
+          <div className="flex flex-col">
+            <small className="text-default-500">MÃ ĐẶT CHỖ</small>
+            <p className="text-md font-bold text-blue-500">{maDatCho}</p>
+            <Button className="bg-blue-600 font-bold h-[30px]" onClick={() => {onOpen(); setSelectedMaDatCho(maDatCho)}}>Xem mã QR Code <BiRightArrowAlt /></Button>
+          </div>
+          <Divider className="my-2" />
+          <div className="flex flex-col">
+            <small className="text-default-500">THỜI GIAN</small>
+            {convertDateTimeToDate(ngayBatDau)}
+            {" - "}
+            {convertDateTimeToDate(ngayKetThuc)}
+          </div>
+          <div className="flex flex-col mt-2">
+            <small className="text-default-500">ĐỊA ĐIỂM</small>
+            {diaChi}
+          </div>
+          <Divider className="my-2" />
+          <div className="flex flex-col">
+            <small className="text-default-500">DANH SÁCH VÉ</small>
             {HoaDonVe.map((hoaDon, index) => (
               <div key={index} className="flex items-center m-3">
-                {/* <h3>{hoaDon.ve.name}</h3>
-                <p>{hoaDon.ve.moTa}</p>
-                <p>Số lượng: {hoaDon.soLuong}</p>
-                <p>Tổng giá: {hoaDon.tongGia}</p> */}
                 <IoTicketOutline className="h-8 w-8" color={hoaDon.ve.mau} />
                 <div className="ml-3 flex-1">
-                  <h1 className="text-xl font-extrabold">{hoaDon.ve.name}</h1>
-                  <p className=" text-medium text-slate-500 text-ellipsis overflow-hidden h-[60px]">
+                  <h1 className="text-medium font-extrabold">{hoaDon.ve.name}</h1>
+                  <p className=" text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
                     Mô tả vé: {hoaDon.ve.moTa}
                   </p>
-                </div>
-                {/* <div className="flex flex-col">
-                  <p className="text-base font-semibold">
-                    Số lượng:{" "}
-                    <span className="text-blue-700">{hoaDon.soLuong}</span>
+                  <br></br>
+                  <p className=" text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
+                    Số lượng: <span className="text-blue-500">{hoaDon.soLuong}</span>
                   </p>
-                  <p className="text-base font-semibold">
-                    Tổng giá:{" "}
-                    <span className="text-blue-700">{hoaDon.tongGia}₫</span>{" "}
-                  </p>
-                </div> */}
-                <div className="flex items-center mt-2 ml-2">
-                  <div className="flex flex-col">
-                    <p className="text-base text-slate-500">
-                      Số lượng:{" "}
-                      <span className="text-blue-700 font-semibold">
-                        {hoaDon.soLuong}
-                      </span>
-                    </p>
-                    <p className="text-base text-slate-500">
-                      Tổng giá:{" "}
-                      <span className="text-blue-700 font-semibold">
-                        {hoaDon.tongGia}₫
-                      </span>{" "}
-                    </p>
-                  </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-        {/* <Separator /> */}
-        {/* <div className="thongtinthanhtoan">
-          <div className="grid grid-cols-4 m-3 justify-center">
-            <p className="text-base font-semibold text-center">
-              Ngày đặt hàng:{" "}
-              <span className="text-blue-700">
-                {convertDateTimeToDate(ngayDatHang)}
-              </span>
-            </p>
-            <p className="text-base font-semibold text-center">
-              Tinh trạng: <span className="text-blue-700">{tinhTrang}</span>
-            </p>
-            <p className="text-base font-semibold text-center">
-              Phương thức thanh toán:{" "}
-              <span className="text-blue-700">{phuongThucThanhToan}</span>
-            </p>
-            <p className="text-base font-semibold text-center">
-              Tổng cộng: <span className="text-blue-700">{tongTien}₫</span>
-            </p>
+          <Divider className="my-2" />
+          <div className="flex flex-col gap-1">
+            <small className="text-default-500">THÔNG TIN THANH TOÁN</small>
+            <p className="text-md font-bol">Trạng thái thanh toán: <span className="text-blue-500 font-semibold">{tinhTrang}</span></p>
+            <p className="text-md font-bol">Phương thức thanh toán: <span className="text-blue-500 font-semibold">{phuongThucThanhToan}</span></p>
+            <p className="text-md font-bol">Tổng tiền: <span className="text-blue-500 font-semibold">{formatCurrency(tongTien)}</span></p>
           </div>
-        </div> */}
-        <div className="thongtinthanhtoan">
-          <button
-            onClick={toggleAccordion}
-            className="flex items-center justify-center w-full cursor-pointer focus:outline-none"
-          >
-            <span className="text-base font-semibold text-center">
-              Chi tiết hóa đơn
-            </span>
-            <span
-              className={`ml-2 ${isExpanded ? "transform rotate-180" : ""}`}
-            >
-              {/* You can replace this with your caret-down icon */}▼
-            </span>
-          </button>
-          {isExpanded && (
-            <>
-              <div className="grid grid-cols-2 xl:grid-cols-4 m-3 justify-center">
-                <p className="text-base text-slate-500  text-center">
-                  Ngày đặt hàng:{" "}
-                  <span className="text-blue-700 font-semibold">
-                    {convertDateTimeToDate(ngayDatHang)}
-                  </span>
-                </p>
-                <p className="text-base text-slate-500  text-center">
-                  Tình trạng:{" "}
-                  <span className="text-blue-700 font-semibold">
-                    {tinhTrang}
-                  </span>
-                </p>
-                <p className="text-base text-slate-500  text-center">
-                  Phương thức:{" "}
-                  <span className="text-blue-700 font-semibold">
-                    {phuongThucThanhToan}
-                  </span>
-                </p>
-                <p className="text-base text-slate-500  text-center">
-                  Tổng cộng:{" "}
-                  <span className="text-blue-700 font-semibold">
-                    {tongTien}₫
-                  </span>
-                </p>
-              </div>
-              <div className="grid grid-cols-2 m-3 justify-center">
-                <p className="text-base text-slate-500  text-center">
-                  Mã đặt chỗ:{" "}
-                  <span className="text-blue-700 font-semibold">
-                    {maDatCho}
-                  </span>
-                </p>
-                <p className="text-base text-slate-500  text-center">
-                  QR Code:
-                  <QRCode size={256}     
-                  style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                  value={maDatCho}
-                  viewBox={`0 0 256 256`}/>
-                </p>
-              </div>
-            </>
-          )}
         </div>
-      </div>
+        <Image
+          alt="Card background"
+          className="object-cover rounded-xl"
+          src={hinhAnhSuKien}
+          width={1000}
+          height={200}
+          objectFit="cover"
+        />
+      </CardBody>
+
     </Card>
   );
 };
