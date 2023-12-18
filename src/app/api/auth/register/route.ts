@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       );
       return new Response(
         JSON.stringify({
-          message: 'User created and OTP sent',
+          message: 'Tài khoản đã tạo thành công. Kiểm tra mã OTP được gửi đến Email của bạn',
           payload: payload,
           status: 200,
         })

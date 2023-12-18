@@ -12,7 +12,7 @@ import CourseIcon from "@/components/course";
 import TourismIcon from "@/components/tourism";
 import SportIcon from "@/components/sport";
 import { Separator } from "@/components/ui/separator";
-import { QrCode } from "lucide-react";
+import QRCode from "react-qr-code";
 
 interface TicketItemProps {
   ticketItem: {
@@ -239,7 +239,10 @@ const TicketItem = ({ ticketItem }: TicketItemProps) => {
                 </p>
                 <p className="text-base text-slate-500  text-center">
                   QR Code:
-                  {/* {QrCode ở đây khoa ơi}  */}
+                  <QRCode size={256}     
+                  style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                  value={maDatCho}
+                  viewBox={`0 0 256 256`}/>
                 </p>
               </div>
             </>
