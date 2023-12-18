@@ -49,6 +49,7 @@ function OrganizerRegister({ session }) {
                 <RegisterForm
                   organizerType={loaiHinhKinhDoanhValue}
                   setIsLoading={setIsLoading}
+                  userId={session?.user?.id}
                 />
               ) : null}
             </div>

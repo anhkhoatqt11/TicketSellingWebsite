@@ -5,15 +5,17 @@ import { CircularProgress } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { RegisterForm } from "../(components)/(organizerRegister)/RegisterForm";
 import { SelectLoaiHinhKinhDoanh } from "../(components)/SelectLoaiHinhKinhDoanh";
-export const EditProfileForm = () => {
+interface Props {
+  userId: number;
+}
+export const EditProfileForm = ({ userId }: Props) => {
   const [loaiHinhKinhDoanhValue, setLoaiHinhKinhDoanhValue] =
     React.useState("");
   const { fetchOrganizerRoleById } = useRole();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchOrganizer = async () => {
-      const session = await getSession();
-      const result = await fetchOrganizerRoleById(session?.user?.id);
+      const result = await fetchOrganizerRoleById(userId);
       setLoaiHinhKinhDoanhValue(
         result[0]?.loaiHinhKinhDoanh === 1 ? "canhan" : "doanhnghiep"
       );
@@ -34,6 +36,7 @@ export const EditProfileForm = () => {
           <RegisterForm
             organizerType={loaiHinhKinhDoanhValue}
             setIsLoading={setIsLoading}
+            userId={userId}
           />
         ) : null}
       </div>
