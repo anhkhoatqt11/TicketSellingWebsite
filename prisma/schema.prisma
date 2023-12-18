@@ -32,6 +32,7 @@ model User {
   soTaiKhoan        String?
   tenChuTaiKhoan    String?
   tenNganHang       String?
+  otp               String?
   trangThai         String?  @default("dang_hoat_dong")
   SuKiens           SuKien[]
   HoaDon            HoaDon[]
