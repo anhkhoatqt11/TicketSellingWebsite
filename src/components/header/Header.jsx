@@ -33,7 +33,7 @@ const avatarNav = [
   },
   {
     name: "Nhà tổ chức",
-    href: "/organiser/profile",
+    href: "/organizer/profile",
   },
 ];
 

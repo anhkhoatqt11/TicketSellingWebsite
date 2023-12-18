@@ -16,13 +16,10 @@ import { useOrganizer } from "@/hooks/useOrganizer";
 import { checkEmail, checkPhoneNumber } from "@/lib/utils";
 import { url } from "inspector";
 import { Zoom } from "@/components/ui/zoom-image";
-import { ImageCus } from "@/components/ui/ImageCus";
-import { getSession } from "@/lib/auth";
 
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
-export const RegisterForm = async ({ organizerType, setIsLoading }) => {
-  const session = await getSession();
+export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
   const { startUpload } = useUploadThing("imageUploader");
 
   const [organizerName, setOrganizerName] = React.useState("");
@@ -45,7 +42,7 @@ export const RegisterForm = async ({ organizerType, setIsLoading }) => {
   const { fetchOrganizerById, uploadOrganizerInfo } = useOrganizer();
   useEffect(() => {
     const fetchOrganizer = async () => {
-      const result = await fetchOrganizerById(session?.user?.id);
+      const result = await fetchOrganizerById(userId);
       setPhoneNumber(result[0]?.phoneNumber);
       console.log(result[0]);
       setEmail(result[0]?.email);
@@ -125,7 +122,7 @@ export const RegisterForm = async ({ organizerType, setIsLoading }) => {
       chiNhanh: chiNhanh,
       role: "organizer",
       anhDaiDienToChuc: avatarImage ? avatarImage[0]?.url : defaultAvatar,
-      id: session?.user?.id,
+      id: userId,
     };
 
     await uploadOrganizerInfo(thongTin).then(() => {
