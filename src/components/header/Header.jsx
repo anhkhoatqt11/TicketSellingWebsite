@@ -77,15 +77,16 @@ const NavigationMenuDemo = ({ session }) => {
     ${show}
     `}
     >
+      <MobileNav session={session} />
 
-      <div className="flex py-2 items-center h-full drop-shadow">
+      <div className=" py-2 items-center h-full drop-shadow hidden lg:flex">
         {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null}
         {<Logo />}
         {pathname !== "/search" ? (
-          <div className="form-control hidden lg:block">
+          <div className="form-control ">
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Tìm kiếm sự kiện"
               className="input input-bordered md:w-[500px] ml-5 h-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -99,8 +100,8 @@ const NavigationMenuDemo = ({ session }) => {
               {
                 <div className="flex gap-16">
                   <div>
-                    <Link href="#">
-                      <Button className="!box-content h-7 w-full rounded-full bg-blue-700 hover:bg-blue-800">
+                    <Link href="/organizer/event">
+                      <Button className="!box-content h-7 w-full rounded-full bg-blue-700 hover:bg-amber-300 hover:text-black">
                         Tạo sự kiện
                       </Button>
                     </Link>
@@ -163,7 +164,7 @@ const NavigationMenuDemo = ({ session }) => {
         ) : (
           <div className="ml-auto mr-8">
             <Link href={"/auth/login"}>
-              <Button className="!box-content h-8 w-full rounded-full bg-blue-700 hover:bg-blue-800">
+              <Button className="!box-content h-8 w-full rounded-full bg-blue-700 hover:bg-amber-300 hover:text-black">
                 Đăng nhập
               </Button>
             </Link>
