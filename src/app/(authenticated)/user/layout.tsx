@@ -3,21 +3,23 @@ import { getSession } from "@/lib/auth";
 import { Header } from "@/components/header";
 import { Sidebar } from "./components/Sidebar";
 import { DashboardIcon } from "@radix-ui/react-icons";
-import { SubscriptIcon, UserIcon } from "lucide-react";
+
 import { redirect } from "next/navigation";
 import { Footer } from "@/components/footer";
+import TicketIcon from "@/components/ticketicon";
+import UserIcon from "@/components/userprofileicon";
 // import OrganizerRegister from "./(components)/OrganizerRegister";
 
 const navItems = [
   {
     title: "Hồ sơ cá nhân",
     value: "profile",
-    icon: <DashboardIcon className="w-5 h-5" />,
+    icon: <UserIcon className="mr-2 ms-3 w-6 h-6" />,
   },
   {
     title: "Vé của tôi",
     value: "my-ticket",
-    icon: <DashboardIcon className="w-5 h-5" />,
+    icon: <TicketIcon className="mr-2 ms-3 w-6 h-6" />,
   },
 ];
 export default async function UserLayout({
