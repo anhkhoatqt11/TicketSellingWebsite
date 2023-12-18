@@ -90,7 +90,7 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                           href={`/user/${item.value}`}
                           className="flex items-center text-gray-900 rounded-lg  hover:bg-blue-300 hover:text-white"
                         >
-                          <motion.a
+                          <motion.span
                             className={classnames(
                               "text-[14px] flex items-center font-medium gap-2 w-full h-10 rounded-md text-slate-11 relative transition ease-in-out duration-200",
                               {
@@ -114,7 +114,7 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                             )}
                             {item.icon}
                             {item.title}
-                          </motion.a>
+                          </motion.span>
                         </Link>
                       );
                     })}
