@@ -11,12 +11,9 @@ import LicenseLogo from "../license";
 const Footer = () => {
   return (
     <footer className="bg-[#393F4E] text-white pt-14 pb-3">
-      <div
-        className="w-full px-5
-  md:px-10 mx-auto flex justify-between flex-col md:flex-row gap-[50px] md:gap-0"
-      >
+      <div className="w-full px-5 md:px-10 mx-auto flex justify-between flex-col md:flex-row gap-[50px] md:gap-0 ">
         {/* LEFT START */}
-        <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] flex-col md:flex-row">
+        <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] flex-col xl:flex-row">
           {/* MENU START */}
           <div className="flex flex-col gap-3 shrink-0">
             <div className="font-oswald font-medium  text-sm cursor-pointer">
@@ -108,10 +105,7 @@ const Footer = () => {
         </div>
         {/* RIGHT END */}
       </div>
-      <div
-        className="w-full px-5
-  md:px-10 mx-auto flex justify-between mt-10 flex-col md:flex-row gap-[10px] md:gap-0"
-      >
+      <div className="w-full px-5 md:px-10 mx-auto flex justify-between mt-10 flex-col md:flex-row gap-[10px] md:gap-0">
         {/* LEFT START */}
         <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] flex-col md:flex-row">
           <div className="flex text-[12px] text-white/[0.5] hover:text-white cursor-pointer  text-left ">

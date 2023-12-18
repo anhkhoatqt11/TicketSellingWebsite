@@ -33,7 +33,7 @@ const avatarNav = [
   },
   {
     name: "Nhà tổ chức",
-    href: "/organiser/profile",
+    href: "/organizer/profile",
   },
 ];
 
@@ -78,6 +78,9 @@ const NavigationMenuDemo = ({ session }) => {
     `}
     >
 
+      <MobileNav session={session} />
+
+
       <div className="flex py-2 items-center h-full drop-shadow">
         {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null}
         {<Logo />}
@@ -85,7 +88,7 @@ const NavigationMenuDemo = ({ session }) => {
           <div className="form-control hidden lg:block">
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Tìm kiếm sự kiện"
               className="input input-bordered md:w-[500px] ml-5 h-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -99,8 +102,8 @@ const NavigationMenuDemo = ({ session }) => {
               {
                 <div className="flex gap-16">
                   <div>
-                    <Link href="#">
-                      <Button className="!box-content h-7 w-full rounded-full bg-blue-700 hover:bg-blue-800">
+                    <Link href="/organizer/event">
+                      <Button className="!box-content h-7 w-full rounded-full bg-blue-700 hover:bg-amber-300 hover:text-black">
                         Tạo sự kiện
                       </Button>
                     </Link>
@@ -163,7 +166,7 @@ const NavigationMenuDemo = ({ session }) => {
         ) : (
           <div className="ml-auto mr-8">
             <Link href={"/auth/login"}>
-              <Button className="!box-content h-8 w-full rounded-full bg-blue-700 hover:bg-blue-800">
+              <Button className="!box-content h-8 w-full rounded-full bg-blue-700 hover:bg-amber-300 hover:text-black">
                 Đăng nhập
               </Button>
             </Link>
