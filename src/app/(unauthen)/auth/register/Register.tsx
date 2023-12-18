@@ -31,35 +31,35 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const formSchema = z
   .object({
     name: z.string().min(1, {
-      message: 'Name is required',
+      message: 'Nhập tên của bạn',
     }),
     password: z
       .string()
       .min(1, {
-        message: 'Password is required',
+        message: 'Nhập mật khẩu của bạn',
       })
-      .min(8, { message: 'Password must be at least 8 characters' })
+      .min(8, { message: 'Mật khẩu phải có tối thiểu 8 kí tự' })
       .regex(regexPasswordSpecial, {
-        message: 'Password must contain at least 1 special character',
+        message: 'Mật khẩu phải chứa ít nhất 1 kí tự đặc biệt',
       })
       .regex(regexPasswordNumber, {
-        message: 'Password must contain at least 1 number',
+        message: 'Mật khẩu phải chứa ít nhất 1 số',
       })
       .regex(regexPasswordUpperCase, {
-        message: 'Password must contain at least 1 uppercase character',
+        message: 'Mật khẩu phải chứa ít nhất 1 kí tự viết hoa',
       }),
     email: z
       .string()
       .min(1, {
-        message: 'Email is required',
+        message: 'Nhập email của bạn',
       })
-      .email({ message: 'Email is invalid' }),
+      .email({ message: 'Email không hợp lệ' }),
     confirmPassword: z.string().min(1, {
-      message: 'Confirm password is required',
+      message: 'Nhập mật khẩu xác nhận',
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Password doesn't match",
+    message: "Mật khẩu không giống nhau",
     path: ['confirmPassword'],
   });
 const Register = ({
@@ -83,7 +83,7 @@ const Register = ({
   useEffect(() => {
     if (payload?.email && payload?.name) {
       toast.error(
-        'Your account is not registered yet, please register to continue'
+        'Tài khoản của bạn chưa được đăng ký. Vui lòng đăng ký tài khoản mới'
       );
     }
   }, []);
@@ -94,10 +94,9 @@ const Register = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function onSubmit(data) {
-    console.log(data);
-
     setIsLoading(true);
     onRegister(data, () => {
+      toast.success('Đăng ký thành công');
       setIsLoading(false);
     });
   }
@@ -235,7 +234,7 @@ const Register = ({
                 </div>
               </div>
 
-              <Button type="submit" className="">
+              <Button type="submit" className="font-bold bg-blue-700 hover:bg-amber-300 hover:text-black">
                 Đăng ký
               </Button>
             </div>

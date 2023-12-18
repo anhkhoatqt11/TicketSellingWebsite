@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       return new Response(JSON.stringify({}), { status: 400 });
     }
     if (user.otp !== body.otp) {
-      return new Response(JSON.stringify('OTP is not valid'), { status: 200 });
+      return new Response(JSON.stringify('Mã OTP không đúng'), { status: 200 });
     }
     const update = await prisma.user.update({
       where: {
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       },
     });
     if (update) {
-      return new Response(JSON.stringify('OTP verified'), { status: 200 });
+      return new Response(JSON.stringify('Xác thực OTP thành công'), { status: 200 });
     }
   } catch (err) {
     return new Response(err.message, { status: 500 });
@@ -62,14 +62,14 @@ export async function PUT(req: Request) {
         host: 'smtp.gmail.com',
         secure: true,
         auth: {
-          user: 'playground.dev001@gmail.com',
-          pass: 'upnilkyofuyzkhla',
+          user: 'anhkhoatqt11@gmail.com',
+          pass: 'ecvaonxktvlzahlk',
         },
       });
 
       // send mail with defined transport object
       await transporter.sendMail({
-        from: '"UIT_Estate" <playground.dev001@gmail.com>',
+        from: '"TicketNow" <anhkhoatqt11@gmail.com>',
         to: body.email,
         subject: 'Email Verification OTP',
         text: `Your OTP for email verification is: ${otp}`,
@@ -80,7 +80,7 @@ export async function PUT(req: Request) {
         font-size: 18px;
         font-weight: bold;
         text-align: center;
-        background-color: #000; 
+        background-color: #1d4ed8; 
         color: #fff; 
         padding: 10px; 
         border-radius: 5px; 
@@ -89,9 +89,9 @@ export async function PUT(req: Request) {
         </style>
       </head>
     <body>
-      <div class="title">UIT Sport</div>
-      <div> <b>Your OTP code is: ${otp}</b></div>
-    </body>
+      <div class="title">TicketNow</div>
+      <div> <b>Mã OTP của bạn là: ${otp}</b></div>
+    </body> 
          `, // HTML body
       });
       return new Response(JSON.stringify('OTP sent'), { status: 200 });

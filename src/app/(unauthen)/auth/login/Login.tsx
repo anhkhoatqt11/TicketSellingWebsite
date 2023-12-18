@@ -59,13 +59,18 @@ const Login = ({ className }: { className?: string }) => {
         setIsLoading(false);
 
         if (res?.error) {
-            console.log(res);
+            if (res?.error === 'Email or password is incorrect') {
+                toast.error('Email hoặc mật khẩu không chính xác');
+            }
             return;
         }
 
 
         console.log(res);
-        if (!res?.error) router.push('/');
+        if (!res?.error) { 
+            router.push('/'); 
+            toast.success('Đăng nhập thành công');
+        }
         setIsLoading(false);
         console.log(res);
     }
@@ -81,7 +86,7 @@ const Login = ({ className }: { className?: string }) => {
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <div className='grid gap-6'>
-                            <div className='gap-8 flex flex-col gap-3'>
+                            <div className='gap-8 flex flex-col'>
                                 <div className="flex flex-col gap-3 ">
                                     <Label>Email</Label>
                                     <FormField
@@ -139,7 +144,7 @@ const Login = ({ className }: { className?: string }) => {
                                     />
                                 </div>
                             </div>
-                            <Button type="submit">Đăng nhập</Button>
+                            <Button className='font-bold bg-blue-700 hover:bg-amber-300 hover:text-black' type="submit">Đăng nhập</Button>
                             <p className="mt-10 px-8 text-center text-sm text-muted-foreground">
                                 Chưa có tài khoản?{' '}
                                 <Link className="font-bold underline text-black" href="/auth/register">

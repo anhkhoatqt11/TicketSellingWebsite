@@ -114,7 +114,7 @@ export function EventDetail({ id }) {
               </div>
               <div className='md:w-1/2 flex justify-center md:justify-end mt-10'> {/* Center button on mobile and push it to the right on larger screens */}
                 <Link href={`/ticket-booking/${EventDetail.id}`}>
-                  <Button className='w-full md:w-[340px] bg-emerald-500'>Đặt vé ngay</Button>
+                  <Button className='w-full md:w-[340px] font-bold bg-blue-700 hover:bg-amber-300 hover:text-black'>Đặt vé ngay</Button>
                 </Link>
               </div>
             </div>
