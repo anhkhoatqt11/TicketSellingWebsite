@@ -87,7 +87,6 @@ model Ve {
 
 model HoaDon {
   id                  Int        @id @default(autoincrement())
-  maDatCho            String     
   ngayDatHang         DateTime
   userId              Int
   phuongThucThanhToan String
@@ -97,8 +96,9 @@ model HoaDon {
   maGiamGiaId         Int?
   checkIn             Boolean    @default(false)
   suKienId            Int
-  user                User       @relation(fields: [userId], references: [id])
+  maDatCho            String
   suKien              SuKien     @relation(fields: [suKienId], references: [id])
+  user                User       @relation(fields: [userId], references: [id])
   HoaDonVe            HoaDonVe[]
 
   @@index([userId])
@@ -138,8 +138,8 @@ model MaGiamGia {
 model Banners {
   id       Int    @id @default(autoincrement())
   SuKienId Int
-  suKien   SuKien @relation(fields: [SuKienId], references: [id])
   position Int?
+  suKien   SuKien @relation(fields: [SuKienId], references: [id])
 
   @@index([SuKienId])
 }

@@ -9,6 +9,7 @@ import TourismIcon from "@/components/tourism";
 import SportIcon from "@/components/sport";
 import OutsideIcon from "@/components/outside";
 import CalendarIcon from "@/components/calendar";
+import { Button } from "@/components/ui/button";
 const NavbarLinks = ({ data }) => {
   const getIconById = (id) => {
     switch (id) {
@@ -50,7 +51,7 @@ const NavbarLinks = ({ data }) => {
             <li>
               <Link
                 href={`/search/?category=${item.id}`} //url search
-                className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-white "
+                className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-blue-300 hover:text-white"
               >
                 {getIconById(item.id)}
                 <span className="text-sm">{item.name}</span>
@@ -58,6 +59,14 @@ const NavbarLinks = ({ data }) => {
             </li>
           </div>
         ))}
+        <div>
+          <Link
+            href={"/search"}
+            className="flex items-center justify-center text-center p-2 bg-blue-700 rounded-lg text-white hover:bg-blue-800"
+          >
+            Tìm kiếm sự kiện
+          </Link>
+        </div>
       </ul>
     </div>
   );

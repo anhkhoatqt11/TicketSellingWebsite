@@ -17,7 +17,7 @@ const NavigationBar = () => {
   });
   return (
     <>
-      <div className="bg-gray-100 w-[20%]">
+      <div className="bg-gray-100 w-full lg:basis-1/4">
         <NavbarLinks data={data} />
       </div>
     </>
