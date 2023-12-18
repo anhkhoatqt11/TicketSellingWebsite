@@ -20,15 +20,46 @@ import {
   CouponItem,
   CouponItemComponent,
 } from "@/app/(authenticated)/organizer/(components)/(event)/(detail)/CouponItem";
+import LiveMusic from "@/components/livemusic";
+import NightLifeIcon from "@/components/nightlife";
+import StageIcon from "@/components/stage";
+import ConferenceIcon from "@/components/conference";
+import CourseIcon from "@/components/course";
+import TourismIcon from "@/components/tourism";
+import SportIcon from "@/components/sport";
+import OutsideIcon from "@/components/outside";
 import { DatePicker } from "@/components/ui/date-picker";
 import { useDisclosure } from "@nextui-org/modal";
 import { CouponModal } from "@/app/(authenticated)/organizer/(components)/(event)/(detail)/CouponModal";
+const getIconById = (id) => {
+  switch (id) {
+    case 1:
+      return <OutsideIcon className={"mt-1 w-4 h-4"} />;
+    case 2:
+      return <LiveMusic className={"mt-1 w-4 h-4"} />;
+    case 3:
+      return <StageIcon className={"mt-1 w-4 h-4"} />;
+    case 4:
+      return <NightLifeIcon className={"mt-1 w-4 h-4"} />;
+    case 5:
+      return <ConferenceIcon className={"mt-1 w-4 h-4"} />;
+    case 6:
+      return <CourseIcon className={"mt-1 w-4 h-4"} />;
+    case 7:
+      return <TourismIcon className={"mt-1 w-4 h-4"} />;
+    case 8:
+      return <SportIcon className={"mt-1 w-4 h-4"} />;
+    default:
+      return null;
+  }
+};
 
 export function CouponList({ session, id }) {
-  const userId = 1;
+  const userId = session?.user?.id;
   const [eventName, setEventName] = React.useState("");
   const [addressValue, setAddressValue] = React.useState("");
   const [type, setType] = useState("");
+  const [typeId, setTypeId] = useState();
   const [couponList, setCouponList] = useState<CouponItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { fetchEventAndCouponListById } = useEventOrganizer();
@@ -66,6 +97,7 @@ export function CouponList({ session, id }) {
         setEventName(res?.name);
         setTicketList(res?.ves);
         setType(res.ChuDe?.name);
+        setTypeId(res.ChuDe?.id);
         let copyCouponList: CouponItem[] = [];
         res.MaGiamGia?.map((item, index) => {
           const startDay = prismaDateToNextDate(item?.ngayBatDau);
@@ -122,8 +154,8 @@ export function CouponList({ session, id }) {
         <div className="mt-6">
           <h1 className="font-semibold text-2xl">{eventName}</h1>
           <h1 className="text-gray-600">{addressValue}</h1>
-          <h1 className="text-base text-emerald-400 mt-3 flex flex-row gap-2">
-            <FcSportsMode className="mt-1" />
+          <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
+            {getIconById(typeId)}
             {type}
           </h1>
           <Divider className="my-4 mt-6" />
@@ -132,13 +164,13 @@ export function CouponList({ session, id }) {
           Danh sách phiếu giảm giá
         </h1>
         <div className="w-full py-6 flex flex-col lg:flex-row gap-4">
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 items-center">
             <h1 className="leading-10 text-sm w-[60px] text-gray-800">
               Bắt đầu:{" "}
             </h1>
             <DatePicker date={startDate} setDate={setStartDate} />
           </div>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 items-center">
             <h1 className="leading-10 text-sm w-[60px] text-gray-800">
               Kết thúc:{" "}
             </h1>
@@ -182,7 +214,7 @@ export function CouponList({ session, id }) {
             ></CouponItemComponent>
           ))}
           <Button
-            className="w-full bg-emerald-400 mt-4 text-white font-semibold py-6 text-base"
+            className="w-full bg-blue-700 mt-4 text-white font-semibold py-6 text-base"
             onClick={onOpen}
           >
             Tạo mã giảm giá mới
@@ -194,7 +226,7 @@ export function CouponList({ session, id }) {
               color="success"
               aria-label="Loading..."
               classNames={{
-                svg: "w-28 h-28 drop-shadow-md",
+                svg: "w-20 h-20 text-blue-700",
               }}
             />
           </div>

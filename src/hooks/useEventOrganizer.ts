@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 export const useEventOrganizer = () => {
   const fetchEventOfOrganizer = async (name,page,userId) => {
-    const res = await getRequest({endPoint: `/api/organizer/event/user-event?name=${name}&page=${page}&limit=2&userId=${userId}`})
+    const res = await getRequest({endPoint: `/api/organizer/event/user-event?name=${name}&page=${page}&limit=10&userId=${userId}`})
     return res;
   }
   const createNewEvent = async (data) => {
@@ -44,6 +44,21 @@ export const useEventOrganizer = () => {
     return res;
   }
 
+  const fetchHoaDonByMaDatCho = async (maDatCho) => {
+    const res = await getRequest({endPoint: `/api/organizer/event/user-event/checkin?maDatCho=${maDatCho}`})
+    return res;
+  }
+
+  const updateCheckInStatus = async (data) => {
+    const res = await postRequest({
+      endPoint: '/api/organizer/event/user-event/checkin/update',
+      isFormData: false,
+      formData: data,
+    });
+    return res;
+  }
+
+
   return {
     // fetchAllDoiTac,
     fetchEventOfOrganizer,
@@ -52,6 +67,8 @@ export const useEventOrganizer = () => {
     fetchEventAngGuestListById,
     fetchEventAndCouponListById,
     editEvent,
-    fetchSummary
+    fetchSummary,
+    fetchHoaDonByMaDatCho,
+    updateCheckInStatus
   };
 };

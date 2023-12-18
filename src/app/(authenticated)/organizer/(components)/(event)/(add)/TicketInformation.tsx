@@ -248,7 +248,7 @@ function TicketInformation({ props }) {
                 }}
               />
               <Button
-                className="w-1/3 bg-emerald-400 text-white"
+                className="w-1/3 bg-blue-700 text-white"
                 radius="sm"
                 onClick={addNewEvent}
               >
@@ -266,9 +266,10 @@ function TicketInformation({ props }) {
                   className="shadow-md rounded-md px-12 mb-4"
                   key={item.id}
                   aria-label="ticket"
+                  disableIndicatorAnimation
                   indicator={<CiEdit className="h-6 w-6" />}
                   startContent={
-                    <div className="p-3 border-1 border-emerald-400 rounded-md">
+                    <div className="p-3 border-1 border-blue-700 rounded-md">
                       <IoTicketOutline className="h-6 w-6" color={item.mau} />
                     </div>
                   }
@@ -418,7 +419,7 @@ function TicketInformation({ props }) {
                         Xong
                       </Button>
                       <Button
-                        className="bg-red-400 text-white font-medium w-full"
+                        className="bg-red-500 text-white font-medium w-full"
                         radius="sm"
                         size="md"
                         onPress={() => {

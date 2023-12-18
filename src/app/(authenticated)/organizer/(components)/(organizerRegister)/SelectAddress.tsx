@@ -228,7 +228,7 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
         isOpen={false}
         label="Địa chỉ"
         placeholder="Chọn địa chỉ"
-        variant="faded"
+        variant="bordered"
         selectedKeys={addressValue !== "" ? [addressValue] : null}
         isInvalid={addressValue !== "" || !diaChiTouched ? false : true}
         errorMessage={

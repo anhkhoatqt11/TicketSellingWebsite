@@ -9,6 +9,14 @@ import { CategoryScale } from "chart.js";
 import { LineChart } from "@/app/(authenticated)/organizer/(components)/(chart)/LineChart";
 import { DoughnutChart } from "@/app/(authenticated)/organizer/(components)/(chart)/DoughnutChart";
 import { currencyFormat, prismaDateToNextDate } from "@/lib/utils";
+import LiveMusic from "@/components/livemusic";
+import NightLifeIcon from "@/components/nightlife";
+import StageIcon from "@/components/stage";
+import ConferenceIcon from "@/components/conference";
+import CourseIcon from "@/components/course";
+import TourismIcon from "@/components/tourism";
+import SportIcon from "@/components/sport";
+import OutsideIcon from "@/components/outside";
 Chart.register(CategoryScale);
 
 type propsLineDate = {
@@ -18,11 +26,34 @@ type propsLineDate = {
   fill: boolean;
   tension: number;
 };
+const getIconById = (id) => {
+  switch (id) {
+    case 1:
+      return <OutsideIcon className={"mt-1 w-4 h-4"} />;
+    case 2:
+      return <LiveMusic className={"mt-1 w-4 h-4"} />;
+    case 3:
+      return <StageIcon className={"mt-1 w-4 h-4"} />;
+    case 4:
+      return <NightLifeIcon className={"mt-1 w-4 h-4"} />;
+    case 5:
+      return <ConferenceIcon className={"mt-1 w-4 h-4"} />;
+    case 6:
+      return <CourseIcon className={"mt-1 w-4 h-4"} />;
+    case 7:
+      return <TourismIcon className={"mt-1 w-4 h-4"} />;
+    case 8:
+      return <SportIcon className={"mt-1 w-4 h-4"} />;
+    default:
+      return null;
+  }
+};
 export function SummaryInformation({ session, id }) {
-  const userId = 1;
+  const userId = session?.user?.id;
   const [eventName, setEventName] = useState("");
   const [addressValue, setAddressValue] = useState("");
   const [type, setType] = useState("");
+  const [typeId, setTypeId] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [ticketNumber, setTickerNumber] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
@@ -166,6 +197,7 @@ export function SummaryInformation({ session, id }) {
         setEventName(res.event?.name);
         setAddressValue(res.event?.diaChi);
         setType(res?.event?.ChuDe?.name);
+        setTypeId(res?.event?.ChuDe?.id);
         setTickerNumber(totalTicket);
         setTotalIncome(res?.income?._sum?.tongGia);
       });
@@ -179,8 +211,8 @@ export function SummaryInformation({ session, id }) {
         <div className="mt-6">
           <h1 className="font-semibold text-2xl">{eventName}</h1>
           <h1 className="text-gray-600">{addressValue}</h1>
-          <h1 className="text-base text-emerald-400 mt-3 flex flex-row gap-2">
-            <FcSportsMode className="mt-1" />
+          <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
+            {getIconById(typeId)}
             {type}
           </h1>
           <Divider className="my-4 mt-6" />
@@ -254,7 +286,7 @@ export function SummaryInformation({ session, id }) {
               color="success"
               aria-label="Loading..."
               classNames={{
-                svg: "w-28 h-28 drop-shadow-md",
+                svg: "w-20 h-20 text-blue-700",
               }}
             />
           </div>

@@ -6,6 +6,10 @@ import { useBooking } from '@/hooks/useBooking';
 import { useUser } from '@/hooks/useUser';
 import { useRouter } from 'next/navigation';
 import { Mail, Phone, User } from 'lucide-react';
+import Coupon from './Coupon';
+import { updateBuyList } from '@/redux/ticketSlice';
+import { useDispatch } from 'react-redux';
+
 
 
 const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
@@ -18,11 +22,24 @@ export function formatCurrency(value: number) {
 }
 
 
-const Cart = ({ websiteBooking, setWebsiteBooking, paymentMethod, session }) => {
+const Cart = ({ websiteBooking,
+    setWebsiteBooking,
+    paymentMethod,
+    EventDetail,
+    session }) => {
 
     const [isDisabled, setIsDisabled] = React.useState(true);
     const [currentDateTime, setCurrentDateTime] = React.useState("");
     const [userInfo, setUserInfo] = React.useState([]);
+    const [isCouponUsing, setIsCouponUsing] = React.useState(false);
+    const [discountPrice, setDiscountPrice] = React.useState(0);
+    const [orginalBuyList, setOrginalBuyList] = React.useState([]);
+    const [couponId, setCouponId] = React.useState(null);
+    var crypto = require("crypto");
+
+
+    const dispatch = useDispatch();
+
 
     const buyList = useSelector((state: RootState) => state.ticket.buyList);
 
@@ -30,16 +47,34 @@ const Cart = ({ websiteBooking, setWebsiteBooking, paymentMethod, session }) => 
     const { uploadPaymentInfo, uploadBillingInfo } = useBooking();
     const router = useRouter();
 
-
     const calculateTotalPrice = () => {
-        return buyList.reduce((total, item) => total + item.totalPrice, 0);
-    };
+        return buyList.reduce((total, item) => {
+            if (isCouponUsing === true) {
+                let discountedPrice;
 
+                if (item.discountPercentage) {
+                    // Apply discount based on percentage
+                    discountedPrice = item.price - (item.price * item.discountPercentage / 100);
+                } else if (item.discountMoney) {
+                    // Apply discount based on fixed amount
+                    discountedPrice = item.price - item.discountMoney;
+                } else {
+                    // No discount applied
+                    discountedPrice = item.price;
+                }
+                return total + discountedPrice * item.quantity;
+            } else {
+                return total + item.totalPrice;
+            }
+        }, 0);
+    };
 
     useEffect(() => {
         setIsDisabled(buyList.length === 0);
         if (websiteBooking === "payment") {
             setIsDisabled(paymentMethod === "");
+            const orginalBuyLists = buyList.map((item) => { return item; });
+            setOrginalBuyList(orginalBuyLists);
         }
     }, [buyList, paymentMethod]);
 
@@ -59,15 +94,25 @@ const Cart = ({ websiteBooking, setWebsiteBooking, paymentMethod, session }) => 
             });
     }, []);
 
+    useEffect(() => {
+        console.log(orginalBuyList);
+        dispatch(updateBuyList(orginalBuyList));
+        if (isCouponUsing === false) {
+            setCouponId(null);
+        }
+    }, [isCouponUsing]);
 
     const onPayment = async () => {
 
         const BillingInfo = {
+            maDatCho: crypto.randomBytes(3).toString('hex').toUpperCase(),
             ngayDatHang: currentDateTime,
             userId: session?.user?.id,
             phuongThucThanhToan: "VNPAY",
             tinhTrang: "Chưa thanh toán",
             tongTien: calculateTotalPrice(),
+            suKienId: EventDetail.id,
+            maGiamGiaId: couponId,
             HoaDonVe: buyList.map((item) => ({
                 veId: item.ticketId,
                 soLuong: item.quantity,
@@ -94,7 +139,7 @@ const Cart = ({ websiteBooking, setWebsiteBooking, paymentMethod, session }) => 
 
 
     return (
-        <div className='w-2/4'>
+        <div className='w-full p-4 md:w-2/4'>
             <div className='h-auto min-h-[500px] bg-white border border-gray-200 shadow rounded-xl flex flex-col'>
                 <div className='bg-gray-100 mx-4 rounded-md h-[40px] mt-3 flex items-center justify-center'>
                     <p className='text-sm font-semibold text-foreground-500'>THÔNG TIN ĐƠN HÀNG</p>
@@ -140,7 +185,14 @@ const Cart = ({ websiteBooking, setWebsiteBooking, paymentMethod, session }) => 
                             <div className='p-4'>
                                 {!paymentMethod && (
                                     <p className='text-gray-500 font-bold text-sm'>Vui lòng chọn hình thức thanh toán</p>)}
-                                <p className='font-bold'>{paymentMethod}</p>
+                                <p className='text-gray-500'>{paymentMethod}</p>
+                            </div>
+                        </div>
+                        <div className='mx-4 mt-5'>
+                            <p className='font-bold'>MÃ GIẢM GIÁ</p>
+                            <hr className='mt-2'></hr>
+                            <div className='p-4'>
+                                <Coupon EventDetail={EventDetail} buyList={buyList} currentDateTime={currentDateTime} setIsCouponUsing={setIsCouponUsing} setDiscountPrice={setDiscountPrice} setCouponId={setCouponId} />
                             </div>
                         </div>
                     </div>
@@ -177,6 +229,15 @@ const Cart = ({ websiteBooking, setWebsiteBooking, paymentMethod, session }) => 
                         <hr className='border-dashed'></hr>
                     </div>
                 ))}
+                {isCouponUsing && (
+                    <div className='mx-4 mt-auto'>
+                        <hr></hr>
+                        <div className='flex flex-row justify-between p-4 text-gray-500 font-bold text-sm'>
+                            <p>Mã giảm giá</p>
+                            <p>-{formatCurrency(discountPrice)}</p>
+                        </div>
+                    </div>
+                )}
 
                 <div className='mx-4 mt-auto'>
                     <hr></hr>
@@ -202,7 +263,7 @@ const Cart = ({ websiteBooking, setWebsiteBooking, paymentMethod, session }) => 
                     {websiteBooking === "payment" ? "HOÀN TẤT ĐẶT VÉ" : "TIẾP TỤC"}
                 </Button>
                 {websiteBooking !== 'choose-ticket' && (
-                    <Button className="w-full mt-10 px-0" onClick={() => setWebsiteBooking('choose-ticket')}>
+                    <Button className="w-full mt-8 px-0" onClick={() => {setWebsiteBooking('choose-ticket');setIsCouponUsing(false)}}>
                         QUAY LẠI
                     </Button>
                 )}

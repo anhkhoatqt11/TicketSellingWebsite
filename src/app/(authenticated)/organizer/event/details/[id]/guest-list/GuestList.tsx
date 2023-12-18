@@ -24,15 +24,46 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
+import LiveMusic from "@/components/livemusic";
+import NightLifeIcon from "@/components/nightlife";
+import StageIcon from "@/components/stage";
+import ConferenceIcon from "@/components/conference";
+import CourseIcon from "@/components/course";
+import TourismIcon from "@/components/tourism";
+import SportIcon from "@/components/sport";
+import OutsideIcon from "@/components/outside";
 import * as XLSX from "xlsx";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+const getIconById = (id) => {
+  switch (id) {
+    case 1:
+      return <OutsideIcon className={"mt-1 w-4 h-4"} />;
+    case 2:
+      return <LiveMusic className={"mt-1 w-4 h-4"} />;
+    case 3:
+      return <StageIcon className={"mt-1 w-4 h-4"} />;
+    case 4:
+      return <NightLifeIcon className={"mt-1 w-4 h-4"} />;
+    case 5:
+      return <ConferenceIcon className={"mt-1 w-4 h-4"} />;
+    case 6:
+      return <CourseIcon className={"mt-1 w-4 h-4"} />;
+    case 7:
+      return <TourismIcon className={"mt-1 w-4 h-4"} />;
+    case 8:
+      return <SportIcon className={"mt-1 w-4 h-4"} />;
+    default:
+      return null;
+  }
+};
 
 export function GuestList({ session, id }) {
-  const userId = 1;
+  const userId = session?.user?.id;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [eventName, setEventName] = React.useState("");
   const [addressValue, setAddressValue] = React.useState("");
   const [type, setType] = useState("");
+  const [typeId, setTypeId] = useState();
   const [guestList, setGuestList] = useState<GuestItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { fetchEventAngGuestListById } = useEventOrganizer();
@@ -65,7 +96,7 @@ export function GuestList({ session, id }) {
       await fetchEventAngGuestListById(id).then((res) => {
         setAddressValue(res?.diaChi);
         setEventName(res?.name);
-        console.log(res);
+        setTypeId(res?.ChuDe?.id);
         setType(res.ChuDe?.name);
         let copyGuestList: GuestItem[] = [];
         res.ves?.map((item, index) => {
@@ -133,8 +164,8 @@ export function GuestList({ session, id }) {
         <div className="mt-6">
           <h1 className="font-semibold text-2xl">{eventName}</h1>
           <h1 className="text-gray-600">{addressValue}</h1>
-          <h1 className="text-base text-emerald-400 mt-3 flex flex-row gap-2">
-            <FcSportsMode className="mt-1" />
+          <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
+            {getIconById(typeId)}
             {type}
           </h1>
           <Divider className="my-4 mt-6" />
@@ -144,7 +175,7 @@ export function GuestList({ session, id }) {
         </h1>
         <div className="rounded-md bg-white p-4">
           <Button onClick={onOpen}>Xuất danh sách thành file excel</Button>
-          <h1 className="w-full text-left mt-2 text-sm text-emerald-500">
+          <h1 className="w-full text-left mt-2 text-sm text-blue-800">
             Để đảm bảo thông tin khách hàng, trường email và số điện thoại sẽ bị
             ẩn
           </h1>
@@ -161,7 +192,7 @@ export function GuestList({ session, id }) {
             className="h-[52px] w-[0px] rounded-md m-0 p-0 -ml-[50px] min-w-unit-12 bg-transparent"
             onClick={searchSubmit}
           >
-            <MagnifyingGlassIcon className="h-6 w-6 text-emerald-400" />
+            <MagnifyingGlassIcon className="h-6 w-6 text-blue-700" />
           </Button>
         </div>
         <div className="w-full px-12 grid grid-cols-6 text-sm lg:text-base font-semibold mt-6 ">
@@ -199,7 +230,7 @@ export function GuestList({ session, id }) {
               color="success"
               aria-label="Loading..."
               classNames={{
-                svg: "w-28 h-28 drop-shadow-md",
+                svg: "w-20 h-20 text-blue-700",
               }}
             />
           </div>

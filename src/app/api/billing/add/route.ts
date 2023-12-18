@@ -28,6 +28,23 @@ export async function POST(req: Request) {
                 data: hoaDonVeItems,
             });
 
+            // Subtract soLuong from Ve model
+            for (const item of HoaDonVe) {
+                const ve = await prisma.ve.findUnique({
+                    where: { id: item.veId },
+                });
+
+                if (ve) {
+                    const updatedSoLuong = ve.soLuong - item.soLuong;
+
+                    // Update soLuong in Ve model
+                    await prisma.ve.update({
+                        where: { id: item.veId },
+                        data: { soLuong: updatedSoLuong },
+                    });
+                }
+            }
+
             return new Response(JSON.stringify({ hoaDon, hoaDonVe }), { status: 200 });
         }
 

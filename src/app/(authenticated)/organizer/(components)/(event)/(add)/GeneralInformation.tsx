@@ -40,18 +40,16 @@ function GeneralInformation({ props }) {
       <div className="rounded bg-white p-4">
         {/* avatar */}
         <div className="flex flex-col gap-y-3 w-full">
-          <div className=" w-full h-41 border-2 rounded">
-            <Zoom key={1} className={"w-full h-[360px]"}>
-              <img
-                src={
-                  props.eventPosterFile[0]?.preview ||
-                  props.eventPosterFile[0]?.url ||
-                  props.defaultPoster
-                }
-                alt={props.eventPosterFile[0]?.name}
-                className={`h-[360px] w-full rounded-md object-cover object-center`}
-              />
-            </Zoom>
+          <div className=" w-full h-41 border-1 rounded">
+            <img
+              src={
+                props.eventPosterFile[0]?.preview ||
+                props.eventPosterFile[0]?.url ||
+                props.defaultPoster
+              }
+              alt={props.eventPosterFile[0]?.name}
+              className={`h-[360px] w-full rounded-md object-cover object-center`}
+            />
           </div>
           <FileDialog
             name="images"
@@ -71,7 +69,8 @@ function GeneralInformation({ props }) {
               <Input
                 className="w-full"
                 radius="sm"
-                variant="faded"
+                variant="bordered"
+                size="lg"
                 value={props.eventName}
                 placeholder="Nhập tên sự kiện"
                 onChange={(e) => {

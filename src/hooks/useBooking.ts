@@ -55,11 +55,19 @@ export const useBooking = () => {
         return res;
     }
 
+    const fetchCoupon = async (coupon) => {
+        const res = await getRequest({
+            endPoint: `/api/billing/coupon?coupon=${coupon}`,
+        });
+        return res;
+    }
+
     return {
         uploadBillingInfo,
         uploadPaymentInfo,
         fetchPaymentStatus,
-        fetchOrderInfo
+        fetchOrderInfo,
+        fetchCoupon,
     }
 
 }

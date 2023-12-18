@@ -12,14 +12,14 @@ import { useRole } from "@/hooks/useRole";
 function OrganizerRegister({ session }) {
   const { fetchOrganizerRoleById } = useRole();
   const [userRole, setUserRole] = useState("");
-  const [trigger, setTrigger] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [loaiHinhKinhDoanhValue, setLoaiHinhKinhDoanhValue] =
     React.useState("");
 
   useEffect(() => {
     const fetchUserRole = async () => {
       try {
-        const userRole = await fetchOrganizerRoleById(1);
+        const userRole = await fetchOrganizerRoleById(session?.user?.id);
         setUserRole(userRole[0]?.role);
       } catch (error) {
         console.error("Error fetching user role:", error);
@@ -30,7 +30,7 @@ function OrganizerRegister({ session }) {
   }, []);
   return (
     <div>
-      {userRole === "user" && trigger ? (
+      {userRole === "user" && isLoading ? (
         <DialogCustom
           className="w-full lg:w-[70%] h-[80%] lg:h-[95%] flex items-center justify-center bg-slate-50"
           isModalOpen={true}
@@ -48,7 +48,7 @@ function OrganizerRegister({ session }) {
               {loaiHinhKinhDoanhValue ? (
                 <RegisterForm
                   organizerType={loaiHinhKinhDoanhValue}
-                  setTrigger={setTrigger}
+                  setIsLoading={setIsLoading}
                 />
               ) : null}
             </div>

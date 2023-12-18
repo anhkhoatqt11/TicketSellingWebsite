@@ -100,7 +100,7 @@ const NavigationMenuDemo = ({ session }) => {
               {
                 <div className="flex gap-16">
                   <div>
-                    <Link href="#">
+                    <Link href="/organizer/event/add">
                       <Button className="h-7 w-full rounded-full bg-green-500 hover:bg-green-600">
                         Tạo sự kiện
                       </Button>

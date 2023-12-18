@@ -16,7 +16,7 @@ export type GuestItem = {
 export const GuestItemComponent = ({ props }) => {
   return (
     <div className="grid grid-cols-6 shadow-md rounded-md px-12 py-4 mb-4 transition ease-in-out hover:scale-[101%]">
-      <div className="p-3 border-1 border-emerald-400 rounded-md h-12 w-12">
+      <div className="p-3 border-1 border-blue-700 rounded-md h-12 w-12">
         <IoTicketOutline className="h-6 w-6" color={props.color} />
       </div>
       <div className="text-gray-600 text-sm flex align-middle items-center">

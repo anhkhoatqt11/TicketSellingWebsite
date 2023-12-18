@@ -16,7 +16,7 @@ import { useTicketOrganizer } from "@/hooks/useTicketOrganizer";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export function EditEvent({ session, id }) {
-  const userId = 1;
+  const userId = session?.user?.id;
 
   const { startUpload } = useUploadThing("imageUploader");
   const [startIndex, setStartIndex] = useState(-1);
@@ -227,7 +227,7 @@ export function EditEvent({ session, id }) {
         }}
       />
       <Button
-        className="w-full bg-emerald-400 text-white font-semibold py-6 text-base"
+        className="w-full bg-blue-700 text-white font-semibold py-6 text-base"
         radius="sm"
         onClick={onSubmit}
       >
@@ -239,7 +239,7 @@ export function EditEvent({ session, id }) {
             color="success"
             aria-label="Loading..."
             classNames={{
-              svg: "w-28 h-28 drop-shadow-md",
+              svg: "w-20 h-20 text-blue-700",
             }}
           />
         </div>

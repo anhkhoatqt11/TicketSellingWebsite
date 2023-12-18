@@ -19,15 +19,7 @@ import AuthSvg from "@/assets/AuthSvg";
 const avatarNav = [
   {
     name: "Hồ sơ",
-    href: "/agency",
-  },
-  {
-    name: "Thêm sản phẩm",
-    href: "/admin/add-product",
-  },
-  {
-    name: "Team",
-    href: "/admin/add-product",
+    href: "/user/profile",
   },
 ];
 
@@ -36,14 +28,12 @@ function Header({ session }) {
   const [user] = useState(session?.user);
   const router = useRouter();
   return (
-    <Navbar shouldHideOnScroll className="shadow">
-      {/* <NavbarBrand>
+    <div className="flex justify-between p-6 h-fit w-full drop-shadow bg-white items-center border-b-1">
+      <div className="flex items-center">
         <Logo />
-      </NavbarBrand> */}
-      <NavbarContent as="div" justify="end">
-        <Button isIconOnly aria-label="Like" radius="full">
-          <BellIcon />
-        </Button>
+        <h1 className="font-medium text-blue-700">TicketNow</h1>
+      </div>
+      <div className="flex flex-row gap-3 max-w-full">
         <Dropdown
           shouldBlockScroll={true}
           onOpenChange={(open) => {
@@ -57,11 +47,7 @@ function Header({ session }) {
         >
           <DropdownTrigger>
             <Avatar>
-              <AvatarImage
-                src={
-                  "https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
-                }
-              />
+              <AvatarImage src={user.avatar} />
               <AvatarFallback>Guest</AvatarFallback>
             </Avatar>
           </DropdownTrigger>
@@ -90,8 +76,8 @@ function Header({ session }) {
             </DropdownSection>
           </DropdownMenu>
         </Dropdown>
-      </NavbarContent>
-    </Navbar>
+      </div>
+    </div>
   );
 }
 

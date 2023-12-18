@@ -10,7 +10,7 @@ export function EventManagement({ session }) {
   return (
     <>
       <SearchAndCreateBar setSearchWord={setSearchWord} />
-      <EventListComponent props={searchWord} />
+      <EventListComponent props={searchWord} session={session} />
     </>
   );
 }

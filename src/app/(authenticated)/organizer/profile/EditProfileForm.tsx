@@ -1,5 +1,6 @@
 "use client";
 import { useRole } from "@/hooks/useRole";
+import { getSession } from "@/lib/auth";
 import { CircularProgress } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { RegisterForm } from "../(components)/(organizerRegister)/RegisterForm";
@@ -11,12 +12,11 @@ export const EditProfileForm = () => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchOrganizer = async () => {
-      // update session later
-      const result = await fetchOrganizerRoleById(1);
+      const session = await getSession();
+      const result = await fetchOrganizerRoleById(session?.user?.id);
       setLoaiHinhKinhDoanhValue(
         result[0]?.loaiHinhKinhDoanh === 1 ? "canhan" : "doanhnghiep"
       );
-      console.log(loaiHinhKinhDoanhValue);
     };
     fetchOrganizer().then(() => {
       setIsLoading(false);
@@ -43,7 +43,7 @@ export const EditProfileForm = () => {
             color="success"
             aria-label="Loading..."
             classNames={{
-              svg: "w-28 h-28 drop-shadow-md",
+              svg: "w-20 h-20 text-blue-700",
             }}
           />
         </div>

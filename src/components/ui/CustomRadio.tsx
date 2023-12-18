@@ -10,7 +10,7 @@ const radio = tv({
   variants: {
     isSelected: {
       true: {
-        base: "border-emerald-500 bg-emerald-400 hover:bg-emerald-500 hover:border-emerald-500",
+        base: "border-blue-700 bg-blue-600 hover:bg-blue-700 hover:border-blue-700",
         content: "text-primary-foreground pl-1",
       },
     },
@@ -46,7 +46,7 @@ export const CustomRadio = (props) => {
           base: styles.base(),
           content: styles.content(),
         }}
-        color="success"
+        className="text-blue-700"
         startContent={
           isSelected ? <CheckIcon className="ml-1 text-white" /> : null
         }

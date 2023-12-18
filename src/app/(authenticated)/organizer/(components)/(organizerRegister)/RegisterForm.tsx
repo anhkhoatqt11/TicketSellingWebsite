@@ -17,11 +17,12 @@ import { checkEmail, checkPhoneNumber } from "@/lib/utils";
 import { url } from "inspector";
 import { Zoom } from "@/components/ui/zoom-image";
 import { ImageCus } from "@/components/ui/ImageCus";
+import { getSession } from "@/lib/auth";
 
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
-export const RegisterForm = ({ organizerType, setIsLoading }) => {
-  const userId = 1;
+export const RegisterForm = async ({ organizerType, setIsLoading }) => {
+  const session = await getSession();
   const { startUpload } = useUploadThing("imageUploader");
 
   const [organizerName, setOrganizerName] = React.useState("");
@@ -44,8 +45,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
   const { fetchOrganizerById, uploadOrganizerInfo } = useOrganizer();
   useEffect(() => {
     const fetchOrganizer = async () => {
-      // update session later
-      const result = await fetchOrganizerById(1);
+      const result = await fetchOrganizerById(session?.user?.id);
       setPhoneNumber(result[0]?.phoneNumber);
       console.log(result[0]);
       setEmail(result[0]?.email);
@@ -125,7 +125,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
       chiNhanh: chiNhanh,
       role: "organizer",
       anhDaiDienToChuc: avatarImage ? avatarImage[0]?.url : defaultAvatar,
-      id: userId,
+      id: session?.user?.id,
     };
 
     await uploadOrganizerInfo(thongTin).then(() => {
@@ -177,9 +177,10 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   errorMessage={`${
                     organizerName !== "" ? "" : "Vui lòng nhập họ tên cá nhân"
                   }`}
-                  className="max-w-xs lg:max-w-2xl h-[60px]"
+                  variant="bordered"
+                  size="lg"
+                  className="max-w-xs lg:max-w-2xl h-[60px] "
                   radius="sm"
-                  variant="faded"
                   value={organizerName}
                   placeholder="Nhập tên cá nhân ban tổ chức"
                   onChange={(e) => {
@@ -200,7 +201,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl "
                   radius="sm"
-                  variant="faded"
+                  variant="bordered"
+                  size="lg"
                   value={maSoThueCaNhan}
                   placeholder="Nhập mã số thuế cá nhân"
                   onChange={(e) => {
@@ -222,7 +224,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl h-[52px]"
                   radius="sm"
-                  variant="faded"
+                  variant="bordered"
+                  size="lg"
                   value={companyName}
                   placeholder="Nhập tên doanh nghiệp ban tổ chức"
                   onChange={(e) => {
@@ -244,7 +247,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl h-[52px]"
                   radius="sm"
-                  variant="faded"
+                  variant="bordered"
+                  size="lg"
                   value={maSoDKKD}
                   placeholder="Nhập mã số đăng ký kinh doanh"
                   onChange={(e) => {
@@ -265,7 +269,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   className="max-w-xs lg:max-w-2xl h-[52px]"
                   radius="sm"
-                  variant="faded"
+                  variant="bordered"
+                  size="lg"
                   value={noiCap}
                   placeholder="Nhập nơi cấp mã số đăng ký kinh doanh"
                   onChange={(e) => {
@@ -284,7 +289,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
                   }`}
                   type="date"
                   radius="sm"
-                  variant="faded"
+                  variant="bordered"
+                  size="lg"
                   className="max-w-xs lg:max-w-2xl h-[52px]"
                   value={ngayCap}
                   placeholder="Chọn ngày cấp mã số đăng ký kinh doanh"
@@ -313,7 +319,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               }`}
               className="w-full"
               radius="sm"
-              variant="faded"
+              variant="bordered"
+              size="lg"
               value={phoneNumber}
               placeholder="Nhập số điện thoại"
               onChange={(e) => {
@@ -332,7 +339,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               }`}
               className="w-full"
               radius="sm"
-              variant="faded"
+              variant="bordered"
+              size="lg"
               value={email}
               type={"email"}
               placeholder="Nhập email liên hệ"
@@ -363,7 +371,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               }`}
               className="w-full"
               radius="sm"
-              variant="faded"
+              variant="bordered"
+              size="lg"
               value={chuTaiKhoan}
               placeholder="Nhập tên chủ tài khoản"
               onChange={(e) => {
@@ -382,7 +391,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               }`}
               className="w-full"
               radius="sm"
-              variant="faded"
+              variant="bordered"
+              size="lg"
               value={soTaiKhoan}
               placeholder="Nhập số tài khoản"
               onChange={(e) => {
@@ -401,7 +411,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               }`}
               className="w-full"
               radius="sm"
-              variant="faded"
+              variant="bordered"
+              size="lg"
               value={tenNganHang}
               placeholder="Nhập tên ngân hàng"
               onChange={(e) => {
@@ -420,7 +431,8 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
               }`}
               className="w-full"
               radius="sm"
-              variant="faded"
+              variant="bordered"
+              size="lg"
               value={chiNhanh}
               placeholder="Nhập tên chi nhánh"
               onChange={(e) => {
@@ -436,7 +448,7 @@ export const RegisterForm = ({ organizerType, setIsLoading }) => {
           onClick={() => {
             onSubmit();
           }}
-          className="w-[100%] h-12 text-white bg-emerald-400 hover:bg-emerald-500 transition duration-300 ease-in-out active:scale-90"
+          className="w-[100%] h-12 text-white bg-blue-700 hover:bg-blue-800 transition duration-300 ease-in-out active:scale-90"
         >
           Xác nhận
         </Button>
