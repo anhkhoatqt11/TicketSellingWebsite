@@ -25,15 +25,15 @@ import { useRouter, usePathname } from "next/navigation";
 const avatarNav = [
   {
     name: "Hồ sơ",
-    href: "/agency",
+    href: "/user/profile",
   },
   {
-    name: "Thêm sản phẩm",
-    href: "/admin/add-product",
+    name: "Vé của tôi",
+    href: "/user/my-ticket",
   },
   {
-    name: "Team",
-    href: "/admin/add-product",
+    name: "Nhà tổ chức",
+    href: "/organiser/profile",
   },
 ];
 
@@ -153,7 +153,7 @@ const NavigationMenuDemo = ({ session }) => {
                     >
                       <div className="flex flex-row gap-2 items-center h-8  ">
                         <div className="">{AuthSvg.signIn()}</div>
-                        <div>Logout</div>
+                        <div>Đăng xuất</div>
                       </div>
                     </DropdownItem>
                   </DropdownSection>
@@ -164,8 +164,8 @@ const NavigationMenuDemo = ({ session }) => {
         ) : (
           <div className="ml-auto mr-8">
             <Link href={"/auth/login"}>
-              <Button className="!box-content h-8 w-full rounded-full bg-green-500">
-                Login
+              <Button className="!box-content h-8 w-full rounded-full bg-blue-700 hover:bg-blue-800">
+                Đăng nhập
               </Button>
             </Link>
           </div>

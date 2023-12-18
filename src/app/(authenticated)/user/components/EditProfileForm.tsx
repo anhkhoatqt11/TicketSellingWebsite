@@ -108,7 +108,8 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
     });
   };
   return (
-    <div className="grid-cols-1 grid gap-4 mb-6 mt-5">
+    <div className="grid-cols-1 grid gap-4 mb-6">
+      <h1 className="text-2xl font-extrabold">Hồ sơ cá nhân</h1>
       <h1 className="font-semibold">Ảnh đại diện</h1>
       <div className="flex flex-col md:flex-row rounded bg-white p-4">
         <div className="p-2 pr-3">
