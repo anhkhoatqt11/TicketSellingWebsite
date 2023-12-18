@@ -1,12 +1,12 @@
-import { mustBeLoggedIn } from "@/lib/auth";
+import { Footer } from "@/components/footer";
+import { getSession } from "@/lib/auth";
 
-export default async function DashboardLayout({
+export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-    await mustBeLoggedIn();
-
+  const session = await getSession();
   return (
     <div className="">
       <div className="w-full h-full">{children}</div>

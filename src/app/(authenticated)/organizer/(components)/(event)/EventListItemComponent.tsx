@@ -119,7 +119,7 @@ export function EventListItemComponent({ item }) {
               {convertDateTimeToDate(item?.ngayKetThuc)}
             </h1>
             <p
-              className="mt-2 text-medium truncate"
+              className="mt-2 text-medium h-24 overflow-clip"
               dangerouslySetInnerHTML={{ __html: `${item?.moTa}` }}
             ></p>
           </div>

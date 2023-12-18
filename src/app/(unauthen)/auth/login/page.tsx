@@ -8,15 +8,15 @@ const page = async () => {
         <div className="p-12 relative h-screen w-full ">
             <div className="lg:p-8 sm:p-12 ">
                 <div className="mx-auto h-full flex w-full flex-col justify-center space-y-6 ">
-                    <div className="flex flex-col space-y-2 text-center">
+                    <div className="flex flex-col space-y-2 text-center mb-10">
                         <h1 className="text-2xl font-semibold tracking-tight">
-                            Đăng nhập
+                            Chào mừng đến với TicketNow
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Đăng nhập vào trang bán vé sự kiện
+                            Nhập thông tin đăng nhập của bạn
                         </p>
-                        <Login />
                     </div>
+                    <Login />
                 </div>
             </div>
         </div>)

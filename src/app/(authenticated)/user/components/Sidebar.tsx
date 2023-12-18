@@ -6,8 +6,10 @@ import { LayoutGroup, motion } from "framer-motion";
 import Link from "next/link";
 import classnames from "classnames";
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
+import path from "path";
 import { LuMenu } from "react-icons/lu";
+import { Accordion, AccordionItem } from "@nextui-org/react";
 
 type SidebarElement = React.ElementRef<"aside">;
 type RootProps = React.ComponentPropsWithoutRef<"aside">;
@@ -35,22 +37,25 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
           <Collapsible.Root defaultOpen>
             {navItems && navItems.length > 0 && (
               <>
-                <Collapsible.Content className="relative mt-3 lg:block hidden">
-                  <div className="absolute left-2.5 w-px h-full bg-slate-6" />
+                <Collapsible.Content className="relative mt-3 px-3 py-4 lg:block hidden">
+                  {/* <div className="absolute left-2.5 w-px h-full bg-slate-6" /> */}
 
-                  <div className="py-2 flex flex-col truncate space-y-1">
+                  <div className="py-2 flex flex-col truncate space-y-2 font-medium">
                     <LayoutGroup id="sidebar">
                       {navItems.map((item) => {
-                        const isCurrentPage = title === item.title;
+                        const pathName = usePathname();
+                        const lastPathname = pathName.split("/").pop();
+
+                        const isCurrentPage = lastPathname === item.value;
                         return (
                           <Link
                             key={item.title}
-                            href={`/organizer/${item.value}`}
+                            href={`/user/${item.value}`}
                             className="hover:bg-gray-100 rounded-md h-12 flex items-center mx-2"
                           >
-                            <motion.span
+                            <motion.a
                               className={classnames(
-                                "text-[14px] flex items-center font-medium gap-2 w-full pl-4 h-8 rounded-md text-slate-11 relative transition ease-in-out duration-200",
+                                "text-[14px] flex items-center font-medium gap-2 w-full h-10 rounded-md text-slate-11 relative transition ease-in-out duration-200",
                                 {
                                   "text-white": isCurrentPage,
                                   "hover:text-slate-12": title !== item.title,
@@ -70,9 +75,9 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                                   <div className="bg-cyan-11 w-px absolute top-1 left-2.5 h-6" />
                                 </motion.span>
                               )}
-                              {item.icon} {/* Display the icon here */}
+                              {item.icon}
                               {item.title}
-                            </motion.span>
+                            </motion.a>
                           </Link>
                         );
                       })}
@@ -87,22 +92,25 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                     className="lg:hidden block"
                     indicator={<LuMenu className="mr-6 w-6 h-6" />}
                   >
-                    <Collapsible.Content className="relative mt-1">
-                      <div className="absolute left-2.5 w-px h-full bg-slate-6" />
+                    <Collapsible.Content className="relative px-3 py-4">
+                      {/* <div className="absolute left-2.5 w-px h-full bg-slate-6" /> */}
 
-                      <div className="pb-2 flex flex-col truncate space-y-1">
+                      <div className="py-2 flex flex-col truncate space-y-2 font-medium">
                         <LayoutGroup id="sidebar">
                           {navItems.map((item) => {
-                            const isCurrentPage = title === item.title;
+                            const pathName = usePathname();
+                            const lastPathname = pathName.split("/").pop();
+
+                            const isCurrentPage = lastPathname === item.value;
                             return (
                               <Link
                                 key={item.title}
-                                href={`/organizer/${item.value}`}
+                                href={`/user/${item.value}`}
                                 className="hover:bg-gray-100 rounded-md h-12 flex items-center mx-2"
                               >
-                                <motion.span
+                                <motion.a
                                   className={classnames(
-                                    "text-[16px] flex items-center font-medium gap-2 w-full pl-4 h-8 rounded-md text-slate-800 relative transition ease-in-out duration-200",
+                                    "text-[14px] flex items-center font-medium gap-2 w-full h-10 rounded-md text-slate-11 relative transition ease-in-out duration-200",
                                     {
                                       "text-white": isCurrentPage,
                                       "hover:text-slate-12":
@@ -123,9 +131,9 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                                       <div className="bg-cyan-11 w-px absolute top-1 left-2.5 h-6" />
                                     </motion.span>
                                   )}
-                                  {item.icon} {/* Display the icon here */}
+                                  {item.icon}
                                   {item.title}
-                                </motion.span>
+                                </motion.a>
                               </Link>
                             );
                           })}

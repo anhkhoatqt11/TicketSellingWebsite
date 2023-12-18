@@ -1,39 +1,38 @@
 import React from "react";
 import { getSession } from "@/lib/auth";
-import Header from "./(components)/Header";
-import { Sidebar } from "./(components)/Sidebar";
-import { redirect } from "next/navigation";
-import OrganizerRegister from "./(components)/OrganizerRegister";
-import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { Sidebar } from "./components/Sidebar";
+import { DashboardIcon } from "@radix-ui/react-icons";
 
-import CalendarIcon from "@/components/calendar";
+import { redirect } from "next/navigation";
+import { Footer } from "@/components/footer";
+import TicketIcon from "@/components/ticketicon";
 import UserIcon from "@/components/userprofileicon";
+// import OrganizerRegister from "./(components)/OrganizerRegister";
 
 const navItems = [
   {
-    title: "Hồ sơ ban tổ chức",
+    title: "Hồ sơ cá nhân",
     value: "profile",
     icon: <UserIcon className="mr-2 ms-3 w-6 h-6" />,
   },
   {
-    title: "Quản lý sự kiện",
-    value: "event",
-    icon: <CalendarIcon className="mr-2 ms-3 w-6 h-6" />,
+    title: "Vé của tôi",
+    value: "my-ticket",
+    icon: <TicketIcon className="mr-2 ms-3 w-6 h-6" />,
   },
 ];
-export default async function OrganizerLayout({
+export default async function UserLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const session = await getSession();
-  if (!session) redirect("/auth/login");
+
   return (
     <div className="w-full h-full bg-slate-50">
       <Header session={session} />
-      {/* <Header session={session}/> */}
       <div className="flex flex-col lg:flex-row justify-between h-full ">
-        <OrganizerRegister session={session} />
         <Sidebar
           navItems={navItems}
           title="Navigation"

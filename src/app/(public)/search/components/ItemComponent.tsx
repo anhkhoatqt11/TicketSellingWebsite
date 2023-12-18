@@ -17,7 +17,11 @@ const ItemComponent = ({ item }) => {
     <>
       <Link href={`event/${item?.id}`}>
         <div className="h-full rounded-lg block overflow-hidden shadow-lg hover:opacity-80">
-          <img className="w-full" src={item.hinhAnhSuKien} alt="Event" />
+          <img
+            className="w-full aspect-[13/5] object-cover"
+            src={item.hinhAnhSuKien}
+            alt="Event"
+          />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{item.name}</div>
             <p className="text-gray-700 text-base">

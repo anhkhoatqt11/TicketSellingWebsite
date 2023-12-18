@@ -25,15 +25,15 @@ import { useRouter, usePathname } from "next/navigation";
 const avatarNav = [
   {
     name: "Hồ sơ",
-    href: "/agency",
+    href: "/user/profile",
   },
   {
-    name: "Thêm sản phẩm",
-    href: "/admin/add-product",
+    name: "Vé của tôi",
+    href: "/user/my-ticket",
   },
   {
-    name: "Team",
-    href: "/admin/add-product",
+    name: "Nhà tổ chức",
+    href: "/organiser/profile",
   },
 ];
 
@@ -73,17 +73,16 @@ const NavigationMenuDemo = ({ session }) => {
     <div
       className={`w-full h-[50px] md:h-[76px] 
     bg-white  items-center justify-between z-20
-    sticky top-0 transition-transform duration-300 px-14 shadow-sm
+    sticky top-0 transition-transform duration-300 px-6 shadow-sm
     ${show}
     `}
     >
-      <MobileNav />
 
-      <div className="hidden lg:flex py-2 items-center h-full ">
+      <div className="flex py-2 items-center h-full drop-shadow">
         {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null}
         {<Logo />}
         {pathname !== "/search" ? (
-          <div className="form-control">
+          <div className="form-control hidden lg:block">
             <input
               type="text"
               placeholder="Search"
@@ -100,15 +99,18 @@ const NavigationMenuDemo = ({ session }) => {
               {
                 <div className="flex gap-16">
                   <div>
-                    <Link href="/organizer/event/add">
-                      <Button className="h-7 w-full rounded-full bg-green-500 hover:bg-green-600">
+                    <Link href="#">
+                      <Button className="!box-content h-7 w-full rounded-full bg-blue-700 hover:bg-blue-800">
                         Tạo sự kiện
                       </Button>
                     </Link>
                   </div>
                   <div className="flex items-center">
-                    <Link href="#">
-                      <BsTicketPerforated size={25} />
+                    <Link href={"/user/my-ticket"}>
+                      <BsTicketPerforated
+                        size={25}
+                        className="hover:text-blue-700"
+                      />
                     </Link>
                   </div>
                 </div>
@@ -150,7 +152,7 @@ const NavigationMenuDemo = ({ session }) => {
                     >
                       <div className="flex flex-row gap-2 items-center h-8  ">
                         <div className="">{AuthSvg.signIn()}</div>
-                        <div>Logout</div>
+                        <div>Đăng xuất</div>
                       </div>
                     </DropdownItem>
                   </DropdownSection>
@@ -161,8 +163,8 @@ const NavigationMenuDemo = ({ session }) => {
         ) : (
           <div className="ml-auto mr-8">
             <Link href={"/auth/login"}>
-              <Button className=" h-8 w-full rounded-full bg-green-500">
-                Login
+              <Button className="!box-content h-8 w-full rounded-full bg-blue-700 hover:bg-blue-800">
+                Đăng nhập
               </Button>
             </Link>
           </div>

@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     if (user)
       return new Response(
         JSON.stringify({
-          message: 'User already exists',
+          message: 'Tài khoản đã tồn tại',
           status: 400,
         })
       );
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
         email: body.email,
         name: body.name,
         password: body.password,
-        phoneNumber: '1231',
+        phoneNumber: '0',
       },
     });
     if (create) {
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       );
       return new Response(
         JSON.stringify({
-          message: 'User created and OTP sent',
+          message: 'Tài khoản đã tạo thành công. Kiểm tra mã OTP được gửi đến Email của bạn',
           payload: payload,
           status: 200,
         })

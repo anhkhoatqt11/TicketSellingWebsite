@@ -33,6 +33,7 @@ model User {
   tenChuTaiKhoan    String?
   tenNganHang       String?
   trangThai         String?  @default("dang_hoat_dong")
+  otp               String?
   SuKiens           SuKien[]
   HoaDon            HoaDon[]
 }
@@ -97,8 +98,8 @@ model HoaDon {
   checkIn             Boolean    @default(false)
   suKienId            Int
   maDatCho            String
-  user                User       @relation(fields: [userId], references: [id])
   suKien              SuKien     @relation(fields: [suKienId], references: [id])
+  user                User       @relation(fields: [userId], references: [id])
   HoaDonVe            HoaDonVe[]
 
   @@index([userId])
