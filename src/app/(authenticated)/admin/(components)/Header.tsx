@@ -17,18 +17,7 @@ import { signOut } from "next-auth/react";
 import AuthSvg from "@/assets/AuthSvg";
 
 const avatarNav = [
-  {
-    name: "Hồ sơ",
-    href: "/agency",
-  },
-  {
-    name: "Thêm sản phẩm",
-    href: "/admin/add-product",
-  },
-  {
-    name: "Team",
-    href: "/admin/add-product",
-  },
+
 ];
 
 function Header({ session }) {

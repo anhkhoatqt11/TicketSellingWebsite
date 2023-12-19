@@ -79,7 +79,7 @@ const AddBannerModal = ({ refetch, banners }) => {
       case "addEvent":
         return (
           <TableCell>
-            <Button className='bg-green-500 rounded-full' onClick={() => { handleAddBanner(event.id) }}>
+            <Button className='bg-blue-700 rounded-full' onClick={() => { handleAddBanner(event.id) }}>
               <PlusCircle className="w-6 h-6 text-white" />
             </Button>
           </TableCell>
@@ -92,7 +92,7 @@ const AddBannerModal = ({ refetch, banners }) => {
 
   return (
     <>
-      <Button onPress={() => { onOpen(); setSearchWord("") }} className='mb-10'>Thêm banner mới</Button>
+      <Button onPress={() => { onOpen(); setSearchWord("") }} className='mb-10 bg-blue-700 text-white shadow rounded-sm'>Thêm banner mới</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size={'4xl'}>
         <ModalContent>
           {(onClose) => (

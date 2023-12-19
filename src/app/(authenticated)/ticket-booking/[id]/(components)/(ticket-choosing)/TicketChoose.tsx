@@ -92,11 +92,11 @@ const TicketChoose = ({ EventDetail }) => {
                                         Date.parse(ticket.ngayKetThuc) < Date.parse(currentDateTime)
                                     ) && (
                                             <>
-                                                <Button className='rounded-md bg-transparent text-black border border-solid border-red-500 h-[20px] hover:bg-red-500 hover:text-white' onClick={() => handleRemoveFromBuyList(ticket.id)}>-</Button>
+                                                <Button className='rounded-md bg-transparent text-black border border-solid border-amber-500 h-[20px] hover:bg-amber-500 hover:text-white' onClick={() => handleRemoveFromBuyList(ticket.id)}>-</Button>
                                                 <p className='text-center items-center mt-2 font-bold'>
                                                     {buyList.find((item) => item.ticketId === ticket.id)?.quantity || 0}
                                                 </p>
-                                                <Button className='rounded-md bg-transparent text-black border border-solid border-emerald-500 h-[20px] hover:bg-emerald-500 hover:text-white'
+                                                <Button className='rounded-md bg-transparent text-black border border-solid border-blue-500 h-[20px] hover:bg-blue-500 hover:text-white'
                                                     onClick={() => handleAddToBuyList(ticket.id, ticket.name, ticket.gia, ticket.soLuongToiDa, ticket.soLuong)}
                                                     disabled={
                                                         (buyList.find((item) => item.ticketId === ticket.id)?.quantity || 0) >=

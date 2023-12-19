@@ -37,11 +37,31 @@ const avatarNav = [
   },
 ];
 
+const adminAvatarNav = [
+  {
+    name: "Hồ sơ",
+    href: "/user/profile",
+  },
+  {
+    name: "Vé của tôi",
+    href: "/user/my-ticket",
+  },
+  {
+    name: "Nhà tổ chức",
+    href: "/organizer/profile",
+  },
+  {
+    name: "Trang admin",
+    href: "/admin"
+  }
+]
+
 const NavigationMenuDemo = ({ session }) => {
   const [user] = useState(session?.user);
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [show, setShow] = useState("translate-y-0");
+  const [HeaderNav, setHeaderNav] = useState(avatarNav);
   const router = useRouter();
   const pathname = usePathname();
   useEffect(() => {
@@ -69,6 +89,14 @@ const NavigationMenuDemo = ({ session }) => {
       router.push(`/search?searchWord=${encodeURIComponent(searchQuery)}`);
     }
   };
+
+  useEffect(() => {
+    if (user?.role === "admin") {
+      setHeaderNav(adminAvatarNav);
+    }
+  }, []);
+
+
   return (
     <div
       className={`w-full h-[50px] md:h-[76px] 
@@ -131,23 +159,24 @@ const NavigationMenuDemo = ({ session }) => {
                 <DropdownTrigger>
                   <Avatar>
                     <AvatarImage src={user.avatar} />
-                    <AvatarFallback>Guest</AvatarFallback>
+                    <AvatarFallback></AvatarFallback>
                   </Avatar>
                 </DropdownTrigger>
                 <DropdownMenu>
                   <DropdownSection title={`${user?.name}`}>
-                    {avatarNav.map((item, index) => (
-                      <DropdownItem
-                        onClick={() => {
-                          router.push(item.href);
-                        }}
-                        className="w-full"
-                        key={index}
-                      >
-                        {item.name}
-                      </DropdownItem>
-                    ))}
-
+                    {
+                      HeaderNav.map((item, index) => (
+                        <DropdownItem
+                          onClick={() => {
+                            router.push(item.href);
+                          }}
+                          className="w-full"
+                          key={index}
+                        >
+                          {item.name}
+                        </DropdownItem>
+                      ))
+                    }
                     <DropdownItem
                       onClick={() => signOut({ callbackUrl: "/auth/login" })}
                     >

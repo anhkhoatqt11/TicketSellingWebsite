@@ -19,6 +19,10 @@ export async function GET(request:Request) {
                     name:true,
                     phoneNumber:true,
                     avatar: true,
+                    loaiHinhKinhDoanh: true,
+                    hoTenOrganizer: true,
+                    anhDaiDienToChuc: true,
+                    tenDoanhNghiep: true,
                 }
             }
         }

@@ -7,6 +7,7 @@ import Link from "next/link";
 import classnames from "classnames";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import Logo from "@/components/logo";
+import { usePathname } from "next/navigation";
 
 
 
@@ -79,21 +80,27 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                             <Collapsible.Content className="relative mt-3">
                                 <div className="absolute left-2.5 w-px h-full bg-slate-6" />
 
-                                <div className="py-2 flex flex-col truncate">
+                                <div className="py-2 flex flex-col truncate space-y-2 font-medium">
                                     <LayoutGroup id="sidebar">
                                         {navItems.map((item) => {
-                                            const isCurrentPage = title === item.title;
+                                            const pathName = usePathname();
+                                            const lastPathname = pathName.split("/").pop();
+
+                                            const isCurrentPage = lastPathname === item.value;
                                             return (
                                                 <Link
                                                     key={item.title}
                                                     href={`/admin/${item.value}`}
+                                                    className="flex items-center text-gray-900  hover:bg-blue-300 hover:text-white"
                                                 >
                                                     <motion.span
                                                         className={classnames(
-                                                            "text-[14px] flex items-center font-medium gap-2 w-full pl-4 h-8 rounded-md text-slate-11 relative transition ease-in-out duration-200",
+                                                            "text-[14px] px-4 flex items-center font-medium gap-2 w-full pl-4 h-10 text-slate-11 relative transition ease-in-out duration-200",
                                                             {
-                                                                "text-cyan-11": isCurrentPage,
+                                                                "text-white": isCurrentPage,
                                                                 "hover:text-slate-12": title !== item.title,
+                                                                "font-bold": isCurrentPage,
+                                                                "bg-blue-700": isCurrentPage,
                                                             }
                                                         )}
                                                     >

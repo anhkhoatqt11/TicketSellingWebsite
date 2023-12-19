@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+
 const ItemComponent = ({ item }) => {
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-GB");

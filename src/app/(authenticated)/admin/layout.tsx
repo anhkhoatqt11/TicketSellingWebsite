@@ -3,6 +3,7 @@ import { getSession } from '@/lib/auth';
 import Header from "./(components)/Header";
 import { DashboardIcon } from "@radix-ui/react-icons";
 import { Sidebar } from "./(components)/Sidebar";
+import { Airplay, CalendarRange, User } from "lucide-react";
 
 
 const navItems = [
@@ -14,17 +15,17 @@ const navItems = [
   {
     title: "Quản lý sự kiện",
     value: "events",
-    icon: <DashboardIcon className="w-5 h-5" />,
+    icon: <CalendarRange className="w-5 h-5" />,
   },
   {
     title: "Quản lý người dùng",
     value: "users",
-    icon: <DashboardIcon className="w-5 h-5" />,
+    icon: <User className="w-5 h-5" />,
   },
   {
     title: "Quản lý banner",
     value: "banners",
-    icon: <DashboardIcon className="w-5 h-5" />,
+    icon: <Airplay className="w-5 h-5" />,
   },
 ];
 

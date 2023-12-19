@@ -79,7 +79,7 @@ export function EventListItemComponent({ item , onOpen, setSelectedItem, setTran
               {getDateTimeKetThuc(item?.ngayKetThuc) &&
                 item?.trangThai === "Đã duyệt" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
-                  <div className="bg-blue-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
+                  <div className="bg-blue-700 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
                     <SiEventstore className="mt-1" />
                     <div>Đang hoạt động</div>
                   </div>
@@ -87,7 +87,7 @@ export function EventListItemComponent({ item , onOpen, setSelectedItem, setTran
               ) : !getDateTimeKetThuc(item?.ngayKetThuc) &&
                 item?.trangThai === "Đã duyệt" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
-                  <div className="bg-emerald-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
+                  <div className="bg-blue-700 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
                     <BsCheck2Circle className="mt-1" />
                     <div>Hoàn thành</div>
                   </div>
@@ -109,7 +109,7 @@ export function EventListItemComponent({ item , onOpen, setSelectedItem, setTran
               ) : null}
             </div>
             <div className="lg:w-2/3 m-3">
-              <h1 className="text-base text-emerald-400 mt-1 flex flex-row gap-2">
+              <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
                 {getIconById(item?.ChuDe?.id)}
                 {item?.ChuDe?.name}
               </h1>
@@ -133,14 +133,14 @@ export function EventListItemComponent({ item , onOpen, setSelectedItem, setTran
             </div>
           </div>
           <Separator />
-          <div className="grid grid-cols-2 gap-2 rounded-md text-emerald-400 font-medium w-full place-content-center">
+          <div className="grid grid-cols-2 gap-2 rounded-md text-blue-700 font-medium w-full place-content-center">
             <Link href={`/event/${item?.id}`}>
-              <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4 rounded-bl-lg">
+              <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 hover:text-white py-4 rounded-bl-lg">
                 <PlayIcon className="w-full" />
                 Xem sự kiện
               </div>
             </Link>
-            <div className="grid place-content-center text-center gap-2 hover:bg-emerald-400 hover:text-white py-4" onClick={() => {onOpen(); setSelectedItem(item); setTrangThai(item.trangThai.split(',').map(trangThai => trangThai.trim()))}}>
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 hover:text-white py-4" onClick={() => {onOpen(); setSelectedItem(item); setTrangThai(item.trangThai.split(',').map(trangThai => trangThai.trim()))}}>
               <Edit className="w-full"/>
               Chỉnh sửa trạng thái sự kiện
             </div>

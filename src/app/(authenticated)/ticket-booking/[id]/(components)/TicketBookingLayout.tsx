@@ -37,7 +37,7 @@ const TicketBookingLayout = ({ id, session }) => {
         <div className='bg-slate-50'>
             <EventInfo EventDetail={EventDetail} />
             <BookingBreadcrumbs page={websiteBooking} />
-            <div className='flex flex-col md:flex-row justify-between md:px-[180px]'>
+            <div className='flex flex-col md:flex-row justify-between md:px-8'>
                 {websiteBooking === 'choose-ticket' && (
                     <TicketChoose EventDetail={EventDetail} />
                 )}

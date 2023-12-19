@@ -249,7 +249,7 @@ const Cart = ({ websiteBooking,
             </div>
             <div>
                 <Button
-                    className='w-full mt-10 px-0 bg-emerald-500'
+                    className='w-full mt-10 px-0 bg-blue-700'
                     disabled={isDisabled && websiteBooking === "choose-ticket" || paymentMethod === "" && websiteBooking === "payment"}
                     onClick={() => {
                         if (!isDisabled && websiteBooking === "choose-ticket") {
