@@ -30,7 +30,7 @@ export function UserListSearch({ setSearchWord }) {
                 className="h-[52px] w-[0px] rounded-md m-0 p-0 -ml-[50px] min-w-unit-12 bg-transparent"
                 onClick={searchSubmit}
             >
-                <MagnifyingGlassIcon className="h-6 w-6 text-emerald-400" />
+                <MagnifyingGlassIcon className="h-6 w-6 text-blue-700" />
             </Button>
         </div>
     );

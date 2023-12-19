@@ -41,13 +41,9 @@ export default function Dashboard() {
         fetch("http://worldtimeapi.org/api/timezone/Asia/Bangkok")
             .then(response => response.json())
             .then(data => {
-                const utcDateTime = new Date(data.utc_datetime);
-                const localDateTime = new Date(utcDateTime.getTime() + (utcDateTime.getTimezoneOffset() * 60000));
-
-                // Format the local datetime
-                const formattedDateTime = localDateTime.toISOString().slice(0, 19).replace("T", " ");
-
-                setCurrentDateTime(formattedDateTime);
+                const timestamp = new Date(data.datetime);
+                const formattedDate = timestamp.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' });
+                setCurrentDateTime(formattedDate);
             });
     }, []);
 
@@ -78,7 +74,7 @@ export default function Dashboard() {
                     <Progress
                         aria-label="Loading..."
                         value={parseInt(DashBoardInfo?.totalEvent)}
-                        maxValue={100}
+                        maxValue={1000}
                         classNames={{
                             base: "w-full mt-5",
                             indicator: `bg-yellow-500`,
@@ -166,7 +162,7 @@ export default function Dashboard() {
                     <div className="flex flex-row justify-between items-center">
                         <div>
                             <p className="font-normal text-gray-400">Tổng doanh thu</p>
-                            <p className="text-3xl font-extrabold mt-2">{formatCurrency(DashBoardInfo.totalRevenue)}</p>
+                            <p className="text-3xl font-extrabold mt-2">{formatCurrency(DashBoardInfo.totalRevenue / 3)}</p>
                         </div>
                         <div>
                             <Button className={`bg-purple-100 w-[50px] h-[50px]`}>
@@ -176,7 +172,7 @@ export default function Dashboard() {
                     </div>
                     <Progress
                         aria-label="Loading..."
-                        value={DashBoardInfo.totalRevenue}
+                        value={DashBoardInfo.totalRevenue / 3 }
                         maxValue={10000}
                         classNames={{
                             base: "w-full mt-5",

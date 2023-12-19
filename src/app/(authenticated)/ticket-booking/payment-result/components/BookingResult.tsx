@@ -3,7 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import { useBooking } from '@/hooks/useBooking';
 import Loader from '@/components/Loader';
+import Logo from '@/components/logo';
 
+const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
+    currency: 'VND',
+    style: 'currency',
+});
+
+export function formatCurrency(value: number) {
+    return CURRENCY_FORMAT.format(value);
+}
 
 
 const BookingResult = ({ paymentStatus, setPaymentStatus }) => {
@@ -47,14 +56,16 @@ const BookingResult = ({ paymentStatus, setPaymentStatus }) => {
             ) : (
                 <div className='flex flex-col text-center mt-10'>
                     {paymentStatus === 'completed' && (
-                        <div className='flex flex-col'>
-                            <p className='font-bold text-lg'>Đặt vé thành công</p>
+                        <div className='flex flex-col justify-center items-center'>
+                            <Logo />
+                            <p className='font-bold text-lg mt-1'>Đặt vé thành công</p>
                             <p>Kiểm tra vé đã đặt tại mục Vé của tôi</p>
                         </div>
                     )}
                     {paymentStatus === 'failed' && (
-                        <div className='flex flex-col'>
-                            <p className='font-bold text-lg'>Đặt vé thất bại</p>
+                        <div className='flex flex-col justify-center items-center'>
+                            <Logo />
+                            <p className='font-bold text-lg mt-1'>Đặt vé thất bại</p>
                             <p>Nếu bạn gặp vấn đề thanh toán, hãy thử lại sau.</p>
                         </div>
                     )}
@@ -65,6 +76,10 @@ const BookingResult = ({ paymentStatus, setPaymentStatus }) => {
                                     <tr>
                                         <th className='text-left border p-2'>ID</th>
                                         <td className='text-left border p-2'>{order[0]?.id}</td>
+                                    </tr>
+                                    <tr>
+                                        <th className='text-left border p-2'>Mã đặt chỗ</th>
+                                        <td className='text-left border p-2'>{order[0]?.maDatCho}</td>
                                     </tr>
                                     <tr>
                                         <th className='text-left border p-2'>Ngày đặt hàng</th>
@@ -80,7 +95,7 @@ const BookingResult = ({ paymentStatus, setPaymentStatus }) => {
                                     </tr>
                                     <tr>
                                         <th className='text-left border p-2'>Tổng tiền</th>
-                                        <td className='text-left border p-2'>{order[0]?.tongTien}</td>
+                                        <td className='text-left border p-2'>{formatCurrency(order[0]?.tongTien)}</td>
                                     </tr>
                                 </tbody>
                             </table>

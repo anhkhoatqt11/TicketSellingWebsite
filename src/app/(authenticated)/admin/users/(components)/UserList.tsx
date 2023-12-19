@@ -400,7 +400,7 @@ export default function UserList({ props }) {
                                                 </div>
                                             )}
                                             <Button
-                                                className='w-full col-span-full bg-green-500 text-white mt-4'
+                                                className='w-full col-span-full bg-blue-700 text-white mt-4'
                                                 disabled={isSubmitting}
                                                 onClick={() => {
                                                     onSubmit();

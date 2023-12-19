@@ -61,14 +61,16 @@ const Login = ({ className }: { className?: string }) => {
         if (res?.error) {
             if (res?.error === 'Email or password is incorrect') {
                 toast.error('Email hoặc mật khẩu không chính xác');
+            } else if (res?.error === 'Your account has been locked') {
+                toast.error('Tài khoản của bạn đã bị khoá');
             }
             return;
         }
 
 
         console.log(res);
-        if (!res?.error) { 
-            router.push('/'); 
+        if (!res?.error) {
+            router.push('/');
             toast.success('Đăng nhập thành công');
         }
         setIsLoading(false);
