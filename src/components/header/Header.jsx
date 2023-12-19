@@ -64,6 +64,8 @@ const NavigationMenuDemo = ({ session }) => {
   const [HeaderNav, setHeaderNav] = useState(avatarNav);
   const router = useRouter();
   const pathname = usePathname();
+
+
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
     return () => {

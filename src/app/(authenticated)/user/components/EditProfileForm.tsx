@@ -12,7 +12,7 @@ import { Input, user } from "@nextui-org/react";
 import { checkEmail, checkPhoneNumber } from "@/lib/utils";
 import { Zoom } from "@/components/ui/zoom-image";
 import { useUser } from "@/hooks/useUser";
-
+import { Image } from "@nextui-org/react";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export const EditProfileForm = ({ userId, setIsLoading }) => {
@@ -112,12 +112,14 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
             <div className="font-bold text-sm"></div>
             <div className=" w-full h-full border-2 rounded ml-auto">
               <Zoom key={1} className={"w-full "}>
-                <img
+                <Image
                   src={
                     avatarImageFile[0]?.preview ||
                     avatarImageFile[0]?.url ||
                     defaultAvatar
                   }
+                  width={200}
+                  height={200}
                   alt={avatarImageFile[0]?.name}
                   className={`h-40 w-full rounded-md object-cover object-center`}
                 />
