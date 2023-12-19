@@ -7,7 +7,6 @@ import Logo from "@/components/logo";
 import { SelectLoaiHinhKinhDoanh } from "./SelectLoaiHinhKinhDoanh";
 import { RegisterForm } from "./(organizerRegister)/RegisterForm";
 import { useRole } from "@/hooks/useRole";
-// import { ThongTinForm } from './(agencyRegister)/ThongTinForm';
 
 function OrganizerRegister({ session }) {
   const { fetchOrganizerRoleById } = useRole();
@@ -30,7 +29,7 @@ function OrganizerRegister({ session }) {
   }, []);
   return (
     <div>
-      {userRole === "user" && isLoading ? (
+      {userRole === "user" ? (
         <DialogCustom
           className="w-full lg:w-[70%] h-[80%] lg:h-[95%] flex items-center justify-center bg-slate-50"
           isModalOpen={true}
