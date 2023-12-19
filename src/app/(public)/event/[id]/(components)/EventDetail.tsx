@@ -174,7 +174,8 @@ export function EventDetail({ id }) {
 
                         </AccordionTrigger>
                         <AccordionContent>
-                          <p>{item.moTa}</p>
+                          <p dangerouslySetInnerHTML={{ __html: `${item?.moTa}` }}
+                          ></p>
                         </AccordionContent>
                       </AccordionItem>
                     ))}
@@ -190,19 +191,19 @@ export function EventDetail({ id }) {
                 </div>
 
                 {EventDetail?.user?.loaiHinhKinhDoanh === "1" ? (
-                <div className="mt-4 text-gray-600 text-[14px] flex flex-row">
-                  <div>
-                    <Image src={EventDetail?.user?.avatar} width={100} height={100}></Image>
-                  </div>
-                  <div className='ml-4'>
-                    <p className='text-lg font-bold'>{EventDetail?.user?.hoTenOrganizer}</p>
-                    <div className='mt-1 flex flex-row'>
-                      <PhoneIcon size={18} />
-                      <p className='ml-2'>{EventDetail?.user?.phoneNumber}</p>
+                  <div className="mt-4 text-gray-600 text-[14px] flex flex-row">
+                    <div>
+                      <Image src={EventDetail?.user?.avatar} width={100} height={100}></Image>
+                    </div>
+                    <div className='ml-4'>
+                      <p className='text-lg font-bold'>{EventDetail?.user?.hoTenOrganizer}</p>
+                      <div className='mt-1 flex flex-row'>
+                        <PhoneIcon size={18} />
+                        <p className='ml-2'>{EventDetail?.user?.phoneNumber}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-) : (
+                ) : (
                   <div className="mt-4 text-gray-600 text-[14px] flex flex-row">
                     <div>
                       <Image src={EventDetail?.user?.anhDaiDienToChuc} width={100} height={100}></Image>
@@ -248,6 +249,6 @@ export function EventDetail({ id }) {
         </div>
       )}
     </div>
-  
+
   )
 }
