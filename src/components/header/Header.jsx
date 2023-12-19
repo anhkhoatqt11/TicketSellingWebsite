@@ -108,7 +108,7 @@ const NavigationMenuDemo = ({ session }) => {
       <MobileNav session={session} />
 
       <div className=" py-2 items-center h-full drop-shadow hidden lg:flex">
-        {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null}
+        {/* {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null} */}
         {<Logo />}
         {pathname !== "/search" ? (
           <div className="form-control ">
@@ -164,8 +164,7 @@ const NavigationMenuDemo = ({ session }) => {
                 </DropdownTrigger>
                 <DropdownMenu>
                   <DropdownSection title={`${user?.name}`}>
-                    {
-                      HeaderNav.map((item, index) => (
+                    {HeaderNav.map((item, index) => (
                         <DropdownItem
                           onClick={() => {
                             router.push(item.href);
@@ -175,8 +174,7 @@ const NavigationMenuDemo = ({ session }) => {
                         >
                           {item.name}
                         </DropdownItem>
-                      ))
-                    }
+                      ))}
                     <DropdownItem
                       onClick={() => signOut({ callbackUrl: "/auth/login" })}
                     >
