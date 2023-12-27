@@ -23,7 +23,7 @@ export const CustomRadio = (props) => {
 
 
 
-const PaymentChoose = ({ paymentMethod ,setPaymentMethod}) => {
+const PaymentChoose = ({ paymentMethod, setPaymentMethod }) => {
 
   return (
     <div className='w-full p-4 md:w-2/4 mr-0 md:mr-10'>
@@ -32,13 +32,14 @@ const PaymentChoose = ({ paymentMethod ,setPaymentMethod}) => {
           <p className='text-sm font-semibold text-foreground-500'>LỰA CHỌN HÌNH THỨC THANH TOÁN</p>
         </div>
         <RadioGroup className='p-4' description="Các hình thức thanh toán khác đang được cập nhật" value={paymentMethod} onValueChange={setPaymentMethod}>
-          <CustomRadio description="Thanh toán với VNPAY" value="VNPAY">
+          <CustomRadio className="max-w-[650px]" description="Thanh toán với VNPAY" value="VNPAY">
             VNPAY
           </CustomRadio>
-          <CustomRadio isDisabled description="Thanh toán với Stripe" value="Stripe">
-            Stripe (Đang bảo trì)
+          <CustomRadio className="max-w-[650px]" isDisabled description="Thanh toán với Momo" value="Momo">
+            Momo (Đang bảo trì)
           </CustomRadio>
           <CustomRadio
+            className="max-w-[650px]"
             isDisabled
             description="Thanh toán với Paypal"
             value="Paypal"

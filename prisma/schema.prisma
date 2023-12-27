@@ -41,7 +41,7 @@ model User {
 model SuKien {
   id            Int         @id @default(autoincrement())
   name          String
-  moTa          String?
+  moTa          String?     @db.Text
   diaChi        String?
   hinhAnhSuKien String?     @db.LongText
   ngayBatDau    DateTime
@@ -70,7 +70,7 @@ model ChuDe {
 model Ve {
   id              Int         @id @default(autoincrement())
   name            String
-  moTa            String?
+  moTa            String?     @db.Text
   gia             Float
   mau             String
   soLuong         Int

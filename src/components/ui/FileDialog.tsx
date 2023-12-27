@@ -138,7 +138,7 @@ export function FileDialog<TFieldValues extends FieldValues>({
                 "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                 isDragActive && "border-muted-foreground/50",
                 disabled && "pointer-events-none opacity-60",
-                className
+                
               )}
               {...props}
             >

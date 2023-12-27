@@ -136,36 +136,37 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
       <div className="flex flex-col md:flex-row rounded bg-white p-4">
         <div className="md:basis-1/3 p-2 pr-3">
           {/* avatar */}
-          <div className="flex flex-col items-center gap-y-3 max-w-xs lg:max-w-lg justify-center">
-            <div className="font-bold text-sm"></div>
-            <div className=" w-49 h-49 border-2 rounded-full">
-              <Zoom key={1} className={"w-full "}>
-                <img
-                  src={
-                    avatarImageFile[0]?.preview ||
-                    avatarImageFile[0]?.url ||
-                    defaultAvatar
-                  }
-                  alt={avatarImageFile[0]?.name}
-                  className={`h-48 w-48 rounded-full object-cover object-center`}
-                />
-              </Zoom>
+          <div className="flex flex-col items-center gap-y-3 w-full h-full justify-center">
+            <div className="w-full flex flex-col gap-3 justify-center items-center h-full">
+              <div className=" w-49 h-49 border-2 rounded-full">
+                <Zoom key={1} className={"w-full "}>
+                  <img
+                    src={
+                      avatarImageFile[0]?.preview ||
+                      avatarImageFile[0]?.url ||
+                      defaultAvatar
+                    }
+                    alt={avatarImageFile[0]?.name}
+                    className={`h-48 w-48 rounded-full object-cover object-center`}
+                  />
+                </Zoom>
+              </div>
+              <FileDialog
+                name="images"
+                maxFiles={1}
+                maxSize={1024 * 1024 * 4}
+                files={avatarImageFile}
+                setFiles={setAvatarImageFile}
+                disabled={false}
+              />
             </div>
-            <FileDialog
-              name="images"
-              maxFiles={1}
-              maxSize={1024 * 1024 * 4}
-              files={avatarImageFile}
-              setFiles={setAvatarImageFile}
-              disabled={false}
-            />
           </div>
         </div>
         <div className="md:basis-2/3 p-2 space-y-4 pt-3">
           {/* ten doi tac */}
           {organizerType === "canhan" ? (
             <>
-              <div className="flex flex-col gap-1 max-w-xs lg:max-w-2xl ">
+              <div className="flex flex-col gap-1 w-full ">
                 <Label className="font-bold text-sm">
                   Họ và tên <span className="text-red-500">*</span>
                 </Label>
@@ -176,7 +177,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   }`}
                   variant="bordered"
                   size="lg"
-                  className="max-w-xs lg:max-w-2xl h-[60px] "
+                  className="w-full h-[60px] "
                   radius="sm"
                   value={organizerName}
                   placeholder="Nhập tên cá nhân ban tổ chức"
@@ -185,7 +186,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   }}
                 />
               </div>
-              <div className="flex flex-col gap-1 max-w-xs lg:max-w-2xl ">
+              <div className="flex flex-col gap-1 w-full ">
                 <Label className="font-bold text-sm">
                   Mã số thuế cá nhân <span className="text-red-500">*</span>
                 </Label>
@@ -196,7 +197,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                       ? ""
                       : "Vui lòng nhập mã số thuế cá nhân"
                   }`}
-                  className="max-w-xs lg:max-w-2xl "
+                  className="w-full "
                   radius="sm"
                   variant="bordered"
                   size="lg"
@@ -210,7 +211,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
             </>
           ) : (
             <>
-              <div className="flex flex-col gap-1 max-w-xs lg:max-w-2xl ">
+              <div className="flex flex-col gap-1 w-full ">
                 <Label className="font-bold text-sm">
                   Tên doanh nghiệp <span className="text-red-500">*</span>
                 </Label>
@@ -219,7 +220,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   errorMessage={`${
                     companyName !== "" ? "" : "Vui lòng nhập tên doanh nghiệp"
                   }`}
-                  className="max-w-xs lg:max-w-2xl h-[52px]"
+                  className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
                   size="lg"
@@ -230,7 +231,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   }}
                 />
               </div>
-              <div className="flex flex-col gap-1 max-w-xs lg:max-w-2xl ">
+              <div className="flex flex-col gap-1 w-full ">
                 <Label className="font-bold text-sm">
                   Mã số đăng ký kinh doanh{" "}
                   <span className="text-red-500">*</span>
@@ -242,7 +243,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                       ? ""
                       : "Vui lòng nhập mã số đăng ký kinh doanh"
                   }`}
-                  className="max-w-xs lg:max-w-2xl h-[52px]"
+                  className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
                   size="lg"
@@ -253,7 +254,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   }}
                 />
               </div>
-              <div className="flex flex-col gap-1 max-w-xs lg:max-w-2xl ">
+              <div className="flex flex-col gap-1 w-full ">
                 <Label className="font-bold text-sm">
                   Nơi cấp <span className="text-red-500">*</span>
                 </Label>
@@ -264,7 +265,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                       ? ""
                       : "Vui lòng nhập nơi cấp mã số đăng ký kinh doanh"
                   }`}
-                  className="max-w-xs lg:max-w-2xl h-[52px]"
+                  className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
                   size="lg"
@@ -275,7 +276,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   }}
                 />
               </div>
-              <div className="flex flex-col gap-1 max-w-xs lg:max-w-2xl ">
+              <div className="flex flex-col gap-1 w-full ">
                 <Label className="font-bold text-sm">
                   Ngày cấp <span className="text-red-500">*</span>
                 </Label>
@@ -288,7 +289,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   radius="sm"
                   variant="bordered"
                   size="lg"
-                  className="max-w-xs lg:max-w-2xl h-[52px]"
+                  className="w-full h-[52px]"
                   value={ngayCap}
                   placeholder="Chọn ngày cấp mã số đăng ký kinh doanh"
                   onChange={(e) => {
