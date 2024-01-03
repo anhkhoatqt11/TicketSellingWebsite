@@ -37,9 +37,7 @@ const Cart = ({ websiteBooking,
     const [couponId, setCouponId] = React.useState(null);
     var crypto = require("crypto");
 
-
     const dispatch = useDispatch();
-
 
     const buyList = useSelector((state: RootState) => state.ticket.buyList);
 
@@ -263,7 +261,7 @@ const Cart = ({ websiteBooking,
                     {websiteBooking === "payment" ? "HOÀN TẤT ĐẶT VÉ" : "TIẾP TỤC"}
                 </Button>
                 {websiteBooking !== 'choose-ticket' && (
-                    <Button className="w-full mt-8 px-0" onClick={() => {setWebsiteBooking('choose-ticket');setIsCouponUsing(false)}}>
+                    <Button className="w-full mt-8 px-0" onClick={() => { setWebsiteBooking('choose-ticket'); setIsCouponUsing(false) }}>
                         QUAY LẠI
                     </Button>
                 )}
