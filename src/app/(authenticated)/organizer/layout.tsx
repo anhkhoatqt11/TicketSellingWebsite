@@ -20,6 +20,11 @@ const navItems = [
     value: "event",
     icon: <CalendarIcon className="mr-2 ms-3 w-6 h-6" />,
   },
+  {
+    title: "Thống kê",
+    value: "dashboard",
+    icon: <CalendarIcon className="mr-2 ms-3 w-6 h-6" />,
+  },
 ];
 export default async function OrganizerLayout({
   children,

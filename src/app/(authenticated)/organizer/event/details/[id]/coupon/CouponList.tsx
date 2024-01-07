@@ -131,6 +131,9 @@ export function CouponList({ session, id }) {
             setIsLoading(false);
           }
         });
+        if (res.MaGiamGia?.length === 0) {
+          setIsLoading(false);
+        }
       });
     };
     fetchEventDetails();
@@ -177,11 +180,11 @@ export function CouponList({ session, id }) {
             <DatePicker date={endDate} setDate={setEndDate} />
           </div>
         </div>
-        <div className="w-full px-12 grid grid-cols-7 text-sm lg:text-base font-semibold mt-6 ">
+        <div className="w-full px-12 grid grid-cols-5 md:grid-cols-7 text-sm lg:text-base font-semibold mt-6 ">
           <div>Mã giảm giá</div>
           <div>Mức giảm</div>
-          <div>Bắt đầu</div>
-          <div>Kết thúc</div>
+          <div className="hidden md:block">Bắt đầu</div>
+          <div className="hidden md:block">Kết thúc</div>
           <div>Loại vé</div>
           <div>Trạng thái</div>
           <div></div>
