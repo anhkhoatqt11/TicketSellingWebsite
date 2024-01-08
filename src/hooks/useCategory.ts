@@ -7,7 +7,14 @@ export const useCategory = () => {
     console.log(res);
     return res;
   };
+  const fetchOrganizerCategories = async () => {
+    let endPointUrl = `/api/category/organizer`;
+    const res = await getRequest({ endPoint: endPointUrl });
+    return res;
+  };
+
   return {
     fetchAllCategories,
+    fetchOrganizerCategories
   };
 };

@@ -8,6 +8,7 @@ import { Footer } from "@/components/footer";
 
 import CalendarIcon from "@/components/calendar";
 import UserIcon from "@/components/userprofileicon";
+import AnalyticsIcon from "@components/analytics";
 
 const navItems = [
   {
@@ -23,7 +24,7 @@ const navItems = [
   {
     title: "Thống kê",
     value: "dashboard",
-    icon: <CalendarIcon className="mr-2 ms-3 w-6 h-6" />,
+    icon: <AnalyticsIcon className="mr-2 ms-3 w-6 h-6" />,
   },
 ];
 export default async function OrganizerLayout({

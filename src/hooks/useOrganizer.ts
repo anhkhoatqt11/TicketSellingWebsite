@@ -2,6 +2,13 @@ import { getRequest, postRequest } from '@/lib/fetch';
 import toast from 'react-hot-toast';
 
 export const useOrganizer = () => {
+  const fetchTotalInfo = async () => {
+    const res = await getRequest({
+        endPoint: `/api/organizer/dashboard`,
+    });
+    return res;
+  }
+
   const fetchOrganizerById = async (id) => {
     const res = await getRequest({endPoint: `/api/organizer/organizer-information?userId=${id}`})
     return res;
@@ -22,6 +29,7 @@ export const useOrganizer = () => {
 
   return {
     // fetchAllDoiTac,
+    fetchTotalInfo,
     fetchOrganizerById,
     uploadOrganizerInfo
   };
