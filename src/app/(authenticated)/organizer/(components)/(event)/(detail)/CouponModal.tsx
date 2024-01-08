@@ -35,8 +35,8 @@ export const CouponModal = ({ props }) => {
       toast.error("Vui lòng điền đầy đủ thông tin");
       return;
     }
-    if (code.length < 6) {
-      toast.error("Mã giảm giá phải có tối thiểu 6 kí tự");
+    if (code.length < 6 || code.length > 10) {
+      toast.error("Mã giảm giá phải có tối thiểu 6 kí tự và tối đa 10 kí tự");
       return;
     }
     if (

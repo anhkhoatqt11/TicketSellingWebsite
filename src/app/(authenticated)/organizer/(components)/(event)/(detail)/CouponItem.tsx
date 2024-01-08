@@ -80,23 +80,23 @@ export const CouponItemComponent = ({ props }) => {
           action: "edit",
         }}
       />
-      <div className="grid grid-cols-7 shadow-md rounded-md px-12 py-4 mb-4 ">
-        <div className="text-gray-600 text-sm flex align-middle items-center truncate">
+      <div className="grid grid-cols-5 md:grid-cols-7 shadow-md rounded-md px-12 py-4 mb-4 ">
+        <div className="text-gray-600 text-sm flex align-middle items-center truncate p-1">
           {props.code}
         </div>
-        <div className="text-gray-600 text-sm flex align-middle items-center truncate">
+        <div className="text-gray-600 text-sm flex align-middle items-center truncate p-1">
           {props.price ? currencyFormat(props.price) : `${props.percent}%`}
         </div>
-        <div className="text-gray-600 text-sm flex align-middle items-center truncate">
+        <div className="text-gray-600 text-sm hidden md:flex align-middle items-center truncate p-1">
           {convertDateTimeToDate(prismaDateToNextDate(props.start))}
         </div>
-        <div className="text-gray-600 text-sm flex align-middle items-center truncate">
+        <div className="text-gray-600 text-sm hidden md:flex align-middle items-center truncate p-1">
           {convertDateTimeToDate(prismaDateToNextDate(props.end))}
         </div>
-        <div className="text-gray-600 text-sm flex align-middle items-center truncate">
+        <div className="text-gray-600 text-sm flex align-middle items-center truncate p-1">
           {props.ticketName}
         </div>
-        <div className="text-gray-600 text-sm flex align-middle items-center truncate">
+        <div className="text-gray-600 text-sm flex align-middle items-center truncate p-1">
           {props.state}
         </div>
         <div className="flex flex-row gap-2 flex-wrap">
