@@ -71,7 +71,7 @@ export function EventListItemComponent({ item }) {
             {getDateTimeKetThuc(item?.ngayKetThuc) &&
             item?.trangThai === "Đã duyệt" ? (
               <div className="absolute top-2 left-2 w-[180px]">
-                <div className="bg-blue-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
+                <div className="bg-blue-500 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
                   <SiEventstore className="mt-1" />
                   <div>Đang hoạt động</div>
                 </div>
@@ -127,31 +127,31 @@ export function EventListItemComponent({ item }) {
         <Separator />
         <div className="grid grid-cols-5 gap-2 rounded-md text-blue-700 h-full font-medium w-full place-content-center">
           <Link href={`/organizer/event/details/${item?.id}/guest-list`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4 rounded-bl-lg">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-500 h-full hover:text-white py-4 rounded-bl-lg">
               <IoPeople className="w-full" />
               Danh sách khách
             </div>
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/coupon`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-500 h-full hover:text-white py-4">
               <BiSolidDiscount className="w-full" />
               Mã giảm giá
             </div>
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/edit`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-500 h-full hover:text-white py-4">
               <AiFillEdit className="w-full" />
               Chỉnh sửa
             </div>
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/summary`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-500 h-full hover:text-white py-4">
               <FaChartBar className="w-full" />
               Tổng kết
             </div>
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/check-in`}>
-            <div className="grid place-content-center text-center gap-2 hover:bg-blue-700 h-full hover:text-white py-4 rounded-br-lg">
+            <div className="grid place-content-center text-center gap-2 hover:bg-blue-500 h-full hover:text-white py-4 rounded-br-lg">
               <FaQrcode className="w-full" />
               Checkin
             </div>

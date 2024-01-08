@@ -214,7 +214,7 @@ export function CouponList({ session, id }) {
             ></CouponItemComponent>
           ))}
           <Button
-            className="w-full bg-blue-700 mt-4 text-white font-semibold py-6 text-base"
+            className="w-full bg-blue-500 mt-4 text-white font-semibold py-6 text-base"
             onClick={onOpen}
           >
             Tạo mã giảm giá mới

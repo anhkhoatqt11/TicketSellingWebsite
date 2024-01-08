@@ -35,11 +35,11 @@ const TicketChoose = ({ EventDetail }) => {
             });
     }, []);
 
-    const handleAddToBuyList = (ticketId: number, name: string, price: number, maxQuantity: number, quantityLeft: number) => {
+    const handleAddToBuyList = (ticketId: number, name: string, price: number, maxQuantity: number, minimumQuantity: number, quantityLeft: number) => {
         const existingItem = buyList.find((item) => item.ticketId === ticketId);
 
         if (quantityLeft > 0 && (!existingItem || existingItem.quantity < Math.min(maxQuantity, quantityLeft))) {
-            dispatch(addToBuyList({ ticketId, name, price, quantity: 1 }));
+            dispatch(addToBuyList({ ticketId, name, price, quantity: 1,maxQuantity,minimumQuantity, quantityLeft }));
         }
     };
 
@@ -97,7 +97,7 @@ const TicketChoose = ({ EventDetail }) => {
                                                     {buyList.find((item) => item.ticketId === ticket.id)?.quantity || 0}
                                                 </p>
                                                 <Button className='rounded-md bg-transparent text-black border border-solid border-blue-500 h-[20px] hover:bg-blue-500 hover:text-white'
-                                                    onClick={() => handleAddToBuyList(ticket.id, ticket.name, ticket.gia, ticket.soLuongToiDa, ticket.soLuong)}
+                                                    onClick={() => handleAddToBuyList(ticket.id, ticket.name, ticket.gia, ticket.soLuongToiDa, ticket.soLuongToiThieu ,ticket.soLuong)}
                                                     disabled={
                                                         (buyList.find((item) => item.ticketId === ticket.id)?.quantity || 0) >=
                                                         Math.min(ticket.soLuongToiDa, ticket.soLuong)

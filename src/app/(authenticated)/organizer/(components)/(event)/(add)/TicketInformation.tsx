@@ -248,7 +248,7 @@ function TicketInformation({ props }) {
                 }}
               />
               <Button
-                className="w-1/3 bg-blue-700 text-white"
+                className="w-1/3 bg-blue-500 text-white"
                 radius="sm"
                 onClick={addNewEvent}
               >

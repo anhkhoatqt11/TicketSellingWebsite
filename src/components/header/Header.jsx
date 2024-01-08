@@ -131,7 +131,7 @@ const NavigationMenuDemo = ({ session }) => {
                 <div className="flex gap-16">
                   <div>
                     <Link href="/organizer/event">
-                      <Button className="!box-content h-7 w-full rounded-full bg-blue-700 hover:bg-amber-300 hover:text-black">
+                      <Button className="!box-content h-7 w-full rounded-full bg-blue-500 hover:bg-amber-300 hover:text-black">
                         Tạo sự kiện
                       </Button>
                     </Link>
@@ -193,7 +193,7 @@ const NavigationMenuDemo = ({ session }) => {
         ) : (
           <div className="ml-auto mr-8">
             <Link href={"/auth/login"}>
-              <Button className="!box-content h-8 w-full rounded-full bg-blue-700 hover:bg-amber-300 hover:text-black">
+              <Button className="!box-content h-8 w-full rounded-full bg-blue-500 hover:bg-amber-300 hover:text-black">
                 Đăng nhập
               </Button>
             </Link>

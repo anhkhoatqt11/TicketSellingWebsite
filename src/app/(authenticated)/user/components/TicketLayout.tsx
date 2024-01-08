@@ -51,7 +51,7 @@ const TicketLayout = ({ id }: Props) => {
             {data && data.length > displayedTickets && (
               <div className="mt-3 flex justify-center">
                 <button
-                  className="btn w-[200px] text-white rounded-full bg-blue-700 hover:bg-blue-800"
+                  className="btn w-[200px] text-white rounded-full bg-blue-500 hover:bg-blue-800"
                   onClick={handleShowMore}
                 >
                   Hiển thị thêm

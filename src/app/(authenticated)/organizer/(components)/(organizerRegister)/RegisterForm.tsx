@@ -446,7 +446,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
           onClick={() => {
             onSubmit();
           }}
-          className="w-[100%] h-12 text-white bg-blue-700 hover:bg-blue-800 transition duration-300 ease-in-out active:scale-90"
+          className="w-[100%] h-12 text-white bg-blue-500 hover:bg-blue-800 transition duration-300 ease-in-out active:scale-90"
         >
           Xác nhận
         </Button>

@@ -10,7 +10,7 @@ const radio = tv({
   variants: {
     isSelected: {
       true: {
-        base: "border-blue-700 bg-blue-600 hover:bg-blue-700 hover:border-blue-700",
+        base: "border-blue-700 bg-blue-600 hover:bg-blue-500 hover:border-blue-700",
         content: "text-primary-foreground pl-1",
       },
     },

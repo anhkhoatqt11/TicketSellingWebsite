@@ -100,7 +100,7 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                                                                 "text-white": isCurrentPage,
                                                                 "hover:text-slate-12": title !== item.title,
                                                                 "font-bold": isCurrentPage,
-                                                                "bg-blue-700": isCurrentPage,
+                                                                "bg-blue-500": isCurrentPage,
                                                             }
                                                         )}
                                                     >

@@ -16,23 +16,23 @@ function BreadcrumbStep({ color, icon, text, background }) {
 
 const pageSteps = {
     "choose-ticket": [
-        { background: "blue-700 text-white", color: "blue-700", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
+        { background: "blue-500 text-white", color: "blue-500", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
         { background: "white", color: "gray-400", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
         { background: "white", color: "gray-400", icon: <CheckIcon size={25} />, text: "HOÀN TẤT" },
     ],
     "payment": [
-        { background: "white", color: "blue-700", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
-        { background: "blue-700 text-white", color: "blue-700", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
+        { background: "white", color: "blue-500", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
+        { background: "blue-500 text-white", color: "blue-500", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
         { background: "white", color: "gray-400", icon: <CheckIcon size={25} />, text: "HOÀN TẤT" },
     ],
     "completed": [
-        { background: "white", color: "blue-700", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
-        { background: "white", color: "blue-700", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
-        { background: "blue-700 text-white", color: "blue-700", icon: <CheckIcon size={25} />, text: "HOÀN TẤT" },
+        { background: "white", color: "blue-500", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
+        { background: "white", color: "blue-500", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
+        { background: "blue-500 text-white", color: "blue-500", icon: <CheckIcon size={25} />, text: "HOÀN TẤT" },
     ],
     "failed": [
-        { background: "white", color: "blue-700", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
-        { background: "white", color: "blue-700", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
+        { background: "white", color: "blue-500", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
+        { background: "white", color: "blue-500", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
         { background: "red-400 text-white", color: "red-400", icon: <X size={25} />, text: "THẤT BẠI" },
     ],
 };

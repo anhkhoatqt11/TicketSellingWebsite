@@ -125,7 +125,7 @@ export function EventDetail({ id }) {
                 {" "}
                 {/* Center button on mobile and push it to the right on larger screens */}
                 <Link href={`/ticket-booking/${EventDetail.id}`}>
-                  <Button className="w-full md:w-[340px] font-bold bg-blue-700 hover:bg-amber-300 hover:text-black">
+                  <Button className="w-full md:w-[340px] font-bold bg-blue-500 hover:bg-amber-300 hover:text-black">
                     Đặt vé ngay
                   </Button>
                 </Link>
@@ -287,7 +287,7 @@ export function EventDetail({ id }) {
                     {" "}
                     {/* Center button on mobile and push it to the right on larger screens */}
                     <Link href={`/ticket-booking/${EventDetail.id}`}>
-                      <Button className="w-full font-bold bg-blue-700 hover:bg-amber-300 !box-border hover:text-black">
+                      <Button className="w-full font-bold bg-blue-500 hover:bg-amber-300 !box-border hover:text-black">
                         Đặt vé ngay
                       </Button>
                     </Link>
