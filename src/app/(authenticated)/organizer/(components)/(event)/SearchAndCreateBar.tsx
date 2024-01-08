@@ -36,7 +36,7 @@ export function SearchAndCreateBar({ setSearchWord }) {
         </Button>
       </div>
       <Button
-        className="h-[52px] w-full md:w-[200px] rounded-md m-0 p-0 font-medium bg-blue-700 text-base text-white mr-6 md:mr-6"
+        className="h-[52px] w-full md:w-[200px] rounded-md m-0 p-0 font-medium bg-blue-500 text-base text-white mr-6 md:mr-6"
         onClick={() => {
           router.push("/organizer/event/add");
         }}

@@ -35,6 +35,7 @@ const Cart = ({ websiteBooking,
     const [discountPrice, setDiscountPrice] = React.useState(0);
     const [orginalBuyList, setOrginalBuyList] = React.useState([]);
     const [couponId, setCouponId] = React.useState(null);
+    const [allItemsMeetMinimumQuantity, setAllItemsMeetMinimumQuantity] = React.useState(true);
     var crypto = require("crypto");
 
     const dispatch = useDispatch();
@@ -60,6 +61,7 @@ const Cart = ({ websiteBooking,
                     // No discount applied
                     discountedPrice = item.price;
                 }
+
                 return total + discountedPrice * item.quantity;
             } else {
                 return total + item.totalPrice;
@@ -67,8 +69,14 @@ const Cart = ({ websiteBooking,
         }, 0);
     };
 
+    const isMinimumQuantityMet = (item) => {
+        return item.minimumQuantity <= item.quantity;
+    };
+
     useEffect(() => {
-        setIsDisabled(buyList.length === 0);
+        const allItemsMeetMinimumQuantity = buyList.every(isMinimumQuantityMet);
+        setAllItemsMeetMinimumQuantity(allItemsMeetMinimumQuantity);
+        setIsDisabled(buyList.length === 0 || !allItemsMeetMinimumQuantity);
         if (websiteBooking === "payment") {
             setIsDisabled(paymentMethod === "");
             const orginalBuyLists = buyList.map((item) => { return item; });
@@ -224,6 +232,11 @@ const Cart = ({ websiteBooking,
                                 <p>{formatCurrency(item.totalPrice)}</p>
                             </div>
                         </div>
+                        {item.minimumQuantity && item.quantity < item.minimumQuantity && (
+                            <div className='mx-4 text-red-500 font-bold text-sm pb-3'>
+                                <p>{`${item.name} không đáp ứng số lượng tối thiểu (${item.minimumQuantity} vé)`}</p>
+                            </div>
+                        )}
                         <hr className='border-dashed'></hr>
                     </div>
                 ))}
@@ -247,7 +260,7 @@ const Cart = ({ websiteBooking,
             </div>
             <div>
                 <Button
-                    className='w-full mt-10 px-0 bg-blue-700'
+                    className='w-full mt-10 px-0 bg-blue-500'
                     disabled={isDisabled && websiteBooking === "choose-ticket" || paymentMethod === "" && websiteBooking === "payment"}
                     onClick={() => {
                         if (!isDisabled && websiteBooking === "choose-ticket") {

@@ -133,7 +133,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
               setFiles={setAvatarImageFile}
               disabled={false}
               className={
-                " bg-blue-700 hover:bg-blue-800 hover:text-white text-white"
+                " bg-blue-500 hover:bg-blue-800 hover:text-white text-white"
               }
             />
           </div>
@@ -252,7 +252,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
           onClick={() => {
             onSubmit();
           }}
-          className="w-[100%] h-12 text-white bg-blue-700 hover:bg-blue-800 transition duration-300 ease-in-out active:scale-90"
+          className="w-[100%] h-12 text-white bg-blue-500 hover:bg-blue-800 transition duration-300 ease-in-out active:scale-90"
         >
           Xác nhận
         </Button>

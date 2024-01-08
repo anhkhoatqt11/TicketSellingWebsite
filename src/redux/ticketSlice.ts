@@ -11,8 +11,9 @@ interface Ticket {
   id: number;
   name: string;
   price: number;
-  maxQuantity: number; // Maximum quantity allowed for this ticket
-  quantityLeft: number; // Quantity left from the server
+  maxQuantity: number;
+  minimumQuantity: number; // Minimum quantity required for this ticket
+  quantityLeft: number;
   // ... other ticket properties
 }
 
@@ -22,6 +23,7 @@ interface BuyListItem {
   price: number;
   quantity: number;
   totalPrice: number;
+  minimumQuantity: number;
   maxQuantity: number;
   quantityLeft: number;
 }
@@ -39,7 +41,7 @@ const ticketSlice = createSlice({
       state.tickets = action.payload;
     },
     addToBuyList: (state, action: PayloadAction<BuyListItem>) => {
-      const { ticketId, name, price, quantity, maxQuantity, quantityLeft } = action.payload;
+      const { ticketId, name, price, quantity, maxQuantity, minimumQuantity, quantityLeft } = action.payload;
       const existingItem = state.buyList.find((item) => item.ticketId === ticketId);
 
       if (existingItem) {
@@ -56,6 +58,7 @@ const ticketSlice = createSlice({
           quantity,
           totalPrice: price * quantity,
           maxQuantity,
+          minimumQuantity,
           quantityLeft,
         });
       }

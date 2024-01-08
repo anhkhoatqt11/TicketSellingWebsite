@@ -234,7 +234,7 @@ const Register = ({
                 </div>
               </div>
 
-              <Button type="submit" className="font-bold bg-blue-700 hover:bg-amber-300 hover:text-black">
+              <Button type="submit" className="font-bold bg-blue-500 hover:bg-amber-300 hover:text-black">
                 Đăng ký
               </Button>
             </div>

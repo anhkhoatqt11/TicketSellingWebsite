@@ -62,7 +62,7 @@ const NavbarLinks = ({ data }) => {
         <div>
           <Link
             href={"/search"}
-            className="flex items-center justify-center text-center p-2 bg-blue-700 rounded-lg text-white hover:bg-amber-300 hover:text-black"
+            className="flex items-center justify-center text-center p-2 bg-blue-500 rounded-lg text-white hover:bg-amber-300 hover:text-black"
           >
             Tìm kiếm sự kiện
           </Link>

@@ -72,6 +72,7 @@ const Login = ({ className }: { className?: string }) => {
         if (!res?.error) {
             router.push('/');
             toast.success('Đăng nhập thành công');
+            router.refresh();
         }
         setIsLoading(false);
         console.log(res);
@@ -146,7 +147,7 @@ const Login = ({ className }: { className?: string }) => {
                                     />
                                 </div>
                             </div>
-                            <Button className='font-bold bg-blue-700 hover:bg-amber-300 hover:text-black' type="submit">Đăng nhập</Button>
+                            <Button className='font-bold bg-blue-500 hover:bg-amber-300 hover:text-black' type="submit">Đăng nhập</Button>
                             <p className="mt-10 px-8 text-center text-sm text-muted-foreground">
                                 Chưa có tài khoản?{' '}
                                 <Link className="font-bold underline text-black" href="/auth/register">

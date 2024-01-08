@@ -153,7 +153,7 @@ const SearchComponent = ({ setSearchProps }: props) => {
                 />
               </div>
               <Button
-                className="text-white bg-blue-700 hover:bg-amber-300 hover:text-black"
+                className="text-white bg-blue-500 hover:bg-amber-300 hover:text-black"
                 type="submit"
               >
                 Tìm kiếm
