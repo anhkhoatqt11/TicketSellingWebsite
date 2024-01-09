@@ -102,42 +102,56 @@ const TicketItem = ({ ticketItem, onOpen, setSelectedMaDatCho }: TicketItemProps
   const [isExpanded, setExpanded] = useState(false);
   return (
     <Card className="py-4 mt-4">
-      <CardBody className="pb-0 pt-2 px-4 flex-col-reverse md:flex-row items-start">
-        <div className="overflow-visible py-2 pb-0 pt-2 px-4">
-          <div className="flex flex-col">
-            <small className="text-default-500">TÊN SỰ KIỆN</small>
-            <p className="text-md font-bold text-blue-500">{name}</p>
+      <CardBody className="pb-0 pt-2 px-4">
+        <div className="flex flex-col-reverse md:flex-row">
+          <div className="overflow-visible py-2 pb-0 pt-2 px-4 md:w-2/3">
+            <div className="flex flex-col">
+              <small className="text-default-500">TÊN SỰ KIỆN</small>
+              <p className="text-md font-bold text-blue-500">{name}</p>
+            </div>
+            <Divider className="my-2" />
+            <div className="flex flex-col">
+              <small className="text-default-500">MÃ ĐẶT CHỖ</small>
+              <p className="text-md font-bold text-blue-500">{maDatCho}</p>
+              <Button className="bg-blue-600 font-bold h-[30px]" onClick={() => { onOpen(); setSelectedMaDatCho(maDatCho) }}>Xem mã QR Code <BiRightArrowAlt /></Button>
+            </div>
+            <Divider className="my-2" />
+            <div className="flex flex-col">
+              <small className="text-default-500">THỜI GIAN</small>
+              {convertDateTimeToDate(ngayBatDau)}
+              {" - "}
+              {convertDateTimeToDate(ngayKetThuc)}
+            </div>
+            <div className="flex flex-col mt-2">
+              <small className="text-default-500">ĐỊA ĐIỂM</small>
+              {diaChi}
+            </div>
           </div>
-          <Divider className="my-2" />
-          <div className="flex flex-col">
-            <small className="text-default-500">MÃ ĐẶT CHỖ</small>
-            <p className="text-md font-bold text-blue-500">{maDatCho}</p>
-            <Button className="bg-blue-600 font-bold h-[30px]" onClick={() => {onOpen(); setSelectedMaDatCho(maDatCho)}}>Xem mã QR Code <BiRightArrowAlt /></Button>
+          <div>
+            <Image
+              alt="Card background"
+              className="object-cover rounded-xl"
+              src={hinhAnhSuKien}
+              width={1000}
+              height={200}
+              objectFit="cover"
+            />
           </div>
-          <Divider className="my-2" />
+        </div>
+        <div className="px-4">
           <div className="flex flex-col">
-            <small className="text-default-500">THỜI GIAN</small>
-            {convertDateTimeToDate(ngayBatDau)}
-            {" - "}
-            {convertDateTimeToDate(ngayKetThuc)}
-          </div>
-          <div className="flex flex-col mt-2">
-            <small className="text-default-500">ĐỊA ĐIỂM</small>
-            {diaChi}
-          </div>
-          <Divider className="my-2" />
-          <div className="flex flex-col">
+            <Divider className="my-2" />
             <small className="text-default-500">DANH SÁCH VÉ</small>
             {HoaDonVe.map((hoaDon, index) => (
               <div key={index} className="flex items-center m-3">
                 <IoTicketOutline className="h-8 w-8" color={hoaDon.ve.mau} />
                 <div className="ml-3 flex-1">
                   <h1 className="text-medium font-extrabold">{hoaDon.ve.name}</h1>
-                  <p className=" text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
+                  <p className="text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
                     Mô tả vé: {hoaDon.ve.moTa}
                   </p>
                   <br></br>
-                  <p className=" text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
+                  <p className="text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
                     Số lượng: <span className="text-blue-500">{hoaDon.soLuong}</span>
                   </p>
                 </div>
@@ -152,16 +166,8 @@ const TicketItem = ({ ticketItem, onOpen, setSelectedMaDatCho }: TicketItemProps
             <p className="text-md font-bol">Tổng tiền: <span className="text-blue-500 font-semibold">{formatCurrency(tongTien)}</span></p>
           </div>
         </div>
-        <Image
-          alt="Card background"
-          className="object-cover rounded-xl"
-          src={hinhAnhSuKien}
-          width={1000}
-          height={200}
-          objectFit="cover"
-        />
-      </CardBody>
 
+      </CardBody>
     </Card>
   );
 };
