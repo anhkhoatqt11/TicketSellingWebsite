@@ -9,7 +9,22 @@ import { Mail, Phone, User } from 'lucide-react';
 import Coupon from './Coupon';
 import { updateBuyList } from '@/redux/ticketSlice';
 import { useDispatch } from 'react-redux';
+import {
+    ZaloPayClient,
+    TokenizationAPI,
+    AgreementBindRequest,
+    AgreementBindResponse
+} from "@zalopay-oss/zalopay-nodejs";
 
+
+const client = new ZaloPayClient({
+    appId: "2554",
+    key1: "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn",
+    key2: "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf",
+    callbackUrl: "http://localhost:3000/",
+    env: "sandbox"
+});
+const tokenizationAPI: TokenizationAPI = new TokenizationAPI(client);
 
 
 const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
@@ -142,6 +157,26 @@ const Cart = ({ websiteBooking,
         router.push(uploadPaymentSuccess.data);
     }
 
+    const onPaymentZaloPay = async () => {
+        const request: AgreementBindRequest = {
+            app_id: 0,
+            app_trans_id: "",
+            binding_type: AgreementBindRequest.BindingTypeEnum.Wallet,
+            callback_url: "",
+            identifier: "",
+            mac: "",
+            max_amount: 0,
+            redirect_deep_link: "",
+            redirect_url: "",
+            req_date: 0,
+            binding_data: ""
+        };
+
+        tokenizationAPI
+            .bind(request)
+            .then(bindResponse => console.log(bindResponse))
+            .catch(error => console.log(error));
+    }
 
 
     return (
@@ -266,8 +301,11 @@ const Cart = ({ websiteBooking,
                         if (!isDisabled && websiteBooking === "choose-ticket") {
                             setWebsiteBooking("payment");
                         }
-                        if (websiteBooking === "payment") {
+                        if (websiteBooking === "payment" && paymentMethod === "VNPAY") {
                             onPayment();
+                        }
+                        if (websiteBooking === "payment" && paymentMethod === "ZaloPay") {
+                            onPaymentZaloPay();
                         }
                     }}
                 >
