@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import LiveMusic from "@/components/livemusic";
@@ -10,6 +11,7 @@ import SportIcon from "@/components/sport";
 import OutsideIcon from "@/components/outside";
 import CalendarIcon from "@/components/calendar";
 import { Button } from "@/components/ui/button";
+import LicenseLogo from "@/components/license";
 const NavbarLinks = ({ data }) => {
   const getIconById = (id) => {
     switch (id) {
@@ -51,7 +53,7 @@ const NavbarLinks = ({ data }) => {
             <li>
               <Link
                 href={`/search/?category=${item.id}`} //url search
-                className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-blue-300 hover:text-white"
+                className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-[#dcdcdc]"
               >
                 {getIconById(item.id)}
                 <span className="text-sm">{item.name}</span>
@@ -59,13 +61,29 @@ const NavbarLinks = ({ data }) => {
             </li>
           </div>
         ))}
-        <div>
-          <Link
-            href={"/search"}
-            className="flex items-center justify-center text-center p-2 bg-blue-500 rounded-lg text-white hover:bg-amber-300 hover:text-black"
-          >
-            Tìm kiếm sự kiện
-          </Link>
+        <div className="mt-6 pt-6">
+          <div className="items-center w-full flex flex-row gap-2">
+            <img alt="TicketBox" src="/license1.jpg" className="w-32" />
+          </div>
+          <div className="flex flex-col gap-2 mt-3 ml-1">
+            <div className="text-[12px] text-gray-500 ">
+              Công ty TNHH TicketNow
+            </div>
+            <div className="text-[12px] text-gray-500 ">
+              Đại diện theo pháp luật: Đoàn Lê Tuấn Thành
+            </div>
+            <div className="text-[12px] text-gray-500 ">
+              Địa chỉ: UIT, Phường Linh Trung, Thành phố Thủ Đúc, TP. Hồ Chí
+              Minh
+            </div>
+            <div className="text-[12px] text-gray-500 ">
+              Hotline: 1900.0000 - Email: support@ticketnow.vn
+            </div>
+            <div className="text-[12px] text-gray-500 ">
+              Giấy chứng nhận đăng ký doanh nghiệp số: 0123456789, cấp lần đầu
+              ngày 12/12/2023 bởi Sở Kế Hoạch và Đầu Tư TP. Hồ Chí Minh
+            </div>
+          </div>
         </div>
       </ul>
     </div>

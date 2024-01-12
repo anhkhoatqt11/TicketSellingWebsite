@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useEvent } from "@/hooks/useEvent";
 import ItemComponent from "./ItemComponent";
 import { useQuery } from "@tanstack/react-query";
@@ -18,9 +19,9 @@ export function ListComponent() {
 
   return (
     <>
-      <h1 className="text-2xl font-bold dark:text-white">
-        Danh sách sự kiện đang diễn ra
-      </h1>
+      <div className="my-6">
+        <img src="/sukiennoibat.png" alt="" className="h-24" />
+      </div>
       {!isLoading ? (
         <div className="flex h-screen items-center justify-center">
           <Loader />
