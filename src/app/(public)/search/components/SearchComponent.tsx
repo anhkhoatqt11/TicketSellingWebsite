@@ -41,6 +41,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useCategory } from "@/hooks/useCategory";
 import { useSearchParams } from "next/navigation";
+import { hover_color, main_color } from "../../../../../public/color";
 
 const diaDiem = [
   { label: "Tất cả địa điểm", value: "" },
@@ -129,9 +130,9 @@ const SearchComponent = ({ setSearchProps }: props) => {
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="flex flex-col items-center justify-center w-full h-[400px] bg-[url(https://static.tkbcdn.com/site/global/content-v2/img/home-search-bg-05.jpg)] bg-no-repeat bg-cover">
+          <div className="flex flex-col items-center justify-center w-full h-[450px] bg-[url(https://content.api.news/v3/images/bin/95c374666aecfd1bcb0c373460da01e7)] bg-no-repeat bg-cover bg-center">
             <h1 className="text-white text-2xl font-bold mb-3">
-              Discover upcoming events
+              Khám phá thêm nhiều sự kiện
             </h1>
             <div className="flex max-w-[960px] md:w-[600px] lg:w-[1280px] ">
               <div className="grow mr-2">
@@ -153,7 +154,7 @@ const SearchComponent = ({ setSearchProps }: props) => {
                 />
               </div>
               <Button
-                className="text-white bg-blue-500 hover:bg-amber-300 hover:text-black"
+                className={`text-white bg-[${main_color}] hover:bg-[#40d4c5] hover:text-black`}
                 type="submit"
               >
                 Tìm kiếm
@@ -235,7 +236,7 @@ const SearchComponent = ({ setSearchProps }: props) => {
                           variant={"ghost"}
                           className={cn(
                             "pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            !field.value && "text-muted-foreground shadow"
                           )}
                         >
                           {field.value ? (
@@ -282,7 +283,7 @@ const SearchComponent = ({ setSearchProps }: props) => {
                           variant={"ghost"}
                           className={cn(
                             "pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            !field.value && "text-muted-foreground shadow"
                           )}
                         >
                           {field.value ? (

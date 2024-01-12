@@ -219,7 +219,9 @@ export function EventDetail({ id }) {
                 <div className="text-white text-[14px]">
                   <Accordion type="single" collapsible className="w-full">
                     {EventDetail?.ves.length == 0 ? (
-                      <div>Hiện sự kiện này chưa có vé nào được tạo.</div>
+                      <div className="py-3 pl-8">
+                        Hiện sự kiện này chưa có vé nào được tạo.
+                      </div>
                     ) : null}
                     {EventDetail?.ves.map((item, index) => (
                       <AccordionItem

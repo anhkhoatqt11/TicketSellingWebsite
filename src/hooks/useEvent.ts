@@ -13,6 +13,11 @@ export const useEvent = () => {
     const res = await getRequest({ endPoint: endPointUrl });
     return res;
   };
+  const fetchSuggestion = async () => {
+    let endPointUrl = `/api/event/suggestion`;
+    const res = await getRequest({ endPoint: endPointUrl });
+    return res;
+  };
   const fetchAllEventsBySearch = async (page, props = {}) => {
     let endPointUrl = `/api/event?page=${page}&limit=12`;
     const appendParam = (param, value) => {
@@ -32,6 +37,7 @@ export const useEvent = () => {
   };
   return {
     fetchEventById,
+    fetchSuggestion,
     fetchAllEvents,
     fetchAllEventsBySearch,
     fetchEventBanner,
