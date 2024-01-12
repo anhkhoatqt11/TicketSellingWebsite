@@ -4,8 +4,21 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import TicketItem from "./TicketItem";
 import Loader from "@/components/Loader";
-import { Card, CardHeader, CardBody, Image, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Image,
+  Divider,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
 import QRCode from "react-qr-code";
+import Link from "next/link";
 
 interface Props {
   id: number;
@@ -28,7 +41,6 @@ const TicketLayout = ({ id }: Props) => {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-
   const handleShowMore = () => {
     setDisplayedTickets((prev) => prev + 2);
   };
@@ -46,7 +58,12 @@ const TicketLayout = ({ id }: Props) => {
               data
                 .slice(0, displayedTickets)
                 .map((ticket, index) => (
-                  <TicketItem key={index} ticketItem={ticket} onOpen={onOpen} setSelectedMaDatCho={setSelectedMaDatCho} />
+                  <TicketItem
+                    key={index}
+                    ticketItem={ticket}
+                    onOpen={onOpen}
+                    setSelectedMaDatCho={setSelectedMaDatCho}
+                  />
                 ))}
             {data && data.length > displayedTickets && (
               <div className="mt-3 flex justify-center">
@@ -58,18 +75,37 @@ const TicketLayout = ({ id }: Props) => {
                 </button>
               </div>
             )}
+            {data && data.length == 0 && (
+              <div className="flex flex-col h-screen items-center justify-center p-4">
+                <img src="/no-ticket.png" alt="No ticket" />
+                <p className="text-xl mb-4">Bạn chưa có vé nào.</p>
+                <Link href={"/search"}>
+                  <button className="btn w-[200px] text-white rounded-full bg-blue-500 hover:bg-blue-800">
+                    Đặt vé ngay
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
           <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
               {(onClose) => (
                 <>
-                  <ModalHeader className="flex flex-col gap-1">Mã QR sự kiện</ModalHeader>
+                  <ModalHeader className="flex flex-col gap-1">
+                    Mã QR sự kiện
+                  </ModalHeader>
                   <ModalBody>
-                    <QRCode size={256}
+                    <QRCode
+                      size={256}
                       className="mb-4"
-                      style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                      style={{
+                        height: "auto",
+                        maxWidth: "100%",
+                        width: "100%",
+                      }}
                       value={selectedMaDatCho.toString()}
-                      viewBox={`0 0 256 256`} />
+                      viewBox={`0 0 256 256`}
+                    />
                   </ModalBody>
                 </>
               )}
