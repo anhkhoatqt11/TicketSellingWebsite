@@ -66,6 +66,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
 
   const onSubmit = async () => {
     if (
+      !organizerName ||
       !addressValue ||
       !phoneNumber ||
       !email ||
@@ -171,10 +172,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   Họ và tên <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  isInvalid={organizerName !== "" ? false : true}
-                  errorMessage={`${
-                    organizerName !== "" ? "" : "Vui lòng nhập họ tên cá nhân"
-                  }`}
                   variant="bordered"
                   size="lg"
                   className="w-full h-[60px] "
@@ -191,12 +188,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   Mã số thuế cá nhân <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  isInvalid={maSoThueCaNhan !== "" ? false : true}
-                  errorMessage={`${
-                    maSoThueCaNhan !== ""
-                      ? ""
-                      : "Vui lòng nhập mã số thuế cá nhân"
-                  }`}
                   className="w-full "
                   radius="sm"
                   variant="bordered"
@@ -216,10 +207,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   Tên doanh nghiệp <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  isInvalid={companyName !== "" ? false : true}
-                  errorMessage={`${
-                    companyName !== "" ? "" : "Vui lòng nhập tên doanh nghiệp"
-                  }`}
                   className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
@@ -237,12 +224,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  isInvalid={maSoDKKD !== "" ? false : true}
-                  errorMessage={`${
-                    maSoDKKD !== ""
-                      ? ""
-                      : "Vui lòng nhập mã số đăng ký kinh doanh"
-                  }`}
                   className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
@@ -259,12 +240,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   Nơi cấp <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  isInvalid={noiCap !== "" ? false : true}
-                  errorMessage={`${
-                    noiCap !== ""
-                      ? ""
-                      : "Vui lòng nhập nơi cấp mã số đăng ký kinh doanh"
-                  }`}
                   className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
@@ -281,10 +256,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   Ngày cấp <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  isInvalid={ngayCap !== "" ? false : true}
-                  errorMessage={`${
-                    ngayCap !== "" ? "" : "Vui lòng chọn ngày cấp"
-                  }`}
                   type="date"
                   radius="sm"
                   variant="bordered"
@@ -311,10 +282,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               Số điện thoại <span className="text-red-500">*</span>
             </Label>
             <Input
-              isInvalid={phoneNumber !== "" ? false : true}
-              errorMessage={`${
-                phoneNumber !== "" ? "" : "Vui lòng nhập số điện thoại"
-              }`}
               className="w-full"
               radius="sm"
               variant="bordered"
@@ -331,10 +298,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               Email liên hệ: <span className="text-red-500">*</span>
             </Label>
             <Input
-              isInvalid={email !== "" ? false : true}
-              errorMessage={`${
-                email !== "" ? "" : "Vui lòng nhập email liên hệ"
-              }`}
               className="w-full"
               radius="sm"
               variant="bordered"
@@ -363,10 +326,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               Chủ tài khoản <span className="text-red-500">*</span>
             </Label>
             <Input
-              isInvalid={chuTaiKhoan !== "" ? false : true}
-              errorMessage={`${
-                chuTaiKhoan !== "" ? "" : "Vui lòng nhập tên chủ tài khoản"
-              }`}
               className="w-full"
               radius="sm"
               variant="bordered"
@@ -383,10 +342,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               Số tài khoản: <span className="text-red-500">*</span>
             </Label>
             <Input
-              isInvalid={soTaiKhoan !== "" ? false : true}
-              errorMessage={`${
-                soTaiKhoan !== "" ? "" : "Vui lòng nhập số tài khoản"
-              }`}
               className="w-full"
               radius="sm"
               variant="bordered"
@@ -403,10 +358,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               Tên ngân hàng: <span className="text-red-500">*</span>
             </Label>
             <Input
-              isInvalid={tenNganHang !== "" ? false : true}
-              errorMessage={`${
-                tenNganHang !== "" ? "" : "Vui lòng nhập tên ngân hàng"
-              }`}
               className="w-full"
               radius="sm"
               variant="bordered"
@@ -423,10 +374,6 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               Chi nhánh: <span className="text-red-500">*</span>
             </Label>
             <Input
-              isInvalid={chiNhanh !== "" ? false : true}
-              errorMessage={`${
-                chiNhanh !== "" ? "" : "Vui lòng nhập tên chi nhánh"
-              }`}
               className="w-full"
               radius="sm"
               variant="bordered"

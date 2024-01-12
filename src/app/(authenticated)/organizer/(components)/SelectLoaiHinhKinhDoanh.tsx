@@ -40,14 +40,6 @@ export const SelectLoaiHinhKinhDoanh = ({
           variant="bordered"
           placeholder="Chọn loại hình kinh doanh"
           selectedKeys={loaiHinhKinhDoanhValue ? [loaiHinhKinhDoanhValue] : []}
-          isInvalid={
-            isLoaiHinhKinhDoanhValid || !loaiHinhKinhDoanhTouched ? false : true
-          }
-          errorMessage={
-            isLoaiHinhKinhDoanhValid || !loaiHinhKinhDoanhTouched
-              ? ""
-              : "Vui lòng chọn danh mục"
-          }
           onSelectionChange={setSelectedLoaiHinhKinhDoanh}
           onClose={() => setLoaiHinhKinhDoanhTouched(true)}
           className="w-full"
