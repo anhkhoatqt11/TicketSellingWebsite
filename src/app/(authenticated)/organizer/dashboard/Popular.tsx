@@ -51,12 +51,14 @@ export default function Popular() {
       <Card
         isFooterBlurred
         radius="lg"
-        className="border-none w-full h-[350px] mt-10 md:mt-0 md:w-[270px]"
+        className="border-none w-full h-[360px] mt-10 md:mt-0 md:w-[270px]"
       >
         <CardHeader>
-          <p className="font-bold text-xl">Chủ đề nổi bật</p>
+          <div className="w-full text-center font-semibold text-lg mt-3">
+            Chủ đề nổi bật
+          </div>
         </CardHeader>
-        <CardBody className="p-5 justify-center items-center overflow-hidden">
+        <CardBody className="pr-5 pl-5 pb-5 pt-3 justify-center items-center overflow-hidden">
           <Doughnut data={data} options={options} />
         </CardBody>
       </Card>

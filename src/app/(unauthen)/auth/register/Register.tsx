@@ -1,29 +1,30 @@
-'use client';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+"use client";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import {
   cn,
   regexPasswordNumber,
   regexPasswordSpecial,
   regexPasswordUpperCase,
-} from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { useEffect, useState } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import Loader from '@/components/Loader';
-import Link from 'next/link';
+} from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import Loader from "@/components/Loader";
+import Link from "next/link";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@/components/ui/form';
-import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+} from "@/components/ui/form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { main_color } from "../../../../../public/color";
 
 //quan ly form: react-hook-form
 //validate form: zod
@@ -31,36 +32,36 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const formSchema = z
   .object({
     name: z.string().min(1, {
-      message: 'Nhập tên của bạn',
+      message: "Nhập tên của bạn",
     }),
     password: z
       .string()
       .min(1, {
-        message: 'Nhập mật khẩu của bạn',
+        message: "Nhập mật khẩu của bạn",
       })
-      .min(8, { message: 'Mật khẩu phải có tối thiểu 8 kí tự' })
+      .min(8, { message: "Mật khẩu phải có tối thiểu 8 kí tự" })
       .regex(regexPasswordSpecial, {
-        message: 'Mật khẩu phải chứa ít nhất 1 kí tự đặc biệt',
+        message: "Mật khẩu phải chứa ít nhất 1 kí tự đặc biệt",
       })
       .regex(regexPasswordNumber, {
-        message: 'Mật khẩu phải chứa ít nhất 1 số',
+        message: "Mật khẩu phải chứa ít nhất 1 số",
       })
       .regex(regexPasswordUpperCase, {
-        message: 'Mật khẩu phải chứa ít nhất 1 kí tự viết hoa',
+        message: "Mật khẩu phải chứa ít nhất 1 kí tự viết hoa",
       }),
     email: z
       .string()
       .min(1, {
-        message: 'Nhập email của bạn',
+        message: "Nhập email của bạn",
       })
-      .email({ message: 'Email không hợp lệ' }),
+      .email({ message: "Email không hợp lệ" }),
     confirmPassword: z.string().min(1, {
-      message: 'Nhập mật khẩu xác nhận',
+      message: "Nhập mật khẩu xác nhận",
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Mật khẩu không giống nhau",
-    path: ['confirmPassword'],
+    path: ["confirmPassword"],
   });
 const Register = ({
   className,
@@ -72,10 +73,10 @@ const Register = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: payload.name || '',
-      email: payload.email || '',
-      password: '',
-      confirmPassword: '',
+      name: payload.name || "",
+      email: payload.email || "",
+      password: "",
+      confirmPassword: "",
     },
   });
   const { onRegister } = useAuth();
@@ -83,7 +84,7 @@ const Register = ({
   useEffect(() => {
     if (payload?.email && payload?.name) {
       toast.error(
-        'Tài khoản của bạn chưa được đăng ký. Vui lòng đăng ký tài khoản mới'
+        "Tài khoản của bạn chưa được đăng ký. Vui lòng đăng ký tài khoản mới"
       );
     }
   }, []);
@@ -96,7 +97,7 @@ const Register = ({
   async function onSubmit(data) {
     setIsLoading(true);
     onRegister(data, () => {
-      toast.success('Đăng ký thành công');
+      toast.success("Đăng ký thành công");
       setIsLoading(false);
     });
   }
@@ -109,7 +110,7 @@ const Register = ({
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <div
-        className={cn('grid gap-6 w-[80%] md:w-[70%] lg:w-[60%] ', className)}
+        className={cn("grid gap-6 w-[80%] md:w-[70%] lg:w-[60%] ", className)}
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -165,7 +166,7 @@ const Register = ({
                           <FormControl>
                             <Input
                               placeholder="Nhập mật khẩu"
-                              type={show.password ? 'text' : 'password'}
+                              type={show.password ? "text" : "password"}
                               value={field.value}
                               onChange={field.onChange}
                               renderRight={
@@ -204,7 +205,7 @@ const Register = ({
                           <FormControl>
                             <Input
                               placeholder="Xác nhận mật khẩu"
-                              type={show.confirmPassword ? 'text' : 'password'}
+                              type={show.confirmPassword ? "text" : "password"}
                               value={field.value}
                               onChange={field.onChange}
                               renderRight={
@@ -234,7 +235,10 @@ const Register = ({
                 </div>
               </div>
 
-              <Button type="submit" className="font-bold bg-blue-500 hover:bg-amber-300 hover:text-black">
+              <Button
+                type="submit"
+                className={`font-bold bg-[${main_color}]  hover:text-white`}
+              >
                 Đăng ký
               </Button>
             </div>
@@ -242,7 +246,7 @@ const Register = ({
         </Form>
       </div>
       <p className=" mt-10 text-center text-sm text-muted-foreground">
-        Đã có tài khoản?{' '}
+        Đã có tài khoản?{" "}
         <Link className=" font-bold underline text-black" href="/auth/login">
           Đăng nhập
         </Link>

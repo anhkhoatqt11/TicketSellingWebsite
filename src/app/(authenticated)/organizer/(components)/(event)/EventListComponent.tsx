@@ -52,24 +52,30 @@ function EventListComponent({ props, session }) {
             <div className="text-gray-800 text-lg font-medium">
               Hiện tại chưa có sự kiện nào được tạo
             </div>
-          ) : null}
-          <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mt-6">
-            {data?.data.map((item) => (
-              <EventListItemComponent item={item} key={`event-${item.id}`} />
-            ))}
-          </div>
-          <div className="flex justify-center p-6">
-            <Pagination
-              showControls
-              total={data?.totalPages}
-              color="primary"
-              initialPage={1}
-              onChange={(page) => {
-                onPageChange(page);
-              }}
-              page={currentPage}
-            />
-          </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mt-6">
+                {data?.data.map((item) => (
+                  <EventListItemComponent
+                    item={item}
+                    key={`event-${item.id}`}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-center p-6">
+                <Pagination
+                  showControls
+                  total={data?.totalPages}
+                  color="primary"
+                  initialPage={1}
+                  onChange={(page) => {
+                    onPageChange(page);
+                  }}
+                  page={currentPage}
+                />
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

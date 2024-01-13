@@ -7,6 +7,7 @@ import { Card, Button, Progress, CardBody } from "@nextui-org/react";
 import { Calendar, Ticket, User } from "lucide-react";
 import { BiMoney } from "react-icons/bi";
 import { useOrganizer } from "@/hooks/useOrganizer";
+import { FaRegHeart } from "react-icons/fa";
 
 const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
   currency: "VND",
@@ -56,11 +57,11 @@ export default function DashBoard() {
       </div>
     );
   return (
-    <div className="flex flex-wrap md:flex-row gap-6">
+    <div className="flex flex-wrap md:flex-row gap-3">
       <Card
         isFooterBlurred
         radius="lg"
-        className="border-none w-full h-[180px] md:w-[400px]"
+        className="border-none w-full h-[180px] md:w-[360px]"
       >
         <CardBody className="p-5">
           <div className="flex flex-row justify-between items-center">
@@ -71,18 +72,18 @@ export default function DashBoard() {
               </p>
             </div>
             <div>
-              <Button className={`bg-yellow-100 w-[50px] h-[50px]`}>
-                <Calendar className={`w-6 h-6 text-yellow-500`} />
+              <Button className={`bg-yellow-100 w-[50px] h-[50px] rounded-lg`}>
+                <Calendar className={`w-6 h-6 text-yellow-400`} />
               </Button>
             </div>
           </div>
           <Progress
             aria-label="Loading..."
             value={parseInt(DashBoardInfo?.totalEvent)}
-            maxValue={1000}
+            maxValue={100}
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-yellow-500`,
+              indicator: `bg-yellow-400`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -96,7 +97,7 @@ export default function DashBoard() {
       <Card
         isFooterBlurred
         radius="lg"
-        className="border-none w-full h-[180px] md:w-[400px]"
+        className="border-none w-full h-[180px] md:w-[360px]"
       >
         <CardBody className="p-5">
           <div className="flex flex-row justify-between items-center">
@@ -107,7 +108,7 @@ export default function DashBoard() {
               </p>
             </div>
             <div>
-              <Button className={`bg-purple-100 w-[50px] h-[50px]`}>
+              <Button className={`bg-purple-100 w-[50px] h-[50px] rounded-lg`}>
                 <BiMoney className={`w-6 h-6 text-purple-500`} />
               </Button>
             </div>
@@ -115,7 +116,7 @@ export default function DashBoard() {
           <Progress
             aria-label="Loading..."
             value={DashBoardInfo.totalRevenue / 3}
-            maxValue={10000}
+            maxValue={10000000}
             classNames={{
               base: "w-full mt-5",
               indicator: `bg-purple-500`,
@@ -132,7 +133,7 @@ export default function DashBoard() {
       <Card
         isFooterBlurred
         radius="lg"
-        className="border-none w-full h-[180px] md:w-[400px]"
+        className="border-none w-full h-[180px] md:w-[360px]"
       >
         <CardBody className="p-5">
           <div className="flex flex-row justify-between items-center">
@@ -143,18 +144,52 @@ export default function DashBoard() {
               </p>
             </div>
             <div>
-              <Button className={`bg-orange-100 w-[50px] h-[50px]`}>
-                <Ticket className={`w-6 h-6 text-orange-500`} />
+              <Button className={`bg-emerald-100 w-[50px] h-[50px] rounded-lg`}>
+                <Ticket className={`w-6 h-6 text-emerald-500 `} />
               </Button>
             </div>
           </div>
           <Progress
             aria-label="Loading..."
             value={parseInt(formatCurrency(DashBoardInfo.totalTicket))}
-            maxValue={10000}
+            maxValue={100}
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-orange-500`,
+              indicator: `bg-emerald-500`,
+            }}
+          />
+          <div className="flex flex-row justify-between items-center text-sm mt-4">
+            <div className="flex flex-row">
+              <p className="text-xs">Cập nhật lúc: {currentDateTime} </p>
+            </div>
+            {/* <p className={`text-orange-500 font-bold`}>Đã cập nhật...</p> */}
+          </div>
+        </CardBody>
+      </Card>
+      <Card
+        isFooterBlurred
+        radius="lg"
+        className="border-none w-full h-[180px] md:w-[360px]"
+      >
+        <CardBody className="p-5">
+          <div className="flex flex-row justify-between items-center">
+            <div>
+              <p className="font-normal text-gray-400">Lượt thích</p>
+              <p className="text-3xl font-extrabold mt-2">100</p>
+            </div>
+            <div>
+              <Button className={`bg-pink-100 w-[50px] h-[50px] rounded-lg`}>
+                <FaRegHeart className={`w-6 h-6 text-pink-500 `} />
+              </Button>
+            </div>
+          </div>
+          <Progress
+            aria-label="Loading..."
+            value={100}
+            maxValue={100}
+            classNames={{
+              base: "w-full mt-5",
+              indicator: `bg-pink-500`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">

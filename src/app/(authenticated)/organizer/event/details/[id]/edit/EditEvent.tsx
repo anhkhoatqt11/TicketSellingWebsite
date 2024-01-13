@@ -13,6 +13,7 @@ import TicketInformation, {
 import { generateReactHelpers } from "@uploadthing/react/hooks";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { useTicketOrganizer } from "@/hooks/useTicketOrganizer";
+import { main_color } from "../../../../../../../../public/color";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export function EditEvent({ session, id }) {
@@ -227,7 +228,7 @@ export function EditEvent({ session, id }) {
         }}
       />
       <Button
-        className="w-full bg-blue-500 text-white font-semibold py-6 text-base"
+        className={`w-full bg-[${main_color}] text-white font-semibold py-6 text-base`}
         radius="sm"
         onClick={onSubmit}
       >
@@ -239,7 +240,7 @@ export function EditEvent({ session, id }) {
             color="success"
             aria-label="Loading..."
             classNames={{
-              svg: "w-20 h-20 text-blue-700",
+              svg: "w-20 h-20 text-gray-600",
             }}
           />
         </div>

@@ -13,7 +13,20 @@ import SportIcon from "@/components/sport";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { BiRightArrow, BiRightArrowAlt } from "react-icons/bi";
-import { Card, CardHeader, CardBody, Image, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Image,
+  Divider,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
+import { main_color } from "../../../../../public/color";
 
 interface TicketItemProps {
   ticketItem: {
@@ -70,17 +83,20 @@ const getIconById = (id) => {
   }
 };
 
-
 const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
-  currency: 'VND',
-  style: 'currency',
+  currency: "VND",
+  style: "currency",
 });
 
 export function formatCurrency(value: number) {
   return CURRENCY_FORMAT.format(value);
 }
 
-const TicketItem = ({ ticketItem, onOpen, setSelectedMaDatCho }: TicketItemProps) => {
+const TicketItem = ({
+  ticketItem,
+  onOpen,
+  setSelectedMaDatCho,
+}: TicketItemProps) => {
   const {
     id,
     ngayDatHang,
@@ -107,13 +123,23 @@ const TicketItem = ({ ticketItem, onOpen, setSelectedMaDatCho }: TicketItemProps
           <div className="overflow-visible py-2 pb-0 pt-2 px-4 md:w-2/3">
             <div className="flex flex-col">
               <small className="text-default-500">TÊN SỰ KIỆN</small>
-              <p className="text-md font-bold text-blue-500">{name}</p>
+              <p className={`text-md font-bold text-[${main_color}]`}>{name}</p>
             </div>
             <Divider className="my-2" />
             <div className="flex flex-col">
               <small className="text-default-500">MÃ ĐẶT CHỖ</small>
-              <p className="text-md font-bold text-blue-500">{maDatCho}</p>
-              <Button className="bg-blue-600 font-bold h-[30px]" onClick={() => { onOpen(); setSelectedMaDatCho(maDatCho) }}>Xem mã QR Code <BiRightArrowAlt /></Button>
+              <p className={`text-md font-bold text-[${main_color}]`}>
+                {maDatCho}
+              </p>
+              <Button
+                className={`bg-[${main_color}] font-bold h-[30px]`}
+                onClick={() => {
+                  onOpen();
+                  setSelectedMaDatCho(maDatCho);
+                }}
+              >
+                Xem mã QR Code <BiRightArrowAlt />
+              </Button>
             </div>
             <Divider className="my-2" />
             <div className="flex flex-col">
@@ -146,13 +172,18 @@ const TicketItem = ({ ticketItem, onOpen, setSelectedMaDatCho }: TicketItemProps
               <div key={index} className="flex items-center m-3">
                 <IoTicketOutline className="h-8 w-8" color={hoaDon.ve.mau} />
                 <div className="ml-3 flex-1">
-                  <h1 className="text-medium font-extrabold">{hoaDon.ve.name}</h1>
+                  <h1 className="text-medium font-extrabold">
+                    {hoaDon.ve.name}
+                  </h1>
                   <p className="text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
                     Mô tả vé: {hoaDon.ve.moTa}
                   </p>
                   <br></br>
                   <p className="text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
-                    Số lượng: <span className="text-blue-500">{hoaDon.soLuong}</span>
+                    Số lượng:{" "}
+                    <span className={`text-[${main_color}]`}>
+                      {hoaDon.soLuong}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -161,12 +192,26 @@ const TicketItem = ({ ticketItem, onOpen, setSelectedMaDatCho }: TicketItemProps
           <Divider className="my-2" />
           <div className="flex flex-col gap-1">
             <small className="text-default-500">THÔNG TIN THANH TOÁN</small>
-            <p className="text-md font-bol">Trạng thái thanh toán: <span className="text-blue-500 font-semibold">{tinhTrang}</span></p>
-            <p className="text-md font-bol">Phương thức thanh toán: <span className="text-blue-500 font-semibold">{phuongThucThanhToan}</span></p>
-            <p className="text-md font-bol">Tổng tiền: <span className="text-blue-500 font-semibold">{formatCurrency(tongTien)}</span></p>
+            <p className="text-md font-bol">
+              Trạng thái thanh toán:{" "}
+              <span className={`text-[${main_color}] font-semibold`}>
+                {tinhTrang}
+              </span>
+            </p>
+            <p className="text-md font-bol">
+              Phương thức thanh toán:{" "}
+              <span className={`text-[${main_color}] font-semibold`}>
+                {phuongThucThanhToan}
+              </span>
+            </p>
+            <p className="text-md font-bol">
+              Tổng tiền:{" "}
+              <span className={`text-[${main_color}] font-semibold`}>
+                {formatCurrency(tongTien)}
+              </span>
+            </p>
           </div>
         </div>
-
       </CardBody>
     </Card>
   );

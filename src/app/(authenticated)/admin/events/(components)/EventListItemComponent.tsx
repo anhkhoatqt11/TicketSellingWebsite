@@ -28,8 +28,7 @@ import SportIcon from "@/components/sport";
 import OutsideIcon from "@/components/outside";
 import Link from "next/link";
 import { Edit, PlayIcon } from "lucide-react";
-
-
+import { main_color } from "../../../../../../public/color";
 
 const getIconById = (id) => {
   switch (id) {
@@ -54,9 +53,12 @@ const getIconById = (id) => {
   }
 };
 
-
-
-export function EventListItemComponent({ item , onOpen, setSelectedItem, setTrangThai}) {
+export function EventListItemComponent({
+  item,
+  onOpen,
+  setSelectedItem,
+  setTrangThai,
+}) {
   const currentDate = new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
@@ -66,9 +68,10 @@ export function EventListItemComponent({ item , onOpen, setSelectedItem, setTran
     0,
     0
   );
+
   return (
     <>
-      <Card className="mt-4 cursor-pointer" key={`batdongsan_${"item.id"}`}>
+      <Card className="mt-4 cursor-pointer" key={`event_${"item.id"}`}>
         <div>
           <div className="flex flex-col lg:flex-row">
             <div className="lg:w-1/3 h-[180px] m-3 relative">
@@ -77,71 +80,89 @@ export function EventListItemComponent({ item , onOpen, setSelectedItem, setTran
                 src={item?.hinhAnhSuKien}
               />
               {getDateTimeKetThuc(item?.ngayKetThuc) &&
-                item?.trangThai === "Đã duyệt" ? (
+              item?.trangThai === "Đã duyệt" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
-                  <div className="bg-blue-500 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
-                    <SiEventstore className="mt-1" />
-                    <div>Đang hoạt động</div>
+                  <div
+                    className={`bg-blue-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center`}
+                  >
+                    <SiEventstore className="mt-1 w-3 h-3" />
+                    <div className="text-sm">Đang hoạt động</div>
                   </div>
                 </div>
               ) : !getDateTimeKetThuc(item?.ngayKetThuc) &&
                 item?.trangThai === "Đã duyệt" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
-                  <div className="bg-blue-500 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
-                    <BsCheck2Circle className="mt-1" />
-                    <div>Hoàn thành</div>
+                  <div className="bg-emerald-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
+                    <BsCheck2Circle className="mt-1 w-3 h-3" />
+                    <div className="text-sm">Hoàn thành</div>
                   </div>
                 </div>
               ) : item?.trangThai === "Đã hủy" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
                   <div className="bg-red-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
-                    <TbCalendarCancel className="mt-1" />
-                    <div>Đã hủy</div>
+                    <TbCalendarCancel className="mt-1 w-3 h-3" />
+                    <div className="text-sm">Đã hủy</div>
                   </div>
                 </div>
               ) : item?.trangThai === "Đã khóa" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
                   <div className="bg-gray-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
-                    <AiOutlineLock className="mt-1" />
-                    <div>Đã bị khóa</div>
+                    <AiOutlineLock className="mt-1 w-3 h-3" />
+                    <div className="text-sm">Đã bị khóa</div>
                   </div>
                 </div>
               ) : null}
             </div>
             <div className="lg:w-2/3 m-3">
-              <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
+              <h1
+                className={`text-sm text-[${main_color}] font-medium mt-1 flex flex-row gap-2`}
+              >
                 {getIconById(item?.ChuDe?.id)}
                 {item?.ChuDe?.name}
               </h1>
               <div className="flex flex-row">
                 <h1 className="text-2xl font-extrabold mt-1">{item?.name}</h1>
               </div>
-              <h1 className="text-base text-slate-500 mt-1 flex flex-row gap-2">
+              {/* <p
+              className="mt-2 text-medium max-h-24 h-fit overflow-clip"
+              dangerouslySetInnerHTML={{ __html: `${item?.moTa}` }}
+            ></p> */}
+              <h1 className="text-sm text-slate-500 mt-3 flex flex-row gap-2">
                 <IoLocationOutline className="mt-1" />
                 {item?.diaChi}
               </h1>
-              <h1 className="text-base text-slate-500 mt-1 flex flex-row gap-2">
+              <h1 className="text-sm text-slate-500 mt-3 flex flex-row gap-2">
                 <AiOutlineClockCircle className="mt-1" />
+                {"Bắt đầu từ ngày "}
                 {convertDateTimeToDate(item?.ngayBatDau)}
-                {" - "}
+                {" đến ngày "}
                 {convertDateTimeToDate(item?.ngayKetThuc)}
               </h1>
-              <p
-                className="mt-2 text-medium text-ellipsis overflow-hidden h-[60px]"
-                dangerouslySetInnerHTML={{ __html: `${item?.moTa}` }}
-              ></p>
             </div>
           </div>
           <Separator />
-          <div className="grid grid-cols-2 gap-2 rounded-md text-blue-700 font-medium w-full place-content-center">
+          <div
+            className={`grid grid-cols-2 gap-2 rounded-md text-[${main_color}] bg-[#17d1c50d] font-medium w-full place-content-center`}
+          >
             <Link href={`/event/${item?.id}`}>
-              <div className="grid place-content-center text-center gap-2 hover:bg-blue-500 hover:text-white py-4 rounded-bl-lg">
+              <div
+                className={`grid place-content-center text-center gap-2 hover:bg-[${main_color}] hover:text-white py-4 rounded-bl-lg`}
+              >
                 <PlayIcon className="w-full" />
                 Xem sự kiện
               </div>
             </Link>
-            <div className="grid place-content-center text-center gap-2 hover:bg-blue-500 hover:text-white py-4" onClick={() => {onOpen(); setSelectedItem(item); setTrangThai(item.trangThai.split(',').map(trangThai => trangThai.trim()))}}>
-              <Edit className="w-full"/>
+            <div
+              className={`grid place-content-center text-center gap-2 hover:bg-[${main_color}] hover:text-white py-4`}
+              onClick={() => {
+                onOpen();
+                setSelectedItem(item);
+                setTrangThai(
+                  item.trangThai.split(",").map((trangThai) => trangThai.trim())
+                );
+              }}
+            >
+              <Edit className="w-full" />
               Chỉnh sửa trạng thái sự kiện
             </div>
           </div>

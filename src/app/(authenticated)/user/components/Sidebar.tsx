@@ -74,10 +74,10 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
             </Collapsible.Trigger>
 
             {navItems && navItems.length > 0 && (
-              <Collapsible.Content className="relative mt-3 px-3 py-4">
+              <Collapsible.Content className="relative mt-0 px-3 py-0">
                 {/* <div className="absolute left-2.5 w-px h-full bg-slate-6" /> */}
 
-                <div className="py-2 flex flex-col truncate space-y-2 font-medium">
+                <div className="py-0 flex flex-col truncate space-y-2 font-medium">
                   <LayoutGroup id="sidebar">
                     {navItems.map((item) => {
                       const pathName = usePathname();
@@ -88,16 +88,16 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                         <Link
                           key={item.title}
                           href={`/user/${item.value}`}
-                          className="flex items-center text-gray-900 rounded-lg  hover:bg-blue-300 hover:text-white"
+                          className="flex items-center text-gray-900 rounded-lg  hover:bg-[#dcdcdc]"
                         >
                           <motion.span
                             className={classnames(
                               "text-[14px] flex items-center font-medium gap-2 w-full h-10 rounded-md text-slate-11 relative transition ease-in-out duration-200",
                               {
-                                "text-white": isCurrentPage,
+                                "text-black": isCurrentPage,
                                 "hover:text-slate-12": title !== item.title,
-                                "font-bold": isCurrentPage,
-                                "bg-blue-500": isCurrentPage,
+                                "font-semibold": isCurrentPage,
+                                "bg-[#f2f2f2]": isCurrentPage,
                               }
                             )}
                           >

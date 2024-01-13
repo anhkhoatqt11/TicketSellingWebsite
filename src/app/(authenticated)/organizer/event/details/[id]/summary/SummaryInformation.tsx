@@ -17,6 +17,7 @@ import CourseIcon from "@/components/course";
 import TourismIcon from "@/components/tourism";
 import SportIcon from "@/components/sport";
 import OutsideIcon from "@/components/outside";
+import { main_color } from "../../../../../../../../public/color";
 Chart.register(CategoryScale);
 
 type propsLineDate = {
@@ -211,7 +212,9 @@ export function SummaryInformation({ session, id }) {
         <div className="mt-6">
           <h1 className="font-semibold text-2xl">{eventName}</h1>
           <h1 className="text-gray-600">{addressValue}</h1>
-          <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
+          <h1
+            className={`text-base text-[${main_color}] font-medium mt-1 flex flex-row gap-2`}
+          >
             {getIconById(typeId)}
             {type}
           </h1>
@@ -229,7 +232,7 @@ export function SummaryInformation({ session, id }) {
             }}
           >
             <h4 className="text-white text-[24px] mt-[10px] ms-[10px]">
-              {ticketNumber}
+              {ticketNumber} *
             </h4>
             <div className="flex flex-row justify-between">
               <h6
@@ -244,7 +247,7 @@ export function SummaryInformation({ session, id }) {
               className="text-white text-[14px] mt-[14px] ml-[10px]"
               style={{ fontFamily: "sans-serif" }}
             >
-              🕛 Update: 9-2023
+              🕛 Update: {new Date().getMonth() + 1}-{new Date().getFullYear()}
             </h6>
           </div>
           <div
@@ -270,7 +273,7 @@ export function SummaryInformation({ session, id }) {
               className="text-white text-[14px] mt-[14px] ml-[10px]"
               style={{ fontFamily: "sans-serif" }}
             >
-              🕛 Update: 22
+              🕛 Update: {new Date().getMonth() + 1}-{new Date().getFullYear()}
             </h6>
           </div>
         </div>
@@ -286,7 +289,7 @@ export function SummaryInformation({ session, id }) {
               color="success"
               aria-label="Loading..."
               classNames={{
-                svg: "w-20 h-20 text-blue-700",
+                svg: "w-20 h-20 text-gray-600",
               }}
             />
           </div>
