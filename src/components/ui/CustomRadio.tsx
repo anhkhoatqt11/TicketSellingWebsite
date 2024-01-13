@@ -1,6 +1,7 @@
 import React from "react";
 import { Chip, VisuallyHidden, tv, useRadio } from "@nextui-org/react";
 import { CheckIcon } from "./CheckIcon";
+import { accent_color, main_color } from "../../../public/color";
 
 const radio = tv({
   slots: {
@@ -10,8 +11,8 @@ const radio = tv({
   variants: {
     isSelected: {
       true: {
-        base: "border-blue-700 bg-blue-600 hover:bg-blue-500 hover:border-blue-700",
-        content: "text-primary-foreground pl-1",
+        base: `border-[${main_color}] bg-[#17d1c6] hover:bg-[${accent_color}] hover:border-[${main_color}] text-white`,
+        content: `text-primary-foreground pl-1`,
       },
     },
     isFocusVisible: {
@@ -46,7 +47,7 @@ export const CustomRadio = (props) => {
           base: styles.base(),
           content: styles.content(),
         }}
-        className="text-blue-700"
+        className={`text-[#17d1c6]`}
         startContent={
           isSelected ? <CheckIcon className="ml-1 text-white" /> : null
         }

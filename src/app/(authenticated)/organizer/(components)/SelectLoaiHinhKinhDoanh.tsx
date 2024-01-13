@@ -42,7 +42,7 @@ export const SelectLoaiHinhKinhDoanh = ({
           selectedKeys={loaiHinhKinhDoanhValue ? [loaiHinhKinhDoanhValue] : []}
           onSelectionChange={setSelectedLoaiHinhKinhDoanh}
           onClose={() => setLoaiHinhKinhDoanhTouched(true)}
-          className="w-full"
+          className="w-full rounded-sm shadow"
         >
           {loaiHinhKinhDoanh.map((loaikinhdoanh) => (
             <SelectItem key={loaikinhdoanh.value} value={loaikinhdoanh.value}>

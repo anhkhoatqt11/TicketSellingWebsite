@@ -16,6 +16,7 @@ import { useOrganizer } from "@/hooks/useOrganizer";
 import { checkEmail, checkPhoneNumber } from "@/lib/utils";
 import { url } from "inspector";
 import { Zoom } from "@/components/ui/zoom-image";
+import { hover_color, main_color } from "../../../../../../public/color";
 
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
@@ -163,7 +164,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
             </div>
           </div>
         </div>
-        <div className="md:basis-2/3 p-2 space-y-4 pt-3">
+        <div className="md:basis-2/3 p-2 space-y-2 pt-3">
           {/* ten doi tac */}
           {organizerType === "canhan" ? (
             <>
@@ -173,7 +174,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                 </Label>
                 <Input
                   variant="bordered"
-                  size="lg"
+                  size="md"
                   className="w-full h-[60px] "
                   radius="sm"
                   value={organizerName}
@@ -191,7 +192,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   className="w-full "
                   radius="sm"
                   variant="bordered"
-                  size="lg"
+                  size="md"
                   value={maSoThueCaNhan}
                   placeholder="Nhập mã số thuế cá nhân"
                   onChange={(e) => {
@@ -210,7 +211,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
-                  size="lg"
+                  size="md"
                   value={companyName}
                   placeholder="Nhập tên doanh nghiệp ban tổ chức"
                   onChange={(e) => {
@@ -227,7 +228,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
-                  size="lg"
+                  size="md"
                   value={maSoDKKD}
                   placeholder="Nhập mã số đăng ký kinh doanh"
                   onChange={(e) => {
@@ -243,7 +244,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   className="w-full h-[52px]"
                   radius="sm"
                   variant="bordered"
-                  size="lg"
+                  size="md"
                   value={noiCap}
                   placeholder="Nhập nơi cấp mã số đăng ký kinh doanh"
                   onChange={(e) => {
@@ -259,7 +260,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
                   type="date"
                   radius="sm"
                   variant="bordered"
-                  size="lg"
+                  size="md"
                   className="w-full h-[52px]"
                   value={ngayCap}
                   placeholder="Chọn ngày cấp mã số đăng ký kinh doanh"
@@ -285,7 +286,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               className="w-full"
               radius="sm"
               variant="bordered"
-              size="lg"
+              size="md"
               value={phoneNumber}
               placeholder="Nhập số điện thoại"
               onChange={(e) => {
@@ -301,7 +302,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               className="w-full"
               radius="sm"
               variant="bordered"
-              size="lg"
+              size="md"
               value={email}
               type={"email"}
               placeholder="Nhập email liên hệ"
@@ -319,7 +320,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
 
       <h1 className="font-semibold">Thông tin ngân hàng</h1>
       <div className="flex flex-col flex-wrap rounded bg-white p-6 gap-2">
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 gap-3">
           {/* so dien thoai */}
           <div className="flex flex-col gap-3 w-full">
             <Label className="font-bold text-sm">
@@ -329,7 +330,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               className="w-full"
               radius="sm"
               variant="bordered"
-              size="lg"
+              size="md"
               value={chuTaiKhoan}
               placeholder="Nhập tên chủ tài khoản"
               onChange={(e) => {
@@ -345,7 +346,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               className="w-full"
               radius="sm"
               variant="bordered"
-              size="lg"
+              size="md"
               value={soTaiKhoan}
               placeholder="Nhập số tài khoản"
               onChange={(e) => {
@@ -361,7 +362,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               className="w-full"
               radius="sm"
               variant="bordered"
-              size="lg"
+              size="md"
               value={tenNganHang}
               placeholder="Nhập tên ngân hàng"
               onChange={(e) => {
@@ -377,7 +378,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
               className="w-full"
               radius="sm"
               variant="bordered"
-              size="lg"
+              size="md"
               value={chiNhanh}
               placeholder="Nhập tên chi nhánh"
               onChange={(e) => {
@@ -393,7 +394,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
           onClick={() => {
             onSubmit();
           }}
-          className="w-[100%] h-12 text-white bg-blue-500 hover:bg-blue-800 transition duration-300 ease-in-out active:scale-90"
+          className={`w-[100%] h-12 text-white bg-[${main_color}] hover:bg-[${hover_color}] transition duration-300 ease-in-out active:scale-90`}
         >
           Xác nhận
         </Button>

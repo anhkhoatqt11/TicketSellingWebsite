@@ -13,6 +13,7 @@ import { checkEmail, checkPhoneNumber } from "@/lib/utils";
 import { Zoom } from "@/components/ui/zoom-image";
 import { useUser } from "@/hooks/useUser";
 import { Image } from "@nextui-org/react";
+import { hover_color, main_color } from "../../../../../public/color";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export const EditProfileForm = ({ userId, setIsLoading }) => {
@@ -103,14 +104,12 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
   };
   return (
     <div className="grid-cols-1 grid gap-4 mb-6">
-      <h1 className="text-2xl font-extrabold">Hồ sơ cá nhân</h1>
-      <h1 className="font-semibold">Ảnh đại diện</h1>
-      <div className="flex flex-col md:flex-row rounded bg-white p-4">
+      <h1 className="text-xl font-bold">Hồ sơ cá nhân</h1>
+      <div className="flex flex-col md:flex-row rounded bg-transparent justify-center p-4">
         <div className="p-2 pr-3">
           {/* avatar */}
           <div className="flex flex-col items-center gap-y-3 max-w-xs lg:max-w-lg">
-            <div className="font-bold text-sm"></div>
-            <div className=" w-full h-full border-2 rounded ml-auto">
+            <div className=" w-fit h-fit border-2 rounded-full ml-auto">
               <Zoom key={1} className={"w-full "}>
                 <Image
                   src={
@@ -121,7 +120,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
                   width={200}
                   height={200}
                   alt={avatarImageFile[0]?.name}
-                  className={`h-40 w-full rounded-md object-cover object-center`}
+                  className={`h-48 w-48 object-cover object-center rounded-full`}
                 />
               </Zoom>
             </div>
@@ -132,27 +131,22 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
               files={avatarImageFile}
               setFiles={setAvatarImageFile}
               disabled={false}
-              className={
-                " bg-blue-500 hover:bg-blue-800 hover:text-white text-white"
-              }
+              className={`p-0 px-6 bg-[${main_color}] hover:bg-[${hover_color}] hover:text-black text-white`}
             />
           </div>
         </div>
       </div>
 
       <h1 className="font-semibold">Thông tin liên hệ</h1>
-      <div className="flex flex-col flex-wrap rounded bg-white p-6 gap-2">
+      <div className="flex flex-col flex-wrap rounded bg-white p-6 gap-3">
         <div className="flex flex-col gap-3 w-full">
           <Label className="font-bold text-sm">
             Họ và tên <span className="text-red-500">*</span>
           </Label>
           <Input
-            isInvalid={nameValue !== "" ? false : true}
-            errorMessage={`${
-              nameValue !== "" ? "" : "Vui lòng nhập số điện thoại"
-            }`}
             className="w-full"
             radius="sm"
+            variant="bordered"
             value={nameValue}
             placeholder="Nhập số điện thoại"
             onChange={(e) => {
@@ -167,12 +161,9 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
               Số điện thoại <span className="text-red-500">*</span>
             </Label>
             <Input
-              isInvalid={phoneNumber !== "" ? false : true}
-              errorMessage={`${
-                phoneNumber !== "" ? "" : "Vui lòng nhập số điện thoại"
-              }`}
               className="w-full"
               radius="sm"
+              variant="bordered"
               value={phoneNumber}
               placeholder="Nhập số điện thoại"
               onChange={(e) => {
@@ -185,12 +176,9 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
               Email liên hệ: <span className="text-red-500">*</span>
             </Label>
             <Input
-              isInvalid={email !== "" ? false : true}
-              errorMessage={`${
-                email !== "" ? "" : "Vui lòng nhập email liên hệ"
-              }`}
               className="w-full"
               radius="sm"
+              variant="bordered"
               value={email}
               type={"email"}
               placeholder="Nhập email liên hệ"
@@ -215,6 +203,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
           <Input
             type="password"
             className="w-full"
+            variant="bordered"
             radius="sm"
             value={oldPassword}
             placeholder="Nhập mật khẩu cũ"
@@ -227,6 +216,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
           <Input
             type="password"
             className="w-full"
+            variant="bordered"
             radius="sm"
             value={newPassword}
             placeholder="Nhập mật khẩu mới"
@@ -240,6 +230,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
           <Input
             type="password"
             className="w-full"
+            variant="bordered"
             radius="sm"
             value={confirmPassword}
             placeholder="Xác nhận mật khẩu mới"
@@ -252,7 +243,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
           onClick={() => {
             onSubmit();
           }}
-          className="w-[100%] h-12 text-white bg-blue-500 hover:bg-blue-800 transition duration-300 ease-in-out active:scale-90"
+          className={`w-[100%] h-12 text-white bg-[${main_color}] hover:bg-[${hover_color}] hover:text-black transition duration-300 ease-in-out active:scale-90`}
         >
           Xác nhận
         </Button>

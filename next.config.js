@@ -96,6 +96,13 @@ const nextConfig = {
         hostname: "images.tkbcdn.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "wallpapercave.com",
+        port: "",
+      },
+
+
     ],
   },
 };

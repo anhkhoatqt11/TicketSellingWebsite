@@ -26,6 +26,7 @@ import Image from "next/image";
 import { TrangThaiSuKienMap } from "@/lib/constant";
 import { useAdmin } from "@/hooks/useAdmin";
 import toast from "react-hot-toast";
+import { main_color } from "../../../../../../public/color";
 
 function EventListComponent({ props }) {
   const userId = 1;
@@ -33,7 +34,7 @@ function EventListComponent({ props }) {
   const { fetchEventOfOrganizer } = useEventOrganizer();
   const [isLoaded, setIsLoaded] = React.useState(true);
   const [selectedItem, setSelectedItem] = React.useState();
-  const [trangThai, setTrangThai] = React.useState("");
+  let [trangThai, setTrangThai] = React.useState("");
 
   const { updateEvent } = useAdmin();
 
@@ -63,6 +64,7 @@ function EventListComponent({ props }) {
   useEffect(() => {
     if (selectedTrangThai.size > 0) {
       const trangThaiArray = Array.from(selectedTrangThai);
+
       setTrangThai(
         trangThaiArray?.[0].split(",").map((trangThai) => trangThai.trim())
       );
@@ -110,8 +112,9 @@ function EventListComponent({ props }) {
                       <Select
                         items={TrangThaiSuKienMap}
                         label="Trạng thái"
+                        variant="bordered"
                         placeholder="Lựa chọn trạng thái"
-                        className="w-full !box-border"
+                        className="w-full !box-border shadow"
                         selectedKeys={trangThai}
                         onSelectionChange={setSelectedTrangThai}
                       >
@@ -124,11 +127,16 @@ function EventListComponent({ props }) {
                     </div>
                   </ModalBody>
                   <ModalFooter>
-                    <Button color="danger" variant="light" onPress={onClose}>
+                    <Button
+                      color="danger"
+                      variant="light"
+                      radius="sm"
+                      onPress={onClose}
+                    >
                       Đóng
                     </Button>
                     <Button
-                      className="font-bold bg-blue-500 hover:bg-amber-300 hover:text-white"
+                      className={`font-semibold bg-emerald-400 hover:bg-emerald-500 text-white`}
                       onClick={() => {
                         updateTrangThai();
                       }}

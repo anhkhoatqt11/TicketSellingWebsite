@@ -16,9 +16,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import AuthSvg from "@/assets/AuthSvg";
 
-const avatarNav = [
-
-];
+const avatarNav = [];
 
 function Header({ session }) {
   const [isUserOpen, setIsUserOpen] = useState(false);
@@ -28,19 +26,34 @@ function Header({ session }) {
 
   useEffect(() => {
     console.log(session);
-    if (session?.user?.role !== 'admin') {
+    if (session?.user?.role !== "admin") {
       console.log("trang không tồn tại");
     }
   }, []);
 
   return (
-    <Navbar shouldHideOnScroll className="bg-white justify-between">
+    <Navbar
+      shouldHideOnScroll
+      className="bg-gray-100 justify-between shadow-md"
+    >
       <NavbarBrand>
-        {pathanme === "/admin" ? <p className="font-bold text-2xl">Trang chính</p> : null}
-        {pathanme === "/admin/events" ? <p className="font-bold text-2xl">Sự kiện</p> : null}
-        {pathanme === "/admin/users" ? <p className="font-bold text-2xl">Người dùng</p> : null}
-        {pathanme === "/admin/payments" ? <p className="font-bold text-2xl">Phương thức thanh toán</p> : null}
-        {pathanme === "/admin/banners" ? <p className="font-bold text-2xl">Banners</p> : null}
+        {pathanme === "/admin" ? (
+          <p className={`font-bold text-2xl text-gray-600`}>Trang chính</p>
+        ) : null}
+        {pathanme === "/admin/events" ? (
+          <p className={`font-bold text-2xl text-gray-600`}>Sự kiện</p>
+        ) : null}
+        {pathanme === "/admin/users" ? (
+          <p className={`font-bold text-2xl text-gray-600`}>Người dùng</p>
+        ) : null}
+        {pathanme === "/admin/payments" ? (
+          <p className={`font-bold text-2xl text-gray-600`}>
+            Phương thức thanh toán
+          </p>
+        ) : null}
+        {pathanme === "/admin/banners" ? (
+          <p className={`font-bold text-2xl text-gray-600`}>Banners</p>
+        ) : null}
       </NavbarBrand>
       <NavbarContent as="div" justify="end">
         <Dropdown
@@ -56,9 +69,7 @@ function Header({ session }) {
         >
           <DropdownTrigger>
             <Avatar>
-              <AvatarImage
-                src={session?.user?.avatar}
-              />
+              <AvatarImage src={session?.user?.avatar} />
               <AvatarFallback>Guest</AvatarFallback>
             </Avatar>
           </DropdownTrigger>

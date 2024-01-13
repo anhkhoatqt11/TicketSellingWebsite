@@ -22,6 +22,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { main_color } from "../../../../../../public/color";
 const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 export function AddNewEvent({ session }) {
@@ -209,7 +210,7 @@ export function AddNewEvent({ session }) {
           }}
         />
         <Button
-          className="w-full bg-blue-500 text-white font-semibold py-6 text-base"
+          className={`w-full bg-[${main_color}] text-white font-semibold py-6 text-base`}
           radius="sm"
           onClick={onOpen}
         >
@@ -221,7 +222,7 @@ export function AddNewEvent({ session }) {
               color="success"
               aria-label="Loading..."
               classNames={{
-                svg: "w-20 h-20 text-blue-700",
+                svg: "w-20 h-20 text-gray-600",
               }}
             />
           </div>

@@ -1,4 +1,6 @@
+import { convertDateInUI } from "@/lib/utils";
 import React from "react";
+import { main_color } from "../../../../../../public/color";
 
 function convertUtcToGmtPlus7(utcString) {
   const utcDate = new Date(utcString);
@@ -13,13 +15,16 @@ function convertUtcToGmtPlus7(utcString) {
 
 export function EventInfo({ EventDetail }) {
   return (
-    <div className="w-full h-2/3 bg-[#17d1c6]">
-      <div className="flex flex-col p-4 text-white">
-        <p className="font-bold text-lg">{EventDetail.name}</p>
-        <p>{EventDetail.diaChi}</p>
-        <p>
-          {convertUtcToGmtPlus7(EventDetail.ngayBatDau)} -{" "}
-          {convertUtcToGmtPlus7(EventDetail.ngayKetThuc)}
+    <div className="w-full h-2/3 bg-white shadow">
+      <div className="flex flex-col p-4 text-white gap-1">
+        <p className="font-bold text-black text-lg">{EventDetail.name}</p>
+        <p className={`text-sm text-[${main_color}] font-semibold`}>
+          {EventDetail.diaChi}
+        </p>
+        <p className="text-sm text-gray-400">
+          Bắt đầu từ ngày {convertDateInUI(EventDetail.ngayBatDau)}{" "}
+          {" đến ngày "}
+          {convertDateInUI(EventDetail.ngayKetThuc)}
         </p>
       </div>
     </div>

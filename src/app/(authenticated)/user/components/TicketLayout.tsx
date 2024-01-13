@@ -19,6 +19,8 @@ import {
 } from "@nextui-org/react";
 import QRCode from "react-qr-code";
 import Link from "next/link";
+import { hover_color, main_color } from "../../../../../public/color";
+import { IoIosArrowDown } from "react-icons/io";
 
 interface Props {
   id: number;
@@ -53,7 +55,7 @@ const TicketLayout = ({ id }: Props) => {
       ) : (
         <>
           <div className="flex flex-col p-4">
-            <h1 className="text-2xl font-extrabold">Vé đã đặt</h1>
+            <h1 className="text-xl font-semibold">Vé đã đặt</h1>
             {data &&
               data
                 .slice(0, displayedTickets)
@@ -68,10 +70,10 @@ const TicketLayout = ({ id }: Props) => {
             {data && data.length > displayedTickets && (
               <div className="mt-3 flex justify-center">
                 <button
-                  className="btn w-[200px] text-white rounded-full bg-blue-500 hover:bg-blue-800"
+                  className={`btn w-[200px] text-white rounded-full bg-[${main_color}] hover:bg-[#343434] flex flex-row gap-3 items-center`}
                   onClick={handleShowMore}
                 >
-                  Hiển thị thêm
+                  Hiển thị thêm <IoIosArrowDown />
                 </button>
               </div>
             )}
@@ -80,7 +82,9 @@ const TicketLayout = ({ id }: Props) => {
                 <img src="/no-ticket.png" alt="No ticket" />
                 <p className="text-xl mb-4">Bạn chưa có vé nào.</p>
                 <Link href={"/search"}>
-                  <button className="btn w-[200px] text-white rounded-full bg-blue-500 hover:bg-blue-800">
+                  <button
+                    className={`btn w-[200px] text-white rounded-full bg-[${main_color}] hover:bg-[${hover_color}]`}
+                  >
                     Đặt vé ngay
                   </button>
                 </Link>

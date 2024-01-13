@@ -18,6 +18,8 @@ export async function GET(request:Request) {
                     id: true,
                     name:true,
                     phoneNumber:true,
+                    email:true,
+                    diaChi:true,
                     avatar: true,
                     loaiHinhKinhDoanh: true,
                     hoTenOrganizer: true,

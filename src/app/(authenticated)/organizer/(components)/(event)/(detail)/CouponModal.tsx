@@ -21,6 +21,7 @@ import {
 import { Select, SelectItem } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { main_color } from "../../../../../../../public/color";
 
 export const CouponModal = ({ props }) => {
   const [code, setCode] = useState(props.code);
@@ -194,7 +195,9 @@ export const CouponModal = ({ props }) => {
                       setPrice(e.target.value);
                     }}
                   />
-                  <div className="w-full text-center text-sm text-blue-700">
+                  <div
+                    className={`w-full text-center text-sm text-[${main_color}]`}
+                  >
                     hoặc
                   </div>
                   <Input
@@ -271,16 +274,22 @@ export const CouponModal = ({ props }) => {
             </ModalBody>
             <ModalFooter className="flex justify-center">
               <Button
-                className="border-1 border-success w-28"
+                className="w-28"
                 color="success"
                 variant="light"
+                radius="sm"
                 onPress={() => {
                   editVoucherAction(onClose);
                 }}
               >
                 Xác nhận
               </Button>
-              <Button className="w-28" color="primary" onPress={onClose}>
+              <Button
+                className="w-28"
+                color="primary"
+                radius="sm"
+                onPress={onClose}
+              >
                 Hủy
               </Button>
             </ModalFooter>

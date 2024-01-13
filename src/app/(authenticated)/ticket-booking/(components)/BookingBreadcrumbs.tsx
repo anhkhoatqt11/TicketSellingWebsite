@@ -2,56 +2,121 @@ import { ArrowRight, CheckIcon, X } from "lucide-react";
 import React from "react";
 import { AiOutlineInsertRowBelow } from "react-icons/ai";
 import { FaCreditCard } from "react-icons/fa";
+import { main_color } from "../../../../../public/color";
 
 function BreadcrumbStep({ color, icon, text, background }) {
-    return (
-        <div className="flex flex-col items-center mx-2">
-            <div className={`flex items-center justify-center w-12 h-12 text-${color} bg-${background} rounded-full`}>
-                {icon}
-            </div>
-            <p className={`font-bold text-xs mt-1 text-${color} `}>{text}</p>
-        </div>
-    );
+  return (
+    <div className="flex flex-col items-center mx-2">
+      <div
+        className={`flex items-center justify-center w-12 h-12 text-${color} bg-${background} rounded-full`}
+      >
+        {icon}
+      </div>
+      <p className={`font-bold text-xs mt-1 text-${color} `}>{text}</p>
+    </div>
+  );
 }
 
 const pageSteps = {
-    "choose-ticket": [
-        { background: "blue-500 text-white", color: "blue-500", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
-        { background: "white", color: "gray-400", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
-        { background: "white", color: "gray-400", icon: <CheckIcon size={25} />, text: "HOÀN TẤT" },
-    ],
-    "payment": [
-        { background: "white", color: "blue-500", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
-        { background: "blue-500 text-white", color: "blue-500", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
-        { background: "white", color: "gray-400", icon: <CheckIcon size={25} />, text: "HOÀN TẤT" },
-    ],
-    "completed": [
-        { background: "white", color: "blue-500", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
-        { background: "white", color: "blue-500", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
-        { background: "blue-500 text-white", color: "blue-500", icon: <CheckIcon size={25} />, text: "HOÀN TẤT" },
-    ],
-    "failed": [
-        { background: "white", color: "blue-500", icon: <AiOutlineInsertRowBelow size={25} />, text: "CHỌN VÉ" },
-        { background: "white", color: "blue-500", icon: <FaCreditCard size={25} />, text: "THANH TOÁN" },
-        { background: "red-400 text-white", color: "red-400", icon: <X size={25} />, text: "THẤT BẠI" },
-    ],
+  "choose-ticket": [
+    {
+      background: `[${main_color}] text-white`,
+      color: `[${main_color}]`,
+      icon: <AiOutlineInsertRowBelow size={25} />,
+      text: "CHỌN VÉ",
+    },
+    {
+      background: "white",
+      color: "gray-400",
+      icon: <FaCreditCard size={25} />,
+      text: "THANH TOÁN",
+    },
+    {
+      background: "white",
+      color: "gray-400",
+      icon: <CheckIcon size={25} />,
+      text: "HOÀN TẤT",
+    },
+  ],
+  payment: [
+    {
+      background: "white",
+      color: `[${main_color}]`,
+      icon: <AiOutlineInsertRowBelow size={25} />,
+      text: "CHỌN VÉ",
+    },
+    {
+      background: `[${main_color}] text-white`,
+      color: `[${main_color}]`,
+      icon: <FaCreditCard size={25} />,
+      text: "THANH TOÁN",
+    },
+    {
+      background: "white",
+      color: "gray-400",
+      icon: <CheckIcon size={25} />,
+      text: "HOÀN TẤT",
+    },
+  ],
+  completed: [
+    {
+      background: "white",
+      color: `[${main_color}]`,
+      icon: <AiOutlineInsertRowBelow size={25} />,
+      text: "CHỌN VÉ",
+    },
+    {
+      background: "white",
+      color: `[${main_color}]`,
+      icon: <FaCreditCard size={25} />,
+      text: "THANH TOÁN",
+    },
+    {
+      background: `[${main_color}] text-white`,
+      color: `[${main_color}]`,
+      icon: <CheckIcon size={25} />,
+      text: "HOÀN TẤT",
+    },
+  ],
+  failed: [
+    {
+      background: "white",
+      color: `[${main_color}]`,
+      icon: <AiOutlineInsertRowBelow size={25} />,
+      text: "CHỌN VÉ",
+    },
+    {
+      background: "white",
+      color: `[${main_color}]`,
+      icon: <FaCreditCard size={25} />,
+      text: "THANH TOÁN",
+    },
+    {
+      background: "red-400 text-white",
+      color: "red-400",
+      icon: <X size={25} />,
+      text: "THẤT BẠI",
+    },
+  ],
 };
 
 export function BookingBreadcrumbs({ page }) {
-    const steps = pageSteps[page] || [];
+  const steps = pageSteps[page] || [];
 
-    return (
-        <div className="pt-10 pb-10">
-            {steps.length > 0 ? (
-                <div className="flex flex-row justify-center">
-                    {steps.map((step, index) => (
-                        <React.Fragment key={index}>
-                            <BreadcrumbStep {...step} />
-                            {index < steps.length - 1 && <ArrowRight className="text-gray-400 mx-6 mt-3" />}
-                        </React.Fragment>
-                    ))}
-                </div>
-            ) : null}
+  return (
+    <div className="pt-10 pb-10">
+      {steps.length > 0 ? (
+        <div className="flex flex-row justify-center">
+          {steps.map((step, index) => (
+            <React.Fragment key={index}>
+              <BreadcrumbStep {...step} />
+              {index < steps.length - 1 && (
+                <ArrowRight className="text-gray-400 mx-6 mt-3" />
+              )}
+            </React.Fragment>
+          ))}
         </div>
-    );
+      ) : null}
+    </div>
+  );
 }

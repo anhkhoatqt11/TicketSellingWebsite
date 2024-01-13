@@ -19,10 +19,15 @@ import {
 import Link from "next/link";
 import { parseJSON } from "date-fns";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { hover_color, main_color } from "../../../../../../public/color";
+import {
+  accent_color,
+  hover_color,
+  main_color,
+} from "../../../../../../public/color";
 import { FaCalendarDays } from "react-icons/fa6";
 import { convertDateInUI } from "@/lib/utils";
 import { useCategory } from "@/hooks/useCategory";
+import { MdOutlineMailOutline } from "react-icons/md";
 
 const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
   currency: "VND",
@@ -170,7 +175,7 @@ export function EventDetail({ id }) {
 
                     <a
                       href={`/ticket-booking/${EventDetail.id}`}
-                      className={`w-full font-bold bg-[${main_color}] hover:bg-[${hover_color}] hover:text-black text-white text-center py-2 text-sm rounded-md`}
+                      className={`w-full font-bold bg-[${main_color}] hover:bg-[${accent_color}] transition ease-in-out hover:scale-105 text-white text-center py-2 text-sm rounded-md`}
                     >
                       Đặt vé ngay
                     </a>
@@ -316,12 +321,28 @@ export function EventDetail({ id }) {
                       ></Image>
                     </div>
                     <div className="ml-4">
-                      <p className="text-lg font-bold">
+                      <p
+                        className={`text-lg font-semibold text-[${main_color}]`}
+                      >
                         {EventDetail?.user?.tenDoanhNghiep}
                       </p>
-                      <div className="mt-1 flex flex-row">
-                        <PhoneIcon size={18} />
-                        <p className="ml-2">{EventDetail?.user?.phoneNumber}</p>
+                      <div className="mt-1 flex flex-row items-center">
+                        <PhoneIcon size={12} />
+                        <p className="ml-2 text-sm font-semibold">
+                          {EventDetail?.user?.phoneNumber}
+                        </p>
+                      </div>
+                      <div className="mt-1 flex flex-row items-center">
+                        <MdOutlineMailOutline size={12} />
+                        <p className="ml-2 text-gray-400 text-sm">
+                          {EventDetail?.user?.email}
+                        </p>
+                      </div>
+                      <div className="mt-1 flex flex-row items-center">
+                        <IoLocationOutline size={12} />
+                        <p className="ml-2 text-gray-600 text-sm">
+                          {EventDetail?.user?.diaChi}
+                        </p>
                       </div>
                     </div>
                   </div>

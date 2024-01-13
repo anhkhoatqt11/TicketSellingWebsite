@@ -18,6 +18,7 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
+import { main_color } from "../../../../../../../public/color";
 
 export type TicketProps = {
   id: number;
@@ -248,7 +249,7 @@ function TicketInformation({ props }) {
                 }}
               />
               <Button
-                className="w-1/3 bg-blue-500 text-white"
+                className={`w-1/3 bg-[${main_color}] text-white`}
                 radius="sm"
                 onClick={addNewEvent}
               >
@@ -269,7 +270,9 @@ function TicketInformation({ props }) {
                   disableIndicatorAnimation
                   indicator={<CiEdit className="h-6 w-6" />}
                   startContent={
-                    <div className="p-3 border-1 border-blue-700 rounded-md">
+                    <div
+                      className={`p-3 border-1 border-[${main_color}] rounded-md`}
+                    >
                       <IoTicketOutline className="h-6 w-6" color={item.mau} />
                     </div>
                   }
@@ -306,9 +309,9 @@ function TicketInformation({ props }) {
                         setDescription(e.target.value);
                       }}
                     />
-                    <div className="lg:flex lg:h-20 space-y-3 lg:space-y-0 items-center lg:space-x-4 text-small">
+                    <div className="lg:flex lg:h-20 space-y-3 lg:space-y-0 items-center lg:space-x-4 text-small mt-3">
                       <div className="space-y-3">
-                        <div className="flex flex-row gap-2">
+                        <div className="flex flex-row gap-2 items-center">
                           <h1 className="leading-10 text-sm w-[150px]">
                             Ngày bắt đầu bán:{" "}
                           </h1>
@@ -317,7 +320,7 @@ function TicketInformation({ props }) {
                             setDate={setStartSale}
                           />
                         </div>
-                        <div className="flex flex-row gap-2">
+                        <div className="flex flex-row gap-2 items-center">
                           <h1 className="leading-10 text-sm w-[150px]">
                             Ngày kết thúc bán:{" "}
                           </h1>
