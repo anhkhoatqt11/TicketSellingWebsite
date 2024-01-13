@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import "./styles.css";
 import { Button } from "../ui/button";
+import {Input} from "@nextui-org/react";
+import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { signOut } from "next-auth/react";
@@ -18,9 +20,9 @@ import {
 import AuthSvg from "@/assets/AuthSvg";
 import { MobileNav } from "./MobileNavBar";
 import Logo from "../logo";
-import { BsTicketPerforated } from "react-icons/bs";
-import BackDropCus from "../backdropCus/backdropCus";
+import { HiOutlineTicket } from "react-icons/hi2";
 import { useRouter, usePathname } from "next/navigation";
+import { main_color } from "../../../public/color";
 
 const avatarNav = [
   {
@@ -98,50 +100,72 @@ const NavigationMenuDemo = ({ session }) => {
     }
   }, []);
 
-
   return (
     <div
       className={`w-full h-[50px] md:h-[76px] 
-    bg-white  items-center justify-between z-20
+    bg-[${main_color}]  items-center justify-between z-20
     sticky top-0 transition-transform duration-300 px-6 shadow-sm
     ${show}
     `}
     >
       <MobileNav session={session} />
 
-      <div className=" py-2 items-center h-full drop-shadow hidden lg:flex">
+      <div className="py-2 items-center h-full drop-shadow hidden lg:flex">
         {/* {isUserOpen ? <BackDropCus isOpen={isUserOpen} /> : null} */}
-        {<Logo />}
+        {<Logo />} <div className="ml-3 mr-6 text-white font-bold"         style={{ fontFamily: "'Nunito', sans-serif" }}>TicketNow</div>
         {pathname !== "/search" ? (
           <div className="form-control ">
-            <input
+            {/* <input
               type="text"
               placeholder="Tìm kiếm sự kiện"
               className="input input-bordered md:w-[500px] ml-5 h-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearchKeyPress}
-            />
+            /> */}
+            <Input
+          type="text"
+          placeholder="Hôm nay xem gì ta"
+          labelPlacement="outside"
+          className=" md:w-[450px] ml-5 h-10"
+          value={searchQuery}
+          radius="sm"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleSearchKeyPress}
+          startContent={
+            <IoSearch className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+          }
+          endContent={
+            <div className="flex flex-row w-[60px] gap-3">
+              <div className="text-sm text-[#CFCFCF]">|</div>
+                <div className="text-sm text-[#2A2D34]" onClick={()=>{
+                  router.push(`/search?searchWord=${encodeURIComponent(searchQuery)}`);
+                }}>Search</div>
+              </div>
+          }
+        />
           </div>
         ) : null}
         {user ? (
           <div className="flex flex-row gap-5 items-center justify-center ml-auto">
-            <div className="box-border w-full h-full flex gap-10">
+            <div className="box-border w-full h-full flex gap-14">
               {
-                <div className="flex gap-16">
+                <div className="flex gap-14">
                   <div>
                     <Link href="/organizer/event">
-                      <Button className="!box-content h-7 w-full rounded-full bg-blue-500 hover:bg-amber-300 hover:text-black">
+                      <Button className={`h-full py-0 w-32 rounded-full border-2 border-solid border-white bg-transparent text-white hover:text-black hover:bg-white font-medium`}>
                         Tạo sự kiện
                       </Button>
                     </Link>
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex items-center text-white">
                     <Link href={"/user/my-ticket"}>
-                      <BsTicketPerforated
+                      <div className="flex flex-row gap-3 items-center hover:text-black">
+                      <HiOutlineTicket
                         size={25}
-                        className="hover:text-blue-700"
                       />
+                      <p className="text-sm text-center hidden xl:block">Vé của tôi</p>
+                      </div>
                     </Link>
                   </div>
                 </div>
@@ -193,7 +217,7 @@ const NavigationMenuDemo = ({ session }) => {
         ) : (
           <div className="ml-auto mr-8">
             <Link href={"/auth/login"}>
-              <Button className="!box-content h-8 w-full rounded-full bg-blue-500 hover:bg-amber-300 hover:text-black">
+              <Button className="h-6 w-full rounded-full border-2 border-solid border-white bg-transparent text-white hover:text-black hover:bg-white font-medium">
                 Đăng nhập
               </Button>
             </Link>

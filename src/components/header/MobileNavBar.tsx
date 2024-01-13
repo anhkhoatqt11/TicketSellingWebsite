@@ -52,7 +52,7 @@ export function MobileNav({ session }) {
             variant="ghost"
             className="h-full p-0 text-base hover:bg-transparent
           focus-visible:bg-transparent focus-visible:ring-0 
-          focus-visible:ring-offset-0 lg:hidden"
+          focus-visible:ring-offset-0 lg:hidden text-white"
           >
             {CommonSvg.menuBurger()}
             <span className="sr-only">Toggle Menu</span>

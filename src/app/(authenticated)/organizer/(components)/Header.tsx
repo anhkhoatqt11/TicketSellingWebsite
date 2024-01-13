@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import AuthSvg from "@/assets/AuthSvg";
+import { main_color } from "../../../../../public/color";
 
 const avatarNav = [
   {
@@ -28,10 +29,17 @@ function Header({ session }) {
   const [user] = useState(session?.user);
   const router = useRouter();
   return (
-    <div className="flex justify-between p-6 h-fit w-full drop-shadow bg-white items-center border-b-1">
+    <div
+      className={`flex justify-between p-6 py-3 h-fit w-full drop-shadow bg-[${main_color}] items-center border-b-1`}
+    >
       <div className="flex items-center">
         <Logo />
-        <h1 className="font-medium text-blue-700">TicketNow</h1>
+        <div
+          className="ml-3 mr-6 text-white font-bold"
+          style={{ fontFamily: "'Nunito', sans-serif" }}
+        >
+          TicketNow
+        </div>
       </div>
       <div className="flex flex-row gap-3 max-w-full">
         <Dropdown

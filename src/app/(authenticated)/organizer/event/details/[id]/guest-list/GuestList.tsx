@@ -34,6 +34,7 @@ import SportIcon from "@/components/sport";
 import OutsideIcon from "@/components/outside";
 import * as XLSX from "xlsx";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { main_color } from "../../../../../../../../public/color";
 const getIconById = (id) => {
   switch (id) {
     case 1:
@@ -164,7 +165,9 @@ export function GuestList({ session, id }) {
         <div className="mt-6">
           <h1 className="font-semibold text-2xl">{eventName}</h1>
           <h1 className="text-gray-600">{addressValue}</h1>
-          <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
+          <h1
+            className={`text-base font-medium text-[${main_color}] mt-1 flex flex-row gap-2`}
+          >
             {getIconById(typeId)}
             {type}
           </h1>
@@ -174,8 +177,14 @@ export function GuestList({ session, id }) {
           Danh sách khán giả
         </h1>
         <div className="rounded-md bg-white p-4">
-          <Button onClick={onOpen}>Xuất danh sách thành file excel</Button>
-          <h1 className="w-full text-left mt-2 text-sm text-blue-800">
+          <Button
+            onClick={onOpen}
+            radius="sm"
+            className="bg-gray-100 transition ease-in-out hover:scale-105"
+          >
+            Xuất danh sách thành file excel
+          </Button>
+          <h1 className={`w-full text-left mt-2 text-sm text-[${main_color}]`}>
             Để đảm bảo thông tin khách hàng, trường email và số điện thoại sẽ bị
             ẩn
           </h1>
@@ -192,7 +201,7 @@ export function GuestList({ session, id }) {
             className="h-[52px] w-[0px] rounded-md m-0 p-0 -ml-[50px] min-w-unit-12 bg-transparent"
             onClick={searchSubmit}
           >
-            <MagnifyingGlassIcon className="h-6 w-6 text-blue-700" />
+            <MagnifyingGlassIcon className={`h-6 w-6 text-[${main_color}]`} />
           </Button>
         </div>
         <div className="w-full px-12 grid grid-cols-6 text-sm lg:text-base font-semibold mt-6 ">
@@ -230,7 +239,7 @@ export function GuestList({ session, id }) {
               color="success"
               aria-label="Loading..."
               classNames={{
-                svg: "w-20 h-20 text-blue-700",
+                svg: "w-20 h-20 text-gray-600",
               }}
             />
           </div>

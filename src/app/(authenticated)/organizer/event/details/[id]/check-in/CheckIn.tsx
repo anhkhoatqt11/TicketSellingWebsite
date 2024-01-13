@@ -36,6 +36,7 @@ import {
   currencyFormat,
   prismaDateToNextDate,
 } from "@/lib/utils";
+import { hover_color, main_color } from "../../../../../../../../public/color";
 
 const getIconById = (id) => {
   switch (id) {
@@ -180,7 +181,9 @@ const CheckIn = ({ session, id }) => {
       <div className="mt-6">
         <h1 className="font-semibold text-2xl">{eventName}</h1>
         <h1 className="text-gray-600">{addressValue}</h1>
-        <h1 className="text-base text-blue-700 mt-1 flex flex-row gap-2">
+        <h1
+          className={`text-base text-[${main_color}] font-medium mt-1 flex flex-row gap-2`}
+        >
           {getIconById(typeId)}
           {type}
         </h1>
@@ -224,34 +227,32 @@ const CheckIn = ({ session, id }) => {
                             <div className="flex flex-col items-center justify-center">
                               <Image
                                 alt="nextui logo"
-                                height={80}
-                                radius="full"
+                                className="h-[80px] w-[80px] rounded-full"
                                 src={userScanned?.avatar}
-                                width={80}
                               />
                               <p className="ml-2 font-medium text-xl">
                                 {userScanned?.name}
                               </p>
                             </div>
-                            <div className="mt-2 space-y-1">
-                              <p className="text-sm">
+                            <div className="mt-3 space-y-1">
+                              <p className="text-sm text-gray-600">
                                 Mã đặt chỗ: {hoaDonScanned?.maDatCho}
                               </p>
-                              <p className="text-sm">
+                              <p className="text-sm text-gray-600">
                                 Ngày đặt:{" "}
                                 {convertDateTimeToDate(
                                   hoaDonScanned?.createdAt
                                 )}
                               </p>
-                              <p className="text-sm">
+                              <p className="text-sm text-gray-600">
                                 Phương thức thanh toán:{" "}
                                 {hoaDonScanned?.phuongThucThanhToan}
                               </p>
-                              <p className="text-sm">
+                              <p className="text-sm text-gray-600">
                                 Tổng tiền thanh toán:{" "}
                                 {currencyFormat(hoaDonScanned?.tongTien)}
                               </p>
-                              <p className="text-sm">
+                              <p className="text-sm text-gray-600">
                                 Mã giảm giá:{" "}
                                 {hoaDonScanned?.maGiamGiaId === null ? (
                                   <span>Không</span>
@@ -259,7 +260,7 @@ const CheckIn = ({ session, id }) => {
                                   hoaDonScanned?.maGiamGiaId
                                 )}
                               </p>
-                              <p className="text-sm">
+                              <p className="text-sm text-gray-600">
                                 Trạng thái Check-in:{" "}
                                 {hoaDonScanned?.checkIn === false ? (
                                   <span>Chưa check-in</span>
@@ -269,7 +270,7 @@ const CheckIn = ({ session, id }) => {
                               </p>
                             </div>
                             {hoaDonScanned?.checkIn === false ? (
-                              <div className="grid grid-cols-2 gap-6 mt-2">
+                              <div className="grid grid-cols-2 gap-6 mt-3">
                                 <Button
                                   onClick={() => checkIn()}
                                   radius="sm"
@@ -287,7 +288,8 @@ const CheckIn = ({ session, id }) => {
                               </div>
                             ) : (
                               <Button
-                                className="w-full"
+                                className={`w-full mt-3 bg-[${main_color}] text-white hover:bg-[${hover_color}]`}
+                                radius="sm"
                                 onClick={() => cancelCheckIn()}
                               >
                                 Quét mã QR khác

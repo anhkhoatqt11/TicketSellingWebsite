@@ -8,6 +8,8 @@ import classnames from "classnames";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import { LuMenu } from "react-icons/lu";
+import { usePathname } from "next/navigation";
+import path from "path";
 
 type SidebarElement = React.ElementRef<"aside">;
 type RootProps = React.ComponentPropsWithoutRef<"aside">;
@@ -41,7 +43,10 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                   <div className="py-2 flex flex-col truncate space-y-1">
                     <LayoutGroup id="sidebar">
                       {navItems.map((item) => {
-                        const isCurrentPage = title === item.title;
+                        const pathName = usePathname();
+                        const lastPathname = pathName.split("/").pop();
+
+                        const isCurrentPage = lastPathname === item.value;
                         return (
                           <Link
                             key={item.title}
@@ -50,12 +55,12 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                           >
                             <motion.span
                               className={classnames(
-                                "text-[14px] flex items-center font-medium gap-2 w-full pl-4 h-8 rounded-md text-slate-11 relative transition ease-in-out duration-200",
+                                "text-[14px] flex items-center font-medium gap-2 w-full h-10 rounded-md text-slate-11 relative transition ease-in-out duration-200",
                                 {
-                                  "text-white": isCurrentPage,
+                                  "text-black": isCurrentPage,
                                   "hover:text-slate-12": title !== item.title,
-                                  "font-bold": isCurrentPage,
-                                  "bg-blue-500": isCurrentPage,
+                                  "font-semibold": isCurrentPage,
+                                  "bg-[#f2f2f2]": isCurrentPage,
                                 }
                               )}
                             >

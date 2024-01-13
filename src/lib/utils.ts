@@ -133,7 +133,7 @@ export const prismaDateToNextDate = (type) => {
 
 export const convertDateInUI = (type) => {
     const time = convertDateTimeToDate(type).split("/");
-    return time[2]+"-"+time[1]+"-"+time[0]
+    return time[0]+"-"+time[1]+"-"+time[2]
 }
 
 export const convertDateUIToDate = (type) => {
@@ -143,4 +143,6 @@ export const convertDateUIToDate = (type) => {
   const year =  parseInt(time[0]);
   return new Date(year,month,day);
 }
+
+
 

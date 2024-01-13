@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import DialogCustom from "@/components/ui/dialogCustom";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { hover_color, main_color } from "../../../../../../public/color";
 
 export const SelectAddress = ({ addressValue, setAddressValue }) => {
   const [selectedProvince, setSelectedProvince] = React.useState(new Set([]));
@@ -116,7 +117,7 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
           <div className="flex flex-col gap-y-6 w-full px-1">
             <Select
               key={"province"}
-              radius={"md"}
+              radius={"sm"}
               label="Thành phố, tỉnh thành"
               isInvalid={isProvinceValid || !provinceTouched ? false : true}
               errorMessage={
@@ -129,7 +130,8 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
               selectedKeys={selectedProvince}
               isLoading={isLoadingProvince}
               onSelectionChange={setSelectedProvince}
-              className="w-full "
+              variant="bordered"
+              className="w-full rounded-sm shadow"
               onClose={() => setProvinceTouched(true)}
             >
               {provinces?.map((province) => (
@@ -140,7 +142,7 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
             </Select>
             <Select
               key={"district"}
-              radius={"md"}
+              radius={"sm"}
               label="Quận, huyện"
               isInvalid={isDistrictValid || !districtTouched ? false : true}
               errorMessage={
@@ -153,7 +155,8 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
               selectedKeys={selectedDistrict}
               isLoading={isLoadingDistrict}
               onSelectionChange={setSelectedDistrict}
-              className="w-full "
+              variant="bordered"
+              className="w-full rounded-sm shadow"
               onClose={() => setDistrictTouched(true)}
             >
               {districts?.map((district) => (
@@ -164,7 +167,7 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
             </Select>
             <Select
               key={"ward"}
-              radius={"md"}
+              radius={"sm"}
               label="Xã, phường"
               isInvalid={isWardValid || !wardTouched ? false : true}
               errorMessage={
@@ -175,7 +178,8 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
               selectedKeys={selectedWard}
               isLoading={isLoadingWard}
               onSelectionChange={setSelectedWard}
-              className="w-full "
+              variant="bordered"
+              className="w-full rounded-sm shadow"
               onClose={() => setWardTouched(true)}
             >
               {wards?.map((ward) => (
@@ -202,7 +206,7 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
                   !locationValue
                 }
                 onClick={onSubmit}
-                className="w-[50%] bg-blue-500 hover:bg-blue-500"
+                className={`w-full bg-[${main_color}] hover:text-white hover:bg-[${hover_color}] `}
               >
                 Xác nhận
               </Button>
@@ -230,11 +234,7 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
         placeholder="Chọn địa chỉ"
         variant="bordered"
         selectedKeys={addressValue !== "" ? [addressValue] : null}
-        isInvalid={addressValue !== "" || !diaChiTouched ? false : true}
-        errorMessage={
-          addressValue !== "" || !diaChiTouched ? "" : "Vui lòng chọn địa chỉ"
-        }
-        className="w-full"
+        className="w-full rounded-sm shadow"
         radius="sm"
         onClick={() => {
           setIsModalOpen(true);
