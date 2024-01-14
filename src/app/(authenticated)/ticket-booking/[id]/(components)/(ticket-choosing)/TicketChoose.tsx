@@ -28,6 +28,8 @@ export function formatCurrency(value: number) {
   return CURRENCY_FORMAT.format(value);
 }
 
+
+
 const TicketChoose = ({ EventDetail }) => {
   const dispatch = useDispatch();
   const [currentDateTime, setCurrentDateTime] = React.useState("");

@@ -7,7 +7,7 @@ import TicketInformation, {
   TicketProps,
 } from "../../../../(components)/(event)/(add)/TicketInformation";
 import { GuestItem } from "@/app/(authenticated)/organizer/(components)/(event)/(detail)/GuestItem";
-import { QrReader } from "react-qr-reader";
+import {QrScanner} from '@yudiel/react-qr-scanner';
 import Loader from "@/components/Loader";
 import {
   Card,
@@ -177,7 +177,7 @@ const CheckIn = ({ session, id }) => {
   };
 
   return (
-    <div className="min-h-[1032px]">
+    <div className="min-h-full">
       <div className="mt-6">
         <h1 className="font-semibold text-2xl">{eventName}</h1>
         <h1 className="text-gray-600">{addressValue}</h1>
@@ -190,26 +190,20 @@ const CheckIn = ({ session, id }) => {
         <Divider className="my-4 mt-6" />
       </div>
       <div className="flex flex-col md:flex-row w-full justify-center md:items-start items-center">
-        <QrReader
-          onResult={(result, error) => {
+        <QrScanner
+          onDecode={(result) => {
             if (!!result) {
-              setData(result?.text);
+              setData(result);
             }
           }}
-          className="w-[450px] rounded-md"
+          containerStyle={{ width: "100%", height: "100%", paddingTop: "50%" }}
+          onError={(error) => console.log(error?.message)}
           constraints={{ facingMode: "environment" }}
         />
         <div className="w-full ml-4 flex justify-center md:justify-start">
           <div className="flex flex-col gap-2 mt-10">
             <Card className="w-[400px] rounded-md">
               <CardHeader className="flex gap-3">
-                {/* <Image
-                                    alt="nextui logo"
-                                    height={40}
-                                    radius="sm"
-                                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                                    width={40}
-                                /> */}
                 <Logo />
                 <div className="flex flex-col">
                   <p className="text-md">Checkin bằng mã QR</p>

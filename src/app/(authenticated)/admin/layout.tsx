@@ -4,6 +4,7 @@ import Header from "./(components)/Header";
 import { DashboardIcon } from "@radix-ui/react-icons";
 import { Sidebar } from "./(components)/Sidebar";
 import { Airplay, CalendarRange, User } from "lucide-react";
+import { Footer } from "@/components/footer";
 
 
 const navItems = [
@@ -51,6 +52,7 @@ async function layout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

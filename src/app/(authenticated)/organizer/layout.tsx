@@ -37,7 +37,6 @@ export default async function OrganizerLayout({
   return (
     <div className="w-full h-full bg-slate-50">
       <Header session={session} />
-      {/* <Header session={session}/> */}
       <div className="flex flex-col lg:flex-row justify-between h-full ">
         <OrganizerRegister session={session} />
         <Sidebar
