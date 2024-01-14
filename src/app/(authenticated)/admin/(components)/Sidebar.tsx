@@ -32,6 +32,7 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
         className="px-6 flex flex-col gap-4 border-r border-slate-6 bg-[black] shadow-xl"
         {...props}
       >
+        <nav className="flex flex-col gap-4 bg-[#3BE1AA] h-full">
         <div className="flex flex-col gap-3 pl-4 pr-4 pb-4 pt-4 items-center justify-center bg-[#3BE1AA]">
           <Logo />
           <div
@@ -41,7 +42,6 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
             TicketNow
           </div>
         </div>
-        <nav className="flex flex-col gap-4 bg-[#3BE1AA] h-full">
           <Collapsible.Root defaultOpen>
             {navItems && navItems.length > 0 && (
               <Collapsible.Content className="relative">

@@ -76,7 +76,7 @@ export function EventDetail({ id }) {
   });
 
   useEffect(() => {
-    fetch("http://worldtimeapi.org/api/timezone/Asia/Bangkok")
+    fetch("https://worldtimeapi.org/api/timezone/Asia/Bangkok")
       .then((response) => response.json())
       .then((data) => {
         setCurrentDateTime(data.utc_datetime);
