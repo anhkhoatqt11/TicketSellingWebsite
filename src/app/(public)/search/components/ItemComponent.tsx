@@ -67,7 +67,7 @@ const ItemComponent = ({ item }) => {
           <div className="px-6 py-4 flex-1">
             <div className="flex flex-row gap-1 items-center font-medium mb-1">
               {getIconById(item.ChuDeId)}
-              <div className={`text-sm text-[${main_color}]`}>
+              <div className={`text-sm text-[#3BE1AA]`}>
                 {topicMapping[item.ChuDeId]}
               </div>
             </div>

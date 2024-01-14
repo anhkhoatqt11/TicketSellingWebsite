@@ -70,7 +70,7 @@ const TicketLayout = ({ id }: Props) => {
             {data && data.length > displayedTickets && (
               <div className="mt-3 flex justify-center">
                 <button
-                  className={`btn w-[200px] text-white rounded-full bg-[${main_color}] hover:bg-[#343434] flex flex-row gap-3 items-center`}
+                  className={`btn w-[200px] text-black rounded-full bg-[#3BE1AA] hover:bg-[#2DD196] flex flex-row gap-3 items-center`}
                   onClick={handleShowMore}
                 >
                   Hiển thị thêm <IoIosArrowDown />

@@ -522,7 +522,7 @@ export default function UserList({ props }) {
                         </div>
                       )}
                       <Button
-                        className={`w-full col-span-full bg-[${main_color}] text-white mt-0`}
+                        className={`w-full col-span-full bg-[#3BE1AA] text-black hover:bg-[#2DD196] transition ease-in-out hover:scale-105 active:scale-[0.96] mt-0`}
                         disabled={isSubmitting}
                         onClick={() => {
                           onSubmit();

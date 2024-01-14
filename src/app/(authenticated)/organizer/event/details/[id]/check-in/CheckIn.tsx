@@ -182,7 +182,7 @@ const CheckIn = ({ session, id }) => {
         <h1 className="font-semibold text-2xl">{eventName}</h1>
         <h1 className="text-gray-600">{addressValue}</h1>
         <h1
-          className={`text-base text-[${main_color}] font-medium mt-1 flex flex-row gap-2`}
+          className={`text-base text-[#2DD196] font-medium mt-1 flex flex-row gap-2`}
         >
           {getIconById(typeId)}
           {type}
@@ -288,7 +288,7 @@ const CheckIn = ({ session, id }) => {
                               </div>
                             ) : (
                               <Button
-                                className={`w-full mt-3 bg-[${main_color}] text-white hover:bg-[${hover_color}]`}
+                                className={`w-full mt-3 bg-[#3BE1AA] text-black hover:bg-[#2DD196]`}
                                 radius="sm"
                                 onClick={() => cancelCheckIn()}
                               >

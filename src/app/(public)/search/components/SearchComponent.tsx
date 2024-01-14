@@ -154,7 +154,7 @@ const SearchComponent = ({ setSearchProps }: props) => {
                 />
               </div>
               <Button
-                className={`text-white bg-[${main_color}] hover:bg-[#40d4c5] hover:text-black`}
+                className={`text-white bg-[#3BE1AA] hover:bg-[#2DD196] hover:text-black`}
                 type="submit"
               >
                 Tìm kiếm

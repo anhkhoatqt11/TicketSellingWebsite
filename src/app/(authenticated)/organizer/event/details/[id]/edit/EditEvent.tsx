@@ -228,7 +228,7 @@ export function EditEvent({ session, id }) {
         }}
       />
       <Button
-        className={`w-full bg-[${main_color}] text-white font-semibold py-6 text-base`}
+        className={`w-full bg-[#3BE1AA] hover:bg-[#2DD196]  text-black font-semibold py-6 text-base`}
         radius="sm"
         onClick={onSubmit}
       >

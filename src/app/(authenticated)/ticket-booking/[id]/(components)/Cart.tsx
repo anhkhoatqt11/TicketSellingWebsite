@@ -270,7 +270,7 @@ const Cart = ({
       </div>
       <div>
         <Button
-          className={`w-full mt-10 px-0 bg-[${main_color}]`}
+          className={`w-full mt-10 px-0 bg-[#3BE1AA] text-black hover:bg-[#2DD196]`}
           disabled={
             (isDisabled && websiteBooking === "choose-ticket") ||
             (paymentMethod === "" && websiteBooking === "payment")

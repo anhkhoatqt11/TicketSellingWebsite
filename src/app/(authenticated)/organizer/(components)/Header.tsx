@@ -30,7 +30,7 @@ function Header({ session }) {
   const router = useRouter();
   return (
     <div
-      className={`flex justify-between p-6 py-3 h-fit w-full drop-shadow bg-[${main_color}] items-center border-b-1`}
+      className={`flex justify-between p-6 py-3 h-fit w-full drop-shadow bg-[#3BE1AA] items-center border-b-1`}
     >
       <div className="flex items-center">
         <Logo />

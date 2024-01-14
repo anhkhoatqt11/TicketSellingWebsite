@@ -33,11 +33,11 @@ export function SearchAndCreateBar({ setSearchWord }) {
           className="h-[52px] w-[0px] rounded-md m-0 p-0 -ml-[50px] min-w-unit-12 bg-transparent"
           onClick={searchSubmit}
         >
-          <MagnifyingGlassIcon className={`h-6 w-6 text-[${main_color}]`} />
+          <MagnifyingGlassIcon className={`h-6 w-6 text-[#3BE1AA]`} />
         </Button>
       </div>
       <Button
-        className={`h-[50px] w-full md:w-[200px] rounded-md m-0 p-0 font-medium bg-[${main_color}] text-sm text-white mr-6 md:mr-6`}
+        className={`h-[50px] w-full md:w-[200px] rounded-md m-0 p-0 font-medium bg-[#3BE1AA] hover:bg-[#2DD196] text-sm text-black mr-6 md:mr-6`}
         onClick={() => {
           router.push("/organizer/event/add");
         }}

@@ -237,7 +237,7 @@ const Register = ({
 
               <Button
                 type="submit"
-                className={`font-bold bg-[${main_color}]  hover:text-white`}
+                className={`font-semibold bg-[#3BE1AA]  text-white hover:bg-[#2DD196] hover:scale-105 transition ease-in-out active:scale-[0.96]`}
               >
                 Đăng ký
               </Button>

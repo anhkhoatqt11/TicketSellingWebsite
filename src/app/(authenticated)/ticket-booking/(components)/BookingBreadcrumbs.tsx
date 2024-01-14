@@ -20,8 +20,8 @@ function BreadcrumbStep({ color, icon, text, background }) {
 const pageSteps = {
   "choose-ticket": [
     {
-      background: `[${main_color}] text-white`,
-      color: `[${main_color}]`,
+      background: `[#3BE1AA] text-white`,
+      color: `[#3BE1AA]`,
       icon: <AiOutlineInsertRowBelow size={25} />,
       text: "CHỌN VÉ",
     },
@@ -41,13 +41,13 @@ const pageSteps = {
   payment: [
     {
       background: "white",
-      color: `[${main_color}]`,
+      color: `[#3BE1AA]`,
       icon: <AiOutlineInsertRowBelow size={25} />,
       text: "CHỌN VÉ",
     },
     {
-      background: `[${main_color}] text-white`,
-      color: `[${main_color}]`,
+      background: `[#3BE1AA] text-white`,
+      color: `[#3BE1AA]`,
       icon: <FaCreditCard size={25} />,
       text: "THANH TOÁN",
     },
@@ -61,19 +61,19 @@ const pageSteps = {
   completed: [
     {
       background: "white",
-      color: `[${main_color}]`,
+      color: `[#3BE1AA]`,
       icon: <AiOutlineInsertRowBelow size={25} />,
       text: "CHỌN VÉ",
     },
     {
       background: "white",
-      color: `[${main_color}]`,
+      color: `[#3BE1AA]`,
       icon: <FaCreditCard size={25} />,
       text: "THANH TOÁN",
     },
     {
-      background: `[${main_color}] text-white`,
-      color: `[${main_color}]`,
+      background: `[#3BE1AA] text-white`,
+      color: `[#3BE1AA]`,
       icon: <CheckIcon size={25} />,
       text: "HOÀN TẤT",
     },
@@ -81,13 +81,13 @@ const pageSteps = {
   failed: [
     {
       background: "white",
-      color: `[${main_color}]`,
+      color: `[#3BE1AA]`,
       icon: <AiOutlineInsertRowBelow size={25} />,
       text: "CHỌN VÉ",
     },
     {
       background: "white",
-      color: `[${main_color}]`,
+      color: `[#3BE1AA]`,
       icon: <FaCreditCard size={25} />,
       text: "THANH TOÁN",
     },

@@ -148,7 +148,7 @@ const Login = ({ className }: { className?: string }) => {
                 </div>
               </div>
               <Button
-                className={`font-bold bg-[${main_color}] hover:text-white`}
+                className={`font-semibold bg-[#3BE1AA]  text-white hover:bg-[#2DD196] hover:scale-105 transition ease-in-out active:scale-[0.96]`}
                 type="submit"
               >
                 Đăng nhập

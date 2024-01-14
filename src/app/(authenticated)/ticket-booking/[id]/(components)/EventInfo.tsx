@@ -18,7 +18,7 @@ export function EventInfo({ EventDetail }) {
     <div className="w-full h-2/3 bg-white shadow">
       <div className="flex flex-col p-4 text-white gap-1">
         <p className="font-bold text-black text-lg">{EventDetail.name}</p>
-        <p className={`text-sm text-[${main_color}] font-semibold`}>
+        <p className={`text-sm text-[#2DD196] font-semibold`}>
           {EventDetail.diaChi}
         </p>
         <p className="text-sm text-gray-400">

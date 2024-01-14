@@ -11,7 +11,7 @@ const radio = tv({
   variants: {
     isSelected: {
       true: {
-        base: `border-[${main_color}] bg-[#17d1c6] hover:bg-[${accent_color}] hover:border-[${main_color}] text-white`,
+        base: `border-[#3BE1AA] bg-[#3BE1AA] hover:bg-[${accent_color}] hover:border-[#3BE1AA] text-white`,
         content: `text-primary-foreground pl-1`,
       },
     },

@@ -166,7 +166,7 @@ export function GuestList({ session, id }) {
           <h1 className="font-semibold text-2xl">{eventName}</h1>
           <h1 className="text-gray-600">{addressValue}</h1>
           <h1
-            className={`text-base font-medium text-[${main_color}] mt-1 flex flex-row gap-2`}
+            className={`text-base font-medium text-[#2DD196] mt-1 flex flex-row gap-2`}
           >
             {getIconById(typeId)}
             {type}
@@ -184,7 +184,7 @@ export function GuestList({ session, id }) {
           >
             Xuất danh sách thành file excel
           </Button>
-          <h1 className={`w-full text-left mt-2 text-sm text-[${main_color}]`}>
+          <h1 className={`w-full text-left mt-2 text-sm text-[#2DD196]`}>
             Để đảm bảo thông tin khách hàng, trường email và số điện thoại sẽ bị
             ẩn
           </h1>
@@ -201,7 +201,7 @@ export function GuestList({ session, id }) {
             className="h-[52px] w-[0px] rounded-md m-0 p-0 -ml-[50px] min-w-unit-12 bg-transparent"
             onClick={searchSubmit}
           >
-            <MagnifyingGlassIcon className={`h-6 w-6 text-[${main_color}]`} />
+            <MagnifyingGlassIcon className={`h-6 w-6 text-[#2DD196]`} />
           </Button>
         </div>
         <div className="w-full px-12 grid grid-cols-6 text-sm lg:text-base font-semibold mt-6 ">
