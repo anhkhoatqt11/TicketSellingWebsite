@@ -299,6 +299,7 @@ export function EventDetail({ id }) {
                         src={EventDetail?.user?.avatar}
                         width={100}
                         height={100}
+                        alt={"Organizer Avatar"}
                       ></Image>
                     </div>
                     <div className="ml-4">
@@ -318,6 +319,7 @@ export function EventDetail({ id }) {
                         src={EventDetail?.user?.anhDaiDienToChuc}
                         width={100}
                         height={100}
+                        alt={"Organizer Avatar"}
                       ></Image>
                     </div>
                     <div className="ml-4">

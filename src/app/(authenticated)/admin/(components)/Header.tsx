@@ -24,13 +24,6 @@ function Header({ session }) {
   const router = useRouter();
   const pathanme = usePathname();
 
-  useEffect(() => {
-    console.log(session);
-    if (session?.user?.role !== "admin") {
-      console.log("trang không tồn tại");
-    }
-  }, []);
-
   return (
     <Navbar
       shouldHideOnScroll
