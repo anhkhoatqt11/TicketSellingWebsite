@@ -97,7 +97,7 @@ const AddBannerModal = ({ refetch, banners }) => {
                 handleAddBanner(event.id);
               }}
             >
-              <PlusCircle className={`w-6 h-6 text-[${main_color}]`} />
+              <PlusCircle className={`w-6 h-6 text-[#2DD196]`} />
             </Button>
           </TableCell>
         );
@@ -113,7 +113,7 @@ const AddBannerModal = ({ refetch, banners }) => {
           onOpen();
           setSearchWord("");
         }}
-        className={`mb-10 bg-transparent border-1 border-[${main_color}] text-[${main_color}] hover:bg-[${main_color}] hover:text-white hover:scale-105 transition ease-in-out shadow rounded-sm`}
+        className={`mb-10 bg-transparent border-1 border-[#2DD196] text-[#2DD196] hover:bg-[#2DD196] hover:text-white hover:scale-105 transition ease-in-out shadow rounded-sm`}
       >
         Thêm banner mới
       </Button>

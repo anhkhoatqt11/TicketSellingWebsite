@@ -73,7 +73,7 @@ export function ListComponent({ searchProps }: props) {
           >
             Không tìm thấy sự kiện phù hợp
             <div
-              className={`text-[${main_color}] mt-6 font-semibold text-lg flex flex-row gap-1 items-center`}
+              className={`text-[#3BE1AA] mt-6 font-semibold text-lg flex flex-row gap-1 items-center`}
             >
               <HiOutlineLightBulb className="w-6 h-6" /> Gợi ý hôm nay
             </div>

@@ -123,16 +123,14 @@ const TicketItem = ({
           <div className="overflow-visible py-2 pb-0 pt-2 px-4 md:w-2/3">
             <div className="flex flex-col">
               <small className="text-default-500">TÊN SỰ KIỆN</small>
-              <p className={`text-md font-bold text-[${main_color}]`}>{name}</p>
+              <p className={`text-md font-bold text-[#2DD196]`}>{name}</p>
             </div>
             <Divider className="my-2" />
             <div className="flex flex-col">
               <small className="text-default-500">MÃ ĐẶT CHỖ</small>
-              <p className={`text-md font-bold text-[${main_color}]`}>
-                {maDatCho}
-              </p>
+              <p className={`text-md font-bold text-[#2DD196]`}>{maDatCho}</p>
               <Button
-                className={`bg-[${main_color}] font-bold h-[30px]`}
+                className={`bg-[#3BE1AA] hover:bg-[#2DD196] mt-2 text-black font-bold h-[36px]`}
                 onClick={() => {
                   onOpen();
                   setSelectedMaDatCho(maDatCho);
@@ -181,9 +179,7 @@ const TicketItem = ({
                   <br></br>
                   <p className="text-sm text-slate-500 text-ellipsis overflow-hidden h-[60px]">
                     Số lượng:{" "}
-                    <span className={`text-[${main_color}]`}>
-                      {hoaDon.soLuong}
-                    </span>
+                    <span className={`text-[#2DD196]`}>{hoaDon.soLuong}</span>
                   </p>
                 </div>
               </div>
@@ -192,21 +188,21 @@ const TicketItem = ({
           <Divider className="my-2" />
           <div className="flex flex-col gap-1">
             <small className="text-default-500">THÔNG TIN THANH TOÁN</small>
-            <p className="text-md font-bol">
+            <p className="text-md font-semibold">
               Trạng thái thanh toán:{" "}
-              <span className={`text-[${main_color}] font-semibold`}>
+              <span className={`text-[#2DD196] font-semibold`}>
                 {tinhTrang}
               </span>
             </p>
             <p className="text-md font-bol">
               Phương thức thanh toán:{" "}
-              <span className={`text-[${main_color}] font-semibold`}>
+              <span className={`text-[#2DD196] font-semibold`}>
                 {phuongThucThanhToan}
               </span>
             </p>
             <p className="text-md font-bol">
               Tổng tiền:{" "}
-              <span className={`text-[${main_color}] font-semibold`}>
+              <span className={`text-[#2DD196] font-semibold`}>
                 {formatCurrency(tongTien)}
               </span>
             </p>

@@ -83,7 +83,7 @@ export default function DashBoard() {
             maxValue={100}
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-yellow-400`,
+              indicator: `bg-yellow-300`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -155,7 +155,7 @@ export default function DashBoard() {
             maxValue={100}
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-emerald-500`,
+              indicator: `bg-green-500`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -189,7 +189,7 @@ export default function DashBoard() {
             maxValue={100}
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-pink-500`,
+              indicator: `bg-pink-400`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">

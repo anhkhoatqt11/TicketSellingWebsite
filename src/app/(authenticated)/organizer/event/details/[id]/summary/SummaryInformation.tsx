@@ -213,7 +213,7 @@ export function SummaryInformation({ session, id }) {
           <h1 className="font-semibold text-2xl">{eventName}</h1>
           <h1 className="text-gray-600">{addressValue}</h1>
           <h1
-            className={`text-base text-[${main_color}] font-medium mt-1 flex flex-row gap-2`}
+            className={`text-base text-[#2DD196] font-medium mt-1 flex flex-row gap-2`}
           >
             {getIconById(typeId)}
             {type}

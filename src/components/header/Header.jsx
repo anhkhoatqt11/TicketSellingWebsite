@@ -103,7 +103,7 @@ const NavigationMenuDemo = ({ session }) => {
   return (
     <div
       className={`w-full h-[50px] md:h-[76px] 
-    bg-[${main_color}]  items-center justify-between z-20
+    bg-[#3BE1AA]  items-center justify-between z-20
     sticky top-0 transition-transform duration-300 px-6 shadow-sm
     ${show}
     `}

@@ -206,7 +206,7 @@ export const SelectAddress = ({ addressValue, setAddressValue }) => {
                   !locationValue
                 }
                 onClick={onSubmit}
-                className={`w-full bg-[${main_color}] hover:bg-[${hover_color}] hover:text-black`}
+                className={`w-full bg-[#3BE1AA] hover:bg-[#2DD196] text-black`}
               >
                 Xác nhận
               </Button>

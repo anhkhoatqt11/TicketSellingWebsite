@@ -394,7 +394,7 @@ export const RegisterForm = ({ organizerType, setIsLoading, userId }) => {
           onClick={() => {
             onSubmit();
           }}
-          className={`w-[100%] h-12 text-white bg-[${main_color}] hover:bg-[${hover_color}] transition duration-300 ease-in-out active:scale-90`}
+          className={`w-[100%] h-12 text-black bg-[#3BE1AA] hover:bg-[#2DD196] transition duration-300 ease-in-out active:scale-90`}
         >
           Xác nhận
         </Button>

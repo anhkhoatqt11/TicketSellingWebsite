@@ -115,7 +115,7 @@ export function EventListItemComponent({
             </div>
             <div className="lg:w-2/3 m-3">
               <h1
-                className={`text-sm text-[${main_color}] font-medium mt-1 flex flex-row gap-2`}
+                className={`text-sm text-[#2DD196] font-medium mt-1 flex flex-row gap-2`}
               >
                 {getIconById(item?.ChuDe?.id)}
                 {item?.ChuDe?.name}
@@ -142,18 +142,18 @@ export function EventListItemComponent({
           </div>
           <Separator />
           <div
-            className={`grid grid-cols-2 gap-2 rounded-md text-[${main_color}] bg-[#17d1c50d] font-medium w-full place-content-center`}
+            className={`grid grid-cols-2 gap-2 rounded-md text-[#2DD196] bg-[#2dd1950e] font-medium w-full place-content-center`}
           >
             <Link href={`/event/${item?.id}`}>
               <div
-                className={`grid place-content-center text-center gap-2 hover:bg-[${main_color}] hover:text-white py-4 rounded-bl-lg`}
+                className={`grid place-content-center text-center gap-2 hover:bg-[#3BE1AA] hover:text-white py-4 rounded-bl-lg`}
               >
                 <PlayIcon className="w-full" />
                 Xem sự kiện
               </div>
             </Link>
             <div
-              className={`grid place-content-center text-center gap-2 hover:bg-[${main_color}] hover:text-white py-4`}
+              className={`grid place-content-center text-center gap-2 hover:bg-[#3BE1AA] hover:text-white py-4`}
               onClick={() => {
                 onOpen();
                 setSelectedItem(item);

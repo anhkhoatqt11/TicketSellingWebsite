@@ -159,7 +159,7 @@ export function CouponList({ session, id }) {
           <h1 className="font-semibold text-2xl">{eventName}</h1>
           <h1 className="text-gray-600">{addressValue}</h1>
           <h1
-            className={`text-base font-semibold text-[${main_color}] mt-1 flex flex-row gap-2`}
+            className={`text-base font-semibold text-[#2DD196] mt-1 flex flex-row gap-2`}
           >
             {getIconById(typeId)}
             {type}
@@ -220,7 +220,7 @@ export function CouponList({ session, id }) {
             ></CouponItemComponent>
           ))}
           <Button
-            className={`w-full bg-[${main_color}] hover:bg-[${hover_color}] mt-4 text-white font-semibold py-6 text-base`}
+            className={`w-full bg-[#3BE1AA] hover:bg-[#2DD196] text-black mt-4 font-semibold py-6 text-base`}
             onClick={onOpen}
           >
             Tạo mã giảm giá mới

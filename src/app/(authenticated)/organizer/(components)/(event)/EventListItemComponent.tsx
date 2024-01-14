@@ -105,7 +105,7 @@ export function EventListItemComponent({ item }) {
           </div>
           <div className="lg:w-2/3 m-3">
             <h1
-              className={`text-sm text-[${main_color}] font-medium mt-1 flex flex-row gap-2`}
+              className={`text-sm text-[#2DD196] font-semibold mt-1 flex flex-row gap-2`}
             >
               {getIconById(item?.ChuDe?.id)}
               {item?.ChuDe?.name}
@@ -132,11 +132,11 @@ export function EventListItemComponent({ item }) {
         </div>
         <Separator />
         <div
-          className={`grid grid-cols-5 gap-2 rounded-md text-[${main_color}] bg-[#17d1c50d] h-full font-medium w-full place-content-center`}
+          className={`grid grid-cols-5 gap-2 rounded-md text-[#2DD196] bg-[#2dd1950e] h-full font-medium w-full place-content-center`}
         >
           <Link href={`/organizer/event/details/${item?.id}/guest-list`}>
             <div
-              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[#17d1c6] h-full hover:text-white py-4 rounded-bl-lg`}
+              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[#3BE1AA] h-full hover:text-white py-4 rounded-bl-lg`}
             >
               <IoPeople className="w-full" />
               Danh sách khách
@@ -144,7 +144,7 @@ export function EventListItemComponent({ item }) {
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/coupon`}>
             <div
-              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[${main_color}] h-full hover:text-white py-4`}
+              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[#3BE1AA] h-full hover:text-white py-4`}
             >
               <BiSolidDiscount className="w-full" />
               Mã giảm giá
@@ -152,7 +152,7 @@ export function EventListItemComponent({ item }) {
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/edit`}>
             <div
-              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[${main_color}] h-full hover:text-white py-4`}
+              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[#3BE1AA] h-full hover:text-white py-4`}
             >
               <AiFillEdit className="w-full" />
               Chỉnh sửa
@@ -160,7 +160,7 @@ export function EventListItemComponent({ item }) {
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/summary`}>
             <div
-              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[${main_color}] h-full hover:text-white py-4`}
+              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[#3BE1AA] h-full hover:text-white py-4`}
             >
               <FaChartBar className="w-full" />
               Tổng kết
@@ -168,7 +168,7 @@ export function EventListItemComponent({ item }) {
           </Link>
           <Link href={`/organizer/event/details/${item?.id}/check-in`}>
             <div
-              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[${main_color}] h-full hover:text-white py-4 rounded-br-lg`}
+              className={`grid place-content-center text-sm md:text-base text-center gap-2 hover:bg-[#3BE1AA] h-full hover:text-white py-4 rounded-br-lg`}
             >
               <FaQrcode className="w-full" />
               Checkin

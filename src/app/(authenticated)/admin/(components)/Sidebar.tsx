@@ -29,19 +29,19 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
     return (
       <aside
         ref={forwardedRef}
-        className="px-6 flex flex-col gap-4 border-r border-slate-6 bg-white shadow-xl"
+        className="px-6 flex flex-col gap-4 border-r border-slate-6 bg-[black] shadow-xl"
         {...props}
       >
-        <div className="flex flex-col gap-3 pl-4 pr-4 pb-4 pt-4 items-center justify-center">
+        <div className="flex flex-col gap-3 pl-4 pr-4 pb-4 pt-4 items-center justify-center bg-[#3BE1AA]">
           <Logo />
           <div
-            className={`text-base font-medium text-[${main_color}]`}
+            className={`text-base font-semibold text-[black]`}
             style={{ fontFamily: "'Nunito', sans-serif" }}
           >
             TicketNow
           </div>
         </div>
-        <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col gap-4 bg-[#3BE1AA] h-full">
           <Collapsible.Root defaultOpen>
             {navItems && navItems.length > 0 && (
               <Collapsible.Content className="relative">
@@ -58,16 +58,16 @@ export const Sidebar = React.forwardRef<SidebarElement, Readonly<SidebarProps>>(
                         <Link
                           key={item.title}
                           href={`/admin/${item.value}`}
-                          className="flex items-center text-gray-900 rounded-lg  hover:bg-[#dcdcdc]"
+                          className="flex items-center font-bold text-black rounded-lg  hover:bg-[#2DD196] mx-2"
                         >
                           <motion.span
                             className={classnames(
-                              "text-[14px] px-4 flex items-center font-medium gap-2 w-full pl-4 h-10 text-slate-11 relative transition ease-in-out duration-200",
+                              "text-[14px] px-4 flex items-center font-medium gap-2 w-full pl-4 h-10 text-slate-11 relative transition rounded ease-in-out duration-200",
                               {
                                 "text-black": isCurrentPage,
                                 "hover:text-slate-12": title !== item.title,
-                                "font-semibold": isCurrentPage,
-                                "bg-[#f2f2f2]": isCurrentPage,
+                                "font-bold": isCurrentPage,
+                                "bg-[#f2f2f2] rounded": isCurrentPage,
                               }
                             )}
                           >

@@ -58,7 +58,7 @@ function GeneralInformation({ props }) {
           files={props.eventPosterFile}
           setFiles={props.setEventPosterFile}
           disabled={false}
-          className={`p-0 px-6 bg-[${main_color}] hover:bg-[${hover_color}]  text-white hover:text-white`}
+          className={`p-0 px-6 bg-[#3BE1AA] hover:bg-[#2DD196]  text-white hover:text-white`}
         />
         {/* thong tin khac */}
         <div className="gap-6 mt-6">

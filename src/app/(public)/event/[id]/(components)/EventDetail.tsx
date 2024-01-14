@@ -113,7 +113,7 @@ export function EventDetail({ id }) {
               <div key={item.id}>
                 <Link
                   href={`/search/?category=${item.id}`} //url search
-                  className={`flex items-center p-6 text-white hover:text-[#17d1c6]`}
+                  className={`flex items-center p-6 text-white hover:text-[#3BE1AA]`}
                 >
                   <span className="text-sm text-center">{item.name}</span>
                 </Link>
@@ -141,7 +141,7 @@ export function EventDetail({ id }) {
                       {EventDetail?.name}
                     </h1>
                     <div
-                      className={`pt-3 lg:pt-4 xl:pt-6 flex flex-row text-[${main_color}] font-semibold`}
+                      className={`pt-3 lg:pt-4 xl:pt-6 flex flex-row text-[#3BE1AA] font-semibold`}
                     >
                       <FaCalendarDays className="mt-1 text-white h-4 w-4" />
                       {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) !=
@@ -175,7 +175,7 @@ export function EventDetail({ id }) {
 
                     <a
                       href={`/ticket-booking/${EventDetail.id}`}
-                      className={`w-full font-bold bg-[${main_color}] hover:bg-[${accent_color}] transition ease-in-out hover:scale-105 text-white text-center py-2 text-sm rounded-md`}
+                      className={`w-full font-semibold bg-[#3BE1AA] hover:bg-[#2DD196] transition ease-in-out hover:scale-105 active:scale-[0.96] text-black text-center py-2 text-sm rounded-md`}
                     >
                       Đặt vé ngay
                     </a>
@@ -263,7 +263,7 @@ export function EventDetail({ id }) {
                             ) : null}
                           </div>
 
-                          <p className={`font-bold pr-8 text-[${main_color}]`}>
+                          <p className={`font-bold pr-8 text-[#3BE1AA]`}>
                             {formatCurrency(item.gia)}
                           </p>
                         </AccordionTrigger>
@@ -321,9 +321,7 @@ export function EventDetail({ id }) {
                       ></Image>
                     </div>
                     <div className="ml-4">
-                      <p
-                        className={`text-lg font-semibold text-[${main_color}]`}
-                      >
+                      <p className={`text-lg font-semibold text-[#2DD196]`}>
                         {EventDetail?.user?.tenDoanhNghiep}
                       </p>
                       <div className="mt-1 flex flex-row items-center">

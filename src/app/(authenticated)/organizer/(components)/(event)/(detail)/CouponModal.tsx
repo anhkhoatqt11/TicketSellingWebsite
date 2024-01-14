@@ -195,9 +195,7 @@ export const CouponModal = ({ props }) => {
                       setPrice(e.target.value);
                     }}
                   />
-                  <div
-                    className={`w-full text-center text-sm text-[${main_color}]`}
-                  >
+                  <div className={`w-full text-center text-sm text-[#2DD196]`}>
                     hoặc
                   </div>
                   <Input

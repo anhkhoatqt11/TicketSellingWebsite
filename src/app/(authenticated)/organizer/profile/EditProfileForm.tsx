@@ -46,7 +46,7 @@ export const EditProfileForm = ({ userId }: Props) => {
             color="success"
             aria-label="Loading..."
             classNames={{
-              svg: "w-20 h-20 text-blue-700",
+              svg: "w-20 h-20 text-gray-600",
             }}
           />
         </div>

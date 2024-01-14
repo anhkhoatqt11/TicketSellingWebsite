@@ -249,7 +249,7 @@ function TicketInformation({ props }) {
                 }}
               />
               <Button
-                className={`w-1/3 bg-[${main_color}] text-white`}
+                className={`w-1/3 bg-[#3BE1AA] text-black hover:bg-[#2DD196]`}
                 radius="sm"
                 onClick={addNewEvent}
               >
@@ -270,9 +270,7 @@ function TicketInformation({ props }) {
                   disableIndicatorAnimation
                   indicator={<CiEdit className="h-6 w-6" />}
                   startContent={
-                    <div
-                      className={`p-3 border-1 border-[${main_color}] rounded-md`}
-                    >
+                    <div className={`p-3 border-1 border-[#3BE1AA] rounded-md`}>
                       <IoTicketOutline className="h-6 w-6" color={item.mau} />
                     </div>
                   }
