@@ -35,7 +35,7 @@ const PaymentChoose = ({ paymentMethod, setPaymentMethod }) => {
           <CustomRadio className="max-w-[650px]" description="Thanh toán với VNPAY" value="VNPAY">
             VNPAY
           </CustomRadio>
-          <CustomRadio className="max-w-[650px]" description="Thanh toán với Momo" value="ZaloPay">
+          <CustomRadio className="max-w-[650px]" description="Thanh toán với ZaloPay" value="ZaloPay">
             ZaloPay
           </CustomRadio>
           <CustomRadio

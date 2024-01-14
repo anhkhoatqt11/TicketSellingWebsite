@@ -10,7 +10,7 @@ import Logo from "../logo";
 import LicenseLogo from "../license";
 const Footer = () => {
   return (
-    <footer className="bg-[#393F4E] text-white pt-14 pb-3">
+    <footer className="bg-black text-white pt-14 pb-3">
       <div className="w-full px-5 md:px-10 mx-auto flex justify-between flex-col md:flex-row gap-[50px] md:gap-0 ">
         {/* LEFT START */}
         <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] flex-col xl:flex-row">
