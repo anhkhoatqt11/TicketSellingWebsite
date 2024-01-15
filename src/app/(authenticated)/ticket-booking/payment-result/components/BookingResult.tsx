@@ -31,7 +31,7 @@ const BookingResult = ({ paymentStatus, setPaymentStatus }) => {
             try {
                 const paymentStatus = await fetchPaymentStatus();
                 console.log('Payment Status:', paymentStatus);
-                handlePaymentStatus(paymentStatus);
+                handlePaymentStatus(paymentStatus?.code);
 
                 const fetchOrderData = async () => {
                     try {
