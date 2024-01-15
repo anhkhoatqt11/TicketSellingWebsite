@@ -137,7 +137,7 @@ export default function UserList({ props }) {
       setHoTenDoanhNghiep(response?.tenDoanhNghiep);
       setIsModalLoading(false);
     } catch (error) {
-      console.error("Error fetching user information:", error);
+
     }
   };
 

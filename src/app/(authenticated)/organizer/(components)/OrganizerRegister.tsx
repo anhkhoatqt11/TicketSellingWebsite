@@ -21,7 +21,7 @@ function OrganizerRegister({ session }) {
         const userRole = await fetchOrganizerRoleById(session?.user?.id);
         setUserRole(userRole[0]?.role);
       } catch (error) {
-        console.error("Error fetching user role:", error);
+
       }
     };
 
