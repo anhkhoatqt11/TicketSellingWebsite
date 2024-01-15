@@ -105,11 +105,11 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
   return (
     <div className="grid-cols-1 grid gap-4 mb-6">
       <h1 className="text-xl font-bold">Hồ sơ cá nhân</h1>
-      <div className="flex flex-col md:flex-row rounded bg-transparent justify-center p-4">
+      <div className="flex md:flex-row rounded bg-transparent content-center justify-center p-4">
         <div className="p-2 pr-3">
           {/* avatar */}
           <div className="flex flex-col items-center gap-y-3 max-w-xs lg:max-w-lg">
-            <div className=" w-fit h-fit border-2 rounded-full ml-auto">
+            <div className=" w-fit h-fit border-2 rounded-full">
               <Zoom key={1} className={"w-full "}>
                 <Image
                   src={
@@ -138,7 +138,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
       </div>
 
       <h1 className="font-semibold">Thông tin liên hệ</h1>
-      <div className="flex flex-col flex-wrap rounded bg-white p-6 gap-3">
+      <div className="flex flex-col rounded bg-white p-6 gap-3 box-border">
         <div className="flex flex-col gap-3 w-full">
           <Label className="font-bold text-sm">
             Họ và tên <span className="text-red-500">*</span>
@@ -196,7 +196,7 @@ export const EditProfileForm = ({ userId, setIsLoading }) => {
         </div>
       </div>
       <h1 className="font-semibold">Đổi mật khẩu</h1>
-      <div className="flex flex-col flex-wrap rounded bg-white p-6 gap-2 w-[50%]">
+      <div className="flex flex-col flex-wrap rounded bg-white p-6 gap-2 md:w-[50%]">
         {/* mật khẩu cũ */}
         <div className="flex flex-col gap-3 w-full">
           <Label className="font-bold text-sm">Mật khẩu cũ</Label>
