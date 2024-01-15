@@ -65,7 +65,7 @@ export default function DashBoard() {
       >
         <CardBody className="p-5">
           <div className="flex flex-row justify-between items-center">
-            <div>
+            <div className="flex flex-col">
               <p className="font-normal text-gray-400">Tổng sự kiện</p>
               <p className="text-3xl font-extrabold mt-2">
                 {DashBoardInfo?.totalEvent}
@@ -81,9 +81,9 @@ export default function DashBoard() {
             aria-label="Loading..."
             value={parseInt(DashBoardInfo?.totalEvent)}
             maxValue={100}
+            color="warning"
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-yellow-300`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -101,7 +101,7 @@ export default function DashBoard() {
       >
         <CardBody className="p-5">
           <div className="flex flex-row justify-between items-center">
-            <div>
+            <div className="flex flex-col">
               <p className="font-normal text-gray-400">Tổng doanh thu</p>
               <p className="text-3xl font-extrabold mt-2">
                 {formatCurrency(DashBoardInfo.totalRevenue / 3)}
@@ -119,7 +119,7 @@ export default function DashBoard() {
             maxValue={10000000}
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-purple-500`,
+              indicator: `bg-purple-400`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -137,7 +137,7 @@ export default function DashBoard() {
       >
         <CardBody className="p-5">
           <div className="flex flex-row justify-between items-center">
-            <div>
+            <div className="flex flex-col">
               <p className="font-normal text-gray-400">Tổng vé đã tạo</p>
               <p className="text-3xl font-extrabold mt-2">
                 {DashBoardInfo.totalTicket}
@@ -153,9 +153,9 @@ export default function DashBoard() {
             aria-label="Loading..."
             value={parseInt(formatCurrency(DashBoardInfo.totalTicket))}
             maxValue={100}
+            color="success"
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-green-500`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -173,7 +173,7 @@ export default function DashBoard() {
       >
         <CardBody className="p-5">
           <div className="flex flex-row justify-between items-center">
-            <div>
+            <div className="flex flex-col">
               <p className="font-normal text-gray-400">Lượt thích</p>
               <p className="text-3xl font-extrabold mt-2">100</p>
             </div>
@@ -187,9 +187,9 @@ export default function DashBoard() {
             aria-label="Loading..."
             value={100}
             maxValue={100}
+            color="danger"
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-pink-400`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">

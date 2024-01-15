@@ -25,29 +25,7 @@ function Header({ session }) {
   const pathanme = usePathname();
 
   return (
-    <Navbar
-      shouldHideOnScroll
-      className="bg-gray-100 justify-between shadow-md"
-    >
-      <NavbarBrand>
-        {pathanme === "/admin" ? (
-          <p className={`font-bold text-2xl text-gray-600`}>Trang chính</p>
-        ) : null}
-        {pathanme === "/admin/events" ? (
-          <p className={`font-bold text-2xl text-gray-600`}>Sự kiện</p>
-        ) : null}
-        {pathanme === "/admin/users" ? (
-          <p className={`font-bold text-2xl text-gray-600`}>Người dùng</p>
-        ) : null}
-        {pathanme === "/admin/payments" ? (
-          <p className={`font-bold text-2xl text-gray-600`}>
-            Phương thức thanh toán
-          </p>
-        ) : null}
-        {pathanme === "/admin/banners" ? (
-          <p className={`font-bold text-2xl text-gray-600`}>Banners</p>
-        ) : null}
-      </NavbarBrand>
+    <Navbar shouldHideOnScroll className="bg-gray-50 justify-end shadow-md">
       <NavbarContent as="div" justify="end">
         <Dropdown
           shouldBlockScroll={true}

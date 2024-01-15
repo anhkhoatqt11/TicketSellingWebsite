@@ -80,9 +80,9 @@ export default function Dashboard() {
             aria-label="Loading..."
             value={parseInt(DashBoardInfo?.totalEvent)}
             maxValue={100}
+            color="warning"
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-yellow-400`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -118,7 +118,7 @@ export default function Dashboard() {
             maxValue={100}
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-blue-300`,
+              indicator: `bg-blue-600`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -152,9 +152,9 @@ export default function Dashboard() {
             aria-label="Loading..."
             value={parseInt(DashBoardInfo?.totalUser)}
             maxValue={100}
+            color="success"
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-green-400`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">
@@ -215,18 +215,18 @@ export default function Dashboard() {
               </p>
             </div>
             <div>
-              <Button className={`bg-orange-100 w-[50px] h-[50px]`}>
-                <Ticket className={`w-6 h-6 text-orange-500`} />
+              <Button className={`bg-pink-100 w-[50px] h-[50px]`}>
+                <Ticket className={`w-6 h-6 text-pink-500`} />
               </Button>
             </div>
           </div>
           <Progress
             aria-label="Loading..."
             value={parseInt(formatCurrency(DashBoardInfo.totalTicket))}
-            maxValue={1000}
+            maxValue={100}
+            color="danger"
             classNames={{
               base: "w-full mt-5",
-              indicator: `bg-orange-400`,
             }}
           />
           <div className="flex flex-row justify-between items-center text-sm mt-4">

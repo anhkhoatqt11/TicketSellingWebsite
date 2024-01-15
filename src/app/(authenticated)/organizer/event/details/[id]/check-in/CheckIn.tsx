@@ -7,7 +7,7 @@ import TicketInformation, {
   TicketProps,
 } from "../../../../(components)/(event)/(add)/TicketInformation";
 import { GuestItem } from "@/app/(authenticated)/organizer/(components)/(event)/(detail)/GuestItem";
-import {QrScanner} from '@yudiel/react-qr-scanner';
+import { QrScanner } from "@yudiel/react-qr-scanner";
 import Loader from "@/components/Loader";
 import {
   Card,
@@ -201,7 +201,7 @@ const CheckIn = ({ session, id }) => {
           constraints={{ facingMode: "environment" }}
         />
         <div className="w-full ml-4 flex justify-center md:justify-start">
-          <div className="flex flex-col gap-2 mt-10">
+          <div className="flex flex-col gap-2 mt-6 md:mt-0">
             <Card className="w-[400px] rounded-md">
               <CardHeader className="flex gap-3">
                 <Logo />
