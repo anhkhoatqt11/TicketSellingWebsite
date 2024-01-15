@@ -43,7 +43,7 @@ const Cart = ({
   const buyList = useSelector((state: RootState) => state.ticket.buyList);
 
   const { fetchUserInfoById } = useUser();
-  const { uploadPaymentInfo, uploadBillingInfo } = useBooking();
+  const { uploadPaymentInfo, uploadBillingInfo, uploadZaloPaymentInfo } = useBooking();
   const router = useRouter();
 
   const calculateTotalPrice = () => {
@@ -142,6 +142,36 @@ const Cart = ({
     const uploadPaymentSuccess = await uploadPaymentInfo(VNPAY);
     router.push(uploadPaymentSuccess.data);
   };
+
+  const onPaymentZaloPay = async () => {
+    const BillingInfo = {
+      maDatCho: crypto.randomBytes(3).toString("hex").toUpperCase(),
+      ngayDatHang: currentDateTime,
+      userId: session?.user?.id,
+      phuongThucThanhToan: "ZaloPay",
+      tinhTrang: "Chưa thanh toán",
+      tongTien: calculateTotalPrice(),
+      suKienId: EventDetail.id,
+      maGiamGiaId: couponId,
+      HoaDonVe: buyList.map((item) => ({
+        veId: item.ticketId,
+        soLuong: item.quantity,
+        tongGia: item.totalPrice,
+      })),
+    };
+
+    console.log(BillingInfo);
+    const uploadBillinginfoSuccess = await uploadBillingInfo(BillingInfo);
+    console.log(uploadBillinginfoSuccess);
+
+    const ZaloPay = {
+      amount: calculateTotalPrice(),
+      orderId: uploadBillinginfoSuccess.hoaDon.id,
+    };
+
+    const uploadPaymentSuccess = await uploadZaloPaymentInfo(ZaloPay);
+    router.push(uploadPaymentSuccess.data.response.order_url);
+  }
 
   return (
     <div className="w-full p-4 md:w-2/4">
@@ -279,8 +309,11 @@ const Cart = ({
             if (!isDisabled && websiteBooking === "choose-ticket") {
               setWebsiteBooking("payment");
             }
-            if (websiteBooking === "payment") {
+            if (websiteBooking === "payment" && paymentMethod === "VNPAY") {
               onPayment();
+            }
+            if (websiteBooking === "payment" && paymentMethod === "ZaloPay") {
+              onPaymentZaloPay();
             }
           }}
         >
