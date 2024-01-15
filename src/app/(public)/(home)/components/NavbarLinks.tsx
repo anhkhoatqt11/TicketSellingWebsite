@@ -61,7 +61,7 @@ const NavbarLinks = ({ data }) => {
             </li>
           </div>
         ))}
-        <div className="mt-6 pt-6">
+        <div className="hidden lg:block mt-6 pt-6">
           <div className="items-center w-full flex flex-row gap-2">
             <img alt="TicketBox" src="/license1.jpg" className="w-32" />
           </div>
