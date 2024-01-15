@@ -8,7 +8,7 @@ export async function POST(req: Request) {
         const body = await req.json();
 
         const embed_data = {
-            redirecturl: "http://localhost:3000/ticket-booking/payment-result",
+            redirecturl: process.env.NEXT_PUBLIC_ZALO_REDIRECT_URL,
         };
 
         const items = [{}];
