@@ -8,7 +8,7 @@ export async function POST(req: Request) {
         const body = await req.json();
 
         const embed_data = {
-            redirecturl: process.env.NEXT_PUBLIC_ZLP_REDIRECT_URL,
+            redirecturl: process.env.NEXT_PUBLIC_ZLP_REDIRECTURL,
         };
 
         const items = [{}];
