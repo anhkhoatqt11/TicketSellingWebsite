@@ -5,6 +5,8 @@ export async function GET(request:Request) {
     const searchParams = new URLSearchParams(url.search);
     const id = parseInt(searchParams.get('id'));
     
+    console.log(searchParams.get('apptransid'));
+
     const order = await prisma.hoaDon.findMany({
         where: {
             id: {

@@ -1,5 +1,3 @@
-// Assuming this component is part of a React application
-
 import React, { useEffect, useState } from 'react';
 import { useBooking } from '@/hooks/useBooking';
 import Loader from '@/components/Loader';
@@ -16,19 +14,25 @@ export function formatCurrency(value: number) {
 
 
 const BookingResult = ({ paymentStatus, setPaymentStatus }) => {
-    const { fetchPaymentStatus, fetchOrderInfo } = useBooking();
+    const { fetchPaymentStatus, fetchOrderInfo, fetchZalopaymentStatus } = useBooking();
+    const [isLoading, setIsLoading] = useState(true);
     const [order, setOrder] = useState([]);
+
+    const handlePaymentStatus = (status) => {
+        if (status === '00' || (status.data && status.data.return_code === 1)) {
+            setPaymentStatus('completed');
+        } else {
+            setPaymentStatus('failed');
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const paymentStatus = await fetchPaymentStatus();
                 console.log('Payment Status:', paymentStatus);
-                if (paymentStatus?.code === '00') {
-                    setPaymentStatus('completed');
-                } else {
-                    setPaymentStatus('failed');
-                }
+                handlePaymentStatus(paymentStatus);
+
                 const fetchOrderData = async () => {
                     try {
                         const orderInfo = await fetchOrderInfo(paymentStatus?.orderId);
@@ -45,11 +49,36 @@ const BookingResult = ({ paymentStatus, setPaymentStatus }) => {
         };
 
         fetchData();
-    }, []); // Empty dependency array to run the effect only once on mount
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const paymentStatus = await fetchZalopaymentStatus();
+                console.log('Payment Status:', paymentStatus);
+                handlePaymentStatus(paymentStatus);
+                const fetchOrderData = async () => {
+                    try {
+                        const orderInfo = await fetchOrderInfo(paymentStatus?.orderId);
+                        console.log('Order Info:', orderInfo);
+                        setOrder(orderInfo);
+                    } catch (error) {
+                        console.error('Error fetching order info:', error);
+                    }
+                };
+                fetchOrderData();
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error fetching payment status:', error);
+            }
+        }
+        fetchData();
+    }, []);
+
 
     return (
         <div className='bg-white w-2/3 min-h-[500px] mx-auto my-auto border rounded-lg p-4'>
-            {paymentStatus === '' && order ? (
+            {isLoading && order ? (
                 <div className='flex h-screen items-center justify-center'>
                     <Loader />
                 </div>

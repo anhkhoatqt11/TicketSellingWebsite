@@ -31,20 +31,12 @@ const PaymentChoose = ({ paymentMethod, setPaymentMethod }) => {
         <div className='bg-gray-100 mx-4 rounded-md h-[40px] mt-3 flex items-center justify-center'>
           <p className='text-sm font-semibold text-foreground-500'>LỰA CHỌN HÌNH THỨC THANH TOÁN</p>
         </div>
-        <RadioGroup className='p-4' description="Các hình thức thanh toán khác đang được cập nhật" value={paymentMethod} onValueChange={setPaymentMethod}>
+        <RadioGroup className='p-4' description="Chọn hình thực thanh toán của bạn. Bạn sẽ được điều hướng đến trang thanh toán của đối tác cung cấp dịch vụ." value={paymentMethod} onValueChange={setPaymentMethod}>
           <CustomRadio className="max-w-[650px]" description="Thanh toán với VNPAY" value="VNPAY">
             VNPAY
           </CustomRadio>
           <CustomRadio className="max-w-[650px]" description="Thanh toán với ZaloPay" value="ZaloPay">
             ZaloPay
-          </CustomRadio>
-          <CustomRadio
-            className="max-w-[650px]"
-            isDisabled
-            description="Thanh toán với Paypal"
-            value="Paypal"
-          >
-            Paypal (Đang bảo trì)
           </CustomRadio>
         </RadioGroup>
       </div>
