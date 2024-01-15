@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import EventListComponent from "./EventListComponent";
 import SearchAndCreateBar from "./SearchAndCreateBar";
 
-export function EventManagement({ session }) {
+export function EventManagement({ }) {
   const [searchWord, setSearchWord] = useState("");
 
   return (
