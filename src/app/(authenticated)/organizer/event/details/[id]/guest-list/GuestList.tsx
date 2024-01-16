@@ -5,13 +5,7 @@ import { checkPhoneNumber, prismaDateToNextDate } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { CircularProgress, Divider, Input } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import GeneralInformation from "../../../../(components)/(event)/(add)/GeneralInformation";
-import TicketInformation, {
-  TicketProps,
-} from "../../../../(components)/(event)/(add)/TicketInformation";
-import { useTicketOrganizer } from "@/hooks/useTicketOrganizer";
-import { FcSportsMode } from "react-icons/fc";
+import { TicketProps } from "../../../../(components)/(event)/(add)/TicketInformation";
 import {
   GuestItem,
   GuestItemComponent,
@@ -34,7 +28,6 @@ import SportIcon from "@/components/sport";
 import OutsideIcon from "@/components/outside";
 import * as XLSX from "xlsx";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { main_color } from "../../../../../../../../public/color";
 const getIconById = (id) => {
   switch (id) {
     case 1:
@@ -86,7 +79,60 @@ export function GuestList({ session, id }) {
   const onCreateExcelList = () => {
     var wb = XLSX.utils.book_new();
     var ws = XLSX.utils.json_to_sheet(guestList);
-    XLSX.utils.book_append_sheet(wb, ws, "MySheet1");
+    XLSX.utils.sheet_add_aoa(
+      ws,
+      [
+        [
+          "ID",
+          "Màu vé",
+          "Họ và tên",
+          "Mã vé",
+          "Tên vé",
+          "Số lượng",
+          "Thành tiền",
+        ],
+      ],
+      {
+        origin: "A1",
+      }
+    );
+    const max_width = guestList.reduce((w, r) => Math.max(w, r.id.length), 10);
+    const max_width2 = guestList.reduce(
+      (w, r) => Math.max(w, r.color.length),
+      10
+    );
+    const max_width3 = guestList.reduce(
+      (w, r) => Math.max(w, r.guest.length),
+      10
+    );
+    const max_width4 = guestList.reduce(
+      (w, r) => Math.max(w, r.ticketId.toString().length),
+      10
+    );
+    const max_width5 = guestList.reduce(
+      (w, r) => Math.max(w, r.ticketName.length),
+      10
+    );
+    const max_width6 = guestList.reduce(
+      (w, r) => Math.max(w, r.amount.toString().length),
+      10
+    );
+    const max_width7 = guestList.reduce(
+      (w, r) => Math.max(w, r.price.toString().length),
+      10
+    );
+
+    ws["!cols"] = [
+      { wch: max_width },
+      { wch: max_width2 },
+      { wch: max_width3 },
+      { wch: max_width4 },
+      { wch: max_width5 },
+      { wch: max_width6 },
+      { wch: max_width7 },
+    ];
+
+    XLSX.utils.book_append_sheet(wb, ws, "Guest List");
     XLSX.writeFile(wb, `${eventName}_Danh sách khán giả.xlsx`);
   };
 
