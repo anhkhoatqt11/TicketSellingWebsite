@@ -23,7 +23,7 @@ TicketNow - Ticket Selling App is a web application that helps organizers sell t
 
 Below is the general information about this project.
 ## 🏡 Home
-Customer can search any event that match to their wishes. In addition, they will be offered some suggestion if there are not any event match their wishes. Then go take a look about event information and buy tickets. There are 2 transaction ways, VNPAY and ZaloPay, this is just for developing purpose so the account information is not existed. Then just look up again all ticket bought, take qr code to check-in and done.
+The website caters to its customer base by offering a comprehensive list of events taking place in specific regions or nationwide. Users can easily search and purchase tickets for their desired events, with the platform also providing suggested events based on user preferences. Detailed information about each event, including schedules, venues, ticket prices, and specific benefits, is available to help users choose events that align with their interests and personal schedules. The platform ensures a seamless and convenient payment experience by offering a diverse range of payment platforms. Additionally, users can access information regarding their booked tickets, including the booking date, reservation code, details and benefits, total payment amount, and the current status of their tickets.
 
 ![alt text](https://github.com/anhkhoatqt11/SE347_TicketSelling/blob/main/ReadmeImage/pic1.png)
 
@@ -32,18 +32,19 @@ Customer can search any event that match to their wishes. In addition, they will
 ![alt text](https://github.com/anhkhoatqt11/SE347_TicketSelling/blob/main/ReadmeImage/pic3.png)
 
 ## 📋 Organizer
-This area is designed for organizer or company who want to sell their event's ticket. All the money from selling ticket will be devided 15% total to adminstrator.
+For event organizers, the website provides a ticket-selling platform tailored for individuals or organizations seeking to host and promote their events. It offers a range of features to support event organizers, including the ability to create and manage events. This encompasses functions such as event creation, event management (including editing details), discount code management, viewing attendee lists, event summaries, and check-in support. The platform serves as a comprehensive toolset to facilitate the planning, execution, and analysis of events for organizers, streamlining the entire process from event creation to post-event activities. Additionally, it is noteworthy that 15% of the revenue generated through ticket sales will be allocated to the administration, ensuring a fair and transparent revenue-sharing model.
 
 ![alt text](https://github.com/anhkhoatqt11/SE347_TicketSelling/blob/main/ReadmeImage/pic5.png)
 
 ## 🕵️ Admin
-Designed for admin, manage events and users. Admin reviews every event and block it if it is not suitable, any individual breach policy will be deleted from system. In addition, he can see revenue and manage banner
+The website will be administered by an administrator equipped with various functions to ensure effective management. The administrator can access comprehensive data analytics, providing insights into user statistics, the number of created events, and the total tickets generated across the entire website system. User management capabilities include the ability to edit user information and control user accounts by unlocking or locking them as needed. Additionally, the administrator can manage events by editing their status, ensuring oversight and control over the event-related activities. The banner management feature allows the administrator to dynamically showcase events on the website by adding, modifying positions, or removing events from the banner display. These functions collectively empower the administrator to maintain the platform's integrity, facilitate user interactions, and strategically highlight events through effective banner management.
 ![alt text](https://github.com/anhkhoatqt11/SE347_TicketSelling/blob/main/ReadmeImage/pic4.png)
 
 ## 💕 Thanks
-This project almost completed like a ticket selling system. However developed by developer team who is still university students and have not enough experiences, this project maybe has some problem. You can visit our deploy website for more experience. Thank you for visiting our project.
 
-I deeply appreciate every member of this team for showing relentless effort for this project.
+This project, resembling a ticket-selling system, is nearing completion and has been developed by a team of university students who are still gaining valuable experiences. As with any project led by individuals in the early stages of their careers, there may be some aspects that require refinement. To gain a deeper understanding and experience the system firsthand, feel free to visit our deployed website. Your visit and insights are greatly appreciated. 
+
+I extend sincere gratitude to every team member for their unwavering dedication and relentless efforts throughout the development of this project.
 
 |  Leader  |  Member | Member | 
 | ------------- | ------------- | --------------------------|

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import LiveMusic from "@/components/livemusic";
@@ -10,8 +9,6 @@ import TourismIcon from "@/components/tourism";
 import SportIcon from "@/components/sport";
 import OutsideIcon from "@/components/outside";
 import CalendarIcon from "@/components/calendar";
-import { Button } from "@/components/ui/button";
-import LicenseLogo from "@/components/license";
 const NavbarLinks = ({ data }) => {
   const getIconById = (id) => {
     switch (id) {

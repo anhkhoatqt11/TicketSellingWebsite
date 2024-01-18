@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-// import { useRole } from '@/hooks/useRole';
 import DialogCustom from "@/components/ui/dialogCustom";
 import Logo from "@/components/logo";
 import { SelectLoaiHinhKinhDoanh } from "./SelectLoaiHinhKinhDoanh";

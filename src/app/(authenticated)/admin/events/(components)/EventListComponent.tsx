@@ -2,11 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useState } from "react";
-// import { RealEstateCard } from './RealEstateCard';
-// import { useBaiVietDoiTac } from '@/hooks/useBaiVietDoiTac';
 import { useQuery } from "@tanstack/react-query";
-// import { useBatDongSan } from "@/hooks/useBatDongSan";
-// import { searchType } from './RealEstateListLayout';
 import { Pagination } from "@nextui-org/react";
 import Loader from "@/components/Loader";
 import EventListItemComponent from "./EventListItemComponent";

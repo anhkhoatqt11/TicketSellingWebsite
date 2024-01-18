@@ -36,15 +36,6 @@ export function SearchAndCreateBar({ setSearchWord }) {
           <MagnifyingGlassIcon className={`h-6 w-6 text-[#2DD196]`} />
         </Button>
       </div>
-      {/* <Button
-        className="h-[52px] w-full md:w-[200px] rounded-md m-0 p-0 font-medium bg-emerald-400 text-base text-white mr-6 md:mr-6"
-        onClick={() => {
-          router.push("/organizer/event/add");
-        }}
-      >
-        <BiBookAdd />
-        Tạo sự kiện
-      </Button> */}
     </div>
   );
 }

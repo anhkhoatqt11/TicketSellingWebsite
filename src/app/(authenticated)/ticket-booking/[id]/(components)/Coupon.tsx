@@ -10,15 +10,6 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { updateBuyList } from "@/redux/ticketSlice";
 
-interface Ticket {
-  id: number;
-  name: string;
-  price: number;
-  maxQuantity: number; // Maximum quantity allowed for this ticket
-  quantityLeft: number; // Quantity left from the server
-  // ... other ticket properties
-}
-
 const Coupon = ({
   EventDetail,
   buyList,
