@@ -3,13 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id                Int      @id @default(autoincrement())
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
   name              String
   email             String   @unique
   phoneNumber       String?
@@ -34,43 +33,40 @@ model User {
   tenNganHang       String?
   trangThai         String?  @default("dang_hoat_dong")
   otp               String?
-  SuKiens           SuKien[]
-  HoaDon            HoaDon[]
+  SuKiens           SuKien[] @relation("UserToSuKien")
+  HoaDon            HoaDon[] @relation("UserToHoaDon")
 }
 
 model SuKien {
-  id            Int         @id @default(autoincrement())
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  moTa          String?     @db.Text
+  moTa          String?
   diaChi        String?
-  hinhAnhSuKien String?     @db.LongText
+  hinhAnhSuKien String?
   ngayBatDau    DateTime
   ngayKetThuc   DateTime
-  userId        Int
-  ChuDeId       Int
+  userId        String      @db.ObjectId
+  ChuDeId       String      @db.ObjectId
   trangThai     String      @default("Đã duyệt")
-  user          User        @relation(fields: [userId], references: [id])
+  user          User        @relation(fields: [userId], references: [id], name: "UserToSuKien")
   ChuDe         ChuDe       @relation(fields: [ChuDeId], references: [id])
   ves           Ve[]
   MaGiamGia     MaGiamGia[]
   Banners       Banners[]
-  HoaDon        HoaDon[]
-
-  @@index([userId])
-  @@index([ChuDeId])
+  HoaDon        HoaDon[]    @relation("SuKienToHoaDon")
 }
 
 model ChuDe {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String   @unique
   createdAt DateTime @default(now())
   SuKiens   SuKien[]
 }
 
 model Ve {
-  id              Int         @id @default(autoincrement())
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
   name            String
-  moTa            String?     @db.Text
+  moTa            String?
   gia             Float
   mau             String
   soLuong         Int
@@ -78,69 +74,56 @@ model Ve {
   soLuongToiDa    Int
   ngayBan         DateTime
   ngayKetThuc     DateTime
-  SuKienId        Int
+  SuKienId        String      @db.ObjectId
   suKien          SuKien      @relation(fields: [SuKienId], references: [id])
   HoaDonVe        HoaDonVe[]
   MaGiamGia       MaGiamGia[]
-
-  @@index([SuKienId])
 }
 
 model HoaDon {
-  id                  Int        @id @default(autoincrement())
+  id                  String     @id @default(auto()) @map("_id") @db.ObjectId
   ngayDatHang         DateTime
-  userId              Int
+  userId              String     @db.ObjectId
   phuongThucThanhToan String
   createdAt           DateTime   @default(now())
   tinhTrang           String     @default("Chưa thanh toán")
   tongTien            Float      @default(0)
-  maGiamGiaId         Int?
+  maGiamGiaId         String?
   checkIn             Boolean    @default(false)
-  suKienId            Int
+  suKienId            String     @db.ObjectId
   maDatCho            String
-  suKien              SuKien     @relation(fields: [suKienId], references: [id])
-  user                User       @relation(fields: [userId], references: [id])
+  suKien              SuKien     @relation(fields: [suKienId], references: [id], name: "SuKienToHoaDon")
+  user                User       @relation(fields: [userId], references: [id], name: "UserToHoaDon")
   HoaDonVe            HoaDonVe[]
-
-  @@index([userId])
-  @@index([suKienId])
 }
 
 model HoaDonVe {
-  id       Int    @id @default(autoincrement())
-  hoaDonId Int
-  veId     Int
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  hoaDonId String @db.ObjectId
+  veId     String @db.ObjectId
   soLuong  Int
   tongGia  Float
   hoaDon   HoaDon @relation(fields: [hoaDonId], references: [id])
   ve       Ve     @relation(fields: [veId], references: [id])
-
-  @@index([hoaDonId, veId], map: "HoaDonVe_HoaDonVeId")
-  @@index([veId])
 }
 
 model MaGiamGia {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   maGiamGia    String   @unique
   soTienGiam   Float?
   phanTramGiam Int?
   ngayBatDau   DateTime
   ngayKetThuc  DateTime
-  SuKienId     Int?
-  VeId         Int?
+  SuKienId     String?  @db.ObjectId
+  VeId         String?  @db.ObjectId
   trangThai    Boolean  @default(true)
   suKien       SuKien?  @relation(fields: [SuKienId], references: [id])
   ve           Ve?      @relation(fields: [VeId], references: [id])
-
-  @@index([SuKienId])
-  @@index([VeId])
 }
 
 model Banners {
-  id       Int    @id @default(autoincrement())
-  SuKienId Int
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  SuKienId String @db.ObjectId
   position Int?
   suKien   SuKien @relation(fields: [SuKienId], references: [id])
-
-  @@index([SuKienId])
 }
