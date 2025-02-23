@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -41,9 +40,9 @@ model User {
 model SuKien {
   id            Int         @id @default(autoincrement())
   name          String
-  moTa          String?     @db.Text
+  moTa          String?
   diaChi        String?
-  hinhAnhSuKien String?     @db.LongText
+  hinhAnhSuKien String?
   ngayBatDau    DateTime
   ngayKetThuc   DateTime
   userId        Int
@@ -70,7 +69,7 @@ model ChuDe {
 model Ve {
   id              Int         @id @default(autoincrement())
   name            String
-  moTa            String?     @db.Text
+  moTa            String?
   gia             Float
   mau             String
   soLuong         Int
