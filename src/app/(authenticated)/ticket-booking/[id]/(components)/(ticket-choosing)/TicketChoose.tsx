@@ -28,8 +28,6 @@ export function formatCurrency(value: number) {
   return CURRENCY_FORMAT.format(value);
 }
 
-
-
 const TicketChoose = ({ EventDetail }) => {
   const dispatch = useDispatch();
   const [currentDateTime, setCurrentDateTime] = React.useState("");
@@ -39,12 +37,13 @@ const TicketChoose = ({ EventDetail }) => {
   }, []);
 
   useEffect(() => {
-    fetch("https://worldtimeapi.org/api/timezone/Asia/Bangkok")
-      .then((response) => response.json())
-      .then((data) => {
-        setCurrentDateTime(data.utc_datetime);
-      });
-  }, []);
+    const timestamp = new Date(); // Get the current client-side time
+
+    // Get the ISO-8601 string (in UTC)
+    const isoString = timestamp.toISOString();
+
+    setCurrentDateTime(isoString);
+  }, []); // Empty dependency array means this runs once on mount
 
   const handleAddToBuyList = (
     ticketId: number,

@@ -43,7 +43,8 @@ const Cart = ({
   const buyList = useSelector((state: RootState) => state.ticket.buyList);
 
   const { fetchUserInfoById } = useUser();
-  const { uploadPaymentInfo, uploadBillingInfo, uploadZaloPaymentInfo } = useBooking();
+  const { uploadPaymentInfo, uploadBillingInfo, uploadZaloPaymentInfo } =
+    useBooking();
   const router = useRouter();
 
   const calculateTotalPrice = () => {
@@ -96,12 +97,13 @@ const Cart = ({
   }, []);
 
   useEffect(() => {
-    fetch("https://worldtimeapi.org/api/timezone/Asia/Bangkok")
-      .then((response) => response.json())
-      .then((data) => {
-        setCurrentDateTime(data.utc_datetime);
-      });
-  }, []);
+    const timestamp = new Date(); // Get the current client-side time
+
+    // Get the ISO-8601 string (in UTC)
+    const isoString = timestamp.toISOString();
+
+    setCurrentDateTime(isoString);
+  }, []); // Empty dependency array means this runs once on mount
 
   useEffect(() => {
     console.log(orginalBuyList);
@@ -171,7 +173,7 @@ const Cart = ({
 
     const uploadPaymentSuccess = await uploadZaloPaymentInfo(ZaloPay);
     router.push(uploadPaymentSuccess.data.response.order_url);
-  }
+  };
 
   return (
     <div className="w-full p-4 md:w-2/4">

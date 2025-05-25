@@ -32,21 +32,17 @@ export default function Dashboard() {
   });
 
   useEffect(() => {
-    fetch("https://worldtimeapi.org/api/timezone/Asia/Bangkok")
-      .then((response) => response.json())
-      .then((data) => {
-        const timestamp = new Date(data.datetime);
-        const formattedDate = timestamp.toLocaleString("en-US", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          timeZoneName: "short",
-        });
-        setCurrentDateTime(formattedDate);
-      });
+    const timestamp = new Date(); // Creates a Date object representing the current client-side time
+    const formattedDate = timestamp.toLocaleString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      timeZoneName: "short", // This will show the user's local timezone abbreviation
+    });
+    setCurrentDateTime(formattedDate);
   }, []);
 
   if (isLoading)
