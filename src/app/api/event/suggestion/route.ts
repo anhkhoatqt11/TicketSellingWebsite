@@ -5,7 +5,7 @@ export async function GET(request: Request) {
       ves: true,
     },
     where: {
-      trangThai: "Đã duyệt",
+      trangThai: "daDuyet",
       ngayKetThuc: {
         gte: new Date(),
       },

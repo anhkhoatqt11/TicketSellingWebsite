@@ -146,6 +146,10 @@ export function GuestList({ session, id }) {
         setTypeId(res?.ChuDe?.id);
         setType(res.ChuDe?.name);
         let copyGuestList: GuestItem[] = [];
+        if (res.ves?.length === 0) {
+          setIsLoading(false);
+          return;
+        }
         res.ves?.map((item, index) => {
           const color = item?.mau;
           const mave = item?.id;

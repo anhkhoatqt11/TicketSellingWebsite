@@ -8,20 +8,24 @@ export async function GET(request: Request) {
   const userId = parseInt(searchParams?.get('userId'))
   const searchWord = searchParams.get('name');
 
+  const searchQuery = {
+     name: {
+        contains: searchWord || ""
+      }, 
+  }
+  if (userId) {
+    searchQuery['userId'] = {
+        equals: userId
+      }
+  }
+
   const event = await prisma.suKien.findMany({
     include: {
       ChuDe: true,
     },
     skip: (page - 1) * limit,
     take: limit,
-    where: {
-      userId:{
-        equals: userId,
-      },
-      name: {
-        contains: searchWord || ""
-      }, 
-    }
+    where: searchQuery
   });
   const countItem = await prisma.suKien.count({
     where: {

@@ -141,7 +141,7 @@ export function EditEvent({ session, id }) {
       ngayKetThuc: endDate,
       userId: userId,
       ChuDeId: parseInt(typeEventSelected),
-      trangThai: "Đã duyệt",
+      trangThai: "daDuyet",
     };
     await editEvent(data).then(() => {
       processingTicket().then(() => {

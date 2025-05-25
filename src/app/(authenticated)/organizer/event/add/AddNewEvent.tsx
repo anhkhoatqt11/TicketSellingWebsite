@@ -113,7 +113,7 @@ export function AddNewEvent({ session }) {
       ngayKetThuc: endDate,
       userId: userId,
       ChuDeId: parseInt(typeEventSelected),
-      trangThai: "Đã duyệt",
+      trangThai: "daDuyet",
     };
     await createNewEvent(data).then((res) => {
       processingTicket(res?.id).then(() => {

@@ -4,8 +4,7 @@ import { getSession } from "@/lib/auth";
 
 export async function GET(request: Request) {
   const session = await getSession();
-
-  if (session?.user?.role !== 'organizer') {
+  if (!['organizer','admin'].includes(session?.user?.role)) {
     return new Response(JSON.stringify({ message: "You don't have access to this information." }), {
       status: 404,
     });

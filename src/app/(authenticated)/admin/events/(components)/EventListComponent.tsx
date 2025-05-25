@@ -25,7 +25,6 @@ import toast from "react-hot-toast";
 import { main_color } from "../../../../../../public/color";
 
 function EventListComponent({ props }) {
-  const userId = 1;
   const [currentPage, setCurrentPage] = useState(1);
   const { fetchEventOfOrganizer } = useEventOrganizer();
   const [isLoaded, setIsLoaded] = React.useState(true);
@@ -41,7 +40,7 @@ function EventListComponent({ props }) {
       ["event", currentPage],
       ["name", props],
     ],
-    queryFn: () => fetchEventOfOrganizer(props, currentPage, userId),
+    queryFn: () => fetchEventOfOrganizer(props, currentPage, null),
     staleTime: 60 * 1000 * 1,
     keepPreviousData: true,
     onSuccess: () => {

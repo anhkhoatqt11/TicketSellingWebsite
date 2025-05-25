@@ -80,7 +80,7 @@ export function EventListItemComponent({
                 src={item?.hinhAnhSuKien}
               />
               {getDateTimeKetThuc(item?.ngayKetThuc) &&
-              item?.trangThai === "Đã duyệt" ? (
+              item?.trangThai === "daDuyet" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
                   <div
                     className={`bg-blue-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center`}
@@ -90,21 +90,21 @@ export function EventListItemComponent({
                   </div>
                 </div>
               ) : !getDateTimeKetThuc(item?.ngayKetThuc) &&
-                item?.trangThai === "Đã duyệt" ? (
+                item?.trangThai === "daDuyet" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
                   <div className="bg-emerald-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
                     <BsCheck2Circle className="mt-1 w-3 h-3" />
                     <div className="text-sm">Hoàn thành</div>
                   </div>
                 </div>
-              ) : item?.trangThai === "Đã hủy" ? (
+              ) : item?.trangThai === "daHuy" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
                   <div className="bg-red-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
                     <TbCalendarCancel className="mt-1 w-3 h-3" />
                     <div className="text-sm">Đã hủy</div>
                   </div>
                 </div>
-              ) : item?.trangThai === "Đã khóa" ? (
+              ) : item?.trangThai === "daKhoa" ? (
                 <div className="absolute top-2 left-2 w-[180px]">
                   <div className="bg-gray-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
                     <AiOutlineLock className="mt-1 w-3 h-3" />

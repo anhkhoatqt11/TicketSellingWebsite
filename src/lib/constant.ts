@@ -27,14 +27,14 @@ export const LoaiHinhKinhDoanhMap = [
 export const TrangThaiSuKienMap = [
   {
     name: "Đã duyệt",
-    value: "Đã duyệt",
+    value: "daDuyet",
   },
   {
     name: "Đã huỷ",
-    value: "Đã huỷ",
+    value: "daHuy",
   },
   {
     name: "Đã khoá",
-    value: "Đã khoá",
+    value: "daKhoa",
   }
 ]
