@@ -87,14 +87,14 @@ export function EventListItemComponent({ item }) {
                   <div className="text-sm">Hoàn thành</div>
                 </div>
               </div>
-            ) : item?.trangThai === "daHuydaHuy" ? (
+            ) : item?.trangThai === "daHuy" ? (
               <div className="absolute top-2 left-2 w-[180px]">
                 <div className="bg-red-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
                   <TbCalendarCancel className="mt-1 w-3 h-3" />
                   <div className="text-sm">Đã hủy</div>
                 </div>
               </div>
-            ) : item?.trangThai === "daKhoadaKhoa" ? (
+            ) : item?.trangThai === "daKhoa" ? (
               <div className="absolute top-2 left-2 w-[180px]">
                 <div className="bg-gray-400 font-medium text-white p-2 rounded flex flex-row gap-2 justify-center">
                   <AiOutlineLock className="mt-1 w-3 h-3" />

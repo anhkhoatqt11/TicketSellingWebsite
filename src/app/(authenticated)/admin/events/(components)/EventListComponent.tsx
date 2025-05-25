@@ -115,7 +115,7 @@ function EventListComponent({ props }) {
                       >
                         {(trangThai) => (
                           <SelectItem key={trangThai.value}>
-                            {trangThai.value}
+                            {trangThai.name}
                           </SelectItem>
                         )}
                       </Select>
