@@ -75,11 +75,17 @@ export function EventDetail({ id }) {
   });
 
   useEffect(() => {
-    fetch("https://worldtimeapi.org/api/timezone/Asia/Bangkok")
+    fetch("https://timeapi.io/api/Time/current/zone?timeZone=Asia/Ho_Chi_Minh")
       .then((response) => response.json())
       .then((data) => {
-        setCurrentDateTime(data.utc_datetime);
+        setCurrentDateTime(data.dateTime);
+      })
+      .catch(() => {
+        // Fallback to local time if API fails
+        const now = new Date().toISOString();
+        setCurrentDateTime(now);
       });
+
     const fetchCate = async () => {
       await fetchAllCategories().then((res) => {
         setCateList(res);
@@ -144,7 +150,7 @@ export function EventDetail({ id }) {
                     >
                       <FaCalendarDays className="mt-1 text-white h-4 w-4" />
                       {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) !=
-                      convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                        convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
                         <div className="ml-2 text-sm">
                           {"Từ ngày "}
                           {convertDateInUI(EventDetail?.ngayBatDau)}{" "}
@@ -153,7 +159,7 @@ export function EventDetail({ id }) {
                         </div>
                       ) : null}
                       {convertUtcToGmtPlus7(EventDetail?.ngayBatDau) ==
-                      convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
+                        convertUtcToGmtPlus7(EventDetail?.ngayKetThuc) ? (
                         <div className="ml-2 text-sm">
                           {"Duy nhất ngày "}
                           {convertDateInUI(EventDetail?.ngayBatDau)}
@@ -231,9 +237,8 @@ export function EventDetail({ id }) {
                       <AccordionItem
                         value={item.id}
                         key={`item-${item.id}`}
-                        className={`${
-                          index % 2 !== 0 ? "bg-[#2E2F32]" : "bg-[#37373C]"
-                        } border-b-0`}
+                        className={`${index % 2 !== 0 ? "bg-[#2E2F32]" : "bg-[#37373C]"
+                          } border-b-0`}
                       >
                         <AccordionTrigger className="cursor-pointer flex justify-between">
                           <div className="flex flex-col px-8">
@@ -243,14 +248,14 @@ export function EventDetail({ id }) {
                             </p>
                             {Date.parse(item.ngayBan) >
                               Date.parse(currentDateTime) &&
-                            item.soLuong != 0 ? (
+                              item.soLuong != 0 ? (
                               <div className="border border-gray-500 p-2 mt-3">
                                 <p>VÉ SẮP MỞ BÁN</p>
                               </div>
                             ) : null}
                             {Date.parse(item.ngayKetThuc) <
                               Date.parse(currentDateTime) &&
-                            item.soLuong != 0 ? (
+                              item.soLuong != 0 ? (
                               <div className="border border-gray-500 p-2 mt-3">
                                 <p>VÉ HẾT THỜI HẠN</p>
                               </div>
