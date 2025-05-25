@@ -107,6 +107,11 @@ const nextConfig = {
         hostname: "wallpapercave.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "salt.tkbcdn.com",
+        port: "",
+      },
 
 
     ],
